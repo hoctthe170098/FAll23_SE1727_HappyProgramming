@@ -100,7 +100,7 @@
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
         <h1>what are you looking for?</h1>      
      <form class="d-flex"> 
-      <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search"> 
+      <input class="form-control mr-2" type="search" placeholder="Search mentor here" aria-label="Search" name=""> 
       <button class="btn btn-outline-success" type="submit">Search</button> </form>
     </div>
 </section>
