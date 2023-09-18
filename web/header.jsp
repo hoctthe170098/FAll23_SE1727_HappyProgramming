@@ -25,7 +25,7 @@
             <ul>
                 <li><a class="active" href="home.jsp">Home</a></li>
                 <li><a href="">Mentor</a></li>
-                <li><a href="courses.html">Skills</a></li>              
+                <li><a href="Skill.jsp">Skills</a></li>              
                 <li class="dropdown"><a href="#"><span>Suggest Mentor</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <%for (Skill s: listSkill){%>
