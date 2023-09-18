@@ -12,14 +12,16 @@ public class Mentor {
    int ID;
    float rate;
    String experience;
+   String Intro;
 
     public Mentor() {
     }
 
-    public Mentor(int ID, float rate, String experience) {
+    public Mentor(int ID, float rate, String experience, String Intro) {
         this.ID = ID;
         this.rate = rate;
         this.experience = experience;
+        this.Intro = Intro;
     }
 
     public int getID() {
@@ -46,10 +48,21 @@ public class Mentor {
         this.experience = experience;
     }
 
+    public String getIntro() {
+        return Intro;
+    }
+
+    public void setIntro(String Intro) {
+        this.Intro = Intro;
+    }
+
     @Override
     public String toString() {
-        return "Mentor{" + "ID=" + ID + ", rate=" + rate + ", experience=" + experience + '}';
+        return "Mentor{" + "ID=" + ID + ", rate=" + rate + ", experience=" + experience + ", Intro=" + Intro + '}';
     }
+   
+
+    
    
     
    
