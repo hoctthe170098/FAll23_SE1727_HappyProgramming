@@ -2970,7 +2970,7 @@ textarea.form-control-lg {
 .btn {
   --bs-btn-padding-x: 0.75rem;
   --bs-btn-padding-y: 0.375rem;
-  --bs-btn-font-family: ;
+  --bs-btn-font-family: 0;
   --bs-btn-font-size: 1rem;
   --bs-btn-font-weight: 400;
   --bs-btn-line-height: 1.5;
@@ -4700,8 +4700,8 @@ textarea.form-control-lg {
   --bs-breadcrumb-padding-x: 0;
   --bs-breadcrumb-padding-y: 0;
   --bs-breadcrumb-margin-bottom: 1rem;
-  --bs-breadcrumb-bg: ;
-  --bs-breadcrumb-border-radius: ;
+  --bs-breadcrumb-bg: 0;
+  --bs-breadcrumb-border-radius: 0;
   --bs-breadcrumb-divider-color: var(--bs-secondary-color);
   --bs-breadcrumb-item-padding-x: 0.5rem;
   --bs-breadcrumb-item-active-color: var(--bs-secondary-color);
@@ -5401,7 +5401,7 @@ textarea.form-control-lg {
   --bs-toast-spacing: 1.5rem;
   --bs-toast-max-width: 350px;
   --bs-toast-font-size: 0.875rem;
-  --bs-toast-color: ;
+  --bs-toast-color: 0 rem ;
   --bs-toast-bg: rgba(var(--bs-body-bg-rgb), 0.85);
   --bs-toast-border-width: var(--bs-border-width);
   --bs-toast-border-color: var(--bs-border-color-translucent);

@@ -3,9 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/ky4/SWP391/project/happyprogramming/web/Footer.jsp</file>
-            <file>file:/D:/FPT/ky4/SWP391/project/happyprogramming/web/header.jsp</file>
-            <file>file:/D:/FPT/ky4/SWP391/project/happyprogramming/web/home.jsp</file>
+            <file>file:/C:/PRJ/happyprogramming/web/assets/scss/Readme.txt</file>
+            <file>file:/C:/PRJ/happyprogramming/web/assets/vendor/bootstrap/css/bootstrap.rtl.css</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/Mentor.java</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/MenteeDAO.java</file>
+            <file>file:/C:/PRJ/happyprogramming/web/assets/css/style.css</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/Mentee.java</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/MentorDAO.java</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/Account.java</file>
+            <file>file:/C:/PRJ/happyprogramming/web/trainers.html</file>
+            <file>file:/C:/PRJ/happyprogramming/web/assets/vendor/bootstrap/css/bootstrap.min.css</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/CV.java</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/CVDAO.java</file>
+            <file>file:/C:/PRJ/happyprogramming/web/assets/vendor/bootstrap/css/bootstrap.css</file>
         </group>
     </open-files>
 </project-private>
