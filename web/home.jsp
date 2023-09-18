@@ -269,7 +269,7 @@
                   <h4><%=s.getName()%></h4>
 <!--                  <p class="price">$169</p>-->
                 </div>
-                <h3><a href="">Go to the course</a></h3>
+                <h3><a href="">Mentors of this skill</a></h3>
                 <p><%=s.getDescription()%></p>
               </div>
             </div>
@@ -279,7 +279,7 @@
       </div>
     </section><!-- End Popular Courses Section -->
     <!-- ======= Trainers Section ======= -->
-    <section id="trainers" class="trainers">
+<!--    <section id="trainers" class="trainers">
       <div class="container" data-aos="fade-up">
       <div class="section-title">
           <h2>Mentor</h2>
@@ -346,7 +346,7 @@
         </div>
 
       </div>
-    </section><!-- End Trainers Section -->
+    </section> End Trainers Section -->
 
   </main><!-- End #main -->
 

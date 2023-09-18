@@ -85,8 +85,6 @@ public class SkillDAO extends MyDAO{
       public static void main(String[] args) {
           SkillDAO dao = new SkillDAO();
         List<Skill>list = dao.getListSkill();
-        for (Skill s: list){
-            System.out.println(s.toString());
-        }
+        
     }
 }
