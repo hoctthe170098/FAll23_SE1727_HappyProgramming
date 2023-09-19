@@ -38,12 +38,12 @@ public class AccountDAO extends DBContext {
         }
     }
 
-    public Account getAccountBy(String username, String password) {
+    public Account getAccountBy(String Username, String Password) {
     try {
         String sql = "SELECT * FROM [dbo].[Account] WHERE Username = ? AND Password = ?";
         PreparedStatement stm = connection.prepareStatement(sql);
-        stm.setString(1, username);
-        stm.setString(2, password);
+        stm.setString(1, Username);
+        stm.setString(2, Password);
         ResultSet rs = stm.executeQuery();
 
         if (rs.next()) {

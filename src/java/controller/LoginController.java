@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //query data from databases;
-        request.getRequestDispatcher("view/Signin.html").forward(request, response);
+        request.getRequestDispatcher("Signin.html").forward(request, response);
     } 
 
     /** 
@@ -46,8 +46,8 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter("Username");
+        String password = request.getParameter("Password");
         
         AccountDAO db = new AccountDAO();
         Account account = db.getAccountBy(username, password);

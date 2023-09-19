@@ -67,7 +67,7 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
         <%if(acc==null){%>
-        <a href="Signin.html" class="get-started-btn">Sign in</a>
+        <a href="login" class="get-started-btn">Sign in</a>
         <%}%>
         <%if(acc!=null){%>
         <a href="#" class="get-started-btn"><%=acc.getUsername()%></a>
