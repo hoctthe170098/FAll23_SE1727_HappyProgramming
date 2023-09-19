@@ -50,9 +50,8 @@ public class MentorDAO extends MyDAO {
         }
         return list;
     }
-       public static void main(String[] args) throws SQLException {
+       public static void main(String[] args) {
         MentorDAO dao =  new MentorDAO();
-        System.out.println(dao.TotalMentor());
-        System.out.println(dao.getAllMentor());
+      
 }
 }

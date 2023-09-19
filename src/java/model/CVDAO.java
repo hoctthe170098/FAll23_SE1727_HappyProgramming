@@ -34,8 +34,8 @@ public class CVDAO extends MyDAO{
         }
         return list;
     }
-     public static void main(String[] args) throws SQLException {
+     public static void main(String[] args)  {
         CVDAO cdao =  new CVDAO();
-        System.out.println(cdao.getAllCV());
+        
     }
 }
