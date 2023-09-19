@@ -11,8 +11,8 @@ package model;
 public class Account {
     int ID;
     String email;
-    String username;
-    String password;
+    String Username;
+    String Password;
     Byte isMentee;
     Byte isMentor;
     Byte isAdmin;
@@ -20,11 +20,11 @@ public class Account {
     public Account() {
     }
 
-    public Account(int ID, String email, String username, String password, Byte isMentee, Byte isMentor, Byte isAdmin) {
+    public Account(int ID, String email, String Username, String Password, Byte isMentee, Byte isMentor, Byte isAdmin) {
         this.ID = ID;
         this.email = email;
-        this.username = username;
-        this.password = password;
+        this.Username = Username;
+        this.Password = Password;
         this.isMentee = isMentee;
         this.isMentor = isMentor;
         this.isAdmin = isAdmin;
@@ -47,19 +47,19 @@ public class Account {
     }
 
     public String getUsername() {
-        return username;
+        return Username;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.Username = Username;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.Password = Password;
     }
 
     public Byte getIsMentee() {
@@ -88,7 +88,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "ID=" + ID + ", email=" + email + ", username=" + username + ", password=" + password + ", isMentee=" + isMentee + ", isMentor=" + isMentor + ", isAdmin=" + isAdmin + '}';
+        return "Account{" + "ID=" + ID + ", email=" + email + ", Username=" + Username + ", Password=" + Password + ", isMentee=" + isMentee + ", isMentor=" + isMentor + ", isAdmin=" + isAdmin + '}';
     }
     
 }
