@@ -40,7 +40,7 @@ public class AccountDAO extends DBContext {
 
     public Account getAccountBy(String username, String password) {
     try {
-        String sql = "SELECT [Username], [Password] FROM [dbo].[Account] WHERE Username = ? AND Password = ?";
+        String sql = "SELECT * FROM [dbo].[Account] WHERE Username = ? AND Password = ?";
         PreparedStatement stm = connection.prepareStatement(sql);
         stm.setString(1, username);
         stm.setString(2, password);
@@ -49,8 +49,13 @@ public class AccountDAO extends DBContext {
         if (rs.next()) {
             // Tạo một đối tượng Account và đổ dữ liệu từ ResultSet vào đó
             Account account = new Account();
+            account.setID(rs.getInt("ID"));
+            account.setEmail(rs.getString("Email"));
             account.setUsername(rs.getString("Username"));
             account.setPassword(rs.getString("Password"));
+            account.setIsMentee(rs.getByte("isMentee"));
+            account.setIsMentor(rs.getByte("isMentor"));
+            account.setIsAdmin(rs.getByte("isAdmin"));
             // Điền thêm các trường khác nếu cần
 
             return account;

@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
             response.getWriter().println("login successful!");
             HttpSession session = request.getSession();
             session.setAttribute("acc", account);
-            request.getRequestDispatcher("home.jsp");
+            request.getRequestDispatcher("home.jsp").forward(request, response);
         }
     }
 
