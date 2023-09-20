@@ -35,15 +35,16 @@
                 </li>
                 <%if (acc!=null){%>
                 <%if(acc.getIsMentee()==1){%>
-                <li><a href="">Profile</a></li>
+                <li><a href="profile.jsp">Profile</a></li>
                 <li><a href="">Request</a></li>
+                <li><a href="">Become mentor</a></li>
                     <%}%>
                     <%if(acc.getIsMentor()==1){%>
                 <li class="dropdown"><a href="#"><span>Request</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="">Invited</a></li>
                         <li><a href="">Eccepted</a></li>
-                        <li><a href="">Become mentor</a></li>
+                        
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#"><span>CV</span> <i class="bi bi-chevron-down"></i></a>
@@ -59,7 +60,14 @@
                         <li><a href="">Mentee</a></li>
                         <li><a href="">Mentor</a></li>
                     </ul>
+                   </li> 
                 <li><a href="">List Mentor</a></li> 
+                 <li class="dropdown"><a href="#"><span>Skill</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="">List Skill</a></li>
+                        <li><a href="">Create Skill</a></li>
+                    </ul>
+                   </li> 
                 </li>
                 <%}%>
                 <%}%>
