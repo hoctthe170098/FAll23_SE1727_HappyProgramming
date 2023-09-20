@@ -81,7 +81,7 @@
         <%}%>
         <%if(acc!=null){%>
         <a href="#" class="get-started-btn"><%=acc.getUsername()%></a>
-        <a href="" class="get-started-btn">Log out</a>
+        <a href="logout" class="get-started-btn">Log out</a>
         <%}%>
     </div>
 </header><!-- End Header -->
