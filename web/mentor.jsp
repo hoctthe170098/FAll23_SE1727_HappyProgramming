@@ -55,7 +55,7 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <jsp:include page="header.jsp"></jsp:include>
+  <jsp:include page="headerMentor.jsp"></jsp:include>
 <main id="main">
 
     <!-- ======= About Section ======= -->
@@ -67,7 +67,7 @@
             <img src="assets/img/about.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-            <h3>Do you want to become a mentor?</h3>
+            <h3>DO you want to become a mentor?</h3>
             <p class="fst-italic">
               To become a mentor, you need:
             </p>
@@ -79,7 +79,6 @@
             <p>
               If you have a account,Click "Become Mentor" to join with us
             </p>
-            
              
           </div>
         </div>

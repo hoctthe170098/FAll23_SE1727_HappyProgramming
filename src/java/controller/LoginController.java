@@ -53,10 +53,12 @@ public class LoginController extends HttpServlet {
         Account account = db.getAccountBy(username, password);
         
         if(account ==null)
-        {
+        { String msg ="";
             HttpSession session = request.getSession();
             session.setAttribute("account", null);
             response.sendRedirect("login?error=1");
+            msg ="Failed to loggin";
+            request.setAttribute("mess", msg);
         }
         else
         {

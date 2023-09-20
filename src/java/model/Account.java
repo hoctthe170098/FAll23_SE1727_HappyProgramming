@@ -50,7 +50,7 @@ public class Account {
         return Username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String Username) {
         this.Username = Username;
     }
 
@@ -58,7 +58,7 @@ public class Account {
         return Password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String Password) {
         this.Password = Password;
     }
 

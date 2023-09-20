@@ -77,8 +77,10 @@
 </header><!-- End Header -->
 <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
-        <h1>WELCOME TO HAPPY PROGRAMMING</h1>      
-     
+        <h1>WHAT ARE YOU LOOKING FOR?</h1>      
+     <form class="d-flex"> 
+      <input class="form-control mr-2" type="search" placeholder="Search mentor here" aria-label="Search" name=""> 
+      <button class="btn btn-outline-success" type="submit">Search</button> </form>
     </div>
 </section>
 
