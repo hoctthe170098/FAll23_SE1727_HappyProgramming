@@ -12,6 +12,10 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HeaderServlet</servlet-name>
+        <servlet-class>controller.HeaderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -24,13 +28,16 @@
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HeaderServlet</servlet-name>
+        <url-pattern>/header</url-pattern>
+    </servlet-mapping>
     <session-config>
-       <welcome-file-list>
+        <welcome-file-list>
             <welcome-file>home.jsp</welcome-file>
             <welcome-file>Signin.html</welcome-file>
             <welcome-file>Signup.html</welcome-file>
         </welcome-file-list>
-
         <session-timeout>
             30
         </session-timeout>

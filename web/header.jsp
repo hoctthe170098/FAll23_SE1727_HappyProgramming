@@ -13,6 +13,8 @@
   SkillDAO SkillDAO = new SkillDAO();  
   Account acc = (Account)request.getSession().getAttribute("acc");  
   List<Skill> listSkill = SkillDAO.getListSkill();
+  String sID1=(String)request.getAttribute("id1");
+  String sID2=(String)request.getAttribute("id2");
 %>   
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
@@ -23,9 +25,9 @@
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
-                <li><a class="active" href="home.jsp">Home</a></li>
-                <li><a href="mentor.jsp">Mentor</a></li>
-                <li><a href="Skill.jsp">Skills</a></li>              
+                <li><a href="home.jsp">Home</a></li>
+                <li><a href="header?id=1">Mentor</a></li>
+                <li><a href="header?id=2">Skills</a></li>              
                 <li class="dropdown"><a href="#"><span>Suggest Mentor</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <%for (Skill s: listSkill){%>
@@ -85,8 +87,22 @@
 </header><!-- End Header -->
 <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+        <%if(sID1==null&&sID2==null){%>
         <h1>WELCOME TO HAPPY PROGRAMMING</h1>      
-     
+        <%}%>
+        <%if(sID1!=null){ %>     
+        <h1>WHAT ARE YOU LOOKING FOR?</h1>      
+     <form class="d-flex"> 
+      <input class="form-control mr-2" type="search" placeholder="Search mentor here" aria-label="Search" name=""> 
+      <button class="btn btn-outline-success" type="submit">Search</button> </form>  
+      <%}%>
+        <%if(sID2!=null){%>
+        <h1>WHAT ARE YOU LOOKING FOR?</h1>      
+     <form class="d-flex"> 
+      <input class="form-control mr-2" type="search" placeholder="Search skill here" aria-label="Search" name=""> 
+      <button class="btn btn-outline-success" type="submit">Search</button> </form>
+        <%}%>
+        
     </div>
 </section>
 
