@@ -19,10 +19,11 @@ import model.DBContext;
  */
 public class AccountDAO extends DBContext {
 
-    public void insertAccount(Account account) {
+    public boolean insertAccount(Account account) {
+        boolean success = false; // Initialize as false
 
         try {
-            String query = "INSERT INTO Account (name, email, password,gender,username,mobile) VALUES (?, ?, ?,?,?,?)";
+            String query = "INSERT INTO Account (name, email, password, gender, username, mobile) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(2, account.getEmail());
@@ -30,12 +31,17 @@ public class AccountDAO extends DBContext {
 
             statement.setString(5, account.getUsername());
 
-            statement.executeUpdate();
+            int rowsInserted = statement.executeUpdate();
             statement.close();
+
+            if (rowsInserted > 0) {
+                success = true; // Update success if the insertion was successful
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-
         }
+
+        return success; // Return the success status
     }
 
     public Account getAccountBy(String Username, String Password) {
