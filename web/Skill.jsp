@@ -56,7 +56,7 @@
     <body>
 
         <!-- ======= Header ======= -->
-        <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="headerSkill.jsp"></jsp:include>
             <main id="main" data-aos="fade-in">
 
                 <!-- ======= Breadcrumbs ======= -->

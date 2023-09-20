@@ -35,16 +35,15 @@
                 </li>
                 <%if (acc!=null){%>
                 <%if(acc.getIsMentee()==1){%>
-                <li><a href="profile.jsp">Profile</a></li>
+                <li><a href="">Profile</a></li>
                 <li><a href="">Request</a></li>
-                <li><a href="">Become mentor</a></li>
                     <%}%>
                     <%if(acc.getIsMentor()==1){%>
                 <li class="dropdown"><a href="#"><span>Request</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="">Invited</a></li>
                         <li><a href="">Eccepted</a></li>
-                        
+                        <li><a href="">Become mentor</a></li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#"><span>CV</span> <i class="bi bi-chevron-down"></i></a>
@@ -60,14 +59,7 @@
                         <li><a href="">Mentee</a></li>
                         <li><a href="">Mentor</a></li>
                     </ul>
-                   </li> 
                 <li><a href="">List Mentor</a></li> 
-                 <li class="dropdown"><a href="#"><span>Skill</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="">List Skill</a></li>
-                        <li><a href="">Create Skill</a></li>
-                    </ul>
-                   </li> 
                 </li>
                 <%}%>
                 <%}%>
@@ -85,8 +77,10 @@
 </header><!-- End Header -->
 <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
-        <h1>WELCOME TO HAPPY PROGRAMMING</h1>      
-     
+        <h1>WHAT ARE YOU LOOKING FOR?</h1>      
+     <form class="d-flex"> 
+      <input class="form-control mr-2" type="search" placeholder="Search mentor here" aria-label="Search" name=""> 
+      <button class="btn btn-outline-success" type="submit">Search</button> </form>
     </div>
 </section>
 
