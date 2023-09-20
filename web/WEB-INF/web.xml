@@ -25,11 +25,12 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <session-config>
-        <welcome-file-list>
+       <welcome-file-list>
             <welcome-file>home.jsp</welcome-file>
             <welcome-file>Signin.html</welcome-file>
             <welcome-file>Signup.html</welcome-file>
         </welcome-file-list>
+
         <session-timeout>
             30
         </session-timeout>
