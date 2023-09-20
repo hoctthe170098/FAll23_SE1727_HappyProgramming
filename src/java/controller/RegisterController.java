@@ -82,19 +82,6 @@ public class RegisterController extends HttpServlet {
         account.setPassword(password);   
         account.setUsername(username);
         
-        AccountDAO dao = new AccountDAO();
-        if(dao.insertAccount(account)){
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", account);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }else{
-            String mess = "Please check username or password";
-            request.setAttribute("mess", mess);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
-        
-        
-        
       
 //        AccountDBContext acc = new AccountDBContext();
 //        acc.insertAccount(account);

@@ -16,15 +16,17 @@
         <servlet-name>HeaderServlet</servlet-name>
         <servlet-class>controller.HeaderServlet</servlet-class>
     </servlet>
+
     <servlet>
-<<<<<<< HEAD
+
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
-=======
+
         <servlet-name>RequestServlet</servlet-name>
         <servlet-class>controller.RequestServlet</servlet-class>
->>>>>>> 0c073b122bfbc5ac2515691e5eaad0b6a71c20c0
+
     </servlet>
+
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -41,15 +43,17 @@
         <servlet-name>HeaderServlet</servlet-name>
         <url-pattern>/header</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
-<<<<<<< HEAD
+
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
-=======
+
         <servlet-name>RequestServlet</servlet-name>
         <url-pattern>/request</url-pattern>
->>>>>>> 0c073b122bfbc5ac2515691e5eaad0b6a71c20c0
+
     </servlet-mapping>
+
     <session-config>
         <welcome-file-list>
             <welcome-file>home.jsp</welcome-file>
