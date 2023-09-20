@@ -58,111 +58,80 @@
   <jsp:include page="header.jsp"></jsp:include>
 <main id="main">
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-            <h3>DO you want to become a mentor?</h3>
-            <p class="fst-italic">
-              To become a mentor, you need:
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> Strong knowledge. Certainly, the necessary condition to become a mentor is that you must master the knowledge you want to teach.</li>
-              <li><i class="bi bi-check-circle"></i> Practice communication skills</li>
-              <li><i class="bi bi-check-circle"></i> Learn how to create lesson plans</li>
-            </ul>
-            <p>
-              If you have a account,Click "Become Mentor" to join with us
-            </p>
-             
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts section-bg">
-      <div class="container">
+       <main id="main" data-aos="fade-in">
 
-        <div class="row counters">
-           <%
-               MenteeDAO MenteeDAO = new MenteeDAO();
-           %>
-          <div class="col-lg-4 col-6 text-center">
-              <span data-purecounter-start="0" data-purecounter-end=<%=MenteeDAO.TotalMentee()%> data-purecounter-duration="1" class="purecounter"></span>
-            <p>Students</p>
-          </div>
-         <%
-               SkillDAO SkillDAO = new SkillDAO();
-           %>
-          <div class="col-lg-4 col-6 text-center">
-              <span data-purecounter-start="0" data-purecounter-end=<%=SkillDAO.TotalSkill()%> data-purecounter-duration="1" class="purecounter"></span>
-            <p>Skills</p>
-          </div>
-          <%
-           MentorDAO MentorDAO = new MentorDAO();
-          %>
-          <div class="col-lg-4 col-6 text-center">
-              <span data-purecounter-start="0" data-purecounter-end=<%=MentorDAO.TotalMentor()%> data-purecounter-duration="1" class="purecounter"></span>
-            <p>Mentor</p>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Counts Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="content">
-              <h3>Why Choose HappyProgramming?</h3>
-              <p>
-               HappyProgramming will help you find mentor to learn about skills,language programming easily and page 
-                ensure:
-              </p>
-<!--              <div class="text-center">
-                <a href="about.html" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
-              </div>-->
-            </div>
-          </div>
-          <div class="col-lg-8 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-boxes d-flex flex-column justify-content-center">
-              <div class="row">
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-receipt"></i>
-                    <h4>Quality mentors, always on time</h4>
-                    <p>The mentors are selective and have very high expertise</p>
-                  </div>
+                <!-- ======= Breadcrumbs ======= -->
+                <div class="breadcrumbs">
+                    <div class="container">
+                        <h2>Skills</h2>
+                    <%  
+                          SkillDAO SkillDAO = new SkillDAO();
+                          List<Skill> listSkill = SkillDAO.getListSkill();
+                          MentorDAO MentorDAO = new MentorDAO();
+                          List<Mentor> listMentor = MentorDAO.getAllMentor();
+                          CVDAO CVDAO = new CVDAO();
+                          List<CV> listCV = CVDAO.getAllCV();
+                          
+                    %>   
+                    <p>We have <%=listMentor.size()%> mentors for you to choose </p>
                 </div>
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-cube-alt"></i>
-                    <h4>Support team</h4>
-                    <p>Support team always helps you when something goes wrong, and will answer any questions related to the mentors and skills</p>
-                  </div>
-                </div>
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-images"></i>
-                    <h4>Good textbooks and materials</h4>
-                    <p>The materials have been compiled by mentors and ensure 100% knowledge</p>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End .content-->
-          </div>
-        </div>
+            </div><!-- End Breadcrumbs -->
 
-      </div>
+            <!-- ======= Courses Section ======= -->
+            <section id="courses" class="courses">
+                <%
+               int count=listMentor.size()/2;
+               int remain=listMentor.size()-count*2;
+                %>
+                <%for (int i=1;i<=count;i++){%>
+                <div class="container" data-aos="fade-up">
+                    <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                        <%for(int j=(i-1)*2+1;j<=i*2;j++){%>
+                        <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
+                            <div class="course-item">
+                                <img src=<%=listCV.get(j-1).getAvatar()%> class="img-fluid" alt="...">
+                                <div class="course-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h2><%=listCV.get(j-1).getFullname()%></h2>
+<!--                                        <p class="price">$169</p>-->
+                                    </div>
+
+                                    <h3>About this mentor: </h3>
+                                    <p><%=listMentor.get(j-1).getExperience()%></p>
+                                     <h3 style="border: 2px solid black; background-color: #f8f8f8; padding: 10px; text-align: center";><a href="request.jsp">Request</a></h3>
+                                </div>
+                            </div>
+                        </div> <!-- End Course Item-->
+                        <%}%>
+                    </div>
+
+                </div>
+                <%}%>
+              <%if(remain!=0){%>
+               <div class="container" data-aos="fade-up">
+                    <div class="row" data-aos="zoom-in" data-aos-delay="100">               
+                        <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
+                            <div class="course-item">
+                                <img src=<%=listCV.get(listCV.size()-1).getAvatar()%> class="img-fluid" alt="...">
+                                <div class="course-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h2><%=listCV.get(listCV.size()-1).getFullname()%></h2>
+<!--                                        <p class="price">$169</p>-->
+                                    </div>
+
+                                    <h3>About this mentor:</h3>
+                                    <p><%=listMentor.get(listMentor.size()-1).getExperience()%></p>
+                                    
+                                       <h3 style="border: 2px solid black; background-color: #f8f8f8; padding: 10px; text-align: center";><a href="request.jsp">Request</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End Course Item-->                    
+                    </div>
+
+                </div>
+              <%}%>
     </section><!-- End Why Us Section -->
 
     <!-- ======= Features Section ======= -->

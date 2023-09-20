@@ -16,6 +16,10 @@
         <servlet-name>HeaderServlet</servlet-name>
         <servlet-class>controller.HeaderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RequestServlet</servlet-name>
+        <servlet-class>controller.RequestServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>HeaderServlet</servlet-name>
         <url-pattern>/header</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestServlet</servlet-name>
+        <url-pattern>/request</url-pattern>
     </servlet-mapping>
     <session-config>
         <welcome-file-list>
