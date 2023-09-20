@@ -1,39 +1,65 @@
 <%-- 
-    Document   : profile
-    Created on : Sep 19, 2023, 11:05:07 PM
+    Document   : Profile1
+    Created on : Sep 20, 2023, 9:18:07 AM
     Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*" %>
+<%@page import = "model.*" %>
+<%@page import = "java.util.List" %>
+<%@page import = "java.util.ArrayList" %>
 <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+         <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Home</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-<html lang="en">
-<head>
-<meta charset="utf-8">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-<title>update my profile - Bootdey.com</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
 <style type="text/css">
-    	body{margin-top:20px;
+.profile{margin-top:20px;
 color: #9b9ca1;
 }
-.bg-secondary-soft {
+.profile .bg-secondary-soft {
     background-color: rgba(208, 212, 217, 0.1) !important;
 }
-.rounded {
+.profile .rounded {
     border-radius: 5px !important;
 }
-.py-5 {
+.profile .py-5 {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important;
 }
-.px-4 {
+.profile .px-4 {
     padding-right: 1.5rem !important;
     padding-left: 1.5rem !important;
 }
-.file-upload .square {
+.profile .file-upload .square {
     height: 250px;
     width: 250px;
     margin: auto;
@@ -42,19 +68,19 @@ color: #9b9ca1;
     background-color: #fff;
     border-radius: 5px;
 }
-.text-secondary {
+.profile .text-secondary {
     --bs-text-opacity: 1;
     color: rgba(208, 212, 217, 0.5) !important;
 }
-.btn-success-soft {
+.profile .btn-success-soft {
     color: #28a745;
     background-color: rgba(40, 167, 69, 0.1);
 }
-.btn-danger-soft {
+.profile .btn-danger-soft {
     color: #dc3545;
     background-color: rgba(220, 53, 69, 0.1);
 }
-.form-control {
+.profile .form-control {
     display: block;
     width: 100%;
     padding: 0.5rem 1rem;
@@ -75,9 +101,20 @@ color: #9b9ca1;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
     </style>
-</head>
-<body>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+  <!-- =======================================================
+  * Template Name: Mentor
+  * Updated: Aug 30 2023 with Bootstrap v5.3.1
+  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  
+    </head>
+    <body>
+       <!-- ======= Header ======= -->
+  <jsp:include page="header.jsp"></jsp:include>
+  <div class="profile">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 <div class="container">
 <div class="row">
 <div class="col-12">
@@ -225,5 +262,22 @@ color: #9b9ca1;
 <script type="text/javascript">
 	
 </script>
-</body>
+  </div>
+  
+  <!-- ======= Footer ======= -->
+    <jsp:include page="Footer.jsp"></jsp:include>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+    </body>
 </html>
