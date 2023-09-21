@@ -35,8 +35,8 @@
             <h4>Useful Links</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="home.jsp">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Mentor</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Skill</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="header?id=1">Mentor</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="header?id=2">Skill</a></li>
             </ul>
           </div>
 
