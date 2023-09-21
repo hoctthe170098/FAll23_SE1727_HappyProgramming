@@ -15,7 +15,7 @@
         <meta charset="utf-8">
          <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
+        <title>Profile</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -250,7 +250,7 @@ color: #9b9ca1;
 </div> 
 
 <div class="gap-3 d-md-flex justify-content-md-end text-center">
-<button type="button" class="btn btn-danger btn-lg">Delete profile</button>
+    <button type="button" class="btn btn-danger btn-lg">Delete profile</button>
 <button type="button" class="btn btn-primary btn-lg">Update profile</button>
 </div>
 </form> 

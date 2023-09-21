@@ -20,7 +20,6 @@ public class HeaderServlet extends HttpServlet {
             request.getRequestDispatcher("Skill.jsp").forward(request, response);
         }
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
