@@ -20,7 +20,7 @@
       <div class="container">
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 footer-contact">
+          <div class="col-lg-4 col-md-6 footer-contact">
             <h3>Happy Programming</h3>
             <p>
               Thach Hoa Thach That <br>
@@ -31,16 +31,16 @@
             </p>
           </div>
 
-          <div class="col-lg-2 col-md-6 footer-links">
+          <div class="col-lg-4 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="home.jsp">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Mentor</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Skill</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="header?id=1">Mentor</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="header?id=2">Skill</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-3 col-md-6 footer-links">
+          <div class="col-lg-4 col-md-6 footer-links">
             <h4>Our Skill</h4>
             <ul>
                <%for (Skill s: listSkill){%>
@@ -48,19 +48,16 @@
               <%}%>
             </ul>
           </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
+<!--          <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Search</h4>
             <p>Search mentor here</p>
             <form action="" method="post">
               <input type="text" name=""><input type="submit" value="Search">
             </form>
-          </div>
-
+          </div>-->
         </div>
       </div>
     </div>
-
 <!--    <div class="container d-md-flex py-4">
 
       <div class="me-md-auto text-center text-md-start">
