@@ -13,16 +13,17 @@ import java.util.List;
  * @author Admin
  */
 public class MentorDAO extends MyDAO {
-       public int TotalMentor(){
-           
+
+    public int TotalMentor() {
+
         xSql = "select count(*)as Count from Mentor";
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
-            int count;         
+            int count;
             while (rs.next()) {
                 count = rs.getInt("Count");
-               return count;
+                return count;
             }
             rs.close();
             ps.close();
@@ -30,9 +31,10 @@ public class MentorDAO extends MyDAO {
             e.printStackTrace();
         }
         return 0;
-        
+
     }
-       public List<Mentor> getAllMentor() throws SQLException {
+
+    public List<Mentor> getAllMentor() throws SQLException {
         List<Mentor> list = new ArrayList<>();
         String sql = "Select *from dbo.Mentor";
         ps = con.prepareStatement(sql);
@@ -42,16 +44,43 @@ public class MentorDAO extends MyDAO {
             Mentor r = new Mentor();
             r.setID(rs.getInt("ID"));
             r.setIntro(rs.getString("Intro"));
-           
+
             r.setExperience(rs.getString("Ex"));
-            
+
             list.add(r);
 
         }
         return list;
     }
-       public static void main(String[] args) {
-        MentorDAO dao =  new MentorDAO();
-      
-}
+
+    public List<Mentor> SearchMentorByName(String Fullname) throws SQLException {
+        List<Mentor> list = new ArrayList<>();
+        String sql = "Select c.Avatar, c.Fullname, m.ID, m.Ex from Mentor m join CV c\n"
+                + "on m.ID = c.ID\n"
+                + "\n"
+                + "where  c.Fullname like ?";
+        ps = con.prepareStatement(sql);
+        ps.setString(1, "%" + Fullname + "%");
+
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            Mentor r = new Mentor();
+            CV c = new CV();
+            c.setAvatar(rs.getString("Avatar"));
+            c.setFullname(rs.getString("Fullname"));
+            r.setID(rs.getInt("ID"));
+            r.setExperience(rs.getString("Ex"));
+
+            list.add(r);
+
+        }
+        return list;
+
+    }
+
+    public static void main(String[] args) throws SQLException {
+        MentorDAO dao = new MentorDAO();
+         System.out.println(dao.getAllMentor());
+
+    }
 }
