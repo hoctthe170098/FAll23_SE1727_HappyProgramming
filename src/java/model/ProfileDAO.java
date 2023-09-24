@@ -13,9 +13,9 @@ import java.util.List;
  * @author ADMIN
  */
 public class ProfileDAO extends MyDAO{
-     public List<Profile> getAllCV() throws SQLException {
+     public List<Profile> getAllProfile() throws SQLException {
         List<Profile> list = new ArrayList<>();
-        String sql = "Select *from dbo.CV";
+        String sql = "Select *from dbo.Profile";
         ps = con.prepareStatement(sql);
 
         rs = ps.executeQuery();
