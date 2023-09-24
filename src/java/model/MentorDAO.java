@@ -55,7 +55,7 @@ public class MentorDAO extends MyDAO {
 
     public List<Mentor> SearchMentorByName(String Fullname) throws SQLException {
         List<Mentor> list = new ArrayList<>();
-        String sql = "Select c.Avatar, c.Fullname, m.ID, m.Ex from Mentor m join CV c\n"
+        String sql = "Select c.Avatar, c.Fullname, m.ID, m.Ex from Mentor m join Profile c\n"
                 + "on m.ID = c.ID\n"
                 + "\n"
                 + "where  c.Fullname like ?";
@@ -65,7 +65,7 @@ public class MentorDAO extends MyDAO {
         rs = ps.executeQuery();
         while (rs.next()) {
             Mentor r = new Mentor();
-            CV c = new CV();
+            Profile c = new Profile();
             c.setAvatar(rs.getString("Avatar"));
             c.setFullname(rs.getString("Fullname"));
             r.setID(rs.getInt("ID"));
