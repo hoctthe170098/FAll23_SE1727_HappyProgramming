@@ -17,7 +17,6 @@ public class ProfileDAO extends MyDAO{
         List<Profile> list = new ArrayList<>();
         String sql = "Select *from dbo.Profile";
         ps = con.prepareStatement(sql);
-
         rs = ps.executeQuery();
         while (rs.next()) {
             Profile c = new Profile();
