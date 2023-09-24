@@ -12,15 +12,15 @@ import java.util.List;
  *
  * @author ADMIN
  */
-public class CVDAO extends MyDAO{
-     public List<CV> getAllCV() throws SQLException {
-        List<CV> list = new ArrayList<>();
+public class ProfileDAO extends MyDAO{
+     public List<Profile> getAllCV() throws SQLException {
+        List<Profile> list = new ArrayList<>();
         String sql = "Select *from dbo.CV";
         ps = con.prepareStatement(sql);
 
         rs = ps.executeQuery();
         while (rs.next()) {
-            CV c = new CV();
+            Profile c = new Profile();
             c.setId(rs.getInt("ID"));
             c.setGender(rs.getBoolean("Gender"));
             c.setAvatar(rs.getString("Avatar"));
@@ -35,7 +35,7 @@ public class CVDAO extends MyDAO{
         return list;
     }
      public static void main(String[] args)  {
-        CVDAO cdao =  new CVDAO();
+        ProfileDAO cdao =  new ProfileDAO();
         
     }
 }

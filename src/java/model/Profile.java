@@ -10,7 +10,7 @@ import java.sql.Date;
  *
  * @author ADMIN
  */
-public class CV {
+public class Profile {
     int id;
     boolean gender;
     String Avatar;
@@ -19,10 +19,10 @@ public class CV {
     String Fullname;
     String Address;
 
-    public CV() {
+    public Profile() {
     }
 
-    public CV(int id, boolean gender, String Avatar, String Phone, Date Birth, String Fullname, String Address) {
+    public Profile(int id, boolean gender, String Avatar, String Phone, Date Birth, String Fullname, String Address) {
         this.id = id;
         this.gender = gender;
         this.Avatar = Avatar;

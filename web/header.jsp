@@ -49,12 +49,7 @@
                         
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>CV</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="">Create</a></li>
-                        <li><a href="">Update</a></li>
-                    </ul>  
-                </li>
+                <li><a href="#">CV</a></li>
                 <%}%>
                 <%if(acc.getIsAdmin()==1){%>
                 <li class="dropdown"><a href="#"><span>Static</span> <i class="bi bi-chevron-down"></i></a>
