@@ -57,7 +57,7 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("account", null);
             response.sendRedirect("login?error=1");
-            msg ="Failed to loggin";
+            msg ="Unable to loggin";
             request.setAttribute("mess", msg);
         }
         else
