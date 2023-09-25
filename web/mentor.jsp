@@ -84,8 +84,8 @@
                                   List<Skill> listSkill = SkillDAO.getListSkill();
                                   MentorDAO MentorDAO = new MentorDAO();
                                   List<Mentor> listMentor = MentorDAO.getAllMentor();
-                                  CVDAO CVDAO = new CVDAO();
-                                  List<CV> listCV = CVDAO.getAllCV();
+                                  ProfileDAO ProfileDAO = new ProfileDAO();
+                                  List<Profile> listPr = ProfileDAO.getAllProfile();
                           
                             %>   
                             <p>We have <%=listMentor.size()%> mentors for you to choose </p>
@@ -105,11 +105,11 @@
                                 <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
                                     <div class="course-item">
                                         <div style="text-align: center;">
-                                            <img src="<%= listCV.get(j-1).getAvatar() %>" class="img-fluid" alt="...">
+                                            <img src="<%= listPr.get(j-1).getAvatar() %>" class="img-fluid" alt="...">
                                         </div>
                                         <div style="text-align: center;" class="course-content">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h2 ><%=listCV.get(j-1).getFullname()%></h2>
+                                                <h2 ><%=listPr.get(j-1).getFullname()%></h2>
                                                 <!--                                        <p class="price">$169</p>-->
                                             </div>
 
@@ -130,10 +130,10 @@
                             <div class="row" data-aos="zoom-in" data-aos-delay="100">               
                                 <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
                                     <div class="course-item">
-                                        <img src=<%=listCV.get(listCV.size()-1).getAvatar()%> class="img-fluid" alt="...">
+                                        <img src=<%=listPr.get(listPr.size()-1).getAvatar()%> class="img-fluid" alt="...">
                                         <div class="course-content">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h2 style="text-align: center;" ><%=listCV.get(listCV.size()-1).getFullname()%></h2>
+                                                <h2 style="text-align: center;" ><%=listPr.get(listPr.size()-1).getFullname()%></h2>
                                                 <!--                                        <p class="price">$169</p>-->
                                             </div>
 

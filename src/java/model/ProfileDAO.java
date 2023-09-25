@@ -28,8 +28,7 @@ public class ProfileDAO extends MyDAO{
             c.setBirth(rs.getDate("Birth"));
             c.setFullname(rs.getString("Fullname"));
             c.setAddress(rs.getString("Address"));
-            c.setFacebookLink(rs.getString("facebookLink"));
-            c.setInstagramLink(rs.getString("InstagramLink"));
+            
             list.add(c);
         }
         return list;
@@ -91,13 +90,9 @@ public class ProfileDAO extends MyDAO{
             e.printStackTrace();
         }
      }
-     public static void main(String[] args)  {
+     public static void main(String[] args) throws SQLException  {
         ProfileDAO cdao =  new ProfileDAO();
-         long millis=System.currentTimeMillis();
-             java.sql.Date date=new java.sql.Date(millis); 
-         Profile p = new Profile(5, true, "assets/img/c++.png",
-                 "0948102469", date, "Tran Trung Hoc", "linh tinh","tfdc", "gfvdc");
-         cdao.InsertProfile(p);
-System.out.println(cdao.getProfileByID(5));
+System.out.println(cdao.getAllProfile());
+
     }
 }
