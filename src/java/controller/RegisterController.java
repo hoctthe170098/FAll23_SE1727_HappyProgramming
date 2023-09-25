@@ -107,7 +107,7 @@ public class RegisterController extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "long description";
     }// </editor-fold>
 
 }
