@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <welcome-file-list>
-            <welcome-file>home.jsp</welcome-file>
-            <welcome-file>Signin.html</welcome-file>
-            <welcome-file>Signup.html</welcome-file>
-        </welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+        <welcome-file>Signin.html</welcome-file>
+        <welcome-file>Signup.html</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>controller.RegisterController</servlet-class>
@@ -33,6 +33,10 @@
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>controller.ProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchMentorByNameServlet</servlet-name>
+        <servlet-class>controller.SearchMentorByNameServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchMentorByNameServlet</servlet-name>
+        <url-pattern>/searchmentor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
