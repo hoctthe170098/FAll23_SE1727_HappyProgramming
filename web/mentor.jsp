@@ -130,7 +130,9 @@
                             <div class="row" data-aos="zoom-in" data-aos-delay="100">               
                                 <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
                                     <div class="course-item">
+                                         <div style="text-align: center;">
                                         <img src=<%=listPr.get(listPr.size()-1).getAvatar()%> class="img-fluid" alt="...">
+                                         </div>
                                         <div class="course-content">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h2 style="text-align: center;" ><%=listPr.get(listPr.size()-1).getFullname()%></h2>
