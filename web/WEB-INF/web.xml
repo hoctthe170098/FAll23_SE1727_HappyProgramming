@@ -37,6 +37,10 @@
         <servlet-name>SearchMentorByNameServlet</servlet-name>
         <servlet-class>controller.SearchMentorByNameServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateCV</servlet-name>
+        <servlet-class>controller.UpdateCV</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -68,6 +72,10 @@
     <servlet-mapping>
         <servlet-name>SearchMentorByNameServlet</servlet-name>
         <url-pattern>/searchmentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCV</servlet-name>
+        <url-pattern>/updatecv</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
