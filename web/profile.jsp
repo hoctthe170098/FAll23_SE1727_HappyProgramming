@@ -145,7 +145,7 @@ color: #9b9ca1;
 String[] str = p.getFullname().split(" ");
 String firstname="";
         for (int i=0;i<str.length-1;i++){
-             firstname=firstname+str[i]+" ";
+             firstname=firstname+str[i];
         }
         firstname=firstname;
         String lastname = str[str.length-1];
@@ -180,11 +180,11 @@ String firstname="";
 <label class="form-label">Birth *</label>
 <input type="date" name="birth" class="form-control" placeholder aria-label="Enter your birth here" value=<%=p.getBirth()%>>
 </div>
-
-<div class="col-md-6">
-<label for="inputEmail4" class="form-label">Email *</label>
-<div><%=acc.getEmail()%></div>
+ <div class="col-md-6">
+<label class="form-label">Address *</label>
+<input type="text" name="address" class="form-control" placeholder aria-label="Address" value=<%=p.getAddress()%>>
 </div>
+
 
 <div class="col-md-6">
 <label class="form-label">Gender *</label>
@@ -193,6 +193,10 @@ String firstname="";
   <option value="true">Male</option>
   <option value="false">Female</option>  
 </select>    
+</div>
+ <div class="col-md-6">
+<label for="inputEmail4" class="form-label">Email *</label>
+<div><%=acc.getEmail()%></div>
 </div>
 </div> 
 </div>
@@ -205,15 +209,15 @@ String firstname="";
 <div class="text-center">
 
 <div class="square position-relative display-2 mb-3">
-    <%if(p.getAvatar()!=""){%>
-    <img class="square position-relative display-2 mb-3" src="" id="image" alt=""/>
+    <%if(p.getAvatar()!=""){%> 
+    <img class="square position-relative display-2 mb-3" src=<%=p.getAvatar()%> id="image" alt=""/>
     <%}%>
     <%if(p.getAvatar()==""){%>
-    <img class="square position-relative display-2 mb-3" src="" id="image" alt=""/>
+    <img class="square position-relative display-2 mb-3" src="imagesAcc\htmlcssjs.png" id="image" alt="gvb"/>
     <%}%>
 <!--    <i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>-->
 </div>
-    <input type="file" id="customFile" name="image" hidden onchange="chooseFile(this)" accept="image/png, image/gif, image/jpeg">
+    <input type="file" id="customFile" name="avatar" hidden onchange="chooseFile(this)" accept="image/png, image/gif, image/jpeg">
 <label class="btn btn-success-soft btn-block" for="customFile">Upload</label>
 <!--<button type="button" class="btn btn-danger-soft">Remove</button>-->
 
@@ -268,6 +272,7 @@ String firstname="";
 <!--<div class="gap-3 d-md-flex justify-content-md-end text-center">-->
 <!--    <button type="submit" class="btn btn-danger btn-lg">Delete profile</button>-->
 <button type="submit" class="btn btn-primary btn-lg">Update profile</button>
+<!--<input type="submit" class="btn btn-primary btn-lg" value="Update profile">-->
 <!--</div>-->
 </form> 
 </div>
@@ -276,7 +281,6 @@ String firstname="";
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-	
 </script>
   </div>
   
