@@ -93,11 +93,11 @@ public class ProfileDAO extends MyDAO{
      }
      public static void main(String[] args)  {
         ProfileDAO cdao =  new ProfileDAO();
-//         long millis=System.currentTimeMillis();
-//             java.sql.Date date=new java.sql.Date(millis); 
-//         Profile p = new Profile(5, true, "assets/img/c++.png",
-//                 "0948102469", date, "Tran Trung Hoc", "linh tinh","tfdc", "gfvdc");
-//         cdao.InsertProfile(p);
+         long millis=System.currentTimeMillis();
+             java.sql.Date date=new java.sql.Date(millis); 
+         Profile p = new Profile(5, true, "assets/img/c++.png",
+                 "0948102469", date, "Tran Trung Hoc", "linh tinh","tfdc", "gfvdc");
+         cdao.InsertProfile(p);
 System.out.println(cdao.getProfileByID(5));
     }
 }
