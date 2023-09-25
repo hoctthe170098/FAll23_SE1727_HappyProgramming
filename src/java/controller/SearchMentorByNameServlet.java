@@ -10,6 +10,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.List;
+import model.MentorProfile;
+import model.MentorProfileDAO;
 
 /**
  *
@@ -55,7 +59,7 @@ public class SearchMentorByNameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
     }
 
     /**
@@ -69,7 +73,26 @@ public class SearchMentorByNameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String mentorName = request.getParameter("name");
+
+        // Tạo một đối tượng MentorCVDAO
+        MentorProfileDAO mentorCVDAO = new MentorProfileDAO();
+
+        try {
+            // Thực hiện tìm kiếm mentor theo tên
+            List<MentorProfile> mentorList = mentorCVDAO.SearchMentorByName(mentorName);
+
+            // Lưu danh sách mentor vào thuộc tính request để chuyển đến JSP hoặc servlet khác
+            request.setAttribute("mentorName", mentorName);
+            request.setAttribute("mentorList", mentorList);
+
+            // Chuyển hướng đến trang kết quả tìm kiếm hoặc thực hiện các tác vụ khác
+            request.getRequestDispatcher("/searchmentor.jsp").forward(request, response);
+        } catch (SQLException e) {
+            // Xử lý lỗi nếu có
+            e.printStackTrace();
+            // Có thể chuyển hướng đến trang lỗi hoặc thực hiện xử lý lỗi khác
+        }
     }
 
     /**

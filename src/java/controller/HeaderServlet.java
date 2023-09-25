@@ -19,6 +19,7 @@ public class HeaderServlet extends HttpServlet {
             request.setAttribute("id2", id);
             request.getRequestDispatcher("Skill.jsp").forward(request, response);
         }
+       
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
