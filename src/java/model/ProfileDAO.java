@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +28,76 @@ public class ProfileDAO extends MyDAO{
             c.setBirth(rs.getDate("Birth"));
             c.setFullname(rs.getString("Fullname"));
             c.setAddress(rs.getString("Address"));
-            
+            c.setFacebookLink(rs.getString("facebookLink"));
+            c.setInstagramLink(rs.getString("InstagramLink"));
             list.add(c);
-
         }
         return list;
     }
+     public Profile getProfileByID(int ID){
+         Profile p = new Profile();
+         xSql = "select * from Profile where id = " + ID;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+           
+            p.setId(rs.getInt("ID"));
+            p.setGender(rs.getBoolean("Gender"));
+            p.setAvatar(rs.getString("Avatar"));
+            p.setPhone(rs.getString("Phone"));
+            p.setBirth(rs.getDate("Birth"));
+            p.setFullname(rs.getString("Fullname"));
+            p.setAddress(rs.getString("Address"));
+            p.setFacebookLink(rs.getString("facebookLink"));
+            p.setInstagramLink(rs.getString("InstagramLink"));
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         if(p.getId()>0) return p;
+         else{
+             p.setId(ID);
+             p.setGender(true);
+             p.setAvatar("");
+             p.setPhone("0123456789");
+             p.setAddress("");
+             p.setFullname("FirstName LastName");
+             long millis=System.currentTimeMillis();
+             java.sql.Date date=new java.sql.Date(millis); 
+             p.setBirth(date);
+             p.setFacebookLink("");
+             p.setInstagramLink("");
+             return p;
+         }
+     }
+     public void InsertProfile(Profile p){
+           xSql = "insert into Profile values (?,?,?,?,?,?,?,?,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, p.getId());
+            ps.setString(2, p.getFullname());
+            ps.setString(3, p.getAddress());
+            ps.setDate(4, p.getBirth());
+            ps.setString(5, p.getPhone());
+            if(p.isGender()==true){
+            ps.setByte(6,Byte.parseByte("1") );}else ps.setByte(6,Byte.parseByte("0"));
+            ps.setString(7, p.getAvatar());
+            ps.setString(8, p.getFacebookLink());
+            ps.setString(9, p.getInstagramLink());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+     }
      public static void main(String[] args)  {
         ProfileDAO cdao =  new ProfileDAO();
-        
+//         long millis=System.currentTimeMillis();
+//             java.sql.Date date=new java.sql.Date(millis); 
+//         Profile p = new Profile(5, true, "assets/img/c++.png",
+//                 "0948102469", date, "Tran Trung Hoc", "linh tinh","tfdc", "gfvdc");
+//         cdao.InsertProfile(p);
+System.out.println(cdao.getProfileByID(5));
     }
 }

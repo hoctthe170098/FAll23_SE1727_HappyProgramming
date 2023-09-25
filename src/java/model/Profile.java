@@ -18,11 +18,12 @@ public class Profile {
     Date Birth;
     String Fullname;
     String Address;
-
+    String FacebookLink;
+    String InstagramLink;
     public Profile() {
     }
 
-    public Profile(int id, boolean gender, String Avatar, String Phone, Date Birth, String Fullname, String Address) {
+    public Profile(int id, boolean gender, String Avatar, String Phone, Date Birth, String Fullname, String Address, String FacebookLink, String InstagramLink) {
         this.id = id;
         this.gender = gender;
         this.Avatar = Avatar;
@@ -30,8 +31,10 @@ public class Profile {
         this.Birth = Birth;
         this.Fullname = Fullname;
         this.Address = Address;
+        this.FacebookLink = FacebookLink;
+        this.InstagramLink = InstagramLink;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -88,9 +91,25 @@ public class Profile {
         this.Address = Address;
     }
 
+    public String getFacebookLink() {
+        return FacebookLink;
+    }
+
+    public void setFacebookLink(String FacebookLink) {
+        this.FacebookLink = FacebookLink;
+    }
+
+    public String getInstagramLink() {
+        return InstagramLink;
+    }
+
+    public void setInstagramLink(String InstagramLink) {
+        this.InstagramLink = InstagramLink;
+    }
+
     @Override
     public String toString() {
-        return "CV{" + "id=" + id + ", gender=" + gender + ", Avatar=" + Avatar + ", Phone=" + Phone + ", Birth=" + Birth + ", Fullname=" + Fullname + ", Address=" + Address + '}';
+        return "Profile{" + "id=" + id + ", gender=" + gender + ", Avatar=" + Avatar + ", Phone=" + Phone + ", Birth=" + Birth + ", Fullname=" + Fullname + ", Address=" + Address + ", FacebookLink=" + FacebookLink + ", InstagramLink=" + InstagramLink + '}';
     }
 
     

@@ -9,6 +9,9 @@
 <%@page import = "model.*" %>
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
+<%
+    Account acc = (Account)request.getSession().getAttribute("acc");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -108,7 +111,18 @@ color: #9b9ca1;
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script >
+      function chooseFile(fileInput){
+          if(fileInput.files && fileInput.files[0]){
+              var reader = new FileReader();
+              reader.onload = function(e){
+                  $('#image').attr('src',e.target.result);
+              }
+              reader.readAsDataURL(fileInput.files[0]);
+          }
+      }
+  </script>
     </head>
     <body>
        <!-- ======= Header ======= -->
@@ -123,8 +137,23 @@ color: #9b9ca1;
 <h3>My Profile</h3>
 <hr>
 </div>
-
-<form class="file-upload">
+<%
+    ProfileDAO proDAO = new ProfileDAO();
+   Profile p = proDAO.getProfileByID(acc.getID());
+%>
+<%
+String[] str = p.getFullname().split(" ");
+String firstname="";
+        for (int i=0;i<str.length-1;i++){
+             firstname=firstname+str[i]+" ";
+        }
+        firstname=firstname;
+        String lastname = str[str.length-1];
+        String gender;
+ if(p.isGender()==true) gender="male";
+ else gender="female";
+%>
+<form class="file-upload" action="profile" method="post" enctype="multipart/form-data">
 <div class="row mb-5 gx-5">
 
 <div class="col-xxl-8 mb-5 mb-xxl-0">
@@ -134,32 +163,36 @@ color: #9b9ca1;
 
 <div class="col-md-6">
 <label class="form-label">First Name *</label>
-<input type="text" class="form-control" placeholder aria-label="First name" value="Scaralet">
+<input type="text" name="firstname" class="form-control" placeholder aria-label="First name" value=<%=firstname%>>
 </div>
 
 <div class="col-md-6">
 <label class="form-label">Last Name *</label>
-<input type="text" class="form-control" placeholder aria-label="Last name" value="Doe">
+<input type="text" name="lastname" class="form-control" placeholder aria-label="Last name" value=<%=lastname%>>
 </div>
 
 <div class="col-md-6">
 <label class="form-label">Phone number *</label>
-<input type="text" class="form-control" placeholder aria-label="Phone number" value="(333) 000 555">
+<input type="text" name="phone" class="form-control" placeholder aria-label="Phone number" value=<%=p.getPhone()%>>
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Mobile number *</label>
-<input type="text" class="form-control" placeholder aria-label="Phone number" value="+91 9852 8855 252">
+<label class="form-label">Birth *</label>
+<input type="date" name="birth" class="form-control" placeholder aria-label="Enter your birth here" value=<%=p.getBirth()%>>
 </div>
 
 <div class="col-md-6">
 <label for="inputEmail4" class="form-label">Email *</label>
-<input type="email" class="form-control" id="inputEmail4" value="example@homerealty.com">
+<div><%=acc.getEmail()%></div>
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Skype *</label>
-<input type="text" class="form-control" placeholder aria-label="Phone number" value="Scaralet D">
+<label class="form-label">Gender *</label>
+<!--<input type="text" class="form-control" placeholder aria-label="Phone number" value="Scaralet D">-->
+<select name="gender" class="form-control" value=<%=gender%>>
+  <option value="true">Male</option>
+  <option value="false">Female</option>  
+</select>    
 </div>
 </div> 
 </div>
@@ -172,12 +205,17 @@ color: #9b9ca1;
 <div class="text-center">
 
 <div class="square position-relative display-2 mb-3">
-<i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>
+    <%if(p.getAvatar()!=""){%>
+    <img class="square position-relative display-2 mb-3" src="" id="image" alt=""/>
+    <%}%>
+    <%if(p.getAvatar()==""){%>
+    <img class="square position-relative display-2 mb-3" src="" id="image" alt=""/>
+    <%}%>
+<!--    <i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>-->
 </div>
-
-<input type="file" id="customFile" name="file" hidden>
+    <input type="file" id="customFile" name="image" hidden onchange="chooseFile(this)" accept="image/png, image/gif, image/jpeg">
 <label class="btn btn-success-soft btn-block" for="customFile">Upload</label>
-<button type="button" class="btn btn-danger-soft">Remove</button>
+<!--<button type="button" class="btn btn-danger-soft">Remove</button>-->
 
 <p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>Minimum size 300px x 300px</p>
 </div>
@@ -191,41 +229,19 @@ color: #9b9ca1;
 <div class="bg-secondary-soft px-4 py-5 rounded">
 <div class="row g-3">
 <h4 class="mb-4 mt-0">Social media detail</h4>
-
 <div class="col-md-6">
 <label class="form-label"><i class="fab fa-fw fa-facebook me-2 text-facebook"></i>Facebook *</label>
-<input type="text" class="form-control" placeholder aria-label="Facebook" value="http://www.facebook.com">
+<input type="text" name="facebooklink" class="form-control" placeholder aria-label="Facebook" value=<%=p.getFacebookLink()%>>
 </div>
-
-<div class="col-md-6">
-<label class="form-label"><i class="fab fa-fw fa-twitter text-twitter me-2"></i>Twitter *</label>
-<input type="text" class="form-control" placeholder aria-label="Twitter" value="http://www.twitter.com">
-</div>
-
-<div class="col-md-6">
-<label class="form-label"><i class="fab fa-fw fa-linkedin-in text-linkedin me-2"></i>Linkedin *</label>
-<input type="text" class="form-control" placeholder aria-label="Linkedin" value="http://www.linkedin.com">
-</div>
-
 <div class="col-md-6">
 <label class="form-label"><i class="fab fa-fw fa-instagram text-instagram me-2"></i>Instagram *</label>
-<input type="text" class="form-control" placeholder aria-label="Instragram" value="http://www.instragram.com">
-</div>
-
-<div class="col-md-6">
-<label class="form-label"><i class="fas fa-fw fa-basketball-ball text-dribbble me-2"></i>Dribble *</label>
-<input type="text" class="form-control" placeholder aria-label="Dribble" value="http://www.dribble.com">
-</div>
-
-<div class="col-md-6">
-<label class="form-label"><i class="fab fa-fw fa-pinterest text-pinterest"></i>Pinterest *</label>
-<input type="text" class="form-control" placeholder aria-label="Pinterest" value="http://www.pinterest.com">
+<input type="text" name="instragramlink" class="form-control" placeholder aria-label="Instragram" value=<%=p.getInstagramLink()%>>
 </div>
 </div> 
 </div>
 </div>
 
-<div class="col-xxl-6">
+<!--<div class="col-xxl-6">
 <div class="bg-secondary-soft px-4 py-5 rounded">
 <div class="row g-3">
 <h4 class="my-4">Change Password</h4>
@@ -246,13 +262,13 @@ color: #9b9ca1;
 </div>
 </div>
 </div>
-</div>
+</div>-->
 </div> 
 
-<div class="gap-3 d-md-flex justify-content-md-end text-center">
-    <button type="button" class="btn btn-danger btn-lg">Delete profile</button>
-<button type="button" class="btn btn-primary btn-lg">Update profile</button>
-</div>
+<!--<div class="gap-3 d-md-flex justify-content-md-end text-center">-->
+<!--    <button type="submit" class="btn btn-danger btn-lg">Delete profile</button>-->
+<button type="submit" class="btn btn-primary btn-lg">Update profile</button>
+<!--</div>-->
 </form> 
 </div>
 </div>
