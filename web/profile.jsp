@@ -210,10 +210,11 @@ String firstname="";
 
 <div class="square position-relative display-2 mb-3">
     <%if(p.getAvatar()!=""){%> 
-    <img class="square position-relative display-2 mb-3" src=<%=p.getAvatar()%> id="image" alt=""/>
+    
+    <img class="square position-relative display-2 mb-3" src="<%=p.getAvatar()%>"+ id="image" alt=""/>
     <%}%>
     <%if(p.getAvatar()==""){%>
-    <img class="square position-relative display-2 mb-3" src="imagesAcc\htmlcssjs.png" id="image" alt="gvb"/>
+    <img class="square position-relative display-2 mb-3" src="" id="image" alt="avatar"/>
     <%}%>
 <!--    <i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>-->
 </div>
