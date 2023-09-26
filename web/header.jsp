@@ -16,6 +16,7 @@
   String sID1=(String)request.getAttribute("id1");
   String sID2=(String)request.getAttribute("id2");
 %>   
+
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 

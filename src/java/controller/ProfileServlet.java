@@ -13,6 +13,7 @@ import model.*;
 @MultipartConfig
 public class ProfileServlet extends HttpServlet {
 
+    // b?t swj kien insert -> acc -> mentee
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
