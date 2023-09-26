@@ -10,14 +10,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.*;
+import java.sql.SQLException;
+import java.util.List;
+import model.MentorProfile;
+import model.MentorProfileDAO;
 
 /**
  *
- * @author DELL
+ * @author admin
  */
-public class RegisterController extends HttpServlet {
+public class SearchMentorByNameServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +38,10 @@ public class RegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");
+            out.println("<title>Servlet SearchMentorByNameServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchMentorByNameServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +59,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/Signup.html").forward(request, response);
+       
     }
 
     /**
@@ -71,33 +73,26 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         String mentorName = request.getParameter("name");
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String name = request.getParameter("name");
+        // Tạo một đối tượng MentorCVDAO
+        MentorProfileDAO mentorCVDAO = new MentorProfileDAO();
 
-        Account account = new Account();
-        account.setEmail(email);
-        account.setPassword(password);
-        account.setUsername(name);
+        try {
+            // Thực hiện tìm kiếm mentor theo tên
+            List<MentorProfile> mentorList = mentorCVDAO.SearchMentorByName(mentorName);
 
-        if (account == null) {
-            String msg = "";
-            HttpSession session = request.getSession();
-            session.setAttribute("account", null);
-            response.sendRedirect("register?error=1");
-            msg = "Unable to signup";
-            request.setAttribute("mess", msg);
-        } else {
-            response.getWriter().println("register successful!");
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", account);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            // Lưu danh sách mentor vào thuộc tính request để chuyển đến JSP hoặc servlet khác
+            request.setAttribute("mentorName", mentorName);
+            request.setAttribute("mentorList", mentorList);
+
+            // Chuyển hướng đến trang kết quả tìm kiếm hoặc thực hiện các tác vụ khác
+            request.getRequestDispatcher("/searchmentor.jsp").forward(request, response);
+        } catch (SQLException e) {
+            // Xử lý lỗi nếu có
+            e.printStackTrace();
+            // Có thể chuyển hướng đến trang lỗi hoặc thực hiện xử lý lỗi khác
         }
-
-//        AccountDBContext acc = new AccountDBContext();
-//        acc.insertAccount(account);
-//        request.getRequestDispatcher("view/login.jsp").forward(request, response);
     }
 
     /**
@@ -107,7 +102,7 @@ public class RegisterController extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "long description";
+        return "Short description";
     }// </editor-fold>
 
 }

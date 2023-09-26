@@ -15,6 +15,8 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
         <title>Home</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
@@ -26,6 +28,7 @@
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
   <title>Mentor</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -37,6 +40,8 @@
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+>>>>>>> 595401a21149daca8f99a050e91779e5905dff4e
+
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -76,22 +81,22 @@
                                 <h2>Skills</h2>
                             <%  
                                   SkillDAO SkillDAO = new SkillDAO();
-                                  List<Skill> listSkill = SkillDAO.getListSkill();
-                                  MentorDAO MentorDAO = new MentorDAO();
-                                  List<Mentor> listMentor = MentorDAO.getAllMentor();
-                                  ProfileDAO ProfileDAO = new ProfileDAO();
-                                  List<Profile> listPr = ProfileDAO.getAllProfile();
-                          
-                            %>   
-                            <p>We have <%=listMentor.size()%> mentors for you to choose </p>
+    List<Skill> listSkill = SkillDAO.getListSkill();
+    String mentorName = (String) request.getAttribute("mentorName");
+    MentorProfileDAO mentorProfileDAO = new MentorProfileDAO();
+    List<MentorProfile> mentorList = mentorProfileDAO.SearchMentorByName(mentorName);
+
+
+ %>   
+                            <p>We have <%=mentorList.size()%> mentors for you </p>
                         </div>
                     </div><!-- End Breadcrumbs -->
 
                     <!-- ======= Courses Section ======= -->
                     <section id="courses" class="courses">
                         <%
-                       int count=listMentor.size()/2;
-                       int remain=listMentor.size()-count*2;
+                       int count=mentorList.size()/2;
+                       int remain=mentorList.size()-count*2;
                         %>
                         <%for (int i=1;i<=count;i++){%>
                         <div class="container" data-aos="fade-up">
@@ -100,17 +105,17 @@
                                 <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
                                     <div class="course-item">
                                         <div style="text-align: center;">
-                                            <img src="<%= listPr.get(j-1).getAvatar() %>" class="img-fluid" alt="...">
+                                            <img src="<%= mentorList.get(j-1).getAvatar() %>" class="img-fluid" alt="...">
                                         </div>
                                         <div style="text-align: center;" class="course-content">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h2 ><%=listPr.get(j-1).getFullname()%></h2>
+                                                <h2 ><%=mentorList.get(j-1).getFullname()%></h2>
                                                 <!--                                        <p class="price">$169</p>-->
                                             </div>
 
                                             <h2 style="border-bottom: 3px solid;border-bottom-color: #86db9f" ><a href="request.jsp"> About this mentor </a></h2>
                                             <h3>Mentor's Experiences</h3>
-                                            <p><%=listMentor.get(j-1).getExperience()%></p>
+                                            <p><%=mentorList.get(j-1).getEx()%></p>
                                             <h3 style="border: 2px solid black; background-color: #f8f8f8; padding: 10px; text-align: center";><a href="request.jsp">Request</a></h3>
                                         </div>
                                     </div>
@@ -125,18 +130,16 @@
                             <div class="row" data-aos="zoom-in" data-aos-delay="100">               
                                 <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
                                     <div class="course-item">
-                                         <div style="text-align: center;">
-                                        <img src=<%=listPr.get(listPr.size()-1).getAvatar()%> class="img-fluid" alt="...">
-                                         </div>
+                                        <img src=<%=mentorList.get(mentorList.size()-1).getAvatar()%> class="img-fluid" alt="...">
                                         <div class="course-content">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h2 style="text-align: center;" ><%=listPr.get(listPr.size()-1).getFullname()%></h2>
+                                                <h2 style="text-align: center;" ><%=mentorList.get(mentorList.size()-1).getFullname()%></h2>
                                                 <!--                                        <p class="price">$169</p>-->
                                             </div>
 
                                             <h2 style="text-decoration: underline; text-decoration-color: #86db9f;  "><a href="request.jsp"> About this mentor </a></h2>
                                             <h3>Mentor's Experiences</h3>
-                                            <p><%=listMentor.get(listMentor.size()-1).getExperience()%></p>
+                                            <p><%=mentorList.get(mentorList.size()-1).getEx()%></p>
 
                                             <h3 style="border: 2px solid black; background-color: #f8f8f8; padding: 10px; text-align: center";><a href="request.jsp">Request</a></h3>
                                         </div>
