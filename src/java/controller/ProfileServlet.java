@@ -50,26 +50,26 @@ public class ProfileServlet extends HttpServlet {
             String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
             Account acc = (Account) request.getSession().getAttribute("acc");
             int ID = acc.getID();
-            
-            String ss="fdf.df";
-            out.println(ss.contains("."));
-            String[] s = ss.split(".");
-            out.println(s.length);
             if (!Files.exists(Paths.get(realPath))) {
                 Files.createDirectory(Paths.get(realPath));
             }
-            //String imgName=realPath+"/"+"acc"+ID+"."+str[str.length-1];
-            //String imgName = realPath + "/" + fileName;
-            //part.write(imgName);
-            
+            int index=-1;
+            for (int i=0;i<=fileName.length();i++){
+                if (fileName.charAt(i)=='.'){
+                    index=i;break;
+                }
+            }
+            String s=fileName.substring(index);
+            String img="acc"+ID+"."+s;
+            String imgName = realPath + "/" + img;
+            part.write(imgName);         
 //            out.print("<img src='imagesAcc/"+fileName+"'>");
-
 //            
-//            Profile p = new Profile(ID, gender, fileName, Phone, birth, fullname, address, faceLink, intaLink);        
-//            ProfileDAO dao = new ProfileDAO();
-//          dao.InsertProfile(p);
-//          out.print(p.toString());
-//          request.getRequestDispatcher("profile.jsp").forward(request, response);
+            Profile p = new Profile(ID, gender,"imagesAcc/"+img, Phone, birth, fullname, address, faceLink, intaLink);        
+            ProfileDAO dao = new ProfileDAO();
+          dao.InsertProfile(p);
+          out.print(p.toString());
+          request.getRequestDispatcher("profile.jsp").forward(request, response);
         } catch (Exception e) {
 
         }
