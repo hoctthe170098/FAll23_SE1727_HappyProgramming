@@ -36,6 +36,14 @@ public class ProfileServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            ProfileDAO dao = new ProfileDAO();
+            Account acc = (Account) request.getSession().getAttribute("acc");
+            int ID = acc.getID();
+            String button = request.getParameter("button");
+            if(button.equals("delete")){
+               dao.deleteProfile(ID);
+            }
+            if(button.equals("update")){
             String firstname = request.getParameter("firstname");
             String lastname = request.getParameter("lastname");
             String fullname = firstname + " " + lastname;
@@ -46,10 +54,7 @@ public class ProfileServlet extends HttpServlet {
             String faceLink = request.getParameter("facebooklink");
             String intaLink = request.getParameter("instragramlink");
             Part part = request.getPart("avatar");
-            //out.println(part);
-            Account acc = (Account) request.getSession().getAttribute("acc");
-            int ID = acc.getID();
-            ProfileDAO dao = new ProfileDAO();
+            //out.println(part);      
             Profile pro = dao.getProfileByID(ID);
             if (pro.getId() == 0) {
                 String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
@@ -99,6 +104,7 @@ public class ProfileServlet extends HttpServlet {
                     dao.deleteProfile(ID);
                     dao.InsertProfile(p);
                 }
+            }
             }
         } catch (Exception e) {
 
