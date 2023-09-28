@@ -46,10 +46,14 @@ public class ProfileServlet extends HttpServlet {
             String faceLink = request.getParameter("facebooklink");
             String intaLink = request.getParameter("instragramlink");
             Part part = request.getPart("avatar");
-            String realPath = request.getServletContext().getRealPath("/imagesAcc");
-            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+           
             Account acc = (Account) request.getSession().getAttribute("acc");
             int ID = acc.getID();
+            ProfileDAO dao = new ProfileDAO();
+            Profile pro = dao.getProfileByID(ID);
+            if (pro.getId()==0){
+            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            String realPath = request.getServletContext().getRealPath("/imagesAcc");
             if (!Files.exists(Paths.get(realPath))) {
                 Files.createDirectory(Paths.get(realPath));
             }
@@ -62,16 +66,23 @@ public class ProfileServlet extends HttpServlet {
             String s=fileName.substring(index);
             String img="acc"+ID+"."+s;
             String imgName = realPath + "/" + img;
-            part.write(imgName);         
-//            out.print("<img src='imagesAcc/"+fileName+"'>");
-//            
-            Profile p = new Profile(ID, gender,"imagesAcc/"+img, Phone, birth, fullname, address, faceLink, intaLink);        
-            ProfileDAO dao = new ProfileDAO();
-          dao.InsertProfile(p);
-          out.print(p.toString());
-          request.getRequestDispatcher("profile.jsp").forward(request, response);
+            part.write(imgName);    
+            Profile p = new Profile(ID, gender,"imagesAcc/"+img, Phone, birth, fullname, address, faceLink, intaLink);  
+            dao.InsertProfile(p);
+             response.sendRedirect("profile.jsp");
+            }
+            else{
+                if (part==null){
+                    
+                    Profile p = new Profile(ID, gender,pro.getAvatar(), Phone, birth, fullname, address, faceLink, intaLink);
+                    out.println(p.toString());
+//                    dao.deleteProfile(ID);
+//                    dao.InsertProfile(p);             
+                }
+            }                 
         } catch (Exception e) {
 
         }
+         
     }
 }

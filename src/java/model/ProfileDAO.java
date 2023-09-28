@@ -56,7 +56,7 @@ public class ProfileDAO extends MyDAO{
          }
          if(p.getId()>0) return p;
          else{
-             p.setId(ID);
+             p.setId(0);
              p.setGender(true);
              p.setAvatar("");
              p.setPhone("0123456789");
@@ -89,6 +89,15 @@ public class ProfileDAO extends MyDAO{
         } catch (Exception e) {
             e.printStackTrace();
         }
+     }
+     public void deleteProfile(int ID){
+         xSql = "delete from Profile where id = " + ID;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+         }catch(Exception e){
+             e.printStackTrace();
+         }
      }
      public static void main(String[] args) throws SQLException  {
         ProfileDAO cdao =  new ProfileDAO();
