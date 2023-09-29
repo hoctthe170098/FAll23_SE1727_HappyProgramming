@@ -58,15 +58,15 @@ public class ProfileDAO extends MyDAO{
          else{
              p.setId(0);
              p.setGender(true);
-             p.setAvatar("");
+             p.setAvatar("imagesAcc/acc0.jpg");
              p.setPhone("0123456789");
              p.setAddress("");
              p.setFullname("FirstName LastName");
              long millis=System.currentTimeMillis();
              java.sql.Date date=new java.sql.Date(millis); 
              p.setBirth(date);
-             p.setFacebookLink("");
-             p.setInstagramLink("");
+             p.setFacebookLink("https://www.facebook.com/");
+             p.setInstagramLink("https://www.instagram.com/");
              return p;
          }
      }
@@ -100,7 +100,11 @@ public class ProfileDAO extends MyDAO{
          }
      }
      public static void main(String[] args) throws SQLException  {
-        ProfileDAO cdao =  new ProfileDAO();
-         System.out.println(cdao.getProfileByID(5));
+        ProfileDAO cdao =  new ProfileDAO();       
+//         long millis=System.currentTimeMillis();
+//             java.sql.Date date=new java.sql.Date(millis); 
+//             Profile p  = new Profile(7, true, "imagesAcc/acc7.jpg", "0987654321",date, "FirstName", "NamĐinh", "https://www.facebook.com/", "khongco");
+//             cdao.InsertProfile(p);
+//             System.out.println(cdao.getProfileByID(7));
     }
 }
