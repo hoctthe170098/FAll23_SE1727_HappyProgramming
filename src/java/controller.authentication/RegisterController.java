@@ -71,33 +71,35 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        AccountDAO accDao = new AccountDAO();
         String name = request.getParameter("name");
-
-        Account account = new Account();
-        account.setEmail(email);
-        account.setPassword(password);
-        account.setUsername(name);
-
-        if (account == null) {
-            String msg = "";
-            HttpSession session = request.getSession();
-            session.setAttribute("account", null);
-            response.sendRedirect("register?error=1");
-            msg = "Unable to signup";
-            request.setAttribute("mess", msg);
-        } else {
-            response.getWriter().println("register successful!");
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", account);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+        String email = request.getParameter("email");
+        String password = request.getParameter("pass");
+        String repass = request.getParameter("repass");
+        if(name==""||email==""||password==""||repass==""){
+            request.setAttribute("msg", "Please fill out the form completely");
+            request.getRequestDispatcher("Signup.jsp").forward(request, response);
         }
-
-//        AccountDBContext acc = new AccountDBContext();
-//        acc.insertAccount(account);
-//        request.getRequestDispatcher("view/login.jsp").forward(request, response);
+        else if((name.contains(" ")||name.length()>50)||(password.contains(" ")||password.length()>50)){
+            request.setAttribute("msg", "Username or password can't contain space or has length >50 ");
+            request.getRequestDispatcher("Signup.jsp").forward(request, response);
+        }else{
+           if(accDao.IsExistUsername(name)){
+            request.setAttribute("msg", "Username is exist");
+            request.getRequestDispatcher("Signup.jsp").forward(request, response);  
+           }else if(accDao.IsExistEmail(email)){
+            request.setAttribute("msg", "Email is exist");
+            request.getRequestDispatcher("Signup.jsp").forward(request, response);  
+           }else if (!password.equals(repass)){
+            request.setAttribute("msg", "Password must be the same as Repassword");
+            request.getRequestDispatcher("Signup.jsp").forward(request, response);   
+           }else{
+               Account acc = new Account(0,email, name, password,Byte.valueOf("1"),Byte.valueOf("0"),Byte.valueOf("0"));
+               accDao.insertAccount(acc);
+               request.setAttribute("msg", "Sign up successfully, please return Sign in page to login");
+               request.getRequestDispatcher("Signup.jsp").forward(request, response);
+           }
+        }
     }
 
     /**

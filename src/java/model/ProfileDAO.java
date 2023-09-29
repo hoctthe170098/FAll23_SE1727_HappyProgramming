@@ -40,7 +40,6 @@ public class ProfileDAO extends MyDAO{
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             while (rs.next()) {
-           
             p.setId(rs.getInt("ID"));
             p.setGender(rs.getBoolean("Gender"));
             p.setAvatar(rs.getString("Avatar"));

@@ -17,27 +17,53 @@ import model.DBContext;
  *
  * @author DELL
  */
-public class AccountDAO extends DBContext {
+public class AccountDAO extends MyDAO {
 
     public void insertAccount(Account account) {
 
+           xSql = "insert into Account values (?,?,?,?,?,?)";
         try {
-            String query = "INSERT INTO Account (name, email, password,gender,username,mobile) VALUES (?, ?, ?,?,?,?)";
-            PreparedStatement statement = connection.prepareStatement(query);
-
-            statement.setString(2, account.getEmail());
-            statement.setString(3, account.getPassword());
-
-            statement.setString(5, account.getUsername());
-
-            statement.executeUpdate();
-            statement.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, account.getEmail());
+            ps.setString(2, account.getUsername());
+            ps.setString(3, account.getPassword());
+            ps.setByte(4, account.getIsMentee());
+            ps.setByte(5, account.getIsMentor());
+            ps.setByte(6, account.getIsAdmin());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
+    public boolean IsExistUsername(String username){
+         xSql = "select Username from Account where Username = '" + username+"'";
+         String user =null;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+           user = rs.getString("Username");         
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         if(user!=null)return true; else return false;
+    }
+    public boolean IsExistEmail(String ema){
+         xSql = "select Email from Account where Email = '" + ema+"'";
+         String email =null;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+           email = rs.getString("Email");         
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         if(email!=null)return true; else return false;
+    }
     public Account getAccountBy(String Username, String Password) {
         try {
             String sql = "SELECT * FROM [dbo].[Account] WHERE Username = ? AND Password = ?";
@@ -125,6 +151,6 @@ public class AccountDAO extends DBContext {
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
 //        dao.updatePassword("hoctthe170098@fpt.edu.vn", "1234213123");
-        System.out.println(dao.searchAccountByEmail("tung020802@gmail.com"));
+        System.out.println(dao.IsExistUsername("hoct"));
     }
 }
