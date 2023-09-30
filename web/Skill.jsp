@@ -64,8 +64,11 @@
                     <div class="container">
                         <h2>Skills</h2>
                     <%  
+                          List<Skill> listSkill = (List<Skill>)request.getAttribute("listSkillByName");
+                          if(listSkill==null){
                           SkillDAO SkillDAO = new SkillDAO();
-                          List<Skill> listSkill = SkillDAO.getListSkill();
+                          listSkill = SkillDAO.getListSkill();
+                        }
                     %>   
                     <p>We have <%=listSkill.size()%> skills which are the most used nowaday such as: C/C++, java, HTML/CSS</p>
                 </div>

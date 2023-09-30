@@ -37,7 +37,10 @@
         <servlet-name>SearchMentorByNameServlet</servlet-name>
         <servlet-class>controller.SearchMentorByNameServlet</servlet-class>
     </servlet>
- 
+    <servlet>
+        <servlet-name>SearchSkillByNameServlet</servlet-name>
+        <servlet-class>controller.SearchSkillByNameServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -70,7 +73,10 @@
         <servlet-name>SearchMentorByNameServlet</servlet-name>
         <url-pattern>/searchmentor</url-pattern>
     </servlet-mapping>
-   
+    <servlet-mapping>
+        <servlet-name>SearchSkillByNameServlet</servlet-name>
+        <url-pattern>/searchskill</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

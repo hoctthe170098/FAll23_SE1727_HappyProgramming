@@ -95,8 +95,8 @@
       <%}%>
         <%if(sID2!=null){%>
         <h1>WHAT ARE YOU LOOKING FOR?</h1>      
-     <form class="d-flex"> 
-      <input class="form-control mr-2" type="search" placeholder="Search skill here" aria-label="Search" name=""> 
+        <form class="d-flex" action="searchskill" method="post"> 
+      <input class="form-control mr-2" type="search" placeholder="Search skill here" aria-label="Search" name="nameskill"> 
       <button class="btn btn-outline-success" type="submit">Search</button> </form>
         <%}%>
         
