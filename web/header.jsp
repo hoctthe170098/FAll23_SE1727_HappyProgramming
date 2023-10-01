@@ -40,7 +40,7 @@
                 <%if(acc.getIsMentee()==1){%>
                 <li><a href="profile.jsp">Profile</a></li>
                 <li><a href="">Request</a></li>
-                <li><a href="">Become mentor</a></li>
+                <li><a href="becomementor">Become mentor</a></li>
                     <%}%>
                     <%if(acc.getIsMentor()==1){%>
                 <li class="dropdown"><a href="#"><span>Request</span> <i class="bi bi-chevron-down"></i></a>

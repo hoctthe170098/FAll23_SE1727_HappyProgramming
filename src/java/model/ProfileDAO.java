@@ -98,8 +98,23 @@ public class ProfileDAO extends MyDAO{
              e.printStackTrace();
          }
      }
+     public boolean IsExistProfile(int ID){
+         xSql = "select FullName from Profile where ID = "+ID;
+         String name =null;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            name = rs.getString("FullName");         
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         if(name!=null)return true; else return false;
+    }
      public static void main(String[] args) throws SQLException  {
-        ProfileDAO cdao =  new ProfileDAO();       
+        ProfileDAO cdao =  new ProfileDAO();
+         System.out.println(cdao.IsExistProfile(5));
 //         long millis=System.currentTimeMillis();
 //             java.sql.Date date=new java.sql.Date(millis); 
 //             Profile p  = new Profile(7, true, "imagesAcc/acc7.jpg", "0987654321",date, "FirstName", "NamĐinh", "https://www.facebook.com/", "khongco");
