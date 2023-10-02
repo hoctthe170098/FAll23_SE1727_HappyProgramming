@@ -41,6 +41,14 @@
         <servlet-name>BecomeMentorServlet</servlet-name>
         <servlet-class>controller.BecomeMentorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>controller.authentication.RegisterController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>controller.RegisterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -76,6 +84,14 @@
     <servlet-mapping>
         <servlet-name>BecomeMentorServlet</servlet-name>
         <url-pattern>/becomementor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/registeracc</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
