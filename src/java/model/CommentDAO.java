@@ -38,7 +38,10 @@ public class CommentDAO {
     //HIEN THI DU LIEU TU SQL
     public static List<Comment> DisplayComment(Connection conn) throws SQLException{
         List<Comment> list = new ArrayList<Comment>();
-        String sql = "Select * From Comment";
+        String sql = "Select c.Comment,a.Username From Comment c\n"
+                +" join Mentee m1 on m1.ID = c.IDMentee\n"
+                +" join Mentor m2 on m2.ID = c.IDMentor\n"
+                +" join Account a on c.ID = a.ID";
         try{
             PreparedStatement ptmt = conn.prepareStatement(sql);
             ResultSet rs = ptmt.executeQuery();

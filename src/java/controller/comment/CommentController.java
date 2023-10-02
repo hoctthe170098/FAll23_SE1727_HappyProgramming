@@ -4,6 +4,7 @@
  */
 package controller.comment;
 
+import java.sql.Connection;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +13,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static java.nio.file.Files.list;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -88,7 +88,7 @@ public class CommentController extends HttpServlet {
         try {
             String content = request.getParameter("content");
        String username = request.getParameter("username");
-       Connection conn = DBContext.CreateConnection();
+       Connection conn = DBContext;
        
        Comment cmt = new Comment();
        cmt.setContent(content);
