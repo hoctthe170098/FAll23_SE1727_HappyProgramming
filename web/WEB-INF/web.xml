@@ -6,10 +6,6 @@
         <welcome-file>Signup.html</welcome-file>
     </welcome-file-list>
     <servlet>
-        <servlet-name>RegisterController</servlet-name>
-        <servlet-class>controller.RegisterController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ShowMentorServlet</servlet-name>
         <servlet-class>controller.ShowMentorServlet</servlet-class>
     </servlet>
@@ -45,10 +41,6 @@
         <servlet-name>BecomeMentorServlet</servlet-name>
         <servlet-class>controller.BecomeMentorServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>RegisterController</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
