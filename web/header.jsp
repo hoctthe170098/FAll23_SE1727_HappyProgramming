@@ -38,7 +38,7 @@
                 </li>
                 <%if (acc!=null){%>
                 <%if(acc.getIsMentee()==1){%>
-                <li><a href="profile.jsp">Profile</a></li>
+                <li><a href="profile">Profile</a></li>
                 <li><a href="">Request</a></li>
                 <li><a href="becomementor">Become mentor</a></li>
                     <%}%>

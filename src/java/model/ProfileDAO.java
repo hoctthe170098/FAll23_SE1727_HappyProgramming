@@ -112,13 +112,27 @@ public class ProfileDAO extends MyDAO{
          }
          if(name!=null)return true; else return false;
     }
+      public boolean IsExistPhone(String p){
+         xSql = "select Phone from Profile where Phone = '"+p+"'";
+         String name =null;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            name = rs.getString("Phone");         
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         if(name!=null)return true; else return false;
+    }
      public static void main(String[] args) throws SQLException  {
         ProfileDAO cdao =  new ProfileDAO();
-         System.out.println(cdao.IsExistProfile(5));
+        // System.out.println(cdao.IsExistProfile(5));
 //         long millis=System.currentTimeMillis();
 //             java.sql.Date date=new java.sql.Date(millis); 
-//             Profile p  = new Profile(7, true, "imagesAcc/acc7.jpg", "0987654321",date, "FirstName", "NamĐinh", "https://www.facebook.com/", "khongco");
+//             Profile p  = new Profile(5, true, "imagesAcc/acc0.jpg", "0948102469",date, "Hoc Tran Trung", "Nam Đinh", "https://www.facebook.com/", "khongco");
 //             cdao.InsertProfile(p);
-//             System.out.println(cdao.getProfileByID(7));
+             System.out.println(cdao.getProfileByID(5));
     }
 }

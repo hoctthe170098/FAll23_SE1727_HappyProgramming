@@ -139,7 +139,7 @@ color: #9b9ca1;
 </div>
 <%
     ProfileDAO proDAO = new ProfileDAO();
-   Profile p = proDAO.getProfileByID(acc.getID());
+   Profile p = (Profile)request.getAttribute("p");
 %>
 <%
 String[] str = p.getFullname().split(" ");
@@ -153,6 +153,12 @@ String firstname="";
  if(p.isGender()==true) gender="male";
  else gender="female";
 %>
+<%
+    String msgE = (String)request.getAttribute("msgE");
+%>
+<%if(msgE!=null){%>
+<p style="color: red" class="text-danger"><%=msgE%></p>
+<%}%>
 <form class="file-upload" action="profile" method="post" enctype="multipart/form-data">
 <div class="row mb-5 gx-5">
 
@@ -172,7 +178,20 @@ String firstname="";
 </div>
 
 <div class="col-md-6">
+
+<%
+    String msgP = (String)request.getAttribute("msgP");
+%>
+<%
+    if(msgP!=null){
+%>
+<label class="form-label">Phone number * <span style="color: red" class="text-danger"><%=msgP%></span></label>
+ <%}%>
+<%
+    if(msgP==null){
+%>
 <label class="form-label">Phone number *</label>
+ <%}%>
 <input type="text" name="phone" class="form-control" placeholder aria-label="Phone number" value=<%=p.getPhone()%>>
 </div>
 

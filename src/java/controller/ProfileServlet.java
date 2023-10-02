@@ -18,17 +18,11 @@ public class ProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int ID = Integer.parseInt(request.getParameter("ID"));
+        Account acc = (Account)request.getSession().getAttribute("acc");       
         ProfileDAO proDAO = new ProfileDAO();
-        Profile p = proDAO.getProfileByID(ID);
+        Profile p = proDAO.getProfileByID(acc.getID());
         request.setAttribute("p", p);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
-//        String s="rds rfdsf rfsd";
-//        String[] str = s.split(" ");
-//        for (int i=0;i<str.length-1;i++){
-//            String firstname=str[i]+" ";
-//        }
-//        String lastname = str[str.length-1];
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +35,12 @@ public class ProfileServlet extends HttpServlet {
             int ID = acc.getID();
             String button = request.getParameter("button");
             if (button.equals("delete")) {
+                BecomeMentorDao bmDao = new BecomeMentorDao();
+                if(bmDao.IsExistBecomeMentor(ID)){
+                  request.setAttribute("msgE", "You are having request to register become a mentor, if you want to delete profile, delete request first");     
+                }else 
                 dao.deleteProfile(ID);
+                request.setAttribute("p", dao.getProfileByID(ID));
             }
             if (button.equals("update")) {
                 String firstname = request.getParameter("firstname");
@@ -54,8 +53,9 @@ public class ProfileServlet extends HttpServlet {
                 String faceLink = request.getParameter("facebooklink");
                 String intaLink = request.getParameter("instragramlink");
                 Part part = request.getPart("avatar");
+                Profile p;
                 //out.println(part);      
-                Profile pro = dao.getProfileByID(ID);
+                    Profile pro = dao.getProfileByID(ID);
                 if (pro.getId() == 0) {
                     String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
                     //out.println(fileName);
@@ -75,14 +75,21 @@ public class ProfileServlet extends HttpServlet {
                         String img = "acc" + ID + s;
                         String imgName = realPath + "/" + img;
                         part.write(imgName);
-
-                        Profile p = new Profile(ID, gender, "imagesAcc/" + img, Phone, birth, fullname, address, faceLink, intaLink);
-                        //out.println(p.toString());
-                        dao.InsertProfile(p);
+                        p = new Profile(ID, gender, "imagesAcc/" + img, Phone, birth, fullname, address, faceLink, intaLink);
                     } else {
-                        Profile p = new Profile(ID, gender, "imagesAcc/acc0.jpg", Phone, birth, fullname, address, faceLink, intaLink);
+                        p = new Profile(ID, gender, "imagesAcc/acc0.jpg", Phone, birth, fullname, address, faceLink, intaLink);
+                        //out.println(p.toString());
+    
+                    }
+                    if(dao.IsExistPhone(Phone)){
+                          request.setAttribute("msgP", "This PhoneNumber is Exist");  
+                        }else if(Phone.length()!=10){
+                          request.setAttribute("msgP", "PhoneNumber must contain 10 digit");  
+                        }
+                    else{
                         dao.InsertProfile(p);
                     }
+                    request.setAttribute("p", p);
                     //out.println(dao.getProfileByID(ID));
                 } else {
                     String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
@@ -102,21 +109,29 @@ public class ProfileServlet extends HttpServlet {
                         String img = "acc" + ID + s;
                         String imgName = realPath + "/" + img;
                         part.write(imgName);
-                        Profile p = new Profile(ID, gender, "imagesAcc/" + img, Phone, birth, fullname, address, faceLink, intaLink);
+                        p = new Profile(ID, gender, "imagesAcc/" + img, Phone, birth, fullname, address, faceLink, intaLink);
                         //out.println(p.toString());
-                        dao.deleteProfile(ID);
-                        dao.InsertProfile(p);
+                        
                     } else {
-                        Profile p = new Profile(ID, gender, pro.getAvatar(), Phone, birth, fullname, address, faceLink, intaLink);
-                        dao.deleteProfile(ID);
-                        dao.InsertProfile(p);
+                        p = new Profile(ID, gender, pro.getAvatar(), Phone, birth, fullname, address, faceLink, intaLink);
+                    
 
                     }
+                    if(dao.IsExistPhone(Phone)){
+                         request.setAttribute("msgP", "This PhoneNumber is Exist");  
+                    }else if(Phone.length()!=10){
+                        request.setAttribute("msgP", "PhoneNumber must contain 10 digit");  
+                    }
+                    else{
+                         dao.deleteProfile(ID);
+                        dao.InsertProfile(p);
+                    }
+                    request.setAttribute("p", p); 
                 }
             }
         } catch (Exception e) {
 
         }
-        response.sendRedirect("profile.jsp");
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 }
