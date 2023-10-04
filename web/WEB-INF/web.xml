@@ -49,6 +49,10 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateCVMentorServlet</servlet-name>
+        <servlet-class>controller.UpdateCVMentorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -92,6 +96,10 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/registeracc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCVMentorServlet</servlet-name>
+        <url-pattern>/updatecvmentor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

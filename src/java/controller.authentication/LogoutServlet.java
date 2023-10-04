@@ -7,10 +7,13 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Account;
+import model.AccountDAO;
 
 /**
  *
@@ -57,6 +60,16 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession().removeAttribute("acc");
+          Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie i : cookies) {
+                if (i.getName().equals("loginRemember")) {
+                    i.setMaxAge(0);
+                    response.addCookie(i);
+                }
+            }
+        }
+
         response.sendRedirect("home.jsp");
       
     }

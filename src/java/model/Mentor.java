@@ -13,7 +13,6 @@ public class Mentor {
    float rate;
    String experience;
    String Intro;
-
     public Mentor() {
     }
 
@@ -60,10 +59,4 @@ public class Mentor {
     public String toString() {
         return "Mentor{" + "ID=" + ID + ", rate=" + rate + ", experience=" + experience + ", Intro=" + Intro + '}';
     }
-   
-
-    
-   
-    
-   
 }
