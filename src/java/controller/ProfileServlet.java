@@ -114,8 +114,10 @@ public class ProfileServlet extends HttpServlet {
                         
                     } else {
                         p = new Profile(ID, gender, pro.getAvatar(), Phone, birth, fullname, address, faceLink, intaLink);
+                    
+
                     }
-                    if(!Phone.equals(pro.getPhone())&&dao.IsExistPhone(Phone)){
+                    if(dao.IsExistPhone(Phone)){
                          request.setAttribute("msgP", "This PhoneNumber is Exist");  
                     }else if(Phone.length()!=10){
                         request.setAttribute("msgP", "PhoneNumber must contain 10 digit");  

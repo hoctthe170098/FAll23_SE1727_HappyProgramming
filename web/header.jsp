@@ -50,7 +50,7 @@
                         
                     </ul>
                 </li>
-                <li><a href="updatecvmentor">CV</a></li>
+                <li><a href="#">CV</a></li>
                 <%}%>
                 <%if(acc.getIsAdmin()==1){%>
                 <li class="dropdown"><a href="#"><span>Static</span> <i class="bi bi-chevron-down"></i></a>
@@ -76,7 +76,7 @@
         <a href="login" class="get-started-btn">Sign in</a>
         <%}%>
         <%if(acc!=null){%>
-<!--        <a href="#" class="get-started-btn"><%=acc.getUsername()%></a>-->
+        <a href="#" class="get-started-btn"><%=acc.getUsername()%></a>
         <a href="logout" class="get-started-btn">Log out</a>
         <%}%>
     </div>
