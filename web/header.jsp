@@ -10,37 +10,6 @@
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
 <%
-
-// Khai báo biến 
-Cookie[] cookies = request.getCookies();
-
-// Kiểm tra xem có cookie loginRemember không
-if (cookies != null) {
-  for (Cookie cookie : cookies) {
-    if (cookie.getName().equals("loginRemember")) {
-      
-      // Lấy dữ liệu từ cookie
-      String[] arr = cookie.getValue().split(":");
-      String username = arr[0];
-      String password = arr[1];
-      
-      // Kiểm tra trong CSDL
-      AccountDAO db = new AccountDAO();
-      Account account = db.getAccountBy(username, password);
-      
-      // Lưu vào session và chuyển hướng
-      if (account != null) {
-        request.getSession().setAttribute("acc", account);
-        response.sendRedirect("home.jsp");  
-      }
-    }
-  }
-} 
-
-
-
-        %>
-<%
   SkillDAO SkillDAO = new SkillDAO();  
   Account acc = (Account)request.getSession().getAttribute("acc");  
   List<Skill> listSkill = SkillDAO.getListSkill();
