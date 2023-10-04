@@ -93,7 +93,8 @@ public class ProfileDAO extends MyDAO{
          xSql = "delete from Profile where id = " + ID;
          try{
             ps = con.prepareStatement(xSql);
-            rs = ps.executeQuery();
+            ps.executeUpdate();
+            ps.close();
          }catch(Exception e){
              e.printStackTrace();
          }
@@ -133,6 +134,6 @@ public class ProfileDAO extends MyDAO{
 //             java.sql.Date date=new java.sql.Date(millis); 
 //             Profile p  = new Profile(5, true, "imagesAcc/acc0.jpg", "0948102469",date, "Hoc Tran Trung", "Nam Đinh", "https://www.facebook.com/", "khongco");
 //             cdao.InsertProfile(p);
-             System.out.println(cdao.getProfileByID(5));
+             cdao.deleteProfile(5);
     }
 }
