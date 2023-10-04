@@ -81,7 +81,7 @@ public class ProfileServlet extends HttpServlet {
                         //out.println(p.toString());
     
                     }
-                    if(dao.IsExistPhone(Phone)){
+                    if(!Phone.equals(p.getPhone())&&dao.IsExistPhone(Phone)){
                           request.setAttribute("msgP", "This PhoneNumber is Exist");  
                         }else if(Phone.length()!=10){
                           request.setAttribute("msgP", "PhoneNumber must contain 10 digit");  
@@ -117,7 +117,7 @@ public class ProfileServlet extends HttpServlet {
                     
 
                     }
-                    if(dao.IsExistPhone(Phone)){
+                    if(!Phone.equals(p.getPhone())&&dao.IsExistPhone(Phone)){
                          request.setAttribute("msgP", "This PhoneNumber is Exist");  
                     }else if(Phone.length()!=10){
                         request.setAttribute("msgP", "PhoneNumber must contain 10 digit");  
