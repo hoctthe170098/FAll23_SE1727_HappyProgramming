@@ -44,15 +44,43 @@ public class MentorDAO extends MyDAO {
             Mentor r = new Mentor();
             r.setID(rs.getInt("ID"));
             r.setIntro(rs.getString("Intro"));
-
             r.setExperience(rs.getString("Ex"));
-
             list.add(r);
 
         }
         return list;
     }
-
+    public Mentor getMentorByID(int ID){
+      Mentor m = new Mentor();
+         xSql = "select * from Mentor where id = " + ID;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            m.setID(rs.getInt("ID"));  
+            m.setIntro(rs.getString("Intro"));
+            m.setExperience(rs.getString("Ex"));        
+            m.setRate(rs.getFloat("Rate"));    
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         if(m.getExperience()==null) m.setExperience("Input Experience here");
+         if(m.getIntro()==null)m.setIntro("Input Introduction here");
+         return m;
+    }
+     public void updateMentor(int ID,String intro,String ex) {       
+        xSql = "update Mentor set Intro='"+intro+"', "+"Ex='"+ex+"' where ID = "+ID;
+                
+        try {
+            ps = con.prepareStatement(xSql);
+           
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public List<Mentor> SearchMentorByName(String Fullname) throws SQLException {
         List<Mentor> list = new ArrayList<>();
         String sql = "Select c.Avatar, c.Fullname, m.ID, m.Ex from Mentor m join Profile c\n"
@@ -75,12 +103,12 @@ public class MentorDAO extends MyDAO {
 
         }
         return list;
-
     }
+    
 
     public static void main(String[] args) throws SQLException {
         MentorDAO dao = new MentorDAO();
-         System.out.println(dao.getAllMentor());
-
+         System.out.println(dao.getMentorByID(4));
+       dao.updateMentor(4, "tfdc", "fgvdc");
     }
 }
