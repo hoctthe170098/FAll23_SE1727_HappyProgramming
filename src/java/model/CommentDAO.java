@@ -10,54 +10,58 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  *
  * @author admin
  */
 public class CommentDAO {
-    
-    public static void insertComment(Connection conn, Comment cmt) throws SQLException{
-        PreparedStatement ptmt = null;
-        String sql = "insert into comment(content,Username) values(?,?)";
+    Connection conn ;        // keets noois sql
+    PreparedStatement ps;  // nems cau lenh query
+    ResultSet rs ;    // keet qua tra ve
+    public List<Comment> getAllComment() throws SQLException{
+        List<Comment> list = new ArrayList<>();
+        String sql = "Select * from dbo.Comment";
+        ps = conn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        while (rs.next()){
+            Comment c = new Comment();
+            c.setTime(rs.getDate("time"));
+            c.setComment(rs.getString("comment"));
+             c.setIDMentor(rs.getInt("IDMentor"));
+            c.setIDMentee(rs.getInt("IDMentee"));
+            
+            list.add(c);
+        }
+        return list;
+    }
+    public void insertComment(Comment c){
+        
+        String Query = "insert into comment(Comment,IDMentor,IdMentee) values(?,?,?)";
         try{
-            ptmt = conn.prepareStatement(sql);
-            String Content = cmt.getContent();
-            String Username = cmt.getUsername();
-            
-            ptmt.setString(1,Content);
-            ptmt.setString(2,Username );
-            ptmt.executeUpdate();
-            
-           ptmt.close();
+          ps = conn.prepareStatement(Query);
+          ps.setString(1, c.getComment());
+          ps.setInt(2, c.getIDMentor());
+          ps.setInt(3,c.getIDMentee() );
+          ps.executeUpdate();
+          ps.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
     }
     
-    //HIEN THI DU LIEU TU SQL
-    public static List<Comment> DisplayComment(Connection conn) throws SQLException{
-        List<Comment> list = new ArrayList<Comment>();
-        String sql = "Select c.Comment,a.Username From Comment c\n"
-                +" join Mentee m1 on m1.ID = c.IDMentee\n"
-                +" join Mentor m2 on m2.ID = c.IDMentor\n"
-                +" join Account a on c.ID = a.ID";
-        try{
-            PreparedStatement ptmt = conn.prepareStatement(sql);
-            ResultSet rs = ptmt.executeQuery();
-            while(rs.next()){
-                Comment cmt = new Comment();
-                String Content = rs.getString("Content");
-                String Username = rs.getString("Username");
-                
-                cmt.setContent(Content);
-                cmt.setUsername(Username);
-                
-                list.add(cmt);
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-    } 
-    return list;
+   
+    public static void main(String[] args) throws SQLException  {
+        Comment cdao =  new Comment();
+         
+//         long millis=System.currentTimeMillis();
+//             java.sql.Date date=new java.sql.Date(millis); 
+//             Profile p  = new Profile(7, true, "imagesAcc/acc7.jpg", "0987654321",date, "FirstName", "NamĐinh", "https://www.facebook.com/", "khongco");
+//             cdao.InsertProfile(p);
+//             System.out.println(cdao.getProfileByID(7));
     }
-}
+
+
+    }
+
