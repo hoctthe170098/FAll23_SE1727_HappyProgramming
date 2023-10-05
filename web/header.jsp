@@ -32,13 +32,13 @@
                 <li class="dropdown"><a href="#"><span>Suggest Mentor</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <%for (Skill s: listSkill){%>
-                        <li><a href="#"><%=s.getName()%></a></li> 
+                        <li><a href="suggestmentorbyid?id=<%=s.getID()%>"><%=s.getName()%></a></li> 
                             <%}%>
                     </ul>
                 </li>
                 <%if (acc!=null){%>
                 <%if(acc.getIsMentee()==1){%>
-                <li><a href="profile.jsp">Profile</a></li>
+                <li><a href="profile">Profile</a></li>
                 <li><a href="">Request</a></li>
                 <li><a href="becomementor">Become mentor</a></li>
                     <%}%>
@@ -50,7 +50,7 @@
                         
                     </ul>
                 </li>
-                <li><a href="#">CV</a></li>
+                <li><a href="updatecvmentor">CV</a></li>
                 <%}%>
                 <%if(acc.getIsAdmin()==1){%>
                 <li class="dropdown"><a href="#"><span>Static</span> <i class="bi bi-chevron-down"></i></a>
@@ -76,7 +76,6 @@
         <a href="login" class="get-started-btn">Sign in</a>
         <%}%>
         <%if(acc!=null){%>
-        <a href="#" class="get-started-btn"><%=acc.getUsername()%></a>
         <a href="logout" class="get-started-btn">Log out</a>
         <%}%>
     </div>

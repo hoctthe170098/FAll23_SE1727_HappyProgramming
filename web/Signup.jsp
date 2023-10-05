@@ -34,7 +34,7 @@
                         <%if(msg!=null){%>
                          <p style="color: red" class="text-danger"><%=msg%></p>
                          <%}%>
-                        <form method="POST" action="register" class="register-form" id="register-form">
+                        <form method="POST" action="registeracc" class="register-form" id="register-form">
                            
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>

@@ -50,7 +50,7 @@
 
             }
             .col-md-3{
-                background: #ff9b00;
+                background: limegreen;
                 padding: 4%;
                 border-top-left-radius: 0.5rem;
                 border-bottom-left-radius: 0.5rem;
@@ -106,8 +106,8 @@
                     <div class="col-md-3">
                         <div class="contact-info">
                             <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
-                            <h2>Become a mentor?</h2>
-                            <h4>Give us some information if you want become a mentor</h4>
+                            <h2 style="color: white">Become a mentor?</h2>
+                            <h4 style="color: white">Give us some information if you want become a mentor</h4>
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -156,8 +156,8 @@
                     <div class="col-md-3">
                         <div class="contact-info">
                             <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
-                            <h2>Become a mentor?</h2>
-                            <h4>Give us some information if you want become a mentor</h4>
+                            <h2 style="color: white">Become a mentor?</h2>
+                            <h4 style="color: white">Give us some information if you want become a mentor</h4>
                         </div>
                     </div>
                     <div class="col-md-9">

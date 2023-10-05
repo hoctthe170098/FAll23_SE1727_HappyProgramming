@@ -115,7 +115,7 @@
 
                                             <h2 style="border-bottom: 3px solid;border-bottom-color: #86db9f" ><a href="request.jsp"> About this mentor </a></h2>
                                             <h3>Mentor's Experiences</h3>
-                                            <p><%=mentorList.get(j-1).getEx()%></p>
+                                            <p><%=mentorList.get(j-1).getIntro()%></p>
                                             <h3 style="border: 2px solid black; background-color: #f8f8f8; padding: 10px; text-align: center";><a href="request.jsp">Request</a></h3>
                                         </div>
                                     </div>
@@ -139,7 +139,7 @@
 
                                             <h2 style="text-decoration: underline; text-decoration-color: #86db9f;  "><a href="request.jsp"> About this mentor </a></h2>
                                             <h3>Mentor's Experiences</h3>
-                                            <p><%=mentorList.get(mentorList.size()-1).getEx()%></p>
+                                            <p><%=mentorList.get(mentorList.size()-1).getIntro()%></p>
 
                                             <h3 style="border: 2px solid black; background-color: #f8f8f8; padding: 10px; text-align: center";><a href="request.jsp">Request</a></h3>
                                         </div>

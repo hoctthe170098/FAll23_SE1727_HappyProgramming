@@ -55,6 +55,20 @@ public class BecomeMentorDao extends MyDAO{
          }
         return bm;
      }
+        public boolean IsExistBecomeMentor(int ID){
+         xSql = "select Intro from BecomeMentor where ID = "+ID;
+         String intro =null;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            intro = rs.getString("Intro");         
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         if(intro!=null)return true; else return false;
+    }
        public static void main(String[] args) {
         BecomeMentorDao dao = new BecomeMentorDao();
            System.out.println(dao.getBecomeMentorByID(3));

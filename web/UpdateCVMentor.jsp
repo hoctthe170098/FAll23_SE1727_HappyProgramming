@@ -18,7 +18,7 @@
         <meta charset="utf-8">
          <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile</title>
+        <title>CV</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -134,7 +134,7 @@ color: #9b9ca1;
 <div class="col-12">
 
 <div class="my-5">
-<h3>My Profile</h3>
+<h3>My CV</h3>
 <hr>
 </div>
 <%
@@ -159,7 +159,7 @@ String firstname="";
 <%if(msgE!=null){%>
 <p style="color: red" class="text-danger"><%=msgE%></p>
 <%}%>
-<form class="file-upload" action="profile" method="post" enctype="multipart/form-data">
+<form class="file-upload" action="updatecvmentor" method="post" enctype="multipart/form-data">
 <div class="row mb-5 gx-5">
 
 <div class="col-xxl-8 mb-5 mb-xxl-0">
@@ -169,12 +169,12 @@ String firstname="";
 
 <div class="col-md-6">
 <label class="form-label">First Name *</label>
-<input type="text" name="firstname" class="form-control" placeholder aria-label="First name" value=<%=firstname%>>
+<input type="text" name="firstname" class="form-control" value=<%=firstname%>>
 </div>
 
 <div class="col-md-6">
 <label class="form-label">Last Name *</label>
-<input type="text" name="lastname" class="form-control" placeholder aria-label="Last name" value=<%=lastname%>>
+<input type="text" name="lastname" class="form-control" value=<%=lastname%>>
 </div>
 
 <div class="col-md-6">
@@ -201,7 +201,7 @@ String firstname="";
 </div>
  <div class="col-md-6">
 <label class="form-label">Address *</label>
-<input type="text" name="address" class="form-control" placeholder aria-label="Address" value=<%=p.getAddress()%>>
+<input type="text" name="address" class="form-control" value=<%=p.getAddress()%>>
 </div>
 
 
@@ -246,7 +246,60 @@ String firstname="";
 </div>
 </div>
 </div> 
-
+<%
+    Mentor m = (Mentor)request.getAttribute("m");
+%>
+<div class="row mb-5 gx-5">
+<div class="col-xxl-6 mb-5 mb-xxl-0">
+<div class="bg-secondary-soft px-4 py-5 rounded">
+<div class="row g-3">
+<h4 class="mb-4 mt-0">Experience detail</h4>
+<div class="col-md-12">
+<label class="form-label">Introduction *</label>
+<textarea class="form-control" rows="3" name="intro" id="intro"><%=m.getIntro()%></textarea>
+</div>
+<div class="col-md-12">
+    <%
+    String msgS = (String)request.getAttribute("msgS");
+%>
+<%
+    if(msgS!=null){
+%>
+<label class="form-label">Skill * <span style="color: red" class="text-danger"><%=msgS%></span></label>
+<%}%>
+<%
+    if(msgS==null){
+%>
+<label class="form-label">Skill *</label>
+<%}%>
+<%
+SkillDAO sDao = new SkillDAO();
+MentorSkillDAO msDao = new MentorSkillDAO();
+List<Skill> listSkill = sDao.getListSkill();
+List<Integer> ListSkillMentor = (List<Integer>)request.getAttribute("ListSkillMentor");
+%>
+ <div class="col-sm-12"> 
+<%
+ for(Skill s : listSkill){
+%>
+<%if(msDao.isExistSkill(s.getID(),ListSkillMentor)){%>
+<input type="checkbox"  name="skill" value=<%=s.getID()%> checked><%=s.getName()%>
+<%}%>
+<%if(!msDao.isExistSkill(s.getID(),ListSkillMentor)){%>
+<input type="checkbox"  name="skill" value=<%=s.getID()%> /><%=s.getName()%>
+<%}%>
+<%}%>
+</div>
+</div>
+<div class="col-md-12">
+<label class="form-label">Experience *</label>
+<textarea class="form-control" rows="3" name="ex" id="ex"><%=m.getExperience()%></textarea>
+</div>
+</div> 
+</div>
+</div>
+</div> 
+    
 <div class="row mb-5 gx-5">
 <div class="col-xxl-6 mb-5 mb-xxl-0">
 <div class="bg-secondary-soft px-4 py-5 rounded">
@@ -254,45 +307,18 @@ String firstname="";
 <h4 class="mb-4 mt-0">Social media detail</h4>
 <div class="col-md-6">
 <label class="form-label"><i class="fab fa-fw fa-facebook me-2 text-facebook"></i>Facebook *</label>
-<input type="text" name="facebooklink" class="form-control" placeholder aria-label="Facebook" value=<%=p.getFacebookLink()%>>
+<input type="textarea" row="3" name="facebooklink" class="form-control" placeholder aria-label="Facebook" value=<%=p.getFacebookLink()%>>
+
 </div>
 <div class="col-md-6">
 <label class="form-label"><i class="fab fa-fw fa-instagram text-instagram me-2"></i>Instagram *</label>
-<input type="text" name="instragramlink" class="form-control" placeholder aria-label="Instragram" value=<%=p.getInstagramLink()%>>
+<input type="textarea" name="instragramlink" class="form-control" placeholder aria-label="Instragram" value=<%=p.getInstagramLink()%>>
 </div>
 </div> 
 </div>
 </div>
-
-<!--<div class="col-xxl-6">
-<div class="bg-secondary-soft px-4 py-5 rounded">
-<div class="row g-3">
-<h4 class="my-4">Change Password</h4>
-
-<div class="col-md-6">
-<label for="exampleInputPassword1" class="form-label">Old password *</label>
-<input type="password" class="form-control" id="exampleInputPassword1">
-</div>
-
-<div class="col-md-6">
-<label for="exampleInputPassword2" class="form-label">New password *</label>
-<input type="password" class="form-control" id="exampleInputPassword2">
-</div>
-
-<div class="col-md-12">
-<label for="exampleInputPassword3" class="form-label">Confirm Password *</label>
-<input type="password" class="form-control" id="exampleInputPassword3">
-</div>
-</div>
-</div>
-</div>-->
 </div> 
-
-<!--<div class="gap-3 d-md-flex justify-content-md-end text-center">-->
-<button type="submit" name="button" value="delete" class="btn btn-danger btn-lg">Delete profile</button>
-<button type="submit" name="button" value="update" class="btn btn-primary btn-lg">Update profile</button>
-<!--<input type="submit" class="btn btn-primary btn-lg" value="Update profile">-->
-<!--</div>-->
+<button type="submit" name="button" value="update" class="btn btn-primary btn-lg">Update CV</button>
 </form> 
 </div>
 </div>

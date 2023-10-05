@@ -15,7 +15,7 @@ import java.util.List;
 public class MentorProfileDAO extends MyDAO {
      public List<MentorProfile> SearchMentorByName(String mentorName) throws SQLException {
         List<MentorProfile> listmc = new ArrayList<>();
-         String sql = "SELECT Profile.Avatar, Profile.Fullname, Mentor.Ex FROM Profile " +
+         String sql = "SELECT Profile.Avatar, Profile.Fullname, Mentor.Intro FROM Profile " +
                  "INNER JOIN Mentor ON Profile.ID = Mentor.ID " +
                  "WHERE Fullname LIKE ?";
     ps = con.prepareStatement(sql);
@@ -26,7 +26,7 @@ public class MentorProfileDAO extends MyDAO {
             MentorProfile v = new MentorProfile();
            v.setAvatar(rs.getString("Avatar"));
            v.setFullname(rs.getString("Fullname"));
-           v.setEx(rs.getString("Ex"));
+           v.setIntro(rs.getString("Intro"));
            
             listmc.add(v);
 
@@ -41,7 +41,7 @@ public static void main(String[] args) throws SQLException {
     for (MentorProfile mentorProfile : mentorList) {
         System.out.println("Avatar: " + mentorProfile.getAvatar());
         System.out.println("Fullname: " + mentorProfile.getFullname());
-        System.out.println("Experience: " + mentorProfile.getEx());
+        System.out.println("Intro: " + mentorProfile.getIntro());
 
     }
 }
