@@ -4,36 +4,68 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author admin
  */
 public class Comment {
-    private String Content;
-    private String username;
+     Date time;
+     String Comment;
+     int IDMentor;
+     int IDMentee;
+     
+     
 
     public Comment() {
     }
 
-    public Comment(String Content, String username) {
-        this.Content = Content;
-        this.username = username;
+    public Comment(Date time, String Comment, int IDMentor, int IDMentee) {
+        this.time = time;
+        this.Comment = Comment;
+        this.IDMentor = IDMentor;
+        this.IDMentee = IDMentee;
+    }
+    
+
+    public Date getTime() {
+        return time;
     }
 
-    public String getContent() {
-        return Content;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
-    public void setContent(String Content) {
-        this.Content = Content;
+    public String getComment() {
+        return Comment;
     }
 
-    public String getUsername() {
-        return username;
+    public void setComment(String Comment) {
+        this.Comment = Comment;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public int getIDMentor() {
+        return IDMentor;
     }
+
+    public void setIDMentor(int IDMentor) {
+        this.IDMentor = IDMentor;
+    }
+
+    public int getIDMentee() {
+        return IDMentee;
+    }
+
+    public void setIDMentee(int IDMentee) {
+        this.IDMentee = IDMentee;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" + "time=" + time + ", Comment=" + Comment + ", IDMentor=" + IDMentor + ", IDMentee=" + IDMentee + '}';
+    }
+
+    
     
 }

@@ -54,54 +54,53 @@
             href="https://fonts.googleapis.com/css2?family=Alegreya&family=MuseoModerno:wght@200;300;400;500;600;800;900&family=Open+Sans:ital,wght@0,300;1,300&display=swap"
             rel="stylesheet">
         <style>
-           .colorful-form {
-                margin-top: 40px;
-                max-width: fit-content;
-                margin: 40px auto;
-                padding: 20px;
-                background-color: #f5f5f5;
-                border-radius: 10px;
-            }
-
-            .form-group {
-
-                margin-bottom: 20px;
-            }
-
-            .form-label {
-                display: block;
-                font-weight: bold;
-                margin-bottom: 5px;
-                color: #333;
-            }
-
-            .form-input {
-                width: 400px;
-                padding: 10px;
-                border: none;
-                background-color: #fff;
-                color: #333;
+            .comment-box{
+                width: 50%;
+                border: 1px solid #ccc;
+                margin: 50px 0;
+                padding: 10px 20px;
+                font-family: 'poppins', sans-serif;
                 border-radius: 5px;
+                margin-left: 25%;
+                margin-top: 80px;
+                box-shadow: 0px 0px 10px 1px rgb(165, 165, 165);
+                
             }
-
-            textarea.form-input {
-                height: 100px;
+            .comment-box p{
+                text-align: left;
+                font-size: 28px;
+                color: #777;
             }
-
-            .form-button {
-                display: block;
+            .comment-form input, .comment-form textarea{
                 width: 100%;
                 padding: 10px;
-                background-color: #ff6f69;
-                color: #fff;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
+                margin: 5px 0;
+                box-sizing: border-box;
+                outline: none;
+                font-size: 18px;
+                font-family: 'poppins', sans-serif;
+                border: 1px solid #ddd;
+                color: #777;
             }
-
-            .form-button:hover {
-                background-color: #ff5f59;
+            .comment-form button{
+                margin: 10px 0;
+                border: none;
+                background-color: #d0d0d0;
+                padding: 10px;
+                font-size: 18px;
+                border-radius: 3px;
+                color: #444;
+                
+            }
+            button:hover{
+                color: #white;
+                background-color: #444;
+            }
+            @media(max-width:900px){
+                .comment-box{
+                    width: 80%;
+                    margin: 5%;
+                }
             }
         </style>
         <!-- MDB -->
@@ -139,18 +138,14 @@
 
         </head>
     <body>
-        <form action="myform">
-            Username: <input type="text" name="Username"/>
-            <br/>
-            <br/>
-            <textarea style="width: 300px; height: 100px " name="Content">
-                
-            </textarea>
-            <br/> 
-            <br/> 
-            <input type="button" value="Post" onclick=""/>
-
-        </form>
+        <div class ="comment-box">
+            <p>Leave a comment</p>
+            <form class="comment-form">
+                <input type="text" placeholder="Name"><!-- comment -->
+                <textarea rows="10" placeholder="Write your comment"></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
 
     </body>
     <div id="mycomment">
