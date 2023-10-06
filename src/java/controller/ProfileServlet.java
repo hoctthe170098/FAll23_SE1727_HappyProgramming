@@ -12,8 +12,6 @@ import model.*;
 
 @MultipartConfig
 public class ProfileServlet extends HttpServlet {
-
-    // b?t swj kien insert -> acc -> mentee
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -40,6 +38,7 @@ public class ProfileServlet extends HttpServlet {
                   request.setAttribute("msgE", "You are having request to register become a mentor, if you want to delete profile, delete request first");     
                 }else 
                 dao.deleteProfile(ID);
+                request.setAttribute("msgE", "Delete Profile successfully!"); 
                 request.setAttribute("p", dao.getProfileByID(ID));
             }
             if (button.equals("update")) {
@@ -81,13 +80,14 @@ public class ProfileServlet extends HttpServlet {
                         //out.println(p.toString());
     
                     }
-                    if(!Phone.equals(p.getPhone())&&dao.IsExistPhone(Phone)){
+                    if(!Phone.equals(pro.getPhone())&&dao.IsExistPhone(Phone)){
                           request.setAttribute("msgP", "This PhoneNumber is Exist");  
                         }else if(Phone.length()!=10){
                           request.setAttribute("msgP", "PhoneNumber must contain 10 digit");  
                         }
                     else{
                         dao.InsertProfile(p);
+                        request.setAttribute("msgE", "Update Profile successfully!"); 
                     }
                     request.setAttribute("p", p);
                     //out.println(dao.getProfileByID(ID));
@@ -117,14 +117,15 @@ public class ProfileServlet extends HttpServlet {
                     
 
                     }
-                    if(!Phone.equals(p.getPhone())&&dao.IsExistPhone(Phone)){
+                    if(!Phone.equals(pro.getPhone())&&dao.IsExistPhone(Phone)){
                          request.setAttribute("msgP", "This PhoneNumber is Exist");  
                     }else if(Phone.length()!=10){
                         request.setAttribute("msgP", "PhoneNumber must contain 10 digit");  
                     }
                     else{
-                         dao.deleteProfile(ID);
+                        dao.deleteProfile(ID);
                         dao.InsertProfile(p);
+                        request.setAttribute("msgE", "Update Profile successfully!"); 
                     }
                     request.setAttribute("p", p); 
                 }
