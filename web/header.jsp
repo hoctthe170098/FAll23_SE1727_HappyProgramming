@@ -10,11 +10,43 @@
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
 <%
+
+// Khai báo biến 
+Cookie[] cookies = request.getCookies();
+
+// Kiểm tra xem có cookie loginRemember không
+if (cookies != null) {
+  for (Cookie cookie : cookies) {
+    if (cookie.getName().equals("loginRemember")) {
+      
+      // Lấy dữ liệu từ cookie
+      String[] arr = cookie.getValue().split(":");
+      String username = arr[0];
+      String password = arr[1];
+      
+      // Kiểm tra trong CSDL
+      AccountDAO db = new AccountDAO();
+      Account account = db.getAccountBy(username, password);
+      
+      // Lưu vào session và chuyển hướng
+      if (account != null) {
+        request.getSession().setAttribute("acc", account);
+        response.sendRedirect("home.jsp");  
+      }
+    }
+  }
+} 
+
+
+
+        %>
+<%
   SkillDAO SkillDAO = new SkillDAO();  
   Account acc = (Account)request.getSession().getAttribute("acc");  
   List<Skill> listSkill = SkillDAO.getListSkill();
   String sID1=(String)request.getAttribute("id1");
   String sID2=(String)request.getAttribute("id2");
+  
 %>   
 
 <header id="header" class="fixed-top">
@@ -32,7 +64,7 @@
                 <li class="dropdown"><a href="#"><span>Suggest Mentor</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <%for (Skill s: listSkill){%>
-                        <li><a href="suggestmentorbyid?id=<%=s.getID()%>"><%=s.getName()%></a></li> 
+                        <li><a href="#"><%=s.getName()%></a></li> 
                             <%}%>
                     </ul>
                 </li>
@@ -76,6 +108,7 @@
         <a href="login" class="get-started-btn">Sign in</a>
         <%}%>
         <%if(acc!=null){%>
+<!--        <a href="#" class="get-started-btn"><%=acc.getUsername()%></a>-->
         <a href="logout" class="get-started-btn">Log out</a>
         <%}%>
     </div>
