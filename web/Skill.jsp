@@ -86,7 +86,7 @@
                         <%for(int j=(i-1)*2+1;j<=i*2;j++){%>
                         <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
                             <div class="course-item">
-                                <img src=<%=listSkill.get(j-1).getImage()%> class="img-fluid" alt="...">
+                                <img style="width: 315px; height: 210px" src=<%=listSkill.get(j-1).getImage()%> class="img-fluid" alt="...">
                                 <div class="course-content">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h4><%=listSkill.get(j-1).getName()%></h4>

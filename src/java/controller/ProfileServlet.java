@@ -38,7 +38,7 @@ public class ProfileServlet extends HttpServlet {
                   request.setAttribute("msgE", "You are having request to register become a mentor, if you want to delete profile, delete request first");     
                 }else 
                 dao.deleteProfile(ID);
-                request.setAttribute("msgE", "Delete Profile successfully!"); 
+                //request.setAttribute("msgE", "Delete Profile successfully!"); 
                 request.setAttribute("p", dao.getProfileByID(ID));
             }
             if (button.equals("update")) {

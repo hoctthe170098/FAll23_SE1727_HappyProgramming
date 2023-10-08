@@ -64,7 +64,7 @@ if (cookies != null) {
                 <li class="dropdown"><a href="#"><span>Suggest Mentor</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <%for (Skill s: listSkill){%>
-                        <li><a href="#"><%=s.getName()%></a></li> 
+                        <li><a href="suggestmentorbyid?id=<%=s.getID()%>"><%=s.getName()%></a></li> 
                             <%}%>
                     </ul>
                 </li>
