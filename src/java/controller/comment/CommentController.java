@@ -85,29 +85,7 @@ public class CommentController extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
         }
        
-        try {
-            String content = request.getParameter("content");
-       String username = request.getParameter("username");
-       Connection conn = DBContext;
        
-       Comment cmt = new Comment();
-       cmt.setContent(content);
-       cmt.setUsername(username);
-       
-       
-            CommentDAO.insertComment(conn, cmt);
-        
-        
-            List<Comment> list = CommentDAO.DisplayComment(conn);
-            request.setAttribute("listcomment", list);
-       
-        
-        RequestDispatcher rd = request.getRequestDispatcher("View/Displaycomment.jsp");
-        rd.forward(request, response);
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(CommentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**

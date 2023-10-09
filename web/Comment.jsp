@@ -64,7 +64,7 @@
                 margin-left: 25%;
                 margin-top: 80px;
                 box-shadow: 0px 0px 10px 1px rgb(165, 165, 165);
-                
+
             }
             .comment-box p{
                 text-align: left;
@@ -82,7 +82,7 @@
                 border: 1px solid #ddd;
                 color: #777;
             }
-            .comment-form button{
+            .comment-box button{
                 margin: 10px 0;
                 border: none;
                 background-color: #d0d0d0;
@@ -90,7 +90,7 @@
                 font-size: 18px;
                 border-radius: 3px;
                 color: #444;
-                
+
             }
             button:hover{
                 color: #white;
@@ -100,6 +100,80 @@
                 .comment-box{
                     width: 80%;
                     margin: 5%;
+                }
+
+                .rate input{
+                    display: none;
+
+                }
+                .rate {
+                    float: left;
+                    height: 46px;
+                    padding: 0 10px;
+                    align-items: center;
+                }
+                .rate label {
+                    display: block;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                    color: #333;
+                }
+
+                .rate:not(:checked) > input {
+                    position:absolute;
+                    top:-9999px;
+                }
+                .rate:not(:checked) > label {
+                    float:right;
+                    width:1em;
+                    overflow:hidden;
+                    white-space:nowrap;
+                    cursor:pointer;
+                    font-size:30px;
+                    color:#ccc;
+                }
+                .rate:not(:checked) > label:before {
+                    content: '★ ';
+                }
+                .rate > input:checked ~ label {
+                    color: #ffc700;
+                }
+                .rate:not(:checked) > label:hover,
+                .rate:not(:checked) > label:hover ~ label {
+                    color: #deb217;
+                }
+                .rate > input:checked + label:hover,
+                .rate > input:checked + label:hover ~ label,
+                .rate > input:checked ~ label:hover,
+                .rate > input:checked ~ label:hover ~ label,
+                .rate > label:hover ~ input:checked ~ label {
+                    color: #c59b08;
+                }
+                input#star5:checked ~ label{
+                    color: #fe7;
+                    text-shadow: 0 0 20px #952;
+
+                }
+
+                #star1:checked ~ form header:before{
+                    content: "I just hare it";
+
+                }
+                #star2:checked ~ form header:before{
+                    content: "I don't like it";
+
+                }
+                #star3:checked ~ form header:before{
+                    content: "It is awesome";
+
+                }
+                #star4:checked ~ form header:before{
+                    content: "I just like it";
+
+                }
+                #star5:checked ~ form header:before{
+                    content: "I just love it";
+
                 }
             }
         </style>
@@ -140,11 +214,38 @@
     <body>
         <div class ="comment-box">
             <p>Leave a comment</p>
+            <div class="rate">
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                </label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                </label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                </label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                </label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                </label>
+
+            </div>
             <form class="comment-form">
+
                 <input type="text" placeholder="Name"><!-- comment -->
                 <textarea rows="10" placeholder="Write your comment"></textarea>
-                <button type="submit">Post Comment</button>
+                <button type="submit">Post Comment</button>   
+
             </form>
+
+
         </div>
 
     </body>
