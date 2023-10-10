@@ -57,6 +57,10 @@
         <servlet-name>SuggestMentorByIDServlet</servlet-name>
         <servlet-class>controller.SuggestMentorByIDServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewDetailOfMentorServlet</servlet-name>
+        <servlet-class>controller.ViewDetailOfMentorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -108,6 +112,10 @@
     <servlet-mapping>
         <servlet-name>SuggestMentorByIDServlet</servlet-name>
         <url-pattern>/suggestmentorbyid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailOfMentorServlet</servlet-name>
+        <url-pattern>/detailmentor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

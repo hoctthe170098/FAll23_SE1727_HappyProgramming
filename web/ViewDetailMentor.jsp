@@ -9,16 +9,13 @@
 <%@page import = "model.*" %>
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
-<%
-    Account acc = (Account)request.getSession().getAttribute("acc");
-%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
          <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>CV</title>
+        <title>Detail of mentor</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -112,17 +109,6 @@ color: #9b9ca1;
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script >
-      function chooseFile(fileInput){
-          if(fileInput.files && fileInput.files[0]){
-              var reader = new FileReader();
-              reader.onload = function(e){
-                  $('#image').attr('src',e.target.result);
-              }
-              reader.readAsDataURL(fileInput.files[0]);
-          }
-      }
-  </script>
     </head>
     <body>
        <!-- ======= Header ======= -->
@@ -132,15 +118,13 @@ color: #9b9ca1;
 <div class="container">
 <div class="row">
 <div class="col-12">
-
-<div class="my-5">
-<h3>My CV</h3>
-<hr>
-</div>
 <%
-    ProfileDAO proDAO = new ProfileDAO();
    Profile p = (Profile)request.getAttribute("p");
 %>
+<div class="my-5">
+<h3>Details of Mentor <%=p.getFullname()%></h3>
+<hr>
+</div>
 <%
 String[] str = p.getFullname().split(" ");
 String firstname="";
@@ -150,101 +134,68 @@ String firstname="";
         firstname=firstname;
         String lastname = str[str.length-1];
         String gender;
- if(p.isGender()==true) gender="male";
- else gender="female";
+ if(p.isGender()==true) gender="Male";
+ else gender="Female";
 %>
-<%
-    String msgE = (String)request.getAttribute("msgE");
-%>
-<%if(msgE!=null){%>
-<p style="color: red" class="text-danger"><%=msgE%></p>
-<%}%>
-<form class="file-upload" action="updatecvmentor" method="post" enctype="multipart/form-data">
-<div class="row mb-5 gx-5">
 
+<div class="row mb-5 gx-5">
+<div class="col-xxl-4">
+<div class="bg-secondary-soft px-4 py-5 rounded">
+<div class="row g-3">
+<h4 class="mb-4 mt-0">Avatar</h4>
+<div class="text-center">
+<div class="square position-relative display-2 mb-3">
+   <img style="height: 300px;width: 360px" class="square position-relative display-2 mb-3" src=<%=p.getAvatar()%> id="image" alt=""/>  
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="col-xxl-8 mb-5 mb-xxl-0">
 <div class="bg-secondary-soft px-4 py-5 rounded">
 <div class="row g-3">
 <h4 class="mb-4 mt-0">Contact detail</h4>
 
 <div class="col-md-6">
-<label class="form-label">First Name *</label>
-<input type="text" name="firstname" class="form-control" value=<%=firstname%>>
+<label class="form-label">First Name :</label>
+<b><%=firstname%></b>
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Last Name *</label>
-<input type="text" name="lastname" class="form-control" value=<%=lastname%>>
+<label class="form-label">Last Name :</label>
+<b><%=lastname%></b>
 </div>
 
 <div class="col-md-6">
-
-<%
-    String msgP = (String)request.getAttribute("msgP");
-%>
-<%
-    if(msgP!=null){
-%>
-<label class="form-label">Phone number * <span style="color: red" class="text-danger"><%=msgP%></span></label>
- <%}%>
-<%
-    if(msgP==null){
-%>
-<label class="form-label">Phone number *</label>
- <%}%>
-<input type="text" name="phone" class="form-control" placeholder aria-label="Phone number" value=<%=p.getPhone()%>>
+<label class="form-label">Phone number :</label>
+<b><%=p.getPhone()%></b>
 </div>
-
 <div class="col-md-6">
-<label class="form-label">Birth *</label>
-<input type="date" name="birth" class="form-control" placeholder aria-label="Enter your birth here" value=<%=p.getBirth()%>>
+<label class="form-label">Birth :</label>
+<%String date =(String)request.getAttribute("date");
+%>
+<b><%=date%></b>
 </div>
  <div class="col-md-6">
-<label class="form-label">Address *</label>
-<input type="text" name="address" class="form-control" value=<%=p.getAddress()%>>
+<label class="form-label">Address :</label>
+<b><%=p.getAddress()%></b>
 </div>
-
-
 <div class="col-md-6">
-<label class="form-label">Gender *</label>
-<!--<input type="text" class="form-control" placeholder aria-label="Phone number" value="Scaralet D">-->
-<select name="gender" class="form-control" value=<%=gender%>>
-  <option value="true">Male</option>
-  <option value="false">Female</option>  
-</select>    
+<label class="form-label">Gender :</label>
+<b><%=gender%></b>
 </div>
  <div class="col-md-6">
-<label for="inputEmail4" class="form-label">Email *</label>
-<div><%=acc.getEmail()%></div>
+     <%
+     String email=(String)request.getAttribute("email");
+     %>
+<label for="inputEmail4" class="form-label">Email :</label>
+<b><%=email%></b>
 </div>
 </div> 
 </div>
 </div>
 
-<div class="col-xxl-4">
-<div class="bg-secondary-soft px-4 py-5 rounded">
-<div class="row g-3">
-<h4 class="mb-4 mt-0">Upload your profile photo</h4>
-<div class="text-center">
 
-<div class="square position-relative display-2 mb-3">
-    <%if(p.getAvatar()!=""){%> 
-    <img class="square position-relative display-2 mb-3" src=<%=p.getAvatar()%> id="image" alt=""/>
-    <%}%>
-    <%if(p.getAvatar()==""){%>
-    <img class="square position-relative display-2 mb-3" src="imagesAcc\htmlcssjs.png" id="image" alt="gvb"/>
-    <%}%>
-<!--    <i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>-->
-</div>
-    <input type="file" id="customFile" name="avatar" hidden onchange="chooseFile(this)" accept="image/png, image/gif, image/jpeg">
-<label class="btn btn-success-soft btn-block" for="customFile">Upload</label>
-<!--<button type="button" class="btn btn-danger-soft">Remove</button>-->
-
-<p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>Minimum size 300px x 300px</p>
-</div>
-</div>
-</div>
-</div>
 </div> 
 <%
     Mentor m = (Mentor)request.getAttribute("m");
@@ -255,23 +206,11 @@ String firstname="";
 <div class="row g-3">
 <h4 class="mb-4 mt-0">Experience detail</h4>
 <div class="col-md-12">
-<label class="form-label">Introduction *</label>
-<textarea class="form-control" rows="3" name="intro" id="intro"><%=m.getIntro()%></textarea>
+<label class="form-label">Introduction :</label><br>
+<b><%=m.getIntro()%></b>
 </div>
 <div class="col-md-12">
-<%
-    String msgS = (String)request.getAttribute("msgS");
-%>
-<%
-    if(msgS!=null){
-%>
-<label class="form-label">Skill * <span style="color: red" class="text-danger"><%=msgS%></span></label>
-<%}%>
-<%
-    if(msgS==null){
-%>
-<label class="form-label">Skill *</label>
-<%}%>
+<label class="form-label">Skill :</label>
 <%
 SkillDAO sDao = new SkillDAO();
 MentorSkillDAO msDao = new MentorSkillDAO();
@@ -283,17 +222,15 @@ List<Integer> ListSkillMentor = (List<Integer>)request.getAttribute("ListSkillMe
  for(Skill s : listSkill){
 %>
 <%if(msDao.isExistSkill(s.getID(),ListSkillMentor)){%>
-<input type="checkbox"  name="skill" value=<%=s.getID()%> checked><%=s.getName()%>
-<%}%>
-<%if(!msDao.isExistSkill(s.getID(),ListSkillMentor)){%>
-<input type="checkbox"  name="skill" value=<%=s.getID()%> /><%=s.getName()%>
+<b><%=s.getName()%></b>
+<br>
 <%}%>
 <%}%>
 </div>
 </div>
 <div class="col-md-12">
-<label class="form-label">Experience *</label>
-<textarea class="form-control" rows="3" name="ex" id="ex"><%=m.getExperience()%></textarea>
+<label class="form-label">Experience :</label><br>
+<b><%=m.getExperience()%></b>
 </div>
 </div> 
 </div>
@@ -306,20 +243,21 @@ List<Integer> ListSkillMentor = (List<Integer>)request.getAttribute("ListSkillMe
 <div class="row g-3">
 <h4 class="mb-4 mt-0">Social media detail</h4>
 <div class="col-md-6">
-<label class="form-label"><i class="fab fa-fw fa-facebook me-2 text-facebook"></i>Facebook *</label>
-<input type="textarea" row="3" name="facebooklink" class="form-control" placeholder aria-label="Facebook" value=<%=p.getFacebookLink()%>>
-
+<label class="form-label"><i class="fab fa-fw fa-facebook me-2 text-facebook"></i>Facebook :</label>
+<b><%=p.getFacebookLink()%></b>
 </div>
 <div class="col-md-6">
-<label class="form-label"><i class="fab fa-fw fa-instagram text-instagram me-2"></i>Instagram *</label>
-<input type="textarea" name="instragramlink" class="form-control" placeholder aria-label="Instragram" value=<%=p.getInstagramLink()%>>
+<label class="form-label"><i class="fab fa-fw fa-instagram text-instagram me-2"></i>Instagram :</label>
+<b><%=p.getInstagramLink()%></b>
 </div>
 </div> 
 </div>
 </div>
 </div> 
-<button type="submit" name="button" value="update" class="btn btn-primary btn-lg">Update CV</button>
-</form> 
+<form action="">
+<button type="submit" name="button" value="Rate" class="btn btn-primary btn-lg">Rate</button>
+<button type="submit" name="button" value="Request" class="btn btn-primary btn-lg">Request</button>  
+</form>
 </div>
 </div>
 </div>

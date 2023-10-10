@@ -96,7 +96,20 @@ public class AccountDAO extends MyDAO {
         // Trả về null nếu có lỗi xảy ra
         return null;
     }
-
+    public String getEmailByID(int ID){
+         xSql = "select Email from Account where id = " + ID;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            String email  = rs.getString("Email");
+            return email;
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+       return null;
+    }
     public Account searchAccountByEmail(String email) {
         Account account = null;
 
