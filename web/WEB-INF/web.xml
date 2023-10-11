@@ -61,6 +61,10 @@
         <servlet-name>ViewDetailOfMentorServlet</servlet-name>
         <servlet-class>controller.ViewDetailOfMentorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListBecomeMentorServlet</servlet-name>
+        <servlet-class>controller.ListBecomeMentorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -116,6 +120,10 @@
     <servlet-mapping>
         <servlet-name>ViewDetailOfMentorServlet</servlet-name>
         <url-pattern>/detailmentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListBecomeMentorServlet</servlet-name>
+        <url-pattern>/ListBecomeMentorServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
