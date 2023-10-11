@@ -38,7 +38,7 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+  
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 <style type="text/css">
@@ -99,6 +99,76 @@ color: #9b9ca1;
     transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    
+    .comment {
+    background-color: #eee
+}
+
+.comment .card {
+    background-color: #fff;
+    border: none
+}
+
+.comment .form-color {
+    background-color: #fafafa
+}
+
+.comment .form-control {
+    height: 48px;
+    border-radius: 25px
+}
+
+.comment .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #35b69f;
+    outline: 0;
+    box-shadow: none;
+    text-indent: 10px
+}
+
+.comment .c-badge {
+    background-color: #35b69f;
+    color: white;
+    height: 20px;
+    font-size: 11px;
+    width: 92px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px
+}
+
+.comment .comment-text {
+    font-size: 13px
+}
+
+.comment .wish {
+    color: #35b69f
+}
+
+.comment .user-feed {
+    font-size: 14px;
+    margin-top: 12px
+}
+
+.clearfix .pagination {
+    float: right;
+    margin: 0 0 5px;
+}
+.clearfix .pagination li a {
+    border: none;
+    font-size: 13px;
+    min-width: 30px;
+    min-height: 30px;
+    color: #999;
+    margin: 0 2px;
+    line-height: 30px;
+    border-radius: 2px !important;
+    text-align: center;
+    padding: 0 6px;
+}
 }
     </style>
   <!-- =======================================================
@@ -108,13 +178,13 @@ color: #9b9ca1;
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
        <!-- ======= Header ======= -->
   <jsp:include page="header.jsp"></jsp:include>
   <div class="profile">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 <div class="container">
 <div class="row">
 <div class="col-12">
@@ -254,10 +324,6 @@ List<Integer> ListSkillMentor = (List<Integer>)request.getAttribute("ListSkillMe
 </div>
 </div>
 </div> 
-<form action="">
-<button type="submit" name="button" value="Rate" class="btn btn-primary btn-lg">Rate</button>
-<button type="submit" name="button" value="Request" class="btn btn-primary btn-lg">Request</button>  
-</form>
 </div>
 </div>
 </div>
@@ -266,7 +332,64 @@ List<Integer> ListSkillMentor = (List<Integer>)request.getAttribute("ListSkillMe
 <script type="text/javascript">
 </script>
   </div>
-  
+<div oncontextmenu='return false' class='snippet-body' class="comment" >
+         <div class="container mt-5 mb-5">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-7">
+            <div style="height: 400px;overflow-y:auto; " class="card">
+                <div class="p-3">
+                    <h6>Comment about Mentor <%=p.getFullname()%></h6>
+                </div>
+                <div class="mt-2">
+                    <%
+                        List<CommentInfo> listComment = (List<CommentInfo>)request.getAttribute("listComment");
+                    %>
+                    <%for(CommentInfo c: listComment){%>
+                    <%
+                        int mi = c.getMinute();
+                        String time="";
+                        if (mi<60){
+                        time+=mi+"m";
+                        }else if(mi<1440){
+                        time+=mi/60+"h";
+                        }else if(mi<43200){
+                        time+=mi/1440+"d";
+                        }else if(mi<518400){
+                        time+=mi/43200 + "month";
+                        }else time+=mi/518400 +"y";
+                    %>
+                    <div class="d-flex flex-row p-3"> <img src=<%=c.getAvatar()%> width="40" height="40" class="rounded-circle mr-3">
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row align-items-center"> <span class="mr-2"><b><%=c.getFullName()%></b></span></div> <small><%=time%> ago</small>
+                            </div>
+                            <p class="text-justify comment-text mb-0"><%=c.getComment()%></p>
+                        </div>
+                    </div>
+                    <%}%>
+<!--                     <div class="d-flex flex-row p-3"> <img src="https://i.imgur.com/agRGhBc.jpg" width="40" height="40" class="rounded-circle mr-3">
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row align-items-center"> <span class="mr-2">Maria Santola</span> <small class="c-badge">Top Comment</small> </div> <small>12h ago</small>
+                            </div>
+                            <p class="text-justify comment-text mb-0"> Id eu nisl nunc mi ipsum faucibus. Massa massa ultricies mi quis hendrerit dolor. Arcu bibendum at varius vel pharetra vel turpis nunc eget. Habitasse platea dictumst quisque sagittis purus sit amet volutpat. Urna condimentum mattis pellentesque id.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                            <div class="d-flex flex-row user-feed"> <span class="wish"><i class="fa fa-heartbeat mr-2"></i>54</span> <span class="ml-3"><i class="fa fa-comments-o mr-2"></i>Reply</span> </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+     <script type='text/javascript'></script>
+</div>
+<div style="text-align: center">
+    <form action="">
+<button type="submit" name="button" value="Rate" class="btn btn-danger btn-lg">Rate and Comment</button>
+<button type="submit" name="button" value="Request" class="btn btn-primary btn-lg">Request</button>  
+</form>
+</div>
+
   <!-- ======= Footer ======= -->
     <jsp:include page="Footer.jsp"></jsp:include>
 

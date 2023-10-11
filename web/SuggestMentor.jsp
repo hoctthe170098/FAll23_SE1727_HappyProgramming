@@ -74,7 +74,7 @@
             <div class="member">
                 <img style="height: 215px;width: 335px" src=<%=mi.getAvatar()%> class="img-fluid" alt="">
               <div class="member-content">
-                  <h4><%=mi.getFullname()%> (<a href="">CV</a>)</h4>
+                  <h4><%=mi.getFullname()%> (<a href="detailmentor?idmentor=<%=mi.getID()%>">Details</a>)</h4>
                 <span>Rate: <%=mi. getRate()%></span>
                 <p>
                   <%=mi.getIntro()%>

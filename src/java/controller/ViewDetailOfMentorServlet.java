@@ -28,12 +28,15 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
         MentorDAO mDAO = new MentorDAO();
         MentorSkillDAO msDAO = new MentorSkillDAO();
         AccountDAO accDAO = new AccountDAO();
+        CommentInfoDAO ciDAO =  new CommentInfoDAO();
         Profile p = pDAO.getProfileByID(idMentor);
         Mentor m = mDAO.getMentorByID(idMentor);
         MentorSkill ms = msDAO.getSkillByName(idMentor);
         String email = accDAO.getEmailByID(idMentor);
         String date = String.valueOf(p.getBirth());
         List<Integer> ListSkillMentor = ms.getListSkillID();
+        List<CommentInfo> listComment = ciDAO.getAllCommentInfo(idMentor);
+        request.setAttribute("listComment", listComment);
         request.setAttribute("p", p);
         request.setAttribute("m", m);
         request.setAttribute("ListSkillMentor", ListSkillMentor);
