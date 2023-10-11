@@ -13,7 +13,6 @@ import java.util.List;
 public class MentorSkill {
     int IDMentor;
     List<Integer> listSkillID;
-
     public MentorSkill() {
     }
 
