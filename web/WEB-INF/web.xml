@@ -13,6 +13,10 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>CreateSkillServlet</servlet-name>
+        <servlet-class>controller.CreateSkillServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>HeaderServlet</servlet-name>
         <servlet-class>controller.HeaderServlet</servlet-class>
@@ -66,8 +70,8 @@
         <servlet-class>controller.ListBecomeMentorServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreateNewRequestServlet</servlet-name>
-        <servlet-class>controller.CreateNewRequestServlet</servlet-class>
+        <servlet-name>CreateRequestServlet</servlet-name>
+        <servlet-class>controller.CreateRequestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
@@ -80,6 +84,10 @@
     <servlet-mapping>
         <servlet-name>HeaderServlet</servlet-name>
         <url-pattern>/header</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>CreateSkillServlet</servlet-name>
+        <url-pattern>/createskill</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RequestServlet</servlet-name>
@@ -130,7 +138,7 @@
         <url-pattern>/ListBecomeMentorServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CreateNewRequestServlet</servlet-name>
+        <servlet-name>CreateRequestServlet</servlet-name>
         <url-pattern>/createrequest</url-pattern>
     </servlet-mapping>
     <session-config>

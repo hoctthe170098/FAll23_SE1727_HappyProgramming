@@ -79,7 +79,7 @@ public class RequestServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Long description";
     }// </editor-fold>
 
 }
