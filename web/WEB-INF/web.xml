@@ -66,8 +66,8 @@
         <servlet-class>controller.ListBecomeMentorServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreateNewRequestServlet</servlet-name>
-        <servlet-class>controller.CreateNewRequestServlet</servlet-class>
+        <servlet-name>CreateRequestServlet</servlet-name>
+        <servlet-class>controller.CreateRequestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
@@ -130,7 +130,7 @@
         <url-pattern>/ListBecomeMentorServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CreateNewRequestServlet</servlet-name>
+        <servlet-name>CreateRequestServlet</servlet-name>
         <url-pattern>/createrequest</url-pattern>
     </servlet-mapping>
     <session-config>

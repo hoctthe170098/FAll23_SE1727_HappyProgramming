@@ -40,94 +40,168 @@
 
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
+        <style type="text/css">
+            .profile{margin-top:20px;
+color: #9b9ca1;
+}
+.profile .bg-secondary-soft {
+    background-color: rgba(208, 212, 217, 0.1) !important;
+}
+.profile .rounded {
+    border-radius: 5px !important;
+}
+.profile .py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+.profile .px-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+}
+.profile .file-upload .square {
+    height: 250px;
+    width: 250px;
+    margin: auto;
+    vertical-align: middle;
+    border: 1px solid #e5dfe4;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.profile .text-secondary {
+    --bs-text-opacity: 1;
+    color: rgba(208, 212, 217, 0.5) !important;
+}
+.profile .btn-success-soft {
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+.profile .btn-danger-soft {
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+.profile .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #29292e;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e5dfe4;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 5px;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+        </style>
     </head>
     <body>
        <!-- ======= Header ======= -->
         <jsp:include page="header.jsp"></jsp:include>
-          <section id="contact" class="contact">
-<!--      <div data-aos="fade-up">
-        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-      </div>-->
+        <%
+            Account acc = (Account)request.getSession().getAttribute("acc");
+        %>
+        <%if(acc==null){%>
+        <h2 style="text-align: center">You must sign in to send a request</h2>
+        <%}%>
+        <%if(acc!=null){%>
+        <%if(acc.getIsMentee()!=1){%>
+        <h2 style="text-align: center">Your account cann't do this function</h2>
+        <%}%>
+        <%if(acc.getIsMentee()==1){%>
+           <div class="profile">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<div class="container">
+<div class="row">
+<div class="col-12">
 
-      <div class="container" data-aos="fade-up">
+<div class="my-5">
+<h3 style="text-align: center">Create Request</h3>
+<hr>
+</div>
+<%
+    String msgE = (String)request.getAttribute("msgE");
+%>
+<%if(msgE!=null){%>
+<p style="color: red" class="text-danger"><%=msgE%></p>
+<%}%>
+<form class="file-upload" action="createrequest" method="post" enctype="multipart/form-data">
+<div class="row mb-5 gx-5">
 
-        <div class="row mt-5">
-<!--
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
+<div class="col-xxl-8 mb-5 mb-xxl-0">
+<div class="bg-secondary-soft px-4 py-5 rounded">
+<div class="row g-3">
+<h4 class="mb-4 mt-0">Request details</h4>
 
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>info@example.com</p>
-              </div>
+<div class="col-md-12">
+<label class="form-label">Title *</label>
+<input type="text" name="title" class="form-control" placeholder aria-label="Title" value="" required>
+</div>
 
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
-              </div>
-
-            </div>
-
-          </div>-->
-
-          <div class="col-lg-12 mt-5 mt-lg-0">
-
-            <form action="createrequest" method="post" class="php-email-form">
-              <div class="row">
-                <div class="col-md-12 form-group">
-                    <h6>Title * </h6>
-                  <input type="text" name="title" class="form-control" id="name" placeholder="Title" required>
-                </div>               
-              </div>
-                <div class="row">
-                  <div class="col-md-6 form-group mt-3 mt-md-0">
-                   <h6>Date * </h6>   
-                  <input type="date" class="form-control" name="date" id="date" placeholder="Date" required>
-                </div>
-                  <div class="col-md-3 form-group mt-3 mt-md-0">
-                   <h6>From * </h6>
-                  <input type="number" class="form-control" name="from" id="from" placeholder="From" min="8" max="20" step="0.5" value="8" required>
-                </div>
-                  <div class="col-md-3 form-group mt-3 mt-md-0">
-                   <h6>To * </h6>   
-                  <input type="number" class="form-control" name="to" id="to" placeholder="To" min="10" max="22" step="0.5" value="10" required>
-                </div>  
-                </div>
-              <div class="form-group mt-3">
-                  <h6>Skill * </h6> 
-                  <%
-                      HashMap hSkill = (HashMap)request.getAttribute("hSkill");
-                      Set<Integer> listKey = hSkill.keySet();
-                  %>
-                  <%for(int id: listKey){%>
-                  <input type="radio" name="skill" value=<%=id%>/><span><%=hSkill.get(id)%></span>
-                  <%}%>          
-              </div>
-              <div class="form-group mt-3">
-                 <h6>Detail * </h6> 
-                <textarea class="form-control" name="detail" rows="5" placeholder="Detail" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Request</button></div>
-            </form>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Section -->
+<div class="col-md-6">
+<label class="form-label">Date *</label>
+<input type="date" name="date" class="form-control" placeholder aria-label="Date" value="" required>
+</div>
+<div class="col-md-3">
+<label class="form-label">From *</label>
+<input type="number" name="from" class="form-control" min="8" max="20" step="0.5" value="8" required>
+</div>
+ <div class="col-md-3">
+<label class="form-label">To *</label>
+<input type="number" name="to" class="form-control" min="10" max="22" step="0.5" value="10" required>
+</div>
+<div class="col-md-12">
+<label class="form-label">Skill *</label>
+<div>
+<%
+        int idMentor =(int)request.getAttribute("idMentor");
+        MentorSkillDAO msDAO = new MentorSkillDAO();
+        SkillDAO sDAO = new SkillDAO();
+        MentorSkill mentorSkill = msDAO.getSkillByName(idMentor);
+        List<Skill> listSkill = sDAO.getListSkill();
+        HashMap<Integer,String> hSkill = new HashMap<>();
+        for (Skill s: listSkill){
+            if(msDAO.isExistSkill(s.getID(), mentorSkill.getListSkillID())) hSkill.put(s.getID(), s.getName());
+        }
+        Set<Integer> key = hSkill.keySet();
+%>
+<%
+    for(int id: key){
+%>
+<input style="margin-right:5px" type="radio" name="idskill" value=<%=id%> /><span style="margin-right: 15px"><b><%=hSkill.get(id)%></b></span>
+<%}%>
+</div>
+</div>
+<div class="col-md-12">
+<label class="form-label">Gender *</label>
+<textarea class="form-control" rows="3" name="detail" id="ex"></textarea>   
+</div>
+</div> 
+</div>
+</div>
+</div> 
+<div style="text-align: center">
+    <button type="submit" class="btn btn-primary btn-lg">Send Request</button>
+</div>
+<!--</div>-->
+</form> 
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+</script>
+  </div>
+  
+              <%}%>
+              <%}%>
+              <!-- End Contact Section -->
 
            <!-- ======= Footer ======= -->
         <jsp:include page="Footer.jsp"></jsp:include>

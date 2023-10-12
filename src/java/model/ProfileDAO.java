@@ -129,6 +129,6 @@ public class ProfileDAO extends MyDAO{
     }
      public static void main(String[] args) throws SQLException  {
         ProfileDAO cdao =  new ProfileDAO();
-         System.out.println(cdao.getProfileByID(4));
+    
     }
 }

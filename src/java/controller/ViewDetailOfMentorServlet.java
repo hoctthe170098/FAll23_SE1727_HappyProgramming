@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import model.*;
 /**
  *
@@ -53,18 +54,8 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         int idMentor = Integer.parseInt(request.getParameter("idmentor"));
-        String button = request.getParameter("button");
-        if(button.equals("request")){
-               MentorSkillDAO msDAO = new MentorSkillDAO();
-        MentorSkill mentorSkill = msDAO.getSkillByName(idMentor);
-        SkillDAO sDAO = new SkillDAO();
-        List<Skill> listSkill = sDAO.getListSkill();
-        HashMap<Integer,String> hSkill = new HashMap<>();
-        for (Skill s:listSkill){
-            if(msDAO.isExistSkill(s.getID(), mentorSkill.getListSkillID()))
-                hSkill.put(s.getID(),s.getName());
-        }      
-        request.setAttribute("hSkill", hSkill);
+        String button = request.getParameter("button");   
+        if(button.equals("request")){          
         request.setAttribute("idMentor", idMentor);
         request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
         }

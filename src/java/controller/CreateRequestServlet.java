@@ -11,28 +11,33 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import model.*;
+import java.sql.Date;
+
 /**
  *
  * @author Admin
  */
-public class CreateNewRequestServlet extends HttpServlet {
-   
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+public class CreateRequestServlet extends HttpServlet {
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+          
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+        int idMentor = Integer.parseInt(request.getParameter("idmentor"));
+        Date date = Date.valueOf(request.getParameter("date"));
+        long millis=System.currentTimeMillis();   
+        java.sql.Date now=new java.sql.Date(millis);
+        if(date.equals(now)){
+            request.setAttribute("idMentor", idMentor);
+            request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+        }else{
+            out.print("dcm ");
+        }
     }
-
 }
