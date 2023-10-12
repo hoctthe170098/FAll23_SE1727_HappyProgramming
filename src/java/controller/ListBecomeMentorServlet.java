@@ -4,12 +4,17 @@
  */
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.List;
+import model.BecomeMentor;
+import model.ListBecomeMentorDAO;
 
 /**
  *
@@ -70,16 +75,51 @@ public class ListBecomeMentorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+         String action = request.getServletPath();
+ 
+        try {
+            switch (action) {
+            
+           
+            case "/delete":
+                deleteRequest(request, response);
+                break;
+          
+            
+            default:
+                listAllRequest(request, response);
+                break;
+            }
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
+        }
     }
+     private void  listAllRequest(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+         ListBecomeMentorDAO lmd = new ListBecomeMentorDAO();
+        List<BecomeMentor> listMentor = lmd.listAllBecomeMentor();
+        request.setAttribute("listBook", listMentor);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListBecomeMentor.jsp");
+        dispatcher.forward(request, response);
+    }
+     private void deleteRequest(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+ 
+        BecomeMentor bm = new BecomeMentor(id);
+       ListBecomeMentorDAO bmd = new ListBecomeMentorDAO();
+       bmd.deleteRequest(bm);
+        response.sendRedirect("list");
+ 
+    }
+}
 
     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+   
 
-}
+
+

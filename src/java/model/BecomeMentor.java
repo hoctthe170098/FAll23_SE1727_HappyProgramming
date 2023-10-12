@@ -17,7 +17,20 @@ public class BecomeMentor {
     public BecomeMentor() {
     }
 
+    public BecomeMentor(int ID) {
+        this.ID = ID;
+    }
+    
+    
+
     public BecomeMentor(int ID, String intro, String ex, String[] skill) {
+        this.ID = ID;
+        this.intro = intro;
+        this.ex = ex;
+        this.skill = skill;
+    }
+
+    BecomeMentor(int id, String Intro, String Ex, String Skill) {
         this.ID = ID;
         this.intro = intro;
         this.ex = ex;

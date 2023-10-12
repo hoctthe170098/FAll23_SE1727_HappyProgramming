@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ListBecomeMentorDAO extends MyDAO{
       public List<BecomeMentor> listAllBecomeMentor() throws SQLException {
         List<BecomeMentor> listMentor = new ArrayList<>();
-         
+        BecomeMentor bm = new BecomeMentor(); 
         String sql = "SELECT * FROM BecomeMentor";
          
         
@@ -29,9 +30,11 @@ public class ListBecomeMentorDAO extends MyDAO{
             int id = resultSet.getInt("id");
             String Intro = resultSet.getString("Intro");
             String Ex = resultSet.getString("Ex");
-            String Skill = resultSet.getString("Skill");
+            String skill = rs.getString("Skill");
+             String[]skills = skill.split(",");
+            bm.setSkill(skills);
              
-            BecomeMentor becomementor = new BecomeMentor(id, Intro, Ex, Skill);
+            BecomeMentor becomementor = new BecomeMentor(id, Intro, Ex, skills);
             listAllBecomeMentor().add(becomementor);
         }
          
@@ -42,5 +45,17 @@ public class ListBecomeMentorDAO extends MyDAO{
          
         return listAllBecomeMentor();
     }
-       
+       public boolean deleteRequest(BecomeMentor bm) throws SQLException {
+        String sql = "DELETE FROM book where book_id = ?";
+         
+        
+         
+         PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, bm.getID());
+        
+         
+        boolean rowDeleted = statement.executeUpdate() > 0;
+        statement.close();
+        return rowDeleted;     
+    }
 }
