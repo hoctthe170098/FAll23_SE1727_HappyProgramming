@@ -13,6 +13,10 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>CreateSkillServlet</servlet-name>
+        <servlet-class>controller.CreateSkillServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>HeaderServlet</servlet-name>
         <servlet-class>controller.HeaderServlet</servlet-class>
@@ -80,6 +84,10 @@
     <servlet-mapping>
         <servlet-name>HeaderServlet</servlet-name>
         <url-pattern>/header</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>CreateSkillServlet</servlet-name>
+        <url-pattern>/createskill</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RequestServlet</servlet-name>
