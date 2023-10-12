@@ -85,7 +85,7 @@ public class LoginController extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Long description";
-    }// </editor-fold>
+        return "Short description";
+    }
 
 }
