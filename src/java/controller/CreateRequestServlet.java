@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import model.*;
 
 /**
  *
@@ -22,22 +23,42 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-          
+        long millis=System.currentTimeMillis();   
+        java.sql.Date now=new java.sql.Date(millis);
+        String title = request.getParameter("title");
+        Date date = Date.valueOf(request.getParameter("date")); 
+        float from = Float.parseFloat(request.getParameter("from"));
+        float to = Float.parseFloat(request.getParameter("to"));
+        String sIDSkill = request.getParameter("idskill");
+        String detail = request.getParameter("detail");
+        if(date.before(now)){
+            request.setAttribute("msgD", "The date must after today");
+        }else if(to - from < 2){
+            request.setAttribute("msgD", "The lesson must last at least 2 hours");
+        }else if(sIDSkill==null){
+            request.setAttribute("msgS", "You must choose one skill ");
+        }else{
+            RequestDAO rDAO = new RequestDAO();
+            Account acc = (Account)request.getSession().getAttribute("acc");
+            int IDMentee = acc.getID();
+            int IDMentor = (int)request.getSession().getAttribute("idmentor");
+            int IDSkill = Integer.parseInt(sIDSkill);
+            if(rDAO.IsDuplicateRequestMentee(IDMentee, from, to,date)){
+                request.setAttribute("msgE", "You had another appointment during this time");
+            }else if(rDAO.IsDuplicateRequestMentor(IDMentor, from, to, date)){
+                request.setAttribute("msgE", "This mentor had another appointment during this time");
+            }else{
+            rDAO.InsertRequest(IDMentor, IDMentee, IDSkill, title, date, from, to, detail);
+            }
+            }  
+         request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt(request.getParameter("idmentor"));
-        Date date = Date.valueOf(request.getParameter("date"));
-        long millis=System.currentTimeMillis();   
-        java.sql.Date now=new java.sql.Date(millis);
-        if(date.equals(now)){
-            request.setAttribute("idMentor", idMentor);
-            request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
-        }else{
-            out.print("dcm ");
-        }
+
     }
 }

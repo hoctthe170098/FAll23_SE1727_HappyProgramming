@@ -111,9 +111,92 @@ color: #9b9ca1;
         <%}%>
         <%if(acc!=null){%>
         <%if(acc.getIsMentee()!=1){%>
-        <h2 style="text-align: center">Your account cann't do this function</h2>
+        <h2 style="text-align: center">Your account can't do this function</h2>
         <%}%>
         <%if(acc.getIsMentee()==1){%>
+        <%
+        int idMentor =(int)request.getSession().getAttribute("idmentor"); 
+        %>
+        <%
+            RequestDAO rDAO = new RequestDAO();
+            Request r = rDAO.getRequestProcessing(idMentor,acc.getID());
+        %>
+        <%if(r!=null){%>
+                  <div class="profile">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<div class="container">
+<div class="row">
+<div class="col-12">
+
+<div class="my-5">
+<h3 style="text-align: center"><%=r.getStatus()%> Request</h3>
+<hr>
+</div>
+<form class="file-upload" action="updaterequest" enctype="multipart/form-data">
+<div class="row mb-5 gx-5">
+
+<div class="col-xxl-8 mb-5 mb-xxl-0">
+<div class="bg-secondary-soft px-4 py-5 rounded">
+<div class="row g-3">
+<h4 class="mb-4 mt-0">Request details</h4>
+
+<div class="col-md-12">
+<label class="form-label">Title :</label>
+<b><%=r.getTitle()%></b>
+</div>
+
+<div class="col-md-3">
+    <label class="form-label">Date :</label>
+    <b><%=r.getDate().toString()%></b>
+</div>
+<div class="col-md-3">
+<label class="form-label">From :</label>
+<b><%=r.getFrom()%></b>
+</div>
+ <div class="col-md-3">
+<label class="form-label">To :</label>
+<b><%=r.getTo()%></b>
+</div>
+<div class="col-md-3">
+    <label class="form-label">Skill :</label>
+<%
+        String skillName="";
+        SkillDAO sDAO = new SkillDAO();
+        List<Skill> listSkill = sDAO.getListSkill();
+        for (Skill s: listSkill){
+           if(s.getID()==r.getIDSkill()){skillName = s.getName();
+           break;
+        }
+        }
+%>
+<b><%=skillName%></b>
+</div>
+<div class="col-md-12">
+<label class="form-label">Detail :</label>
+<p>
+    <b><%=r.getDetails()%></b>
+</p>
+</div>
+</div> 
+</div>
+</div>
+</div> 
+<div style="text-align: center">
+    <button type="submit" name="button" value="delete" class="btn btn-danger btn-lg">Delete Request</button>
+    <button type="submit" name="button" value="update" class="btn btn-primary btn-lg">Update Request</button>
+</div>
+<!--</div>-->
+</form> 
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+</script>
+  </div>
+        <%}%>
+        <%if(r==null){%>
            <div class="profile">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 <div class="container">
@@ -130,7 +213,7 @@ color: #9b9ca1;
 <%if(msgE!=null){%>
 <p style="color: red" class="text-danger"><%=msgE%></p>
 <%}%>
-<form class="file-upload" action="createrequest" method="post" enctype="multipart/form-data">
+<form class="file-upload" action="createrequest" enctype="multipart/form-data">
 <div class="row mb-5 gx-5">
 
 <div class="col-xxl-8 mb-5 mb-xxl-0">
@@ -144,7 +227,15 @@ color: #9b9ca1;
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Date *</label>
+    <%
+        String msgD = (String)request.getAttribute("msgD");
+    %>
+    <%if(msgD!=null){%>
+    <label class="form-label">Date *<span style="color:red"><%=msgD%></span></label>
+    <%}%>
+    <%if(msgD==null){%>
+    <label class="form-label">Date :</label>
+    <%}%>
 <input type="date" name="date" class="form-control" placeholder aria-label="Date" value="" required>
 </div>
 <div class="col-md-3">
@@ -156,10 +247,17 @@ color: #9b9ca1;
 <input type="number" name="to" class="form-control" min="10" max="22" step="0.5" value="10" required>
 </div>
 <div class="col-md-12">
-<label class="form-label">Skill *</label>
+    <%
+        String msgS = (String)request.getAttribute("msgS");
+    %>
+    <%if(msgS!=null){%>
+    <label class="form-label">Skill *<span style="color:red"><%=msgS%></span></label>
+    <%}%>
+    <%if(msgS==null){%>
+    <label class="form-label">Skill *</label>
+    <%}%>
 <div>
 <%
-        int idMentor =(int)request.getAttribute("idMentor");
         MentorSkillDAO msDAO = new MentorSkillDAO();
         SkillDAO sDAO = new SkillDAO();
         MentorSkill mentorSkill = msDAO.getSkillByName(idMentor);
@@ -177,9 +275,17 @@ color: #9b9ca1;
 <%}%>
 </div>
 </div>
+<div class="col-md-6">
+<label class="form-label">Address *</label>
+<input type="text" name="address" class="form-control" placeholder aria-label="Address" value="" required>
+</div>
+<div class="col-md-6">
+<label class="form-label">Can pay *</label>
+<input type="number" min="10" value="10" name="money" class="form-control" placeholder aria-label="Address" value="" required>
+</div>
 <div class="col-md-12">
-<label class="form-label">Gender *</label>
-<textarea class="form-control" rows="3" name="detail" id="ex"></textarea>   
+<label class="form-label">Detail *</label>
+<textarea class="form-control" rows="3" name="detail" id="ex" required></textarea>   
 </div>
 </div> 
 </div>
@@ -198,7 +304,7 @@ color: #9b9ca1;
 <script type="text/javascript">
 </script>
   </div>
-  
+  <%}%>
               <%}%>
               <%}%>
               <!-- End Contact Section -->

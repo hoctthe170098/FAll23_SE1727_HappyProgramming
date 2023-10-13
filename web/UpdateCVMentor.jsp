@@ -234,7 +234,6 @@ String firstname="";
     <%if(p.getAvatar()==""){%>
     <img class="square position-relative display-2 mb-3" src="imagesAcc\htmlcssjs.png" id="image" alt="gvb"/>
     <%}%>
-<!--    <i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>-->
 </div>
     <input type="file" id="customFile" name="avatar" hidden onchange="chooseFile(this)" accept="image/png, image/gif, image/jpeg">
 <label class="btn btn-success-soft btn-block" for="customFile">Upload</label>
