@@ -31,6 +31,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         float to = Float.parseFloat(request.getParameter("to"));
         String sIDSkill = request.getParameter("idskill");
         String detail = request.getParameter("detail");
+        String address = request.getParameter("address");
+        float money = Float.parseFloat(request.getParameter("money"));
         if(date.before(now)){
             request.setAttribute("msgD", "The date must after today");
         }else if(to - from < 2){
@@ -48,7 +50,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
             }else if(rDAO.IsDuplicateRequestMentor(IDMentor, from, to, date)){
                 request.setAttribute("msgE", "This mentor had another appointment during this time");
             }else{
-            rDAO.InsertRequest(IDMentor, IDMentee, IDSkill, title, date, from, to, detail);
+            rDAO.InsertRequest(IDMentor, IDMentee, IDSkill, title, date, from, to, detail,address,money);
             }
             }  
          request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);

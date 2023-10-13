@@ -171,6 +171,14 @@ color: #9b9ca1;
 %>
 <b><%=skillName%></b>
 </div>
+ <div class="col-md-3">
+<label class="form-label">Can pay :</label>
+<b><%=r.getMoney()%></b>
+</div>
+ <div class="col-md-9">
+<label class="form-label">Address :</label>
+<b><%=r.getAddress()%></b>
+</div>
 <div class="col-md-12">
 <label class="form-label">Detail :</label>
 <p>
@@ -275,11 +283,11 @@ color: #9b9ca1;
 <%}%>
 </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-9">
 <label class="form-label">Address *</label>
 <input type="text" name="address" class="form-control" placeholder aria-label="Address" value="" required>
 </div>
-<div class="col-md-6">
+<div class="col-md-3">
 <label class="form-label">Can pay *</label>
 <input type="number" min="10" value="10" name="money" class="form-control" placeholder aria-label="Address" value="" required>
 </div>

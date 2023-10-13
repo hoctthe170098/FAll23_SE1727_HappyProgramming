@@ -21,11 +21,12 @@ public class Request {
   float to;
   String details;
   String status;
-
+  String address;
+  float money;
     public Request() {
     }
 
-    public Request(int ID, int IDMentor, int IDMentee, int IDSkill, String title, Date date, float from, float to, String details, String status) {
+    public Request(int ID, int IDMentor, int IDMentee, int IDSkill, String title, Date date, float from, float to, String details, String status, String address, float money) {
         this.ID = ID;
         this.IDMentor = IDMentor;
         this.IDMentee = IDMentee;
@@ -36,7 +37,11 @@ public class Request {
         this.to = to;
         this.details = details;
         this.status = status;
+        this.address = address;
+        this.money = money;
     }
+
+    
 
     public int getID() {
         return ID;
@@ -118,9 +123,27 @@ public class Request {
         this.status = status;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public float getMoney() {
+        return money;
+    }
+
+    public void setMoney(float money) {
+        this.money = money;
+    }
+
     @Override
     public String toString() {
-        return "Request{" + "ID=" + ID + ", IDMentor=" + IDMentor + ", IDMentee=" + IDMentee + ", IDSkill=" + IDSkill + ", title=" + title + ", date=" + date + ", from=" + from + ", to=" + to + ", details=" + details + ", status=" + status + '}';
+        return "Request{" + "ID=" + ID + ", IDMentor=" + IDMentor + ", IDMentee=" + IDMentee + ", IDSkill=" + IDSkill + ", title=" + title + ", date=" + date + ", from=" + from + ", to=" + to + ", details=" + details + ", status=" + status + ", address=" + address + ", money=" + money + '}';
     }
+
+   
   
 }

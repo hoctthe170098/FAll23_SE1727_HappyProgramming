@@ -13,8 +13,8 @@ import java.util.List;
  * @author Admin
  */
 public class RequestDAO extends MyDAO {
-    public void InsertRequest(int IDMentor,int IDMentee,int IDSkill,String title,Date date,float from,float to,String Detail){
-               xSql = "insert into Request values (?,?,?,?,?,?,?,?,?)";
+    public void InsertRequest(int IDMentor,int IDMentee,int IDSkill,String title,Date date,float from,float to,String Detail,String address,float money){
+               xSql = "insert into Request values (?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, IDMentor);
@@ -26,6 +26,8 @@ public class RequestDAO extends MyDAO {
             ps.setFloat(5,to );
             ps.setString(8, Detail);
             ps.setString(6, "Processing");
+            ps.setString(10, address);
+            ps.setFloat(11, money);
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -37,8 +39,8 @@ public class RequestDAO extends MyDAO {
                  + "from Request "
                  + "where IDMentor = ? and IDMentee = ? and Status in ('Processing','Accepted')";
          int ID,iDMentor,iDMentee,IDSkill;
-         float from,to;
-         String title,status,detail;
+         float from,to,money;
+         String title,status,detail,address;
          Date date;
          Request r ;
          try{
@@ -57,7 +59,9 @@ public class RequestDAO extends MyDAO {
             title = rs.getString("Title");
             detail = rs.getString("Details");
             date = rs.getDate("Date");
-            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status);
+            address = rs.getString("Address");
+            money = rs.getFloat("money");
+            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
             return r;
         }
          }catch(Exception e){
@@ -71,8 +75,8 @@ public class RequestDAO extends MyDAO {
                  + "from Request "
                  + "where IDMentee = ? and (? < [To] and ? > [From]) and Date = ? and Status = 'Accepted'";
          int ID,iDMentor,iDMentee,IDSkill;
-         float from,to;
-         String title,status,detail;
+         float from,to,money;
+         String title,status,detail,address;
          Date date;
          Request r ;
          try{
@@ -93,7 +97,9 @@ public class RequestDAO extends MyDAO {
             title = rs.getString("Title");
             detail = rs.getString("Details");
             date = rs.getDate("Date");
-            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status);
+            address = rs.getString("Address");
+            money = rs.getFloat("money");
+            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
             listRequest.add(r);
         }
          }catch(Exception e){
@@ -108,8 +114,8 @@ public class RequestDAO extends MyDAO {
                  + "from Request "
                  + "where IDMentor = ? and (? < [To] and ? > [From]) and Date = ? and Status = 'Accepted'";
          int ID,iDMentor,iDMentee,IDSkill;
-         float from,to;
-         String title,status,detail;
+         float from,to,money;
+         String title,status,detail,address;
          Date date;
          Request r ;
          try{
@@ -130,7 +136,9 @@ public class RequestDAO extends MyDAO {
             title = rs.getString("Title");
             detail = rs.getString("Details");
             date = rs.getDate("Date");
-            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status);
+            address = rs.getString("Address");
+            money = rs.getFloat("money");
+            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
             listRequest.add(r);
         }
          }catch(Exception e){
