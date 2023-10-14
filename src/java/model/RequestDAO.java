@@ -102,6 +102,8 @@ public class RequestDAO extends MyDAO {
             r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
             listRequest.add(r);
         }
+            rs.close();
+            ps.close();
          }catch(Exception e){
              e.printStackTrace();
          }
@@ -146,6 +148,15 @@ public class RequestDAO extends MyDAO {
          }
         if(listRequest.size()>0)return true;
         else return false;
+    }
+    public void updateRequestByDate(){
+         xSql = "exec updateRequest" ;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+         }catch(Exception e){
+             e.printStackTrace();
+         }
     }
     public static void main(String[] args) {
         RequestDAO dao = new RequestDAO();

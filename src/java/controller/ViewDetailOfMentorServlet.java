@@ -56,6 +56,8 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
         int idMentor = Integer.parseInt(request.getParameter("idmentor"));
         String button = request.getParameter("button");   
         if(button.equals("request")){
+        RequestDAO rDAO = new RequestDAO();
+        rDAO.updateRequestByDate();
         request.getSession().removeAttribute("idmentor");
         request.getSession().setAttribute("idmentor", idMentor);
         request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);

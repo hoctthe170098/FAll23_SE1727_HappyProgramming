@@ -13,7 +13,7 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>CreateSkillServlet</servlet-name>
         <servlet-class>controller.CreateSkillServlet</servlet-class>
     </servlet>
@@ -73,6 +73,10 @@
         <servlet-name>CreateRequestServlet</servlet-name>
         <servlet-class>controller.CreateRequestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowNoficationServlet</servlet-name>
+        <servlet-class>controller.ShowNoficationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -85,7 +89,7 @@
         <servlet-name>HeaderServlet</servlet-name>
         <url-pattern>/header</url-pattern>
     </servlet-mapping>
-      <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CreateSkillServlet</servlet-name>
         <url-pattern>/createskill</url-pattern>
     </servlet-mapping>
@@ -140,6 +144,10 @@
     <servlet-mapping>
         <servlet-name>CreateRequestServlet</servlet-name>
         <url-pattern>/createrequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowNoficationServlet</servlet-name>
+        <url-pattern>/shownofication</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

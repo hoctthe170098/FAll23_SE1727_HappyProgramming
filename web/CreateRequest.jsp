@@ -110,6 +110,12 @@ color: #9b9ca1;
         <h2 style="text-align: center">You must sign in to send a request</h2>
         <%}%>
         <%if(acc!=null){%>
+        <%ProfileDAO pDAO = new ProfileDAO();
+        if (!pDAO.IsExistProfile(acc.getID())){
+        %>
+        <h2 style="text-align: center">You must update profile to do this function</h2>
+        <%}%>
+        <%if(pDAO.IsExistProfile(acc.getID())){%>
         <%if(acc.getIsMentee()!=1){%>
         <h2 style="text-align: center">Your account can't do this function</h2>
         <%}%>
@@ -173,7 +179,7 @@ color: #9b9ca1;
 </div>
  <div class="col-md-3">
 <label class="form-label">Can pay :</label>
-<b><%=r.getMoney()%></b>
+<b><%=r.getMoney()%>$</b>
 </div>
  <div class="col-md-9">
 <label class="form-label">Address :</label>
@@ -313,6 +319,7 @@ color: #9b9ca1;
 </script>
   </div>
   <%}%>
+              <%}%>
               <%}%>
               <%}%>
               <!-- End Contact Section -->

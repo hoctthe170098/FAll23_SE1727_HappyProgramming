@@ -89,18 +89,20 @@ if (cookies != null) {
                     <ul>
                         <li><a href="">Mentee</a></li>
                         <li><a href="">Mentor</a></li>
+                        <li><a href="">Request</a></li>
                     </ul>
                    </li>
-                   <li><a href="ListBecomeMentor">List BecomeMentor</a></li>
-                <li><a href="">List Mentor</a></li> 
-                 <li class="dropdown"><a href="#"><span>Skill</span> <i class="bi bi-chevron-down"></i></a>
+                 <li class="dropdown"><a href="#"><span>List</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="">List Skill</a></li>
-                        <li><a href="">Create Skill</a></li>
+                        <li><a href="ListBecomeMentor">BecomeMentor</a></li>
+                        <li><a href="">Mentor</a></li>
+                        <li><a href="">Mentee</a></li>
+                        <li><a href="">Request</a></li>
+                        <li><a href="">Skill</a></li>
                     </ul>
                    </li> 
-                </li>
                 <%}%>
+                <li><a href="shownofication">Notification</a></li>
                 <%}%>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

@@ -41,6 +41,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
             request.setAttribute("msgS", "You must choose one skill ");
         }else{
             RequestDAO rDAO = new RequestDAO();
+            NoficationDAO nDAO = new NoficationDAO();
             Account acc = (Account)request.getSession().getAttribute("acc");
             int IDMentee = acc.getID();
             int IDMentor = (int)request.getSession().getAttribute("idmentor");
@@ -51,6 +52,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 request.setAttribute("msgE", "This mentor had another appointment during this time");
             }else{
             rDAO.InsertRequest(IDMentor, IDMentee, IDSkill, title, date, from, to, detail,address,money);
+            String content = "I have sent a request to you, check your request please ";
+            nDAO.insertNoficationDAO(IDMentee, IDMentor, content, 3);
             }
             }  
          request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
