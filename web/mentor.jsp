@@ -90,17 +90,14 @@
         List<MentorIntro>listAllMentor = miDao.getAllMentorIntro();
                           
                             %>   
-                            <p>We have <%=listMentor.size()%> mentors for you to choose </p>
+                            <p>We have <%=listAllMentor.size()%> mentors for you to choose </p>
                         </div>
                     </div><!-- End Breadcrumbs -->
 
                     <!-- ======= Courses Section ======= -->
-                    <section id="courses" class="courses">
-                       <%
-int count = listMentor.size() / 3; // Chia danh sách thành các phần 3
-int remain = listMentor.size() % 3;
-%>
-<% for (int i = 0; i < count; i++) { %>
+                    
+                       
+
 <section id="trainers" class="trainers">
       <div class="container" data-aos="fade-up">
       <div class="section-title">
@@ -108,7 +105,7 @@ int remain = listMentor.size() % 3;
         </div>
         <%
         int itemsPerPage = 3; // Số phần tử trên mỗi trang
-        int totalItems = listMentor.size(); // Tổng số phần tử trong danh sách mentor
+        int totalItems = listAllMentor.size(); // Tổng số phần tử trong danh sách mentor
         int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage); // Tính tổng số trang
 
         // Lấy số trang hiện tại từ tham số truyền vào (hoặc từ session hoặc cookie)
@@ -123,41 +120,60 @@ int remain = listMentor.size() % 3;
 
        
          <div class="row" data-aos="zoom-in" data-aos-delay="100">
-            <%for (MentorIntro mi:listAllMentor){%>
-             <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+               
+            <% for (int i = startIndex; i < endIndex; i++) { %>
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
-                <img style="height: 215px;width: 335px" src=<%=mi.getAvatar()%> class="img-fluid" alt="">
-              <div class="member-content">
-                  <h4><%=mi.getFullname()%> (<a href="">CV</a>)</h4>
-                <span>Rate: <%=mi. getRate()%></span>
-                <p>
-                  <%=mi.getIntro()%>
-                </p>
-                <div class="social">
-                    <a href=<%=mi.getFacebook()%>><i class="bi bi-facebook"></i></a>
-                    <a href=<%=mi.getInta()%>><i class="bi bi-instagram"></i></a>
+                <img style="height: 215px; width: 335px" src="<%= listAllMentor.get(i).getAvatar() %>" class="img-fluid" alt="">
+                <div class="member-content">
+                    <h4><%= listAllMentor.get(i).getFullname() %> (<a href="">CV</a>)</h4>
+                    <span>Rate: <%= listAllMentor.get(i).getRate() %></span>
+                    <p><%= listAllMentor.get(i).getIntro() %></p>
+                    <div class="social">
+                        <a href="<%= listAllMentor.get(i).getFacebook() %>"><i class="bi bi-facebook"></i></a>
+                        <a href="<%= listAllMentor.get(i).getInta() %>"><i class="bi bi-instagram"></i></a>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-            <%}%>
-       </div>  
+        </div>
+    <% } %>
+            
+            
+       </div> 
+    
+            
 
-        <!-- Hiển thị các liên kết phân trang -->
-        <div class="pagination">
-            <% if (currentPage > 1) { %>
-                
-                <a href="?page=<%= currentPage - 1 %>&&id=1">Previous</a>
-            <% } %>
-            <% if (currentPage < totalPages) { %>
-                <a href="?page=<%= currentPage + 1 %>&&id=1">Next</a>
-            <% } %>
-        </div>
-    </div>
+        
+       <style>
+    .paging {
+        text-align: right; /* Đẩy sang bên phải */
+        
+        padding: 10px; /* Khoảng cách nội dung và viền */
+        margin-top: 10px; /* Khoảng cách giữa phân trang và nội dung khác */
+    }
+
+    .paging a {
+        padding: 5px 10px; /* Khoảng cách bên trong mỗi liên kết */
+        border: 1px solid #ccc; /* Viền cho từng liên kết */
+        margin-right: 5px; /* Khoảng cách giữa các liên kết */
+        text-decoration: none; /* Loại bỏ gạch chân mặc định */
+        color: #333; /* Màu chữ */
+    }
+
+    .paging a:hover {
+        background-color: #f5f5f5; /* Màu nền khi di chuột qua */
+    }
+</style>
+
+<%-- Hiển thị danh sách các trang --%>
+<div class="paging">
+    <% for (int pageNumber = 1; pageNumber <= totalPages; pageNumber++) { %>
+        <a href="?page=<%= pageNumber %>&&id=1"><%= pageNumber %></a>
+    <% } %>
+</div>  
        
-        </div>
-    </div>
-<% } %>
+        
+
 
                     </section>
                     <section id="popular-courses" class="courses">
