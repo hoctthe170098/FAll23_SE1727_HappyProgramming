@@ -78,14 +78,16 @@
                         <!-- ======= Breadcrumbs ======= -->
                         <div class="breadcrumbs">
                             <div class="container">
-                                <h2>Skills</h2>
+                                
                             <%  
                                   SkillDAO SkillDAO = new SkillDAO();
-                                  List<Skill> listSkill = SkillDAO.getListSkill();
+                                  
                                   MentorDAO MentorDAO = new MentorDAO();
                                   List<Mentor> listMentor = MentorDAO.getAllMentor();
                                   ProfileDAO ProfileDAO = new ProfileDAO();
                                   List<Profile> listPr = ProfileDAO.getAllProfile();
+                                  MentorIntroDAO miDao = new MentorIntroDAO();
+        List<MentorIntro>listAllMentor = miDao.getAllMentorIntro();
                           
                             %>   
                             <p>We have <%=listMentor.size()%> mentors for you to choose </p>
@@ -99,8 +101,11 @@ int count = listMentor.size() / 3; // Chia danh sách thành các phần 3
 int remain = listMentor.size() % 3;
 %>
 <% for (int i = 0; i < count; i++) { %>
-    <div class="container" data-aos="fade-up">
+<section id="trainers" class="trainers">
+      <div class="container" data-aos="fade-up">
+      <div class="section-title">
         <h1>List of Mentors</h1>
+        </div>
         <%
         int itemsPerPage = 3; // Số phần tử trên mỗi trang
         int totalItems = listMentor.size(); // Tổng số phần tử trong danh sách mentor
@@ -117,27 +122,26 @@ int remain = listMentor.size() % 3;
         %>
 
        
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-            <% for (int j = startIndex; j < endIndex; j++) { %>
-                <div class="col-lg-4 col-md-4 d-flex align-items-stretch">
-                    <div style = " background-color: #f8f8f8;border: 2px solid black;padding: 20px;text-align: center;margin-bottom: 20px; " class="course-item">
-                        <div style="text-align: center;">
-                            <img src="<%= listPr.get(j).getAvatar() %>" class="img-fluid" alt="...">
-                        </div>
-                        <div style="text-align: center;" class="course-content">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h2 ><%=listPr.get(j).getFullname()%></h2>
-                            </div>
-
-                            <h2 style="border-bottom: 3px solid;border-bottom-color: #86db9f" ><a href="request.jsp"> About this mentor </a></h2>
-                            <h3>Mentor's Experiences</h3>
-                            <p style ="color: #666; font-size: 30px;"><%=listMentor.get(j).getIntro()%></p>
-                            <h3 style="border: 2px solid black; background-color: #f8f8f8; padding: 10px; text-align: center";><a href="request.jsp">Request</a></h3>
-                        </div>
-                    </div>
+         <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            <%for (MentorIntro mi:listAllMentor){%>
+             <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+                <img style="height: 215px;width: 335px" src=<%=mi.getAvatar()%> class="img-fluid" alt="">
+              <div class="member-content">
+                  <h4><%=mi.getFullname()%> (<a href="">CV</a>)</h4>
+                <span>Rate: <%=mi. getRate()%></span>
+                <p>
+                  <%=mi.getIntro()%>
+                </p>
+                <div class="social">
+                    <a href=<%=mi.getFacebook()%>><i class="bi bi-facebook"></i></a>
+                    <a href=<%=mi.getInta()%>><i class="bi bi-instagram"></i></a>
                 </div>
-            <% } %>
-        </div>
+              </div>
+            </div>
+          </div>
+            <%}%>
+       </div>  
 
         <!-- Hiển thị các liên kết phân trang -->
         <div class="pagination">
