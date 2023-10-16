@@ -52,7 +52,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 request.setAttribute("msgE", "This mentor had another appointment during this time");
             }else{
             rDAO.InsertRequest(IDMentor, IDMentee, IDSkill, title, date, from, to, detail,address,money);
-            String content = "I have sent a request to you, check your request please ";
+            String content = "I have sent a request to you, check your request please";
             nDAO.insertNoficationDAO(IDMentee, IDMentor, content, 3);
             }
             }  

@@ -158,6 +158,15 @@ public class RequestDAO extends MyDAO {
              e.printStackTrace();
          }
     }
+    public void deleteRequest(int id){
+         xSql = "delete from Request where id = "+id ;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+    }
     public static void main(String[] args) {
         RequestDAO dao = new RequestDAO();
         

@@ -26,14 +26,30 @@ public class BecomeMentorServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Account acc = (Account)request.getSession().getAttribute("acc");
         int ID = acc.getID();
-        ProfileDAO pDao = new ProfileDAO();
-        boolean isExist = pDao.IsExistProfile(ID);
+        String button = request.getParameter("button");
         BecomeMentorDao bmDao = new BecomeMentorDao();
+        if(button==null){
+        ProfileDAO pDao = new ProfileDAO();
+        boolean isExist = pDao.IsExistProfile(ID);   
         BecomeMentor bm = bmDao.getBecomeMentorByID(ID);
         request.setAttribute("isExistProfile",isExist);
         if(bm.getID()>0){
         request.setAttribute("BecomeMentor", bm);}
         request.getRequestDispatcher("BecomeMentor.jsp").forward(request, response);
+        }
+        else{
+            String intro = request.getParameter("intro");
+        String[] listNameSkill = request.getParameterValues("skill");
+        String ex = request.getParameter("ex");
+        BecomeMentor bm = new BecomeMentor(acc.getID(), intro, ex, listNameSkill);      
+        bmDao.InsertBecomeMentor(bm);
+        NoficationDAO nDAO = new NoficationDAO();
+        String content = "I want to become a mentor, please check request for me";
+        nDAO.insertNoficationDAO(acc.getID(), 3, content, 3);
+        request.setAttribute("isExistProfile",true);
+        request.setAttribute("BecomeMentor", bm);
+        request.getRequestDispatcher("BecomeMentor.jsp").forward(request, response); 
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -42,22 +58,9 @@ public class BecomeMentorServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Account acc = (Account)request.getSession().getAttribute("acc");
         BecomeMentorDao bmDao = new BecomeMentorDao();
-        String button = request.getParameter("button");
-        if(button.equals("delete")){
-            bmDao.deleteBecomeMentor(acc.getID());
-            request.setAttribute("isExistProfile",true);
-            request.getRequestDispatcher("BecomeMentor.jsp").forward(request, response);
-        }else {
-        String intro = request.getParameter("intro");
-        String[] listNameSkill = request.getParameterValues("skill");
-        String ex = request.getParameter("ex");
-        BecomeMentor bm = new BecomeMentor(acc.getID(), intro, ex, listNameSkill);
-        
-        bmDao.InsertBecomeMentor(bm);
+        bmDao.deleteBecomeMentor(acc.getID());
         request.setAttribute("isExistProfile",true);
-        request.setAttribute("BecomeMentor", bm);
         request.getRequestDispatcher("BecomeMentor.jsp").forward(request, response);
-        }
     }
 
 }

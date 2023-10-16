@@ -77,6 +77,10 @@
         <servlet-name>ShowNoficationServlet</servlet-name>
         <servlet-class>controller.ShowNoficationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateOrDeleteRequestServlet</servlet-name>
+        <servlet-class>controller.UpdateOrDeleteRequestServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -148,6 +152,10 @@
     <servlet-mapping>
         <servlet-name>ShowNoficationServlet</servlet-name>
         <url-pattern>/shownofication</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateOrDeleteRequestServlet</servlet-name>
+        <url-pattern>/updateordeleterequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

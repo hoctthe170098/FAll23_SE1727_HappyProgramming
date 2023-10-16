@@ -100,7 +100,7 @@
             if(bm!=null){
         %>
         <div><h2 style="text-align: center">Your request has been sent and is awaiting approval</h2></div>
-        <form action="becomementor" method="post">
+        
             <div class="container contact">
                 <div class="row">
                     <div class="col-md-3">
@@ -137,20 +137,42 @@
                                     <%=bm.getEx()%>
                                 </div>
                             </div>
+                                <form action="becomementor" method="post" name="formdelete">
                             <div class="form-group">        
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" name="button" value="delete" class="btn btn-default">Delete Request</button>
+                                    <button type="submit" name="button" value="delete" class="btn btn-default" onclick="return submitForm(document.forms['formdelete'])">Delete Request</button>
                                 </div>
                             </div>
+                                </form>
+                                <script src="assets/js/sweetalert.min.js"></script>
+<script>
+    function submitForm(form){
+        swal({
+            title: "Are you sure?",
+            text: "This request will be deleted!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }             
+            )
+            .then((isOkay) =>{
+                if(isOkay){
+                    form.submit();
+                }
+            }
+            );
+    return false;
+    }
+</script>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        
         <%}%>
         <%if(bm==null){%>
 
-        <form action="becomementor" method="post">
+        <form action="becomementor" method="get">
             <div class="container contact">
                 <div class="row">
                     <div class="col-md-3">

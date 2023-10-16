@@ -129,7 +129,7 @@ color: #9b9ca1;
         %>
         <%if(r!=null){%>
                   <div class="profile">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 <div class="container">
 <div class="row">
 <div class="col-12">
@@ -138,7 +138,13 @@ color: #9b9ca1;
 <h3 style="text-align: center"><%=r.getStatus()%> Request</h3>
 <hr>
 </div>
-<form class="file-upload" action="updaterequest" enctype="multipart/form-data">
+<%
+    String msgE = (String)request.getAttribute("msgE");
+%>
+<%if(msgE!=null){%>
+<p style="color: red" class="text-danger"><%=msgE%></p>
+<%}%>
+<div class="file-upload">
 <div class="row mb-5 gx-5">
 
 <div class="col-xxl-8 mb-5 mb-xxl-0">
@@ -195,12 +201,41 @@ color: #9b9ca1;
 </div>
 </div>
 </div> 
-<div style="text-align: center">
-    <button type="submit" name="button" value="delete" class="btn btn-danger btn-lg">Delete Request</button>
-    <button type="submit" name="button" value="update" class="btn btn-primary btn-lg">Update Request</button>
-</div>
+<%if(r.getStatus().equals("Processing")){%>
+<form action="updateordeleterequest?id=<%=r.getID()%>" method="post" enctype="multipart/form-data" name="formdelete" style="display: inline " >
+    <span style="text-align: center">   
+<!--    <input type="submit" name="but" value="Delete Request" class="btn btn-danger btn-lg" onclick="return submitForm(document.forms['formdelete'])">-->
+    <button type="submit" name="button" value="delete" id="delete" class="btn btn-danger btn-lg" onclick="return submitForm(document.forms['formdelete'])">Delete Request</button>
+</span>
+</form>
+    <%}%>
+<form action="updateordeleterequest?id=<%=r.getID()%>" method="get" style="display: inline">
+    <span style="text-align: center">
+        <button type="submit" name="button" value="update" id="update" class="btn btn-primary btn-lg">Update Request</button>
+    </span>
+ </form>    
 <!--</div>-->
-</form> 
+</div> 
+<script src="assets/js/sweetalert.min.js"></script>
+<script>
+    function submitForm(form){
+        swal({
+            title: "Are you sure?",
+            text: "This request will be deleted!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }             
+            )
+            .then((isOkay) =>{
+                if(isOkay){
+                    form.submit();
+                }
+            }
+            );
+    return false;
+    }
+</script>
 </div>
 </div>
 </div>
