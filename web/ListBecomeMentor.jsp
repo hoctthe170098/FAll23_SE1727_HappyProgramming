@@ -47,13 +47,13 @@
         <h2>
             <a href="/new"></a>
             &nbsp;&nbsp;&nbsp;
-            <a href="/list">List All </a>
+            <a href="/list">List BecomeMentor </a>
              
         </h2>
     </center>
          <div align="center">
-        <table border="1" cellpadding="4">
-            <caption><h2>List BecomeMentor</h2></caption>
+        <table border="2" cellpadding="5">
+            <caption><h2></h2></caption>
             <tr>
                 <th>ID</th>
                 <th>Name</th>

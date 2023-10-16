@@ -98,7 +98,7 @@ public class ListBecomeMentorServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
          ListBecomeMentorDAO lmd = new ListBecomeMentorDAO();
         List<BecomeMentor> listMentor = lmd.listAllBecomeMentor();
-        request.setAttribute("listBook", listMentor);
+        request.setAttribute("ListBecomeMentor", listMentor);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ListBecomeMentor.jsp");
         dispatcher.forward(request, response);
     }

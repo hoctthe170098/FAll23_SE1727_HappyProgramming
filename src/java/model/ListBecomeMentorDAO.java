@@ -46,7 +46,7 @@ public class ListBecomeMentorDAO extends MyDAO{
         return listAllBecomeMentor();
     }
        public boolean deleteRequest(BecomeMentor bm) throws SQLException {
-        String sql = "DELETE FROM book where book_id = ?";
+        String sql = "DELETE FROM BecomeMentor where ID = ?";
          
         
          
