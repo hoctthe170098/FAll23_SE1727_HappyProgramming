@@ -169,12 +169,12 @@ String firstname="";
 
 <div class="col-md-6">
 <label class="form-label">First Name *</label>
-<input type="text" name="firstname" class="form-control" placeholder aria-label="First name" value=<%=firstname%>>
+<input type="text" name="firstname" class="form-control" placeholder aria-label="First name" value="<%=firstname%>">
 </div>
 
 <div class="col-md-6">
 <label class="form-label">Last Name *</label>
-<input type="text" name="lastname" class="form-control" placeholder aria-label="Last name" value=<%=lastname%>>
+<input type="text" name="lastname" class="form-control" placeholder aria-label="Last name" value="<%=lastname%>">
 </div>
 
 <div class="col-md-6">
@@ -192,7 +192,7 @@ String firstname="";
 %>
 <label class="form-label">Phone number *</label>
  <%}%>
-<input type="text" name="phone" class="form-control" placeholder aria-label="Phone number" value=<%=p.getPhone()%>>
+<input type="text" name="phone" class="form-control" placeholder aria-label="Phone number" value="<%=p.getPhone()%>">
 </div>
 
 <div class="col-md-6">
@@ -201,7 +201,7 @@ String firstname="";
 </div>
  <div class="col-md-6">
 <label class="form-label">Address *</label>
-<input type="text" name="address" class="form-control" placeholder aria-label="Address" value=<%=p.getAddress()%>>
+<input type="text" name="address" class="form-control" placeholder aria-label="Address" value="<%=p.getAddress()%>">
 </div>
 
 
@@ -254,11 +254,11 @@ String firstname="";
 <h4 class="mb-4 mt-0">Social media detail</h4>
 <div class="col-md-6">
 <label class="form-label"><i class="fab fa-fw fa-facebook me-2 text-facebook"></i>Facebook *</label>
-<input type="text" name="facebooklink" class="form-control" placeholder aria-label="Facebook" value=<%=p.getFacebookLink()%>>
+<input type="text" name="facebooklink" class="form-control" placeholder aria-label="Facebook" value="<%=p.getFacebookLink()%>">
 </div>
 <div class="col-md-6">
 <label class="form-label"><i class="fab fa-fw fa-instagram text-instagram me-2"></i>Instagram *</label>
-<input type="text" name="instragramlink" class="form-control" placeholder aria-label="Instragram" value=<%=p.getInstagramLink()%>>
+<input type="text" name="instragramlink" class="form-control" placeholder aria-label="Instragram" value="<%=p.getInstagramLink()%>">
 </div>
 </div> 
 </div>

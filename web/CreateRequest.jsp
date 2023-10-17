@@ -11,9 +11,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-          <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
         <title>Create Request</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
@@ -202,14 +201,13 @@ color: #9b9ca1;
 </div>
 </div> 
 <%if(r.getStatus().equals("Processing")){%>
-<form action="updateordeleterequest?id=<%=r.getID()%>" method="post" enctype="multipart/form-data" name="formdelete" style="display: inline " >
+<form action="updateordeleterequest?id1=<%=r.getID()%>" method="post" enctype="multipart/form-data" name="formdelete" style="display: inline " >
     <span style="text-align: center">   
-<!--    <input type="submit" name="but" value="Delete Request" class="btn btn-danger btn-lg" onclick="return submitForm(document.forms['formdelete'])">-->
     <button type="submit" name="button" value="delete" id="delete" class="btn btn-danger btn-lg" onclick="return submitForm(document.forms['formdelete'])">Delete Request</button>
 </span>
 </form>
     <%}%>
-<form action="updateordeleterequest?id=<%=r.getID()%>" method="get" style="display: inline">
+<form action="updateordeleterequest?id2=<%=r.getID()%>" method="post" enctype="multipart/form-data" style="display: inline">
     <span style="text-align: center">
         <button type="submit" name="button" value="update" id="update" class="btn btn-primary btn-lg">Update Request</button>
     </span>

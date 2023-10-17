@@ -69,6 +69,39 @@ public class RequestDAO extends MyDAO {
          }
          return null;
     }
+     public Request getRequestByID(int id){
+         xSql = "select * "
+                 + "from Request "
+                 + "where ID = "+id;
+         int ID,iDMentor,iDMentee,IDSkill;
+         float from,to,money;
+         String title,status,detail,address;
+         Date date;
+         Request r ;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            ID = rs.getInt("ID");
+            iDMentor = rs.getInt("IDMentor");
+            iDMentee = rs.getInt("IDMentee");
+            IDSkill = rs.getInt("IDSkill");
+            from  = rs.getFloat("From");
+            to = rs.getFloat("to");
+            status = rs.getString("status"); 
+            title = rs.getString("Title");
+            detail = rs.getString("Details");
+            date = rs.getDate("Date");
+            address = rs.getString("Address");
+            money = rs.getFloat("money");
+            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
+            return r;
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         return null;
+    }
     public boolean IsDuplicateRequestMentee(int IDMentee,float hFrom,float hTo,Date Date){
         List<Request> listRequest = new ArrayList<>();
             xSql = "select * "
@@ -167,8 +200,36 @@ public class RequestDAO extends MyDAO {
              e.printStackTrace();
          }
     }
+    public void updateRequest(Request r){
+                    xSql = "Update Request "
+                            + "set IDMentor = ? ,IDMentee = ?, IDSkill = ?, [From] = ?, [To] = ?, Status = ?,"
+                            + "Title = ?, Details = ?, Date = ?, Address = ?, Money = ? "
+                            + "where ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, r.getIDMentor());
+            ps.setInt(2, r.getIDMentee());
+            ps.setInt(3, r.getIDSkill());
+            ps.setString(7, r.getTitle());
+            ps.setDate(9, r.getDate());
+            ps.setFloat(4, r.getFrom());
+            ps.setFloat(5,r.getTo());
+            ps.setString(8, r.getDetails());
+            ps.setString(6, r.getStatus());
+            ps.setString(10, r.getAddress());
+            ps.setFloat(11, r.getMoney());
+            ps.setInt(12, r.getID());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         RequestDAO dao = new RequestDAO();
-        
+        long millis=System.currentTimeMillis();   
+            java.sql.Date now=new java.sql.Date(millis);
+            System.out.println(now);
+           System.out.println(dao.getRequestByID(42).getDate());
     }
 }
