@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("Username");
         String password = request.getParameter("Password");
-        String remember = request.getParameter("remember");
+        String remember = request.getParameter("remember-me");
 
         AccountDAO db = new AccountDAO();
         Account account = db.getAccountBy(username, password);
