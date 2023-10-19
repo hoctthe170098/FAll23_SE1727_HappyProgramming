@@ -51,7 +51,7 @@
     <h1>Manage Skill</h1>
     <table border="1">
         <tr>
-            <th>ID</th>
+            
             <th>Name</th>
             <th>Description</th>
             <th>Image</th>
@@ -59,7 +59,7 @@
         </tr>
         <c:forEach items="${skillList}" var="skill">
             <tr>
-                <td>${skill.ID}</td>
+                
                 <td>${skill.name}</td>
                 <td style="width: 700px;">${skill.description}</td>
                 <td><img src="${skill.image}" width="50" height="50" alt="${skill.name}"></td>
