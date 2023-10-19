@@ -81,6 +81,14 @@
         <servlet-name>UpdateOrDeleteRequestServlet</servlet-name>
         <servlet-class>controller.UpdateOrDeleteRequestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewSkillServlet</servlet-name>
+        <servlet-class>controller.ViewSkillServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSkillServlet</servlet-name>
+        <servlet-class>controller.DeleteSkillServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -156,6 +164,14 @@
     <servlet-mapping>
         <servlet-name>UpdateOrDeleteRequestServlet</servlet-name>
         <url-pattern>/updateordeleterequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSkillServlet</servlet-name>
+        <url-pattern>/viewskill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSkillServlet</servlet-name>
+        <url-pattern>/DeleteSkill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

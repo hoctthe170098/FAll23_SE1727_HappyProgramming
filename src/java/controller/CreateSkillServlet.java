@@ -7,6 +7,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,10 +23,12 @@ import java.sql.SQLException;
 import java.util.UUID;
 import model.DBContext;
 
+
 /**
  *
  * @author ADMIN
  */
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5)
 public class CreateSkillServlet extends HttpServlet {
 
     /**
@@ -66,7 +69,7 @@ public class CreateSkillServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("CreateSkill.jsp").forward(request, response);
     }
 
     /**
@@ -83,31 +86,15 @@ public class CreateSkillServlet extends HttpServlet {
         String skillName = request.getParameter("skillName");
         String skillDescription = request.getParameter("skillDescription");
         // Lấy hình ảnh từ biểu mẫu (chú ý: bạn cần lưu trữ hình ảnh trong cơ sở dữ liệu hoặc hệ thống tệp riêng biệt)
-        Part imagePart = request.getPart("skillImage");
-        String uploadPath = "assets/img/"; // Thay đổi đường dẫn tùy theo máy chủ của bạn
+        Part Filepart = request.getPart("skillImage");
+        String relativePath = request.getServletContext().getRealPath("/assets/img");
 
-        // Đảm bảo thư mục lưu trữ hình ảnh đã tồn tại
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs();
-        }
+        String avatar = Filepart.getSubmittedFileName();
+        String ava = "assets/img/" + avatar;
+        String filePath = relativePath + File.separator + avatar;
 
-        // Tạo đường dẫn đầy đủ đến tệp mới
-        String fileName = UUID.randomUUID().toString() + ".png";
-        String filePath = uploadPath + fileName;
-
+        Filepart.write(filePath);
         // Lưu dữ liệu từ InputStream vào tệp hình ảnh trên máy chủ
-        try ( OutputStream outputStream = new FileOutputStream(filePath);  InputStream inputStream = imagePart.getInputStream()) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Xử lý lỗi khi lưu tệp hình ảnh
-            return;
-        }
 
         // Sử dụng lớp DBContext để lấy kết nối đến cơ sở dữ liệu
         DBContext dbContext = new DBContext();
@@ -115,14 +102,14 @@ public class CreateSkillServlet extends HttpServlet {
 
         try {
             // Tạo câu lệnh SQL để chèn dữ liệu vào bảng "Skill"
-            String sql = "INSERT INTO Skill (Name, Description, image) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO Skills (Name, Description, image) VALUES (?, ?, ?)";
 
             // Tạo PreparedStatement và thiết lập các tham số
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, skillName);
             preparedStatement.setString(2, skillDescription);
-            preparedStatement.setBinaryStream(3, imagePart.getInputStream());
+            preparedStatement.setString(3, ava);
             // Thực thi câu lệnh SQL
             int rowsAffected = preparedStatement.executeUpdate();
 
@@ -135,6 +122,8 @@ public class CreateSkillServlet extends HttpServlet {
             e.printStackTrace();
             // Xử lý lỗi (ví dụ: in lỗi hoặc chuyển hướng đến trang lỗi)
         }
+        request.setAttribute("mess", "Add successfully!");
+        request.getRequestDispatcher("CreateSkill.jsp").forward(request, response);
     }
 
     /**
