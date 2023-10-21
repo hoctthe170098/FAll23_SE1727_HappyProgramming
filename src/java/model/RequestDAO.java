@@ -20,12 +20,12 @@ public class RequestDAO extends MyDAO {
             ps.setInt(1, IDMentor);
             ps.setInt(2, IDMentee);
             ps.setInt(3, IDSkill);
-            ps.setString(7, title);
-            ps.setDate(9, date);
-            ps.setFloat(4, from);
-            ps.setFloat(5,to );
+            ps.setString(4, title);
+            ps.setDate(5, date);
+            ps.setFloat(6, from);
+            ps.setFloat(7,to );
             ps.setString(8, Detail);
-            ps.setString(6, "Processing");
+            ps.setString(9, "Processing");
             ps.setString(10, address);
             ps.setFloat(11, money);
             ps.executeUpdate();

@@ -45,7 +45,7 @@ public class BecomeMentorServlet extends HttpServlet {
         bmDao.InsertBecomeMentor(bm);
         NoficationDAO nDAO = new NoficationDAO();
         String content = "I want to become a mentor, please check request for me";
-        nDAO.insertNoficationDAO(acc.getID(), 3, content, 3);
+        nDAO.insertNoficationDAO(acc.getID(), 1, content, 3);
         request.setAttribute("isExistProfile",true);
         request.setAttribute("BecomeMentor", bm);
         request.getRequestDispatcher("BecomeMentor.jsp").forward(request, response); 
