@@ -98,7 +98,7 @@ if (cookies != null) {
                         <li><a href="">Mentor</a></li>
                         <li><a href="">Mentee</a></li>
                         <li><a href="">Request</a></li>
-                        <li><a href="">Skill</a></li>
+                        <li><a href="viewskill">Skill</a></li>
                     </ul>
                    </li> 
                 <%}%>

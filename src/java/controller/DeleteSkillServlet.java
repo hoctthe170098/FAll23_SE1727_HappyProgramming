@@ -4,23 +4,44 @@
  */
 package controller;
 
-import model.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import javax.mail.Session;
-import model.Account;
+import java.util.List;
+import model.Skill;
+import model.SkillDAO;
 
 /**
  *
- * @author sonnt
+ * @author ADMIN
  */
-public class LoginController extends HttpServlet {
+public class DeleteSkillServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            int ID = Integer.parseInt(request.getParameter("ID"));
+        SkillDAO u = new SkillDAO();
+            Skill x = u.getSkillByID(ID);
+        u.delete(ID);
+        response.sendRedirect("viewskill");
+        } catch (NumberFormatException e) {
+    
+}
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,10 +55,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //query data from databases;
-
-        request.getRequestDispatcher("Signin.html").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**
@@ -51,31 +69,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("Username");
-        String password = request.getParameter("Password");
-        String remember = request.getParameter("remember-me");
-
-        AccountDAO db = new AccountDAO();
-        Account account = db.getAccountBy(username, password);
-
-        if (account == null) {
-            String msg = "";
-            HttpSession session = request.getSession();
-            session.setAttribute("account", null);
-            response.sendRedirect("login?error=1");
-            msg = "Unable to loggin";
-            request.setAttribute("mess", msg);
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", account);
-            if (remember != null) {
-                String loginData = username + ":" + password;
-                Cookie rememberLogin = new Cookie("loginRemember", loginData);
-                rememberLogin.setMaxAge(30 * 24 * 60 * 60);
-                response.addCookie(rememberLogin);
-            }
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -86,6 +80,6 @@ public class LoginController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

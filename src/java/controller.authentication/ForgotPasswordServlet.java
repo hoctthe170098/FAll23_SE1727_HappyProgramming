@@ -79,7 +79,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                 };
                 ///////////////////////////////////////////////////
                 Timer timer = new Timer();
-                timer.schedule(removeVariableTask, 90 * 1000); // 1 phút = 60 giây * 1000 mili giây
+                timer.schedule(removeVariableTask, 30 * 90 * 1000); // 1 phút = 60 giây * 1000 mili giây
                 //====================================================================
                 request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
             }
@@ -89,30 +89,27 @@ public class ForgotPasswordServlet extends HttpServlet {
                 request.setAttribute("acc", u);
                 request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
             }
-            if (getAction.equalsIgnoreCase("change password")) {
-
-                // Lấy giá trị biến
-                if (servletContext.getAttribute("myVariable") != null) {
-                    String myVariable = (String) servletContext.getAttribute("myVariable");
-                    mailCurrent = request.getParameter("email");
-                    String password = request.getParameter("oldPassword");
-                    if (!password.equalsIgnoreCase(myVariable)) {
-                        String mess2 = "Code not correct!";
-                        request.setAttribute("mess2", mess2);
-                        request.setAttribute("acc", u);
-                        request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
-                    } else {
-                        String newPassword = request.getParameter("password1");
-                        dao.updatePassword(mailCurrent, newPassword);
-                        response.sendRedirect("Signin.html");
-                    }
-                } else {
-                    request.setAttribute("mess", "The code has expired!");
-                    u = null;
+        } else {
+            // Lấy giá trị biến
+            if (servletContext.getAttribute("myVariable") != null) {
+                String myVariable = (String) servletContext.getAttribute("myVariable");
+                mailCurrent = request.getParameter("email");
+                String password = request.getParameter("oldPassword");
+                if (!password.equalsIgnoreCase(myVariable)) {
+                    String mess2 = "Code not correct!";
+                    request.setAttribute("mess2", mess2);
                     request.setAttribute("acc", u);
                     request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
+                } else {
+                    String newPassword = request.getParameter("password1");
+                    dao.updatePassword(mailCurrent, newPassword);
+                    response.sendRedirect("Signin.html");
                 }
-
+            } else {
+                request.setAttribute("mess", "The code has expired!");
+                u = null;
+                request.setAttribute("acc", u);
+                request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
             }
         }
     }
