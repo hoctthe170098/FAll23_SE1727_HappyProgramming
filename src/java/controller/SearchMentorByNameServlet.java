@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 import model.MentorIntro;
@@ -74,12 +75,15 @@ public class SearchMentorByNameServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
+         HttpSession session = request.getSession();
+         
         PrintWriter out = response.getWriter();
         String mentorName = request.getParameter("namementor");
         MentorIntroDAO MentorIntroDAO = new MentorIntroDAO();
         List<MentorIntro> listMentorByName = MentorIntroDAO.getMentorByName(mentorName);
         request.setAttribute("id1", "1");
-        request.setAttribute("listMentorByName", listMentorByName);
+        session.setAttribute("search", "1");
+        session.setAttribute("listMentorByName", listMentorByName);
         request.getRequestDispatcher("mentor.jsp").forward(request, response);
 
     }
