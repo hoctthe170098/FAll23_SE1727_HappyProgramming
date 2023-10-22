@@ -79,7 +79,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                 };
                 ///////////////////////////////////////////////////
                 Timer timer = new Timer();
-                timer.schedule(removeVariableTask, 30 * 90 * 1000); // 1 phút = 60 giây * 1000 mili giây
+                timer.schedule(removeVariableTask, 90 * 1000); 
                 //====================================================================
                 request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
             }
