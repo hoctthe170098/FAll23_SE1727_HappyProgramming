@@ -89,6 +89,10 @@
         <servlet-name>DeleteSkillServlet</servlet-name>
         <servlet-class>controller.DeleteSkillServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditSkillServlet</servlet-name>
+        <servlet-class>controller.EditSkillServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -172,6 +176,10 @@
     <servlet-mapping>
         <servlet-name>DeleteSkillServlet</servlet-name>
         <url-pattern>/DeleteSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSkillServlet</servlet-name>
+        <url-pattern>/editskill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

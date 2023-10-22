@@ -11,6 +11,7 @@ public class HeaderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String id = request.getParameter("id");
+        if (id != null) {
         if(id.equals("1")){
             request.setAttribute("id1", id);
             request.getRequestDispatcher("mentor.jsp").forward(request, response);
@@ -19,6 +20,7 @@ public class HeaderServlet extends HttpServlet {
             request.setAttribute("id2", id);
             request.getRequestDispatcher("Skill.jsp").forward(request, response);
         }    
+    }
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

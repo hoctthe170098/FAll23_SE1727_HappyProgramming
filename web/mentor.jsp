@@ -80,14 +80,14 @@
                             <div class="container">
                                 
                             <%  
-                                  SkillDAO SkillDAO = new SkillDAO();
                                   
-                                  MentorDAO MentorDAO = new MentorDAO();
-                                  List<Mentor> listMentor = MentorDAO.getAllMentor();
-                                  ProfileDAO ProfileDAO = new ProfileDAO();
-                                  List<Profile> listPr = ProfileDAO.getAllProfile();
-                                  MentorIntroDAO miDao = new MentorIntroDAO();
-        List<MentorIntro>listAllMentor = miDao.getAllMentorIntro();
+                                  
+                                 List<MentorIntro> listAllMentor = (List<MentorIntro>)request.getAttribute("listMentorByName");
+                          if(listAllMentor==null){
+                          MentorIntroDAO MentorIntroDAO = new MentorIntroDAO();
+                          listAllMentor = MentorIntroDAO.getAllMentorIntro();
+                        }
+                                  
                           
                             %>   
                             <p>We have <%=listAllMentor.size()%> mentors for you to choose </p>
@@ -168,44 +168,14 @@
 <%-- Hiển thị danh sách các trang --%>
 <div class="paging">
     <% for (int pageNumber = 1; pageNumber <= totalPages; pageNumber++) { %>
-        <a href="?page=<%= pageNumber %>&&id=1"><%= pageNumber %></a>
+        <a href="header?page=<%= pageNumber %>&&id=1"><%= pageNumber %></a>
     <% } %>
 </div>  
        
         
 
 
-                    </section>
-                    <section id="popular-courses" class="courses">
-                        <div class="container" data-aos="fade-up">
-
-                            <div class="section-title">
-                                <h2>Skill</h2>
-                                <p>Popular Skills</p>
-                            </div>
-
-                            <div class="row" data-aos="zoom-in" data-aos-delay="100">
-                                <%
-                                List<Skill> listTop3Skills = SkillDAO.getListTop3Skill();
-                                %>
-                                <%for(Skill s : listTop3Skills){%>
-                                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                                    <div class="course-item">
-                                        <img src=<%=s.getImage()%> class="img-fluid" alt=<%=s.getName()%>>
-                                        <div class="course-content">
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4><%=s.getName()%></h4>
-                                                <!--                  <p class="price">$169</p>-->
-                                            </div>
-                                            <h3><a href="">Mentors of this skill</a></h3>
-                                            <p><%=s.getDescription()%></p>
-                                        </div>
-                                    </div>
-                                </div> <!-- End Course Item-->
-                                <%}%>
-                            </div>
-                        </div>
-                    </section>
+                
 
                 </main><!-- End #main -->
 
