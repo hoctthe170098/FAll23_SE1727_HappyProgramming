@@ -10,10 +10,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
+import jakarta.servlet.http.HttpSession;
+
 import java.util.List;
-import model.MentorProfile;
-import model.MentorProfileDAO;
+import model.MentorIntro;
+import model.MentorIntroDAO;
 
 /**
  *
@@ -38,7 +39,7 @@ public class SearchMentorByNameServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchMentorByNameServlet</title>");            
+            out.println("<title>Servlet SearchMentorByNameServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SearchMentorByNameServlet at " + request.getContextPath() + "</h1>");
@@ -59,7 +60,7 @@ public class SearchMentorByNameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     /**
@@ -73,26 +74,18 @@ public class SearchMentorByNameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String mentorName = request.getParameter("name");
+         response.setContentType("text/html;charset=UTF-8");
+         HttpSession session = request.getSession();
+         
+        PrintWriter out = response.getWriter();
+        String mentorName = request.getParameter("namementor");
+        MentorIntroDAO MentorIntroDAO = new MentorIntroDAO();
+        List<MentorIntro> listMentorByName = MentorIntroDAO.getMentorByName(mentorName);
+        request.setAttribute("id1", "1");
+        session.setAttribute("search", "1");
+        session.setAttribute("listMentorByName", listMentorByName);
+        request.getRequestDispatcher("mentor.jsp").forward(request, response);
 
-        // Tạo một đối tượng MentorCVDAO
-        MentorProfileDAO mentorCVDAO = new MentorProfileDAO();
-
-        try {
-            // Thực hiện tìm kiếm mentor theo tên
-            List<MentorProfile> mentorList = mentorCVDAO.SearchMentorByName(mentorName);
-
-            // Lưu danh sách mentor vào thuộc tính request để chuyển đến JSP hoặc servlet khác
-            request.setAttribute("mentorName", mentorName);
-            request.setAttribute("mentorList", mentorList);
-
-            // Chuyển hướng đến trang kết quả tìm kiếm hoặc thực hiện các tác vụ khác
-            request.getRequestDispatcher("/searchmentor.jsp").forward(request, response);
-        } catch (SQLException e) {
-            // Xử lý lỗi nếu có
-            e.printStackTrace();
-            // Có thể chuyển hướng đến trang lỗi hoặc thực hiện xử lý lỗi khác
-        }
     }
 
     /**

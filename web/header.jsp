@@ -123,8 +123,8 @@ if (cookies != null) {
         <%}%>
         <%if(sID1!=null){ %>     
         <h1>WHAT ARE YOU LOOKING FOR?</h1>      
-      <form class="d-flex" action="/happyprogramming/searchmentor" method="post">
-    <input class="form-control mr-2" type="search" placeholder="Search mentor here" aria-label="Search" name="name">
+      <form class="d-flex" action="searchmentor" method="post">
+    <input class="form-control mr-2" type="search" placeholder="Search mentor here" aria-label="Search" name="namementor">
     <button class="btn btn-outline-success" type="submit">Search</button>
 </form>
       <%}%>
