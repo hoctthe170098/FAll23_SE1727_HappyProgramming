@@ -13,11 +13,10 @@
 <html lang="en">
 
     <head>
-        <meta charset="utf-8">
+      <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <<<<<<< HEAD
-        <title>Home</title>
+        <title>List Mentor</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -28,19 +27,6 @@
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-        =======
-        <title>Mentor</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="author" content="colorlib.com">
-        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-        <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -123,7 +109,7 @@
                                     <div class="member">
                                         <img style="height: 215px; width: 335px" src="<%= listAllMentor.get(i).getAvatar() %>" class="img-fluid" alt="">
                                         <div class="member-content">
-                                            <h4><%= listAllMentor.get(i).getFullname() %> (<a href="">CV</a>)</h4>
+                                            <h4><%= listAllMentor.get(i).getFullname() %> (<a href="detailmentor?idmentor=<%=listAllMentor.get(i).getID()%>">Details</a>)</h4>
                                             <span>Rate: <%= listAllMentor.get(i).getRate() %></span>
                                             <p><%= listAllMentor.get(i).getIntro() %></p>
                                             <div class="social">
