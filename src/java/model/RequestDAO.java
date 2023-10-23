@@ -225,11 +225,70 @@ public class RequestDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+    public int getTotalRequestByID(int IDMentee){
+         int x;
+        xSql = "select count=count(*)from Request where idSeller= " + IDMentee;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                x = rs.getInt("count");
+                return x;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public List<Request> getRequestPagging(int index,int IDMentee){
+         int i = (index - 1) * 4;
+        List<Request> listRequest = new ArrayList<>();
+        xSql = "select * from Request where IDMentee= " + IDMentee
+                + " order by Date "
+                + "offset ? rows fetch next 4 rows only";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, i);
+            rs = ps.executeQuery();
+              int ID,iDMentor,iDMentee,IDSkill;
+         float from,to,money;
+         String title,status,detail,address;
+         Date date;
+         Request r ;
+            while (rs.next()) {
+            ID = rs.getInt("ID");
+            iDMentor = rs.getInt("IDMentor");
+            iDMentee = rs.getInt("IDMentee");
+            IDSkill = rs.getInt("IDSkill");
+            from  = rs.getFloat("From");
+            to = rs.getFloat("to");
+            status = rs.getString("status"); 
+            title = rs.getString("Title");
+            detail = rs.getString("Details");
+            date = rs.getDate("Date");
+            address = rs.getString("Address");
+            money = rs.getFloat("money");
+            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
+            listRequest.add(r);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listRequest;
+    }
     public static void main(String[] args) {
         RequestDAO dao = new RequestDAO();
-        long millis=System.currentTimeMillis();   
-            java.sql.Date now=new java.sql.Date(millis);
-            System.out.println(now);
-           System.out.println(dao.getRequestByID(42).getDate());
+//        long millis=System.currentTimeMillis();   
+//            java.sql.Date now=new java.sql.Date(millis);
+//            System.out.println(now);
+//           System.out.println(dao.getRequestByID(42).getDate());
+      for(Request r:dao.getRequestPagging(2, 3)){
+          System.out.println(r);
+      }
     }
 }
