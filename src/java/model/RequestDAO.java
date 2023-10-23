@@ -227,7 +227,7 @@ public class RequestDAO extends MyDAO {
     }
     public int getTotalRequestByID(int IDMentee){
          int x;
-        xSql = "select count=count(*)from Request where idSeller= " + IDMentee;
+        xSql = "select count=count(*)from Request where IDMentee= " + IDMentee;
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
@@ -287,8 +287,9 @@ public class RequestDAO extends MyDAO {
 //            java.sql.Date now=new java.sql.Date(millis);
 //            System.out.println(now);
 //           System.out.println(dao.getRequestByID(42).getDate());
-      for(Request r:dao.getRequestPagging(2, 3)){
-          System.out.println(r);
-      }
+//      for(Request r:dao.getRequestPagging(2, 3)){
+//          System.out.println(r);
+//      }
+System.out.println(dao.getTotalRequestByID(3));
     }
 }

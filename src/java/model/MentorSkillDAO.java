@@ -62,8 +62,7 @@ public class MentorSkillDAO extends MyDAO{
       }
     public static void main(String[] args) {
         MentorSkillDAO dao = new MentorSkillDAO();
-        dao.deleteMentorSkill(4);
-        dao.insertMentorSkill(1, 4);
+        dao.insertMentorSkill(4, 2);
        // dao.insertMentorSkill(2, 4);
     }
 }

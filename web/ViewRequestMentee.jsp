@@ -10,7 +10,7 @@
     <head>
          <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>Home</title>
+        <title>Request</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -94,18 +94,10 @@
 					        <td>${r.to}</td>
                                                 <td>${r.status}</td>
 					        <td>
-                                                <a href="detailrequestmentee?idmentor=${r.IDMentor}" class="btn btn-primary">Detail</a>
+                                                <a href="detailrequestmentee?idrequest=${r.ID}" class="btn btn-primary">Detail</a>
                                                 </td>
 					      </tr>                                               
                                             </c:forEach>					     					  					
-<!--					      <tr>
-					        <th scope="row" class="scope border-bottom-0">.me</th>
-					        <td class="border-bottom-0">1 Year</td>
-					        <td class="border-bottom-0">$45.00</td>
-					        <td class="border-bottom-0">$5.00</td>
-					        <td class="border-bottom-0">$5.00</td>
-					        <td class="border-bottom-0"><a href="#" class="btn btn-primary">Sign Up</a></td>
-					      </tr>-->
 					    </tbody>
 					  </table>
 					</div>
@@ -113,13 +105,22 @@
 			</div>
              <div class="block-27">
               <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+                  <c:if test="${index>1}">
+                    <li><a href="viewrequestmentee?index=${index-1}">&lt;</a></li>
+                  </c:if>          
+                <c:forEach var="i" begin="1" end="${page}">
+                    <c:choose>
+                        <c:when test="${index==i}">
+                         <li class="active"><span><a href="viewrequestmentee?index=${i}">${i}</a></span></li>    
+                        </c:when>
+                        <c:otherwise>
+                            <li><span><a href="viewrequestmentee?index=${i}">${i}</a></span></li>     
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <c:if test="${index<page}">
+                    <li><a href="viewrequestmentee?index=${index+1}">&gt;</a></li>
+                  </c:if>            
               </ul>
             </div>
 		</div>

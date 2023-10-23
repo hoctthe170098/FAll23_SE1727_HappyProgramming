@@ -63,7 +63,7 @@ public class UpdateOrDeleteRequestServlet extends HttpServlet {
             String content = "I have changed a request you have accepted from me, check your request part Processing please";
             nDAO.insertNoficationDAO(IDMentee, IDMentor, content, 3);
             }
-            response.sendRedirect("CreateRequest.jsp");
+            request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
             }
             }  
          
@@ -80,7 +80,7 @@ public class UpdateOrDeleteRequestServlet extends HttpServlet {
         RequestDAO rDAO = new RequestDAO();      
         rDAO.deleteRequest(id1);
         request.setAttribute("msgE","Delete Request successfully");
-        request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
         }
         else if(sID2!=null){
             int id2 = Integer.parseInt(sID2);

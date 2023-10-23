@@ -25,12 +25,20 @@ public class ViewDetailRequestMenteeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt(request.getParameter("idmentor"));      
+        int idRequest = Integer.parseInt(request.getParameter("idrequest"));      
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
+        Request r = rDAO.getRequestByID(idRequest);
+        SkillDAO sDAO = new SkillDAO();
+        Skill s = sDAO.getSkillByID(r.getIDSkill());
         request.getSession().removeAttribute("idmentor");
-        request.getSession().setAttribute("idmentor", idMentor);
-        request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);   
+        request.getSession().setAttribute("idmentor", r.getIDMentor());
+        ProfileDAO pDAO = new ProfileDAO();
+        Profile p = pDAO.getProfileByID(r.getIDMentor());
+        request.setAttribute("mentorName", p.getFullname());
+        request.setAttribute("r", r);
+        request.setAttribute("s", s);
+        request.getRequestDispatcher("ViewDetailRequest.jsp").forward(request, response);   
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
