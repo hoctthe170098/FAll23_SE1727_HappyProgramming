@@ -286,13 +286,8 @@ String firstname="";
 </div>
 </div>
 </div>-->
-</div> 
-
-<!--<div class="gap-3 d-md-flex justify-content-md-end text-center">-->
-<button type="submit" name="button" value="delete" class="btn btn-danger btn-lg">Delete profile</button>
+</div>
 <button type="submit" name="button" value="update" class="btn btn-primary btn-lg">Update profile</button>
-<!--<input type="submit" class="btn btn-primary btn-lg" value="Update profile">-->
-<!--</div>-->
 </form> 
 </div>
 </div>

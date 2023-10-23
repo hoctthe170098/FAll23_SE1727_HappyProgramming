@@ -80,7 +80,7 @@
 					        <th>From</th>
 					        <th>To</th>
                                                 <th>Status</th>
-					        <th>Register</th>
+					        <th>Actions</th>
 					      </tr>
 					    </thead>
 					    <tbody>
