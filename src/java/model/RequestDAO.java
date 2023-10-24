@@ -69,6 +69,41 @@ public class RequestDAO extends MyDAO {
          }
          return null;
     }
+     public boolean CheckRequestClosed(int IDMentor,int IDMentee){
+         xSql = "select * "
+                 + "from Request "
+                 + "where IDMentor = ? and IDMentee = ? and Status = 'Closed'";
+         int ID,iDMentor,iDMentee,IDSkill;
+         float from,to,money;
+         String title,status,detail,address;
+         Date date;
+         Request r ;
+         try{
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, IDMentor);
+            ps.setInt(2, IDMentee);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            ID = rs.getInt("ID");
+            iDMentor = rs.getInt("IDMentor");
+            iDMentee = rs.getInt("IDMentee");
+            IDSkill = rs.getInt("IDSkill");
+            from  = rs.getFloat("From");
+            to = rs.getFloat("to");
+            status = rs.getString("status"); 
+            title = rs.getString("Title");
+            detail = rs.getString("Details");
+            date = rs.getDate("Date");
+            address = rs.getString("Address");
+            money = rs.getFloat("money");
+            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
+            if(r!=null)return true;
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         return false;
+    }
      public Request getRequestByID(int id){
          xSql = "select * "
                  + "from Request "
@@ -290,6 +325,6 @@ public class RequestDAO extends MyDAO {
 //      for(Request r:dao.getRequestPagging(2, 3)){
 //          System.out.println(r);
 //      }
-System.out.println(dao.getTotalRequestByID(3));
+System.out.println(dao.CheckRequestClosed(2, 3));
     }
 }

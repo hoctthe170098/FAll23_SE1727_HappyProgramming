@@ -90,18 +90,20 @@
         <servlet-class>controller.DeleteSkillServlet</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ViewRequestMenteeServlet</servlet-name>
         <servlet-class>controller.ViewRequestMenteeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewDetailRequestMenteeServlet</servlet-name>
         <servlet-class>controller.ViewDetailRequestMenteeServlet</servlet-class>
-</servlet>
-<servlet>
+    </servlet>
+    <servlet>
         <servlet-name>EditSkillServlet</servlet-name>
         <servlet-class>controller.EditSkillServlet</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>controller.CommentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
@@ -194,10 +196,14 @@
     <servlet-mapping>
         <servlet-name>ViewDetailRequestMenteeServlet</servlet-name>
         <url-pattern>/detailrequestmentee</url-pattern>
-        </servlet-mapping>
-        <servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>EditSkillServlet</servlet-name>
         <url-pattern>/editskill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/comment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -61,6 +61,23 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
         request.getSession().removeAttribute("idmentor");
         request.getSession().setAttribute("idmentor", idMentor);
         request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+        }else{
+        Account acc = (Account)request.getSession().getAttribute("acc");
+        if(acc==null){
+          request.setAttribute("account", "false");     
+        }else{
+        RequestDAO rDAO = new RequestDAO();
+        if(rDAO.CheckRequestClosed(idMentor, acc.getID())){
+            request.setAttribute("closed", "true");
+        }else{
+        request.getSession().removeAttribute("idmentor");
+        request.getSession().setAttribute("idmentor", idMentor); 
+        CommentDAO cDAO = new CommentDAO();
+        List<Comment> list = cDAO.getCommentBy2ID(idMentor,acc.getID());
+        request.setAttribute("listC", list);
+        }
+        }
+         request.getRequestDispatcher("DisplayComment.jsp").forward(request, response);
         }
     }
 }
