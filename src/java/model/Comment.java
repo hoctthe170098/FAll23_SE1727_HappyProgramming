@@ -11,6 +11,7 @@ import java.sql.Date;
  * @author admin
  */
 public class Comment {
+    int ID;
      Date time;
      String Comment;
      int IDMentor;
@@ -21,14 +22,22 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(Date time, String Comment, int IDMentor, int IDMentee) {
+    public Comment(int ID, Date time, String Comment, int IDMentor, int IDMentee) {
+        this.ID = ID;
         this.time = time;
         this.Comment = Comment;
         this.IDMentor = IDMentor;
         this.IDMentee = IDMentee;
     }
-    
 
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+   
     public Date getTime() {
         return time;
     }
@@ -59,13 +68,11 @@ public class Comment {
 
     public void setIDMentee(int IDMentee) {
         this.IDMentee = IDMentee;
-    }
+    }  
 
     @Override
     public String toString() {
-        return "Comment{" + "time=" + time + ", Comment=" + Comment + ", IDMentor=" + IDMentor + ", IDMentee=" + IDMentee + '}';
+        return "Comment{" + "ID=" + ID + ", time=" + time + ", Comment=" + Comment + ", IDMentor=" + IDMentor + ", IDMentee=" + IDMentee + '}';
     }
-
-    
     
 }

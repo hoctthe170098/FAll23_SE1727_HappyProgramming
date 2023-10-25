@@ -24,16 +24,17 @@ public class CommentDAO extends MyDAO{
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
-            int idMentee,idMentor;
+            int id,idMentee,idMentor;
             Date time;
             String Comment;
             Comment c;
             while (rs.next()) {
+                id = rs.getInt("ID");
                 idMentee = rs.getInt("IDMentee");
                 idMentor = rs.getInt("IDMentor");
                 time = rs.getDate("Time");
                 Comment = rs.getString("comment");
-                c = new Comment(time, Comment, idMentor, idMentee);
+                c = new Comment(id,time, Comment, idMentor, idMentee);
                 list.add(c);
             }
             rs.close();
@@ -43,11 +44,35 @@ public class CommentDAO extends MyDAO{
         }
         return list;
     }
+    public void insertComment(int IDMentor,int IDMentee,String comment){
+              xSql = "insert into Comment values (getdate(),?,?,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, IDMentor);
+            ps.setInt(2, IDMentee);
+            ps.setString(3, comment);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteComment(int ID){
+             xSql = "delete from Comment where ID = "+ID;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
     public static void main(String[] args) {
         CommentDAO dao = new CommentDAO();
-        for(Comment c : dao.getCommentBy2ID(3, 4)){
+        for(Comment c : dao.getCommentBy2ID(3, 2)){
             System.out.println(c);
         }
+        System.out.println(dao.getCommentBy2ID(3, 2).size()>0);
     }
     }
 

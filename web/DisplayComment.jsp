@@ -238,40 +238,40 @@
         <!-- ======= Header ======= -->
         <jsp:include page="header.jsp"></jsp:include>
         <c:choose>
-            <c:when test="${account=='false'}">
+            <c:when test="${account==false}">
             <center>
                 <h3>You must sign in to do this task</h3> 
             </center>
         </c:when>
-        <c:when test="${closed!='true'}">
+        <c:when test="${closed==false}">
             <center>
                 <h3>You can't rate or comment for this mentor</h3>
             </center>
         </c:when>
         <c:otherwise>
-            <div class="comment">
+            <div class="comment container">
                 <div class="row d-flex justify-content-center mt-100 mb-100">
-                    <div class="col-lg-6">
+                     <c:if test="${listC.size() > 0}">
+                    <div class="col-lg-8">
                         <div class="card1">
                             <div class="card-body text-center">
                                 <h4 class="card-title">Latest Comments</h4>
-                            </div>
-                            <c:if test="${listC.size()>0}">
-                            <c:forEach items="listC" var="c">
+                            </div>                         
+                            <c:forEach items="${listC}" var="c">
                                 <div class="comment-widgets">
                                     <!-- Comment Row -->
                                     <div class="d-flex flex-row comment-row m-t-0">                                   
                                         <div class="comment-text w-100">
-                                            <span class="text-muted float-right">${c.time}</span> <span class="m-b-15 d-block">${c.Comment}</span>
-                                            <div class="comment-footer"><button type="button" class="btn btn-danger btn-sm">Delete</button> </div>
+                                            <span class="text-muted float-right">${c.getTime()}</span> <span class="m-b-15 d-block">${c.getComment()}</span>
+                                            <div class="comment-footer"><button type="button" class="btn btn-danger btn-sm" onclick="return Delete(${c.getID()})">Delete</button> </div>
                                         </div>
                                     </div> 
                                 </div> 
-                            </c:forEach>    
-                            </c:if>
+                            </c:forEach>                             
                         </div>
                     </div>
-                    <div class="card col-lg-6">
+                     </c:if>
+                    <div class="card col-lg-4">
                         <div class="row">
                             <div class="col-10">
                                 <div class="comment-box ml-2">
@@ -285,7 +285,7 @@
                                             <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
                                         </div>
                                         <div class="comment-area">
-                                            <textarea class="form-control" name="comment" placeholder="what is your view?" rows="4" required=""></textarea>
+                                            <textarea class="form-control" name="comment" placeholder="what is your view?" rows="4"></textarea>
                                         </div>
                                         <div class="comment-btns mt-2">
                                             <div class="row">
@@ -305,11 +305,12 @@
             </div>
         </c:otherwise>    
     </c:choose>
+    <script src="assets/js/sweetalert.min.js"></script>
     <script>
-        function submitForm(form) {
+        function Delete(ID) {
             swal({
                 title: "Are you sure?",
-                text: "This request will be deleted!",
+                text: "This comment will be deleted!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -317,7 +318,7 @@
             )
                     .then((isOkay) => {
                         if (isOkay) {
-                            form.submit();
+                            window.location.href = 'comment?ID=' + ID;
                         }
                     }
                     );

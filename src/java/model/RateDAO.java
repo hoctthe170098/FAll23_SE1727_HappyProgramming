@@ -23,7 +23,7 @@ public class RateDAO extends MyDAO{
             ps.setInt(2, IDMentee);
             rs = ps.executeQuery();
             while (rs.next()) {
-            rate = rs.getInt("rate");
+            rate = rs.getInt("Rate");
             iDMentor = rs.getInt("IDMentor");
             iDMentee = rs.getInt("IDMentee");
             r = new Rate(iDMentor, iDMentee, rate);
@@ -34,7 +34,36 @@ public class RateDAO extends MyDAO{
          }
          return false;
     }
-    public void insertRate(Rate r){
-        
+    public void insertRate(int IDMentor,int IDMentee){
+              xSql = "insert into Rate(IDMentor,IDMentee) values (?,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, IDMentor);
+            ps.setInt(2, IDMentee);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateRate(Rate r){
+              xSql = "Update Rate set Rate = ? where IDMentor = ? and IDMentee = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, r.getRate());
+            ps.setInt(2, r.getIDMentor());
+            ps.setInt(3, r.getIDMentee());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args) {
+        RateDAO dao = new RateDAO();
+        System.out.println(dao.checkIsExistRate(3, 2));
+        if(!dao.checkIsExistRate(3, 2))
+        dao.insertRate(2, 3);
+        System.out.println(dao.checkIsExistRate(3, 2));
     }
 }

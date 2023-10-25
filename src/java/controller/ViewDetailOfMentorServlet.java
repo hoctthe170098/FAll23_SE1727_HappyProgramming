@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import java.io.IOException;
@@ -15,22 +14,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import model.*;
+
 /**
  *
  * @author Admin
  */
 public class ViewDetailOfMentorServlet extends HttpServlet {
-   
-     protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt( request.getParameter("idmentor"));
+        int idMentor = Integer.parseInt(request.getParameter("idmentor"));
         ProfileDAO pDAO = new ProfileDAO();
         MentorDAO mDAO = new MentorDAO();
         MentorSkillDAO msDAO = new MentorSkillDAO();
         AccountDAO accDAO = new AccountDAO();
-        CommentInfoDAO ciDAO =  new CommentInfoDAO();
+        CommentInfoDAO ciDAO = new CommentInfoDAO();
         Profile p = pDAO.getProfileByID(idMentor);
         Mentor m = mDAO.getMentorByID(idMentor);
         MentorSkill ms = msDAO.getSkillByName(idMentor);
@@ -46,7 +46,7 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
         request.setAttribute("date", date);
         request.setAttribute("idmentor", idMentor);
         request.getRequestDispatcher("ViewDetailMentor.jsp").forward(request, response);
-        
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,30 +54,34 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         int idMentor = Integer.parseInt(request.getParameter("idmentor"));
-        String button = request.getParameter("button");   
-        if(button.equals("request")){
-        RequestDAO rDAO = new RequestDAO();
-        rDAO.updateRequestByDate();
-        request.getSession().removeAttribute("idmentor");
-        request.getSession().setAttribute("idmentor", idMentor);
-        request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
-        }else{
-        Account acc = (Account)request.getSession().getAttribute("acc");
-        if(acc==null){
-          request.setAttribute("account", "false");     
-        }else{
-        RequestDAO rDAO = new RequestDAO();
-        if(rDAO.CheckRequestClosed(idMentor, acc.getID())){
-            request.setAttribute("closed", "true");
-        }else{
-        request.getSession().removeAttribute("idmentor");
-        request.getSession().setAttribute("idmentor", idMentor); 
-        CommentDAO cDAO = new CommentDAO();
-        List<Comment> list = cDAO.getCommentBy2ID(idMentor,acc.getID());
-        request.setAttribute("listC", list);
-        }
-        }
-         request.getRequestDispatcher("DisplayComment.jsp").forward(request, response);
+        String button = request.getParameter("button");
+        if (button.equals("request")) {
+            RequestDAO rDAO = new RequestDAO();
+            rDAO.updateRequestByDate();
+            request.getSession().removeAttribute("idmentor");
+            request.getSession().setAttribute("idmentor", idMentor);
+            request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+        } else {
+            Account acc = (Account) request.getSession().getAttribute("acc");
+            if (acc == null) {
+                request.setAttribute("account", false);
+            } else {
+                RequestDAO rDAO = new RequestDAO();
+                if (!rDAO.CheckRequestClosed(idMentor, acc.getID())) {
+                    request.setAttribute("closed", false);
+                } else {
+                    request.getSession().removeAttribute("idmentor");
+                    request.getSession().setAttribute("idmentor", idMentor);
+                    CommentDAO cDAO = new CommentDAO();
+                    RateDAO raDAO = new RateDAO();
+                    if (!raDAO.checkIsExistRate(acc.getID(), idMentor)) {
+                        raDAO.insertRate(idMentor, acc.getID());
+                    }
+                    List<Comment> listC = cDAO.getCommentBy2ID( acc.getID(),idMentor);
+                    request.setAttribute("listC", listC);
+                }
+            }
+            request.getRequestDispatcher("DisplayComment.jsp").forward(request, response);
         }
     }
 }
