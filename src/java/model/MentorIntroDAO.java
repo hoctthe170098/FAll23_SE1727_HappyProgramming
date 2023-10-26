@@ -51,6 +51,53 @@ public class MentorIntroDAO extends MyDAO {
         }
         return listTop3Mentor;
     }
+   public MentorIntro getMentorByID(int ID) {
+    MentorIntro mentor = null;
+    String xSql = "SELECT Mentor.ID, Avatar, Fullname, Rate, Intro, FacebookLink, InstagramLink "
+            + "FROM Mentor JOIN Profile ON Mentor.ID = Profile.ID WHERE ID = ?";
+    try {
+        PreparedStatement ps = con.prepareStatement(xSql);
+        ps.setInt(1, ID);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Lấy thông tin từ cơ sở dữ liệu
+            int id = rs.getInt("ID");
+            String avatar = rs.getString("Avatar");
+            String fullname = rs.getString("Fullname");
+            float rate = rs.getFloat("Rate");
+            String intro = rs.getString("Intro");
+            String facebook = rs.getString("FacebookLink");
+            String inta = rs.getString("InstagramLink");
+
+            // Tạo đối tượng Mentor
+            mentor = new MentorIntro(id, avatar, fullname, rate, intro, facebook, inta);
+        }
+
+        rs.close();
+        ps.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return mentor;
+}
+      
+
+    public void delete(int ID) {
+        xSql = "DELETE FROM Mentor\n" +
+"WHERE ID IN (SELECT Mentor.ID FROM Mentor\n" +
+"            JOIN Profile ON Mentor.ID = Profile.ID\n" +
+"            WHERE Profile.ID = ?);";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, ID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<MentorIntro> getMentorByName(String mentorName) {
         List<MentorIntro> listMentorName = new ArrayList<>();

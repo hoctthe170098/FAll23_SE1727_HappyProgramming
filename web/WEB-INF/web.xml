@@ -105,6 +105,14 @@
         <servlet-name>CommentServlet</servlet-name>
         <servlet-class>controller.CommentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletementorServlet</servlet-name>
+        <servlet-class>controller.DeletementorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>mentoradminServlet</servlet-name>
+        <servlet-class>controller.mentoradminServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -204,6 +212,14 @@
     <servlet-mapping>
         <servlet-name>CommentServlet</servlet-name>
         <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletementorServlet</servlet-name>
+        <url-pattern>/Deletementor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mentoradminServlet</servlet-name>
+        <url-pattern>/mentoradmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

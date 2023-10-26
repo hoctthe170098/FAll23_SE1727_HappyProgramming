@@ -71,7 +71,7 @@ if (cookies != null) {
                 <%if (acc!=null){%>
                 <%if(acc.getIsMentee()==1){%>
                 <li><a href="profile">Profile</a></li>
-                <li><a href="viewrequestmentee">Request</a></li>
+                <li><a href="">Request</a></li>
                 <li><a href="becomementor">Become mentor</a></li>
                     <%}%>
                     <%if(acc.getIsMentor()==1){%>
@@ -95,7 +95,7 @@ if (cookies != null) {
                  <li class="dropdown"><a href="#"><span>List</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="ListBecomeMentor.jsp">BecomeMentor</a></li>
-                        <li><a href="">Mentor</a></li>
+                        <li><a href="mentoradmin">Mentor</a></li>
                         <li><a href="">Mentee</a></li>
                         <li><a href="">Request</a></li>
                         <li><a href="viewskill">Skill</a></li>
