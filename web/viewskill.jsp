@@ -79,10 +79,13 @@
 <body>
      <jsp:include page="header.jsp"></jsp:include>
     <h1>Manage Skill</h1>
-     <div class="btn-container">
+      
+    <div class="container-fluid mb-20" >
+         <div class="btn-container">
         <a style = "background-color:#007aff "class="btn btn-outline-danger" href="createskill"><i class="bi bi-plus"></i> Create Skill</a>
         
     </div>  
+        
     <table border="1">
         <tr>
             
@@ -98,12 +101,13 @@
                 <td style="width: 700px;">${skill.description}</td>
                 <td><img src="${skill.image}" width="50" height="50" alt="${skill.name}"></td>
                 <td>
-                    <a style= "background-color: yellowgreen " class="btn btn-outline-danger" href="editskill.jsp?ID=${skill.ID}"><i class="bi bi-pencil"></i> Edit</a>
+                    <a style= "background-color: yellowgreen " class="btn btn-outline-danger" href="editskill?ID=${skill.ID}"><i class="bi bi-pencil"></i> Edit</a>
                     <a style = " background-color: red"class="btn btn-outline-danger" onclick ="Delete(${skill.ID})" style="padding: 6px"><i class="bi bi-trash"></i>Delete</a></td>
                 </td>
             </tr>
         </c:forEach>
     </table>
+        </div>
 
     <div id="editForm" style="display: none;">
         <h2>Edit Skill</h2>

@@ -45,11 +45,11 @@ public class SkillDAO extends MyDAO {
 
     public Skill getSkillByID(int ID) {
         Skill skill = null;
-        String xSql = "select * from Skills where ID = ?";
+         xSql = "select * from Skills where ID = ?";
         try {
-            PreparedStatement ps = con.prepareStatement(xSql);
+            ps = con.prepareStatement(xSql);
             ps.setInt(1, ID);
-            ResultSet rs = ps.executeQuery();
+             rs = ps.executeQuery();
 
             if (rs.next()) {
                 // Lấy thông tin từ cơ sở dữ liệu
@@ -83,7 +83,7 @@ public class SkillDAO extends MyDAO {
         }
     }
 
-    public List<Skill> getSkillByName(String nameSkill) {
+     public List<Skill> getSkillByName(String nameSkill)  {
         List<Skill> listSkill = new ArrayList<>();
         xSql = "select * from Skills where Name like '%" + nameSkill + "%'";
         try {
@@ -156,6 +156,9 @@ public class SkillDAO extends MyDAO {
     }
     public static void main(String[] args) {
         SkillDAO dao = new SkillDAO();
-        Skill list = dao.getSkillByID(2);
+        List<Skill> list = dao.getSkillByName("C");
     }
+
+   
+        
 }

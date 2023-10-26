@@ -50,6 +50,16 @@
         * Author: BootstrapMade.com
         * License: https://bootstrapmade.com/license/
         ======================================================== -->
+        <style>
+              .custom-icon {
+    color: blue;
+}
+.custom-instagram-icon {
+    background: linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+        </style>
     </head>
 
     <body>
@@ -113,8 +123,8 @@
                                             <span>Rate: <%= listAllMentor.get(i).getRate() %></span>
                                             <p><%= listAllMentor.get(i).getIntro() %></p>
                                             <div class="social">
-                                                <a href="<%= listAllMentor.get(i).getFacebook() %>"><i class="bi bi-facebook"></i></a>
-                                                <a href="<%= listAllMentor.get(i).getInta() %>"><i class="bi bi-instagram"></i></a>
+                                                <a href="<%= listAllMentor.get(i).getFacebook() %>"><i class="bi bi-facebook custom-icon"></i></a>
+                                                <a href="<%= listAllMentor.get(i).getInta() %>"><i class="bi bi-instagram custom-instagram-icon"></i></a>
                                             </div>
                                         </div>
                                     </div>
