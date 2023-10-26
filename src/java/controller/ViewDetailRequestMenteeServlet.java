@@ -34,10 +34,12 @@ public class ViewDetailRequestMenteeServlet extends HttpServlet {
         request.getSession().removeAttribute("idmentor");
         request.getSession().setAttribute("idmentor", r.getIDMentor());
         ProfileDAO pDAO = new ProfileDAO();
-        Profile p = pDAO.getProfileByID(r.getIDMentor());
-        request.setAttribute("mentorName", p.getFullname());
+        Profile mentor = pDAO.getProfileByID(r.getIDMentor());
+        Profile mentee = pDAO.getProfileByID(r.getIDMentee());
         request.setAttribute("r", r);
         request.setAttribute("s", s);
+        request.setAttribute("mentor",mentor);
+        request.setAttribute("mentee", mentee);
         request.getRequestDispatcher("ViewDetailRequest.jsp").forward(request, response);   
     }
 

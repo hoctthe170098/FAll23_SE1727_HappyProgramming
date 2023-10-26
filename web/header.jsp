@@ -71,7 +71,7 @@ if (cookies != null) {
                 <%if (acc!=null){%>
                 <%if(acc.getIsMentee()==1){%>
                 <li><a href="profile">Profile</a></li>
-                <li><a href="">Request</a></li>
+                <li><a href="viewrequestmentee">Request</a></li>
                 <li><a href="becomementor">Become mentor</a></li>
                     <%}%>
                     <%if(acc.getIsMentor()==1){%>

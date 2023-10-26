@@ -148,10 +148,14 @@
         <div class="notification-ui_dd-content">
             <%
                 List<Notification> list = (List<Notification>)request.getAttribute("list");
+                int number=1;
             %>
             <%for(Notification n:list){%>
             <div class="notification-list notification-list--unread">
                 <div class="notification-list_content">
+                    <div class="notification-list_detail">
+                        <h5 class="text-muted"><%=number++%></h5>
+                    </div>
                     <div class="notification-list_img">
                         <img src=<%=n.getAvatarSender()%> alt="user">
                     </div>

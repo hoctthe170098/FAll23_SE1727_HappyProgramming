@@ -128,8 +128,8 @@
                                                 <div class="row g-3">
                                                     <h4 class="mb-4 mt-0">Request details</h4>
                                                     <div class="col-md-12">
-                                                        <label class="form-label">With :</label>
-                                                        <b>${mentorName}</b>
+                                                        <label class="form-label">Mentor :</label>
+                                                        <b>${mentor.getFullname()}(<a href="detailmentor?idmentor=${mentor.getId()}">Details</a>)</b>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="form-label">Title :</label>
