@@ -82,6 +82,48 @@ public class MentorIntroDAO extends MyDAO {
 
     return mentor;
 }
+ public List<MentorIntro> getMentorBySkill(String skill) {
+        List<MentorIntro> listMentorName = new ArrayList<>();
+        xSql = "SELECT M.ID AS MentorID, P.Avatar, P.FullName, M.Rate, M.Intro, P.FacebookLink, P.InstagramLink\n" +
+"FROM Mentor AS M\n" +
+"JOIN SkillMentor AS SM ON M.ID = SM.IDMentor\n" +
+"JOIN Skills AS S ON SM.IDSkill = S.ID\n" +
+"LEFT JOIN Profile AS P ON M.ID = P.ID\n" +
+"\n" +
+"WHERE S.Name LIKE '%" + skill + "%'";
+
+        try {
+
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            MentorIntro m;
+            int id;
+            String avatar;
+            String fullname;
+            float rate;
+            String intro;
+            String facebook;
+            String inta;
+            while (rs.next()) {
+                id = rs.getInt("ID");
+                avatar = rs.getString("Avatar");
+                fullname = rs.getString("Fullname");
+                rate = rs.getFloat("Rate");
+                intro = rs.getString("Intro");
+                facebook = rs.getString("FacebookLink");
+                inta = rs.getString("InstagramLink");
+                m = new MentorIntro(id, avatar, fullname, rate, intro, facebook, inta);
+                listMentorName.add(m);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (listMentorName);
+    }
+
+   
       
 
     public void delete(int ID) {
