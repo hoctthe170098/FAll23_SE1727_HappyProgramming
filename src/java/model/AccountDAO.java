@@ -160,7 +160,18 @@ public class AccountDAO extends MyDAO {
             return false; // Handle the error as needed
         }
     }
-
+    public void updateRole(int idMentee){
+        
+           xSql = "update Account set isMentee = 0,isMentor = 1 where ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, idMentee);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
 //        dao.updatePassword("hoctthe170098@fpt.edu.vn", "1234213123");

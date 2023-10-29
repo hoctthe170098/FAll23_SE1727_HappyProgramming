@@ -15,47 +15,94 @@ import java.util.List;
  *
  * @author admin
  */
-public class ListBecomeMentorDAO extends MyDAO{
-      public List<BecomeMentor> listAllBecomeMentor() throws SQLException {
-        List<BecomeMentor> listMentor = new ArrayList<>();
-        BecomeMentor bm = new BecomeMentor(); 
-        String sql = "SELECT * FROM BecomeMentor";
-         
-        
-         
-        Statement statement = con.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-         
-        while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            String Intro = resultSet.getString("Intro");
-            String Ex = resultSet.getString("Ex");
-            String skill = rs.getString("Skill");
-             String[]skills = skill.split(",");
-            bm.setSkill(skills);
-             
-            BecomeMentor becomementor = new BecomeMentor(id, Intro, Ex, skills);
-            listAllBecomeMentor().add(becomementor);
+public class ListBecomeMentorDAO extends MyDAO {
+
+    public List<CVToBecomeMentor> getListBecomeMentor(int index) {
+        int i = (index - 1) * 4;
+        List<CVToBecomeMentor> list = new ArrayList<>();
+        xSql = "select * "
+                + "from BecomeMentor order by ID "
+                + "offset ? rows fetch next 4 rows only";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, i);
+            rs = ps.executeQuery();
+            int ID;
+            String intro, ex, skill,reason;
+            CVToBecomeMentor cv;
+            while (rs.next()) {
+                ID = rs.getInt("ID");
+                intro = rs.getString("intro");
+                ex = rs.getString("ex");
+                skill = rs.getString("skill");
+                reason = rs.getString("reason");
+                ProfileDAO pDAO = new ProfileDAO();
+                Profile p = pDAO.getProfileByID(ID);
+                cv = new CVToBecomeMentor(ID, intro, ex, skill,reason, p);
+                list.add(cv);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-         
-        resultSet.close();
-        statement.close();
-         
-        
-         
-        return listAllBecomeMentor();
+        return list;
     }
-       public boolean deleteRequest(BecomeMentor bm) throws SQLException {
-        String sql = "DELETE FROM BecomeMentor where ID = ?";
-         
-        
-         
-         PreparedStatement statement = con.prepareStatement(sql);
-        statement.setInt(1, bm.getID());
-        
-         
-        boolean rowDeleted = statement.executeUpdate() > 0;
-        statement.close();
-        return rowDeleted;     
+
+    public CVToBecomeMentor getCVBecomeMentorByID(int IDMentee) {
+        xSql = "select * "
+                + "from BecomeMentor where ID = " + IDMentee;
+        int ID;
+        String intro, ex, skill,reason;
+        CVToBecomeMentor cv;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ID = rs.getInt("ID");
+                intro = rs.getString("intro");
+                ex = rs.getString("ex");
+                skill = rs.getString("skill");
+                reason = rs.getString("reason");
+                ProfileDAO pDAO = new ProfileDAO();
+                Profile p = pDAO.getProfileByID(ID);
+                cv = new CVToBecomeMentor(ID, intro, ex, skill,reason, p);
+                return cv;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int getTotal() {
+        int x;
+        xSql = "select count=count(*)from BecomeMentor";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                x = rs.getInt("count");
+                return x;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+   public void delete(int ID){
+         xSql = "delete from BecomeMentor where id = " + ID;
+         try{
+            ps = con.prepareStatement(xSql);
+            ps.executeUpdate();
+            ps.close();
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+     }
+    public static void main(String[] args) {
+        ListBecomeMentorDAO dao = new ListBecomeMentorDAO();
+        System.out.println(dao.getCVBecomeMentorByID(3));
     }
 }

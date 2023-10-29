@@ -13,28 +13,16 @@ public class BecomeMentor {
     String intro;
     String ex;
     String[]skill;
-
+    String Reason;
     public BecomeMentor() {
     }
 
-    public BecomeMentor(int ID) {
-        this.ID = ID;
-    }
-    
-    
-
-    public BecomeMentor(int ID, String intro, String ex, String[] skill) {
+    public BecomeMentor(int ID, String intro, String ex, String[] skill, String Reason) {
         this.ID = ID;
         this.intro = intro;
         this.ex = ex;
         this.skill = skill;
-    }
-
-    BecomeMentor(int id, String Intro, String Ex, String Skill) {
-        this.ID = ID;
-        this.intro = intro;
-        this.ex = ex;
-        this.skill = skill;
+        this.Reason = Reason;
     }
 
     public int getID() {
@@ -69,9 +57,19 @@ public class BecomeMentor {
         this.skill = skill;
     }
 
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String Reason) {
+        this.Reason = Reason;
+    }
+
     @Override
     public String toString() {
-        return "BecomeMentor{" + "ID=" + ID + ", intro=" + intro + ", ex=" + ex + ", skill=" + skill + '}';
+        return "BecomeMentor{" + "ID=" + ID + ", intro=" + intro + ", ex=" + ex + ", skill=" + skill + ", Reason=" + Reason + '}';
     }
+
+    
     
 }

@@ -32,8 +32,9 @@ public class NoficationDAO extends MyDAO {
              xSql = "select top " + count
                      + " Notification.ID,Avatar,FullName,RoleSender,content,"
                      + "Minute = DATEDIFF(minute,Notification.Time,GETDATE()) "
-                 + "from Notification join Profile "
-                 + "on Notification.IDsender = Profile.ID and IDreceiver = "+id
+                 + "from Notification left join Profile "
+                 + "on Notification.IDsender = Profile.ID "
+                     + "where IDreceiver = "+id
                      + " order by Minute";        
          try{
             ps = con.prepareStatement(xSql);
@@ -60,7 +61,7 @@ public class NoficationDAO extends MyDAO {
     }
     public static void main(String[] args) {
         NoficationDAO dao  = new NoficationDAO();
-        List<Notification> list = dao.getListNoficationByID(12, 5);
+        List<Notification> list = dao.getListNoficationByID(3, 5);
         for(Notification n : list){
             System.out.println(n);
         }

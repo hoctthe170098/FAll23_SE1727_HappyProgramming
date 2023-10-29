@@ -41,7 +41,8 @@ public class BecomeMentorServlet extends HttpServlet {
             String intro = request.getParameter("intro");
         String[] listNameSkill = request.getParameterValues("skill");
         String ex = request.getParameter("ex");
-        BecomeMentor bm = new BecomeMentor(acc.getID(), intro, ex, listNameSkill);      
+        String reason = request.getParameter("reason");
+        BecomeMentor bm = new BecomeMentor(acc.getID(), intro, ex, listNameSkill,reason);      
         bmDao.InsertBecomeMentor(bm);
         NoficationDAO nDAO = new NoficationDAO();
         String content = "I want to become a mentor, please check request for me";

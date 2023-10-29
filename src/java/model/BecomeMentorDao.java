@@ -19,12 +19,13 @@ public class BecomeMentorDao extends MyDAO{
          }
      } 
        public void InsertBecomeMentor(BecomeMentor bm){
-           xSql = "insert into BecomeMentor values (?,?,?,?)";
+           xSql = "insert into BecomeMentor values (?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, bm.getID());
             ps.setString(2, bm.getIntro());
             ps.setString(3, bm.getEx());
+            ps.setString(5, bm.getReason());
             String skill=bm.getSkill()[0];
             for(int i=1;i<bm.getSkill().length;i++){
                 skill+=", "+bm.getSkill()[i];
@@ -46,6 +47,7 @@ public class BecomeMentorDao extends MyDAO{
             bm.setID(rs.getInt("ID"));
             bm.setEx(rs.getString("Ex"));
             bm.setIntro(rs.getString("Intro"));
+            bm.setReason(rs.getString("reason"));
             String skill = rs.getString("Skill");
             String[]skills = skill.split(",");
             bm.setSkill(skills);
