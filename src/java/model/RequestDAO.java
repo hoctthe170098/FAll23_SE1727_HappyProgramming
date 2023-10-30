@@ -278,11 +278,29 @@ public class RequestDAO extends MyDAO {
         }
         return 0;
     }
+    public int getTotalRequestmentorByStatus(int IDMentor,String status){
+         int x;
+        xSql = "select count=count(*)from Request where IDMentor= " + IDMentor+" and status = '"+status+"'";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                x = rs.getInt("count");
+                return x;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
     public List<Request> getRequestPagging(int index,int IDMentee){
          int i = (index - 1) * 4;
         List<Request> listRequest = new ArrayList<>();
         xSql = "select * from Request where IDMentee= " + IDMentee
-                + " order by Date "
+                + "order by Date desc "
                 + "offset ? rows fetch next 4 rows only";
         try {
             ps = con.prepareStatement(xSql);
@@ -316,6 +334,46 @@ public class RequestDAO extends MyDAO {
         }
         return listRequest;
     }
+        public List<Request>getRequestMentorByStatus(int index,int idMentor,String sta){
+            int i = (index - 1) * 4;
+        List<Request> list = new ArrayList<>();
+        xSql = "select * "
+                 + "from Request "
+                 + "where IDMentor = ? and Status = ?"
+                 +" order by Date desc"
+                 +" offset ? rows fetch next 4 rows only";
+         int ID,iDMentor,iDMentee,IDSkill;
+         float from,to,money;
+         String title,status,detail,address;
+         Date date;
+         Request r ;
+         try{
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, idMentor);
+            ps.setString(2, sta);
+            ps.setInt(3, i);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            ID = rs.getInt("ID");
+            iDMentor = rs.getInt("IDMentor");
+            iDMentee = rs.getInt("IDMentee");
+            IDSkill = rs.getInt("IDSkill");
+            from  = rs.getFloat("From");
+            to = rs.getFloat("to");
+            status = rs.getString("status"); 
+            title = rs.getString("Title");
+            detail = rs.getString("Details");
+            date = rs.getDate("Date");
+            address = rs.getString("Address");
+            money = rs.getFloat("money");
+            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
+            list.add(r);
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         return list;
+    }
     public static void main(String[] args) {
         RequestDAO dao = new RequestDAO();
 //        long millis=System.currentTimeMillis();   
@@ -325,6 +383,8 @@ public class RequestDAO extends MyDAO {
 //      for(Request r:dao.getRequestPagging(2, 3)){
 //          System.out.println(r);
 //      }
-System.out.println(dao.CheckRequestClosed(2, 3));
+        for(Request r:dao.getRequestPagging(1, 10)){
+            System.out.println(r);
+        }
     }
 }

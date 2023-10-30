@@ -1,16 +1,11 @@
-<%-- 
-    Document   : ViewRequestMentee
-    Created on : Oct 22, 2023, 3:27:42 PM
-    Author     : Nhat Anh
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
-         <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>Request</title>
+        <title>Request Mentee</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -33,99 +28,103 @@
         <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
         <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-   
-        <!-- Template Main CSS File -->
-        
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<link rel="stylesheet" href="assets/css/style.css">
+        <!-- Template Main CSS File -->
+
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="assets/css/style.css">
         <style>
             .block-27 ul {
-  padding: 0;
-  margin: 0; }
-  .block-27 ul li {
-    display: inline-block;
-    margin-bottom: 4px;
-    font-weight: 400; }
-    .block-27 ul li a, .block-27 ul li span {
-      color: gray;
-      text-align: center;
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 50%;
-      border: 1px solid #e6e6e6; }
-    .block-27 ul li.active a, .block-27 ul li.active span {
-      background: #4ba1fa;
-      color: #fff;
-      border: 1px solid transparent; }
+                padding: 0;
+                margin: 0;
+            }
+            .block-27 ul li {
+                display: inline-block;
+                margin-bottom: 4px;
+                font-weight: 400;
+            }
+            .block-27 ul li a, .block-27 ul li span {
+                color: gray;
+                text-align: center;
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 50%;
+                border: 1px solid #e6e6e6;
+            }
+            .block-27 ul li.active a, .block-27 ul li.active span {
+                background: #4ba1fa;
+                color: #fff;
+                border: 1px solid transparent;
+            }
         </style>
     </head>
     <body>
         <jsp:include page="header.jsp"></jsp:include>
-        <section class="ftco-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">					
-					<div class="table-wrap">
-						<table class="table">
-					    <thead class="thead-primary">
-					      <tr>
-					        <th>Number</th>
-					        <th>Title</th>
-					        <th>Date</th>
-					        <th>From</th>
-					        <th>To</th>
-                                                <th>Status</th>
-					        <th>Actions</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-                                                <%int count=1;%>
-                                           <c:forEach items="${listReq}" var="r">
-                                               <tr>
-					        <th scope="row" class="scope" ><%=count++%></th>
-					        <td>${r.title}</td>
-					        <td>${r.date}</td>
-					        <td>${r.from}</td>
-					        <td>${r.to}</td>
-                                                <td>${r.status}</td>
-					        <td>
+            <section class="ftco-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">					
+                            <div class="table-wrap">
+                                <table class="table">
+                                    <thead class="thead-primary">
+                                        <tr>
+                                            <th>Number</th>
+                                            <th>Title</th>
+                                            <th>Date</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%int count=1;%>
+                                    <c:forEach items="${listReq}" var="r">
+                                        <tr>
+                                            <th scope="row" class="scope" ><%=count++%></th>
+                                            <td>${r.title}</td>
+                                            <td>${r.date}</td>
+                                            <td>${r.from}</td>
+                                            <td>${r.to}</td>
+                                            <td>${r.status}</td>
+                                            <td>
                                                 <a href="detailrequestmentee?idrequest=${r.ID}" class="btn btn-primary">Detail</a>
-                                                </td>
-					      </tr>                                               
-                                            </c:forEach>					     					  					
-					    </tbody>
-					  </table>
-					</div>
-				</div>
-			</div>
-             <div class="block-27">
-              <ul>
-                  <c:if test="${index>1}">
-                    <li><a href="viewrequestmentee?index=${index-1}">&lt;</a></li>
-                  </c:if>          
-                <c:forEach var="i" begin="1" end="${page}">
-                    <c:choose>
-                        <c:when test="${index==i}">
-                         <li class="active"><span><a href="viewrequestmentee?index=${i}">${i}</a></span></li>    
-                        </c:when>
-                        <c:otherwise>
-                            <li><span><a href="viewrequestmentee?index=${i}">${i}</a></span></li>     
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                <c:if test="${index<page}">
-                    <li><a href="viewrequestmentee?index=${index+1}">&gt;</a></li>
-                  </c:if>            
-              </ul>
+                                            </td>
+                                        </tr>                                               
+                                    </c:forEach>					     					  					
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="block-27">
+                    <ul>
+                        <c:if test="${index>1}">
+                            <li><a href="viewrequestmentee?index=${index-1}">&lt;</a></li>
+                            </c:if>          
+                            <c:forEach var="i" begin="1" end="${page}">
+                                <c:choose>
+                                    <c:when test="${index==i}">
+                                    <li class="active"><span><a href="viewrequestmentee?index=${i}">${i}</a></span></li>    
+                                            </c:when>
+                                            <c:otherwise>
+                                    <li><span><a href="viewrequestmentee?index=${i}">${i}</a></span></li>     
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:if test="${index<page}">
+                            <li><a href="viewrequestmentee?index=${index+1}">&gt;</a></li>
+                            </c:if>            
+                    </ul>
+                </div>
             </div>
-		</div>
-	</section>
-         <jsp:include page="Footer.jsp"></jsp:include>
+        </section>
+        <jsp:include page="Footer.jsp"></jsp:include>
         <div id="preloader"></div>
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

@@ -77,9 +77,9 @@ if (cookies != null) {
                     <%if(acc.getIsMentor()==1){%>
                 <li class="dropdown"><a href="#"><span>Request</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="">Invited</a></li>
-                        <li><a href="">Eccepted</a></li>
-                        
+                        <li><a href="listrequestmentor?status=Processing">Invited</a></li>
+                        <li><a href="listrequestmentor?status=Excepted">Excepted</a></li>
+                        <li><a href="listrequestmentor?status=Closed">Closed</a></li>
                     </ul>
                 </li>
                 <li><a href="updatecvmentor">CV</a></li>
