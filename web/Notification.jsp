@@ -157,7 +157,7 @@
                         <h5 class="text-muted"><%=number++%></h5>
                     </div>
                     <div class="notification-list_img">
-                        <img src=<%=n.getAvatarSender()%> alt="user">
+                        <img src=<%=n.getAvatarSender()%> alt="">
                     </div>
                     <div class="notification-list_detail">
                         <%

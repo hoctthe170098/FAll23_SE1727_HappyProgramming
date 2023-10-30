@@ -86,6 +86,20 @@ public class MentorDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+     public void insertMentor(int ID,String intro,String ex){
+         
+           xSql = "insert into Mentor(ID,Intro,Ex) values (?,?,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, ID);
+            ps.setString(2, intro);
+            ps.setString(3, ex);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+     }
     public List<Mentor> SearchMentorByName(String Fullname) throws SQLException {
         List<Mentor> list = new ArrayList<>();
         String sql = "Select c.Avatar, c.Fullname, m.ID, m.Ex from Mentor m join Profile c\n"

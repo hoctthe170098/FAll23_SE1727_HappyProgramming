@@ -94,7 +94,7 @@ if (cookies != null) {
                    </li>
                  <li class="dropdown"><a href="#"><span>List</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="ListBecomeMentor.jsp">BecomeMentor</a></li>
+                        <li><a href="listbecomementor">BecomeMentor</a></li>
                         <li><a href="mentoradmin">Mentor</a></li>
                         <li><a href="">Mentee</a></li>
                         <li><a href="">Request</a></li>

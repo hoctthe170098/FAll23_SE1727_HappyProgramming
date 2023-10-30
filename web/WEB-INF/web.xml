@@ -66,10 +66,6 @@
         <servlet-class>controller.ViewDetailOfMentorServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListBecomeMentorServlet</servlet-name>
-        <servlet-class>controller.ListBecomeMentorServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CreateRequestServlet</servlet-name>
         <servlet-class>controller.CreateRequestServlet</servlet-class>
     </servlet>
@@ -112,6 +108,18 @@
     <servlet>
         <servlet-name>mentoradminServlet</servlet-name>
         <servlet-class>controller.mentoradminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListBecomeMentor</servlet-name>
+        <servlet-class>controller.ListBecomeMentor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCVMentee</servlet-name>
+        <servlet-class>controller.ViewCVMentee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActionAdminRegisterBecomeMentor</servlet-name>
+        <servlet-class>controller.ActionAdminRegisterBecomeMentor</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
@@ -174,10 +182,6 @@
         <url-pattern>/detailmentor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ListBecomeMentorServlet</servlet-name>
-        <url-pattern>/ListBecomeMentorServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CreateRequestServlet</servlet-name>
         <url-pattern>/createrequest</url-pattern>
     </servlet-mapping>
@@ -220,6 +224,18 @@
     <servlet-mapping>
         <servlet-name>mentoradminServlet</servlet-name>
         <url-pattern>/mentoradmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListBecomeMentor</servlet-name>
+        <url-pattern>/listbecomementor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCVMentee</servlet-name>
+        <url-pattern>/viewcvmentee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActionAdminRegisterBecomeMentor</servlet-name>
+        <url-pattern>/actionadminregisterbecomementor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -30,6 +30,16 @@ public class MenteeDAO extends MyDAO {
         }
         return 0;
     }
+    public void delete(int ID){
+         xSql = "delete from Mentee where id = " + ID;
+         try{
+            ps = con.prepareStatement(xSql);
+            ps.executeUpdate();
+            ps.close();
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+     }
     public static void main(String[] args) {
         MenteeDAO dao =  new MenteeDAO();
         System.out.println(dao.TotalMentee());

@@ -119,6 +119,12 @@
                                     <%=bm.getIntro()%>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="comment">Reason :</label>
+                                <div class="col-sm-10">
+                                    <%=bm.getReason()%>
+                                </div>
+                            </div>   
                             <%
                               String skill=bm.getSkill()[0];
                               for(int i=1;i<bm.getSkill().length;i++){
@@ -188,7 +194,13 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="comment">Introduction:</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="intro" id="intro"></textarea>
+                                    <textarea class="form-control" rows="3" name="intro" id="intro" required></textarea>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-sm-2" for="comment">Reason:</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" name="reason" id="intro" required></textarea>
                                 </div>
                             </div>
                             <%
@@ -196,7 +208,7 @@
                                List<Skill> listSkill = sDao.getListSkill();
                             %>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Skill:</label>
+                                <label class="control-label col-sm-10">Skill(you must choose at least one skill):</label>
                                 <div class="col-sm-10"> 
                                     <%
                                         for(Skill s:listSkill){
@@ -208,7 +220,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="comment">Experience:</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="5" name="ex" id="ex"></textarea>
+                                    <textarea class="form-control" rows="5" name="ex" id="ex" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">        

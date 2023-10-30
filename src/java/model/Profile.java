@@ -111,11 +111,5 @@ public class Profile {
     public String toString() {
         return "Profile{" + "id=" + id + ", gender=" + gender + ", Avatar=" + Avatar + ", Phone=" + Phone + ", Birth=" + Birth + ", Fullname=" + Fullname + ", Address=" + Address + ", FacebookLink=" + FacebookLink + ", InstagramLink=" + InstagramLink + '}';
     }
-
-    
-      
-     
-    
-    
-    
+                
 }
