@@ -114,10 +114,6 @@
         <servlet-class>controller.ListBecomeMentor</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewCVMentee</servlet-name>
-        <servlet-class>controller.ViewCVMentee</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ActionAdminRegisterBecomeMentor</servlet-name>
         <servlet-class>controller.ActionAdminRegisterBecomeMentor</servlet-class>
     </servlet>
@@ -228,10 +224,6 @@
     <servlet-mapping>
         <servlet-name>ListBecomeMentor</servlet-name>
         <url-pattern>/listbecomementor</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewCVMentee</servlet-name>
-        <url-pattern>/viewcvmentee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ActionAdminRegisterBecomeMentor</servlet-name>

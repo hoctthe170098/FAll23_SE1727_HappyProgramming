@@ -50,7 +50,7 @@
         * Author: BootstrapMade.com
         * License: https://bootstrapmade.com/license/
         ======================================================== -->
-<!--        <style>
+        <style>
               .custom-icon {
     color: blue;
 }
@@ -59,7 +59,7 @@
     -webkit-background-clip: text;
     color: transparent;
 }
-        </style>-->
+        </style>
     </head>
 
     <body>
