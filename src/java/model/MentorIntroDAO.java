@@ -82,64 +82,26 @@ public class MentorIntroDAO extends MyDAO {
 
     return mentor;
 }
- public List<MentorIntro> getMentorBySkill(String skill) {
-        List<MentorIntro> listMentorName = new ArrayList<>();
-        xSql = "SELECT M.ID AS MentorID, P.Avatar, P.FullName, M.Rate, M.Intro, P.FacebookLink, P.InstagramLink\n" +
-"FROM Mentor AS M\n" +
-"JOIN SkillMentor AS SM ON M.ID = SM.IDMentor\n" +
-"JOIN Skills AS S ON SM.IDSkill = S.ID\n" +
-"LEFT JOIN Profile AS P ON M.ID = P.ID\n" +
-"\n" +
-"WHERE S.Name LIKE '%" + skill + "%'";
+  public void delete(int ID) {
+    String mentorDeleteSql = "DELETE FROM Mentor WHERE ID = ?";
+    String skillMentorDeleteSql = "DELETE FROM SkillMentor WHERE IDMentor = ?";
+    
+    try {
+        
+        ps = con.prepareStatement(skillMentorDeleteSql);
+        ps.setInt(1, ID);
+        ps.executeUpdate();
+        ps.close();
 
-        try {
-
-            ps = con.prepareStatement(xSql);
-            rs = ps.executeQuery();
-            MentorIntro m;
-            int id;
-            String avatar;
-            String fullname;
-            float rate;
-            String intro;
-            String facebook;
-            String inta;
-            while (rs.next()) {
-                id = rs.getInt("ID");
-                avatar = rs.getString("Avatar");
-                fullname = rs.getString("Fullname");
-                rate = rs.getFloat("Rate");
-                intro = rs.getString("Intro");
-                facebook = rs.getString("FacebookLink");
-                inta = rs.getString("InstagramLink");
-                m = new MentorIntro(id, avatar, fullname, rate, intro, facebook, inta);
-                listMentorName.add(m);
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return (listMentorName);
+        
+        ps = con.prepareStatement(mentorDeleteSql);
+        ps.setInt(1, ID);
+        ps.executeUpdate();
+        ps.close();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-
-   
-      
-
-    public void delete(int ID) {
-        xSql = "DELETE FROM Mentor\n" +
-"WHERE ID IN (SELECT Mentor.ID FROM Mentor\n" +
-"            JOIN Profile ON Mentor.ID = Profile.ID\n" +
-"            WHERE Profile.ID = ?);";
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setInt(1, ID);
-            ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+}
 
     public List<MentorIntro> getMentorByName(String mentorName) {
         List<MentorIntro> listMentorName = new ArrayList<>();

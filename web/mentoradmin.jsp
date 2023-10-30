@@ -89,10 +89,6 @@
     background: linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
     -webkit-background-clip: text;
     color: transparent;
-    .p{
-       margin: 0; 
-       padding: 0; 
-    }
 }
     </style>
     </head>
@@ -100,8 +96,6 @@
           <jsp:include page="header.jsp"></jsp:include>
           
       <h1>Manage Mentor</h1>
-      <p>Total mentors: ${mentorlist.size()} </p>
-
      
     <table border="1">
         <tr>
@@ -144,7 +138,7 @@
                             <script src="assets/js/main.js"></script>
                             <script>
        function Delete(ID){
-           var option = confirm('Are you sure to delete?');
+           var option = confirm('Are you sure to delete?' +ID);
            if(option === true) {
                window.location.href = 'Deletementor?ID=' + ID;
            }
