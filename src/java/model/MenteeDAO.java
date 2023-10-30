@@ -42,6 +42,5 @@ public class MenteeDAO extends MyDAO {
      }
     public static void main(String[] args) {
         MenteeDAO dao =  new MenteeDAO();
-        System.out.println(dao.TotalMentee());
     }
 }

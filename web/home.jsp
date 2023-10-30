@@ -220,8 +220,8 @@
                             </p>
                             <div class="social">
                               
-                                <a href=<%=mi.getFacebook()%>><i class="bi bi-facebook"></i></a>
-                                <a href=<%=mi.getInta()%>><i class="bi bi-instagram"></i></a>
+                                <a href=<%=mi.getFacebook()%>><i class="bi bi-facebook custom-icon"></i></a>
+                                <a href=<%=mi.getInta()%>><i class="bi bi-instagram custom-instagram-icon"></i></a>
                            
                             </div>
                           </div>
