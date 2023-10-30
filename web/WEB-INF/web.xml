@@ -128,6 +128,10 @@
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.HomeServlet</servlet-class>
+        </servlet> 
+        <servlet>
+        <servlet-name>menteeadminServlet</servlet-name>
+        <servlet-class>controller.menteeadminServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
@@ -252,6 +256,10 @@
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>menteeadminServlet</servlet-name>
+        <url-pattern>/menteeadmin</url-pattern>  
     </servlet-mapping>
     <session-config>
         <session-timeout>
