@@ -80,7 +80,7 @@ public class UpdateOrDeleteRequestServlet extends HttpServlet {
         RequestDAO rDAO = new RequestDAO();      
         rDAO.deleteRequest(id1);
         request.setAttribute("msgE","Delete Request successfully");
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        response.sendRedirect("home");
         }
         else if(sID2!=null){
             int id2 = Integer.parseInt(sID2);

@@ -1,10 +1,5 @@
-<%-- 
-    Document   : home.jsp
-    Created on : Sep 17, 2023, 4:18:15 PM
-    Author     : Admin
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.sql.*" %>
 <%@page import = "model.*" %>
 <%@page import = "java.util.List" %>
@@ -92,25 +87,16 @@
                     <div class="container">
 
                         <div class="row counters">
-                        <%
-                            MenteeDAO MenteeDAO = new MenteeDAO();
-                        %>
                         <div class="col-lg-4 col-6 text-center">
-                            <span data-purecounter-start="0" data-purecounter-end=<%=MenteeDAO.TotalMentee()%> data-purecounter-duration="1" class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end=${totalMentee} data-purecounter-duration="1" class="purecounter"></span>
                             <p>Students</p>
                         </div>
-                        <%
-                              SkillDAO SkillDAO = new SkillDAO();
-                        %>
                         <div class="col-lg-4 col-6 text-center">
-                            <span data-purecounter-start="0" data-purecounter-end=<%=SkillDAO.TotalSkill()%> data-purecounter-duration="1" class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end=${totalSkill} data-purecounter-duration="1" class="purecounter"></span>
                             <p>Skills</p>
                         </div>
-                        <%
-                         MentorDAO MentorDAO = new MentorDAO();
-                        %>
                         <div class="col-lg-4 col-6 text-center">
-                            <span data-purecounter-start="0" data-purecounter-end=<%=MentorDAO.TotalMentor()%> data-purecounter-duration="1" class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end=${totalMentor} data-purecounter-duration="1" class="purecounter"></span>
                             <p>Mentor</p>
                         </div>
                     </div>
@@ -175,24 +161,20 @@
                     </div>
 
                     <div class="row" data-aos="zoom-in" data-aos-delay="100">
-                        <%
-                        List<Skill> listTop3Skills = SkillDAO.getListTop3Skill();
-                        %>
-                        <%for(Skill s : listTop3Skills){%>
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                        <c:forEach items="${listTop3Skills}" var="s">
+                           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                             <div class="course-item">
-                                <img style="width: 315px; height: 210px" src=<%=s.getImage()%> class="img-fluid" alt=<%=s.getName()%>>
+                                <img style="width: 315px; height: 210px" src=${s.getImage()} class="img-fluid" alt=${s.getName()}>
                                 <div class="course-content">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4><%=s.getName()%></h4>
-                                        <!--                  <p class="price">$169</p>-->
+                                        <h4>${s.getName()}</h4>
                                     </div>
                                     <h3><a href="">Mentors of this skill</a></h3>
-                                    <p><%=s.getDescription()%></p>
+                                    <p>${s.getDescription()}</p>
                                 </div>
                             </div>
-                        </div> <!-- End Course Item-->
-                        <%}%>
+                        </div> <!-- End Course Item--> 
+                        </c:forEach>
                     </div>
                 </div>
             </section><!-- End Popular Courses Section -->
@@ -204,37 +186,29 @@
                       <p>Popular Mentor</p>
                     </div>
                     <div class="row" data-aos="zoom-in" data-aos-delay="100">
-                        <%
-                            MentorIntroDAO mentorIntro = new MentorIntroDAO();
-                            List<MentorIntro> listMentorIntro = mentorIntro.getTop3MentorIntro();
-                        %>
-                        <%for (MentorIntro mi: listMentorIntro){%>
-                      <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                        <c:forEach items="${listTop3MentorIntro}" var="mi">
+                             <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                         <div class="member">
-                            <img style="width: 315px; height: 210px" src=<%=mi.getAvatar()%> class="img-fluid" alt="">
+                            <img style="width: 315px; height: 210px" src=${mi.getAvatar()} class="img-fluid" alt="">
                           <div class="member-content">
-                              <h4><%=mi.getFullname()%>(<a href="detailmentor?idmentor=<%=mi.getID()%>">Details</a>)</h4>
-                            <span>Rate: <%=mi.getRate()%></span>
+                              <h4>${mi.getFullname()}(<a href="detailmentor?idmentor=${mi.getID()}">Details</a>)</h4>
+                            <span>Rate: ${mi.getRate()}</span>
                             <p>
-                             <%=mi.getIntro()%>
+                             ${mi.getIntro()}
                             </p>
                             <div class="social">
                               
-                                <a href=<%=mi.getFacebook()%>><i class="bi bi-facebook"></i></a>
-                                <a href=<%=mi.getInta()%>><i class="bi bi-instagram"></i></a>
+                                <a href=${mi.getFacebook()}><i class="bi bi-facebook"></i></a>
+                                <a href=${mi.getInta()}><i class="bi bi-instagram"></i></a>
                            
                             </div>
                           </div>
                         </div>
                       </div>
-                        <%}%>
-        
-                    <div>
-            
+                        </c:forEach>      
                   </div>
                 </section>
 <!--            End Trainers Section -->
-
         </main><!-- End #main -->
 
         <!-- ======= Footer ======= -->

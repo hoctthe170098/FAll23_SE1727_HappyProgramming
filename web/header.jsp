@@ -58,7 +58,7 @@ if (cookies != null) {
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
-                <li><a href="home.jsp">Home</a></li>
+                <li><a href="home">Home</a></li>
                 <li><a href="header?id=1">Mentor</a></li>
                 <li><a href="header?id=2">Skills</a></li>              
                 <li class="dropdown"><a href="#"><span>Suggest Mentor</span> <i class="bi bi-chevron-down"></i></a>

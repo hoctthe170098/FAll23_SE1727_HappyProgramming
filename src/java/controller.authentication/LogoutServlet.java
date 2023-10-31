@@ -70,7 +70,7 @@ public class LogoutServlet extends HttpServlet {
             }
         }
 
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("home");
       
     }
 

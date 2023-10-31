@@ -156,7 +156,9 @@ public class SkillDAO extends MyDAO {
     }
     public static void main(String[] args) {
         SkillDAO dao = new SkillDAO();
-        List<Skill> list = dao.getSkillByName("C");
+        for(Skill s:dao.getListSkill()){
+            System.out.println(s);
+        }
     }
 
    

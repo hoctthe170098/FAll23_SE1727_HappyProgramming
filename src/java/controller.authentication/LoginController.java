@@ -74,7 +74,7 @@ public class LoginController extends HttpServlet {
                 rememberLogin.setMaxAge(30 * 24 * 60 * 60);
                 response.addCookie(rememberLogin);
             }
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            response.sendRedirect("home");
         }
     }
 

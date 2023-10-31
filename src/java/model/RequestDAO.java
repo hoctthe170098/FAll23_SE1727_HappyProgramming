@@ -206,9 +206,8 @@ public class RequestDAO extends MyDAO {
             String mentorName = rs.getString("MentorName");
             String menteeName = rs.getString("MenteeName");
             String skill = rs.getString("Skill");
-
-            Request r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status, address, money, mentorName, menteeName, skill);
-            requests.add(r);
+            //Request r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status, address, money, mentorName, menteeName, skill);
+            //requests.add(r);
         }
     } catch (Exception e) {
         e.printStackTrace();
