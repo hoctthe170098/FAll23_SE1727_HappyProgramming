@@ -78,8 +78,8 @@
                             <%  
                                 
                             MentorIntroDAO MentorIntroDAO = new MentorIntroDAO();
-                           String skill = request.getParameter("skill");
-                           List<MentorIntro> listAllMentor = MentorIntroDAO.getMentorBySkill(skill);
+                           int ID = Integer.parseInt(request.getParameter("ID"));
+                           List<MentorIntro> listAllMentor = MentorIntroDAO.getMentorBySkill(ID);
                           
                             %>   
                             <p>We have <%=listAllMentor.size()%> mentors for you to choose </p>

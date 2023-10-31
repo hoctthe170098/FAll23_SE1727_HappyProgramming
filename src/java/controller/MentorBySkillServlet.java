@@ -1,28 +1,24 @@
-package controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Skill;
-import model.SkillDAO;
+import java.util.List;
+import model.MentorIntro;
+import model.MentorIntroDAO;
 
 /**
  *
  * @author ADMIN
  */
-public class ViewSkillServlet extends HttpServlet {
+public class MentorBySkillServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +29,7 @@ public class ViewSkillServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
@@ -41,10 +37,10 @@ public class ViewSkillServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditSkillServlet</title>");            
+            out.println("<title>Servlet MentorBySkillServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditSkillServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet MentorBySkillServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,17 +56,14 @@ public class ViewSkillServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        SkillDAO skillDAO = new SkillDAO(); // Khởi tạo SkillDAO
-        List<Skill> skillList = skillDAO.getListSkill(); // Lấy danh sách kỹ năng từ DAO
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        MentorIntroDAO mentorIntroDAO = new MentorIntroDAO();
+        int ID = Integer.parseInt(request.getParameter("ID"));
+    List<MentorIntro> listAllMentor = mentorIntroDAO.getMentorBySkill(ID);
+    request.setAttribute("listAllMentor", listAllMentor);
+    request.getRequestDispatcher("MentorBySkill.jsp").forward(request, response);
 
-        
-        request.setAttribute("skillList", skillList);
-        int totalSkill = skillDAO.TotalSkill(); 
-        request.setAttribute("totalSkill", totalSkill);
-
-        // Chuyển hướng đến trang editskill.jsp
-        request.getRequestDispatcher("viewskill.jsp").forward(request, response);
     }
 
     /**

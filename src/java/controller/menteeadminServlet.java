@@ -60,7 +60,8 @@ public class menteeadminServlet extends HttpServlet {
             throws ServletException, IOException {
          MenteeProfileDAO menteeProfileDAO = new MenteeProfileDAO();
         List<MenteeProfile> listAllMentee = menteeProfileDAO.getAllMenteeIntro();
-        
+        int totalMentee = menteeProfileDAO.TotalMentee(); 
+        request.setAttribute("totalMentee", totalMentee);
          request.setAttribute("menteelist", listAllMentee);
 
         // Chuyển hướng đến trang editskill.jsp

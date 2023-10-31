@@ -61,6 +61,8 @@ public class mentoradminServlet extends HttpServlet {
          MentorIntroDAO mentorIntroDAO = new MentorIntroDAO();
         List<MentorIntro> listAllMentor = mentorIntroDAO.getAllMentorIntro();
          request.setAttribute("mentorlist", listAllMentor);
+         int totalMentor = mentorIntroDAO.TotalMentor(); 
+        request.setAttribute("totalMentor", totalMentor);
 
         // Chuyển hướng đến trang editskill.jsp
         request.getRequestDispatcher("mentoradmin.jsp").forward(request, response);

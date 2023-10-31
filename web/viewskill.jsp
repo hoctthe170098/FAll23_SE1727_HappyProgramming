@@ -79,7 +79,7 @@
 <body>
      <jsp:include page="header.jsp"></jsp:include>
     <h1>Manage Skill</h1>
-      
+    <P>ToTal Skill: ${totalSkill}</P>
     <div class="container-fluid mb-20" >
          <div class="btn-container">
         <a style = "background-color:#007aff "class="btn btn-outline-danger" href="createskill"><i class="bi bi-plus"></i> Create Skill</a>
