@@ -78,7 +78,7 @@ if (cookies != null) {
                 <li class="dropdown"><a href="#"><span>Request</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="listrequestmentor?status=Processing">Invited</a></li>
-                        <li><a href="listrequestmentor?status=Excepted">Excepted</a></li>
+                        <li><a href="listrequestmentor?status=Accepted">Accepted</a></li>
                         <li><a href="listrequestmentor?status=Closed">Closed</a></li>
                     </ul>
                 </li>

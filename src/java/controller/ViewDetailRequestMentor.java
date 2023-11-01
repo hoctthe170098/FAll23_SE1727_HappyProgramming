@@ -19,7 +19,7 @@ import model.*;
  *
  * @author Admin
  */
-public class ViewDetailRequestMenteeServlet extends HttpServlet {
+public class ViewDetailRequestMentor extends HttpServlet {
    
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,11 +34,11 @@ public class ViewDetailRequestMenteeServlet extends HttpServlet {
         request.getSession().removeAttribute("idmentor");
         request.getSession().setAttribute("idmentor", r.getIDMentor());
         ProfileDAO pDAO = new ProfileDAO();
-        Profile mentor = pDAO.getProfileByID(r.getIDMentor());
+        Profile mentee = pDAO.getProfileByID(r.getIDMentee());
         request.setAttribute("r", r);
         request.setAttribute("s", s);
-        request.setAttribute("mentor",mentor);
-        request.getRequestDispatcher("ViewDetailRequestMentee.jsp").forward(request, response);   
+        request.setAttribute("mentee", mentee);
+        request.getRequestDispatcher("ViewDetailRequestMentor.jsp").forward(request, response);   
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

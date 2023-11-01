@@ -87,7 +87,7 @@
 					        <td>${r.from}</td>
 					        <td>${r.to}</td>
 					        <td>
-                                                <a href="detailrequestmentee?idrequest=${r.ID}" class="btn btn-primary">Detail</a>
+                                                <a href="detailrequestmentor?idrequest=${r.ID}" class="btn btn-primary">Detail</a>
                                                 </td>
 					      </tr>                                               
                                             </c:forEach>					     					  					

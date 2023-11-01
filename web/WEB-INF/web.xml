@@ -128,10 +128,14 @@
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.HomeServlet</servlet-class>
-        </servlet> 
-        <servlet>
+    </servlet>
+    <servlet>
         <servlet-name>menteeadminServlet</servlet-name>
         <servlet-class>controller.menteeadminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDetailRequestMentor</servlet-name>
+        <servlet-class>controller.ViewDetailRequestMentor</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
@@ -259,7 +263,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>menteeadminServlet</servlet-name>
-        <url-pattern>/menteeadmin</url-pattern>  
+        <url-pattern>/menteeadmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailRequestMentor</servlet-name>
+        <url-pattern>/detailrequestmentor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
