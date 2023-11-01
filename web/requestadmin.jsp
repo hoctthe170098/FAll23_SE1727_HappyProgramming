@@ -11,6 +11,7 @@
 <%@page import = "java.util.ArrayList" %>
 
 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -90,40 +91,49 @@
     -webkit-background-clip: text;
     color: transparent;
 }
+
     </style>
     </head>
     <body>
           <jsp:include page="header.jsp"></jsp:include>
           
       <h1>Manage Mentor</h1>
-      <p>Total Mentor: ${totalMentor}</p>
-    <table border="1">
-        <tr>
-            
-            <th>FullName</th>
-            <th>Rate</th>
-            <th>Image</th>
-            <th>Intro</th>
-            <th>Facebook</th>
-            <th>Instagram</th>
-            <th>Options</th>
-        </tr>
-        <c:forEach items="${mentorlist}" var="mentor">
+      <p>Total Requests:${requestlist.size()} </p>
+   <table border="1">
     <tr>
-        
-        <td>${mentor.fullname}</td>
-        <td style="width: 700px;">${mentor.rate}</td>
-        <td><img style="height: 125px; width: 125px" src="${mentor.avatar}" class="img-fluid" alt=""></td>
-        <td>${mentor.intro}</td>
-        <td> <a  href="${mentor.facebook}"><i class="bi bi-facebook custom-icon"></i></a></td>
-        <td><a href="${mentor.inta}"><i class="bi bi-instagram custom-instagram-icon"></i></a></td>
-        <td>
-              <a style="background-color: blue" class="btn btn-outline-danger" href="detailmentoradmin?ID=${mentor.ID}" style="padding: 6px">Details</a>
-            <a style = " background-color: red" class="btn btn-outline-danger" onclick="Delete(${mentor.ID})" style="padding: 6px"><i class="bi bi-trash"></i>Delete</a>
-        </td>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Requested By</th>
+        <th>Request To</th>
+        <th>Status</th>
+        <th>Options</th>
     </tr>
-</c:forEach>
-    </table>
+    <c:set var="count" value="0" />
+    <c:forEach items="${requestlist}" var="request">
+        
+        <tr>
+            <td>${request.ID}</td>
+            <td>${request.title}</td>
+            <td>${request.menteeName}</td>
+            <td>${request.mentorName}</td>
+            <td>${request.status}</td>
+           <td>
+            <c:choose>
+                <c:when test="${request.status == 'OutOfDate'}">
+                    <a href="requestdetail?requestID=${request.ID}" class="btn btn-primary">Details</a>
+                    <a style="background-color: red" class="btn btn-outline-danger" onclick="Delete(${request.ID})" style="padding: 6px"><i class="bi bi-trash"></i>Delete</a>
+                    
+                </c:when>
+                <c:otherwise>
+                    
+                    <a href="requestdetail?requestID=${request.ID}" class="btn btn-primary">Details</a>
+                    
+                </c:otherwise>
+            </c:choose>
+        </td>
+        </tr>
+    </c:forEach>
+</table>
         <jsp:include page="Footer.jsp"></jsp:include>
 
                             <div id="preloader"></div>
@@ -138,14 +148,15 @@
 
                             <!-- Template Main JS File -->
                             <script src="assets/js/main.js"></script>
-                            <script>
+                             <script>
        function Delete(ID){
            var option = confirm('Are you sure to delete?' );
            if(option === true) {
-               window.location.href = 'Deletementor?ID=' + ID;
+               window.location.href = 'Deleterequest?ID=' + ID;
            }
        }
    </script>
+                           
 </body>
 
 </html>

@@ -138,6 +138,17 @@ public class RequestDAO extends MyDAO {
          }
          return null;
     }
+      public void delete(int ID) {
+        xSql = "DELETE FROM Request WHERE ID=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, ID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public boolean IsDuplicateRequestMentee(int IDMentee,float hFrom,float hTo,Date Date){
         List<Request> listRequest = new ArrayList<>();
             xSql = "select * "
@@ -179,42 +190,8 @@ public class RequestDAO extends MyDAO {
         if(listRequest.size()>0)return true;
         else return false;
     }
-    public List<Request> getAllRequests() {
-    List<Request> requests = new ArrayList<>();
-    xSql = "SELECT pr.FullName AS MentorName, pr_e.FullName AS MenteeName, s.Name AS Skill, r.Title, r.Date, r.[From], r.[To], r.Details, r.Status, r.Address, r.money " +
-           "FROM Request r " +
-           "JOIN Profile pr ON r.IDMentor = pr.ID " +
-           "JOIN Profile pr_e ON r.IDMentee = pr_e.ID " +
-           "JOIN Skills s ON r.IDSkill = s.ID";
-
-    try {
-        ps = con.prepareStatement(xSql);
-        rs = ps.executeQuery();
-        while (rs.next()) {
-            int ID = rs.getInt("ID");
-            int iDMentor = rs.getInt("IDMentor");
-            int iDMentee = rs.getInt("IDMentee");
-            int IDSkill = rs.getInt("IDSkill");
-            float from = rs.getFloat("From");
-            float to = rs.getFloat("to");
-            String status = rs.getString("status"); 
-            String title = rs.getString("Title");
-            String detail = rs.getString("Details");
-            Date date = rs.getDate("Date");
-            String address = rs.getString("Address");
-            float money = rs.getFloat("money");
-            String mentorName = rs.getString("MentorName");
-            String menteeName = rs.getString("MenteeName");
-            String skill = rs.getString("Skill");
-            //Request r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status, address, money, mentorName, menteeName, skill);
-            //requests.add(r);
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
     
-    return requests;
-}
+
      public boolean IsDuplicateRequestMentor(int IDMentor,float hFrom,float hTo,Date Date){
         List<Request> listRequest = new ArrayList<>();
             xSql = "select * "

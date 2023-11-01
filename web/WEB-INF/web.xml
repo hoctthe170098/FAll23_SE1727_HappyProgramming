@@ -9,6 +9,23 @@
         <servlet-name>ShowMentorServlet</servlet-name>
         <servlet-class>controller.ShowMentorServlet</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>requestadminServlet</servlet-name>
+        <servlet-class>controller.requestadminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleterequestServlet</servlet-name>
+        <servlet-class>controller.DeleterequestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDetailRequestAdmin</servlet-name>
+        <servlet-class>controller.ViewDetailRequestAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>detailmentoradminServlet</servlet-name>
+        <servlet-class>controller.detailmentoradminServlet</servlet-class>
+    </servlet>
+
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
@@ -185,6 +202,23 @@
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>requestadminServlet</servlet-name>
+        <url-pattern>/requestadmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleterequestServlet</servlet-name>
+        <url-pattern>/Deleterequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailRequestAdmin</servlet-name>
+        <url-pattern>/requestdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>detailmentoradminServlet</servlet-name>
+        <url-pattern>/detailmentoradmin</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/registeracc</url-pattern>
