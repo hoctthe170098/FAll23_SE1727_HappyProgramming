@@ -73,6 +73,7 @@
 
         <label for="editSkillImage">Image:</label>
         <input type="file" id="editSkillImage" name="skillImage" accept="image/*" value="${skill.image}">
+         
 
         <label for="editSkillDescription">Description:</label><br>
         <textarea id="editSkillDescription" name="skillDescription" rows="4" required>${skill.description}</textarea><br><br>

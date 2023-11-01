@@ -109,6 +109,21 @@ public class SkillDAO extends MyDAO {
         }
         return (listSkill);
     }
+      public void updateSkillByID(int ID, String name, String description, String image) {
+    String sql = "UPDATE Skills SET Name = ?, Description = ?, Image = ? WHERE ID = ?";
+    
+    try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, description);
+        preparedStatement.setString(3, image);
+        preparedStatement.setInt(4, ID);
+        
+        preparedStatement.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
 
     public List<Skill> getListTop3Skill() {
         List<Skill> listSkill = new ArrayList<>();

@@ -137,6 +137,10 @@
         <servlet-name>ViewDetailRequestMentor</servlet-name>
         <servlet-class>controller.ViewDetailRequestMentor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MentorBySkillServlet</servlet-name>
+        <servlet-class>controller.MentorBySkillServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -268,6 +272,10 @@
     <servlet-mapping>
         <servlet-name>ViewDetailRequestMentor</servlet-name>
         <url-pattern>/detailrequestmentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MentorBySkillServlet</servlet-name>
+        <url-pattern>/MentorBySkill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

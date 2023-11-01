@@ -93,7 +93,7 @@
 <!--                                        <p class="price">$169</p>-->
                                     </div>
 
-                                    <h3><a href="MentorBySkill.jsp?skill=<%=listSkill.get(j-1).getName()%>">Mentors of this skill</a></h3>
+                                    <h3><a href="MentorBySkill.jsp?ID=<%=listSkill.get(j-1).getID()%>">Mentors of this skill</a></h3>
                                     <p><%=listSkill.get(j-1).getDescription()%></p>
                                 </div>
                             </div>

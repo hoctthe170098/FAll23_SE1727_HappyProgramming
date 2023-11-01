@@ -93,57 +93,61 @@
     </style>
     </head>
     <body>
-          <jsp:include page="header.jsp"></jsp:include>
-          
-      <h1>Manage Mentor</h1>
-      <p>Total Mentor: ${totalMentor}</p>
+    <jsp:include page="header.jsp"></jsp:include>
+
+    <h1>Manage Mentee</h1>
+<p> Total Mentees:${totalMentee}</p>
     <table border="1">
         <tr>
             <th>FullName</th>
-            <th>Rate</th>
-            <th>Image</th>
-            <th>Intro</th>
+            <th>Avatar</th>
+            <th>Address</th>
+            <th>Birth</th>
+            <th>Phone</th>
             <th>Facebook</th>
             <th>Instagram</th>
-            <th>Options</th>
+            <th>Action</th>
         </tr>
-        <c:forEach items="${mentorlist}" var="mentor">
-    <tr>
-        <td>${mentor.fullname}</td>
-        <td style="width: 700px;">${mentor.rate}</td>
-        <td><img style="height: 125px; width: 125px" src="${mentor.avatar}" class="img-fluid" alt=""></td>
-        <td>${mentor.intro}</td>
-        <td> <a  href="${mentor.facebook}"><i class="bi bi-facebook custom-icon"></i></a></td>
-        <td><a href="${mentor.inta}"><i class="bi bi-instagram custom-instagram-icon"></i></a></td>
-        <td>
-            
-            <a style = " background-color: red" class="btn btn-outline-danger" onclick="Delete(${mentor.ID})" style="padding: 6px"><i class="bi bi-trash"></i>Delete</a>
-        </td>
-    </tr>
-</c:forEach>
+        <c:forEach items="${menteelist}" var="mentee">
+            <tr>
+                <td>${mentee.fullname}</td>
+                <td><img style="height: 125px; width: 125px;" src="${mentee.avatar}" class="img-fluid" alt=""></td>
+                <td>${mentee.address}</td>
+                <td>${mentee.birth}</td>
+                <td>${mentee.phone}</td>
+                <td><a href="${mentee.facebook}" target="_blank"><i class="bi bi-facebook custom-icon"></i> Facebook</a></td>
+                <td><a href="${mentee.inta}" target="_blank"><i class="bi bi-instagram custom-instagram-icon"></i> Instagram</a></td>
+                <td>
+                    <a style="background-color: red" class="btn btn-outline-danger" onclick="Delete(${mentee.ID})" style="padding: 6px">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
-        <jsp:include page="Footer.jsp"></jsp:include>
 
-                            <div id="preloader"></div>
-                            <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <jsp:include page="Footer.jsp"></jsp:include>
 
-                            <!-- Vendor JS Files -->
-                            <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-                            <script src="assets/vendor/aos/aos.js"></script>
-                            <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                            <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-                            <script src="assets/vendor/php-email-form/validate.js"></script>
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-                            <!-- Template Main JS File -->
-                            <script src="assets/js/main.js"></script>
-                            <script>
-       function Delete(ID){
-           var option = confirm('Are you sure to delete?' +ID);
-           if(option === true) {
-               window.location.href = 'Deletementor?ID=' + ID;
-           }
-       }
-   </script>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        function Delete(ID) {
+            var option = confirm('Are you sure to delete Mentee with ID ' + ID + '?');
+            if (option === true) {
+                window.location.href = 'Deletementee?ID=' + ID;
+            }
+        }
+    </script>
 </body>
 
 </html>

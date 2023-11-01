@@ -45,6 +45,25 @@ public static void main(String[] args) throws SQLException {
 
     }
 }
+
+    public int TotalMentor(){
+           
+        xSql = "select count(*)as Count from Mentor";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int count;         
+            while (rs.next()) {
+                count = rs.getInt("Count");
+               return count;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
             
 

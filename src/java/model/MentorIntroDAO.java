@@ -51,57 +51,58 @@ public class MentorIntroDAO extends MyDAO {
         }
         return listTop3Mentor;
     }
-   public MentorIntro getMentorByID(int ID) {
-    MentorIntro mentor = null;
-    String xSql = "SELECT Mentor.ID, Avatar, Fullname, Rate, Intro, FacebookLink, InstagramLink "
-            + "FROM Mentor JOIN Profile ON Mentor.ID = Profile.ID WHERE ID = ?";
-    try {
-        PreparedStatement ps = con.prepareStatement(xSql);
-        ps.setInt(1, ID);
-        ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
-            // Lấy thông tin từ cơ sở dữ liệu
-            int id = rs.getInt("ID");
-            String avatar = rs.getString("Avatar");
-            String fullname = rs.getString("Fullname");
-            float rate = rs.getFloat("Rate");
-            String intro = rs.getString("Intro");
-            String facebook = rs.getString("FacebookLink");
-            String inta = rs.getString("InstagramLink");
+    public MentorIntro getMentorByID(int ID) {
+        MentorIntro mentor = null;
+        String xSql = "SELECT Mentor.ID, Avatar, Fullname, Rate, Intro, FacebookLink, InstagramLink "
+                + "FROM Mentor JOIN Profile ON Mentor.ID = Profile.ID WHERE ID = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(xSql);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
 
-            // Tạo đối tượng Mentor
-            mentor = new MentorIntro(id, avatar, fullname, rate, intro, facebook, inta);
+            if (rs.next()) {
+                // Lấy thông tin từ cơ sở dữ liệu
+                int id = rs.getInt("ID");
+                String avatar = rs.getString("Avatar");
+                String fullname = rs.getString("Fullname");
+                float rate = rs.getFloat("Rate");
+                String intro = rs.getString("Intro");
+                String facebook = rs.getString("FacebookLink");
+                String inta = rs.getString("InstagramLink");
+
+                // Tạo đối tượng Mentor
+                mentor = new MentorIntro(id, avatar, fullname, rate, intro, facebook, inta);
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        rs.close();
-        ps.close();
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return mentor;
     }
 
-    return mentor;
-}
-  public void delete(int ID) {
-    String mentorDeleteSql = "DELETE FROM Mentor WHERE ID = ?";
-    String skillMentorDeleteSql = "DELETE FROM SkillMentor WHERE IDMentor = ?";
-    
-    try {
-        
-        ps = con.prepareStatement(skillMentorDeleteSql);
-        ps.setInt(1, ID);
-        ps.executeUpdate();
-        ps.close();
+    public void delete(int ID) {
+        String mentorDeleteSql = "DELETE FROM Mentor WHERE ID = ?";
+        String skillMentorDeleteSql = "DELETE FROM SkillMentor WHERE IDMentor = ?";
 
-        
-        ps = con.prepareStatement(mentorDeleteSql);
-        ps.setInt(1, ID);
-        ps.executeUpdate();
-        ps.close();
-    } catch (Exception e) {
-        e.printStackTrace();
+        try {
+
+            ps = con.prepareStatement(skillMentorDeleteSql);
+            ps.setInt(1, ID);
+            ps.executeUpdate();
+            ps.close();
+
+            ps = con.prepareStatement(mentorDeleteSql);
+            ps.setInt(1, ID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
 
     public List<MentorIntro> getMentorByName(String mentorName) {
         List<MentorIntro> listMentorName = new ArrayList<>();
@@ -210,6 +211,55 @@ public class MentorIntroDAO extends MyDAO {
             e.printStackTrace();
         }
         return listTop3Mentor;
+    }
+
+   public List<MentorIntro> getMentorBySkill(int skillID) {
+    List<MentorIntro> listMentor = new ArrayList<>();
+    String sql = "SELECT m.ID, Avatar, Fullname, Rate, Intro, FacebookLink, InstagramLink FROM Mentor m " +
+                 "JOIN Profile p ON m.ID = p.ID " +
+                 "JOIN SkillMentor sm ON m.ID = sm.IDMentor " +
+                 "JOIN Skills s ON s.ID = sm.IDSkill " +
+                 "WHERE s.ID = ?";
+    
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, skillID);
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String avatar = rs.getString("Avatar");
+                String fullname = rs.getString("Fullname");
+                float rate = rs.getFloat("Rate");
+                String intro = rs.getString("Intro");
+                String facebook = rs.getString("FacebookLink");
+                String inta = rs.getString("InstagramLink");
+                
+                MentorIntro mentor = new MentorIntro(id, avatar, fullname, rate, intro, facebook, inta);
+                listMentor.add(mentor);
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return listMentor;
+}
+
+    public int TotalMentor() {
+
+        xSql = "select count(*)as Count from Mentor";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int count;
+            while (rs.next()) {
+                count = rs.getInt("Count");
+                return count;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public static void main(String[] args) {
