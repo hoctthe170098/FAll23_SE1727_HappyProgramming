@@ -105,6 +105,40 @@ public class RequestDAO extends MyDAO {
          }
          return false;
     }
+      public boolean IsExistRequestAccepted(int IDMentee){
+         xSql = "select * "
+                 + "from Request "
+                 + "where IDMentee = ? and Status = 'Accepted'";
+         int ID,iDMentor,iDMentee,IDSkill;
+         float from,to,money;
+         String title,status,detail,address;
+         Date date;
+         Request r ;
+         try{
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, IDMentee);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            ID = rs.getInt("ID");
+            iDMentor = rs.getInt("IDMentor");
+            iDMentee = rs.getInt("IDMentee");
+            IDSkill = rs.getInt("IDSkill");
+            from  = rs.getFloat("From");
+            to = rs.getFloat("to");
+            status = rs.getString("status"); 
+            title = rs.getString("Title");
+            detail = rs.getString("Details");
+            date = rs.getDate("Date");
+            address = rs.getString("Address");
+            money = rs.getFloat("money");
+            r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status,address,money);
+            if(r!=null)return true;
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         return false;
+    }
      public Request getRequestByID(int id){
          xSql = "select * "
                  + "from Request "
@@ -138,6 +172,17 @@ public class RequestDAO extends MyDAO {
          }
          return null;
     }
+     public void deleteRequestByIDMentee(int IDMentee){
+         xSql = "DELETE FROM Request WHERE IDMentee=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, IDMentee);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+     }
       public void delete(int ID) {
         xSql = "DELETE FROM Request WHERE ID=?";
         try {

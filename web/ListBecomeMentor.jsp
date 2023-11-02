@@ -103,7 +103,7 @@
     <body>
         <jsp:include page="header.jsp"></jsp:include>
             <h1>List Register to Become Mentor</h1>
-
+            <p style="color: red" class="text-danger">${msgE}</p>
             <div class="container-fluid mb-20" >      
                 <table border="1">
                     <tr>
