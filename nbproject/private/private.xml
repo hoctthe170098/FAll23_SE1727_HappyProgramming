@@ -3,9 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FAll23_SE1727_HappyProgramming/src/java/controller/LoginController.java</file>
-            <file>file:/D:/FAll23_SE1727_HappyProgramming/src/java/controller/RegisterController.java</file>
-            <file>file:/D:/FAll23_SE1727_HappyProgramming/src/java/model/AccountDAO.java</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/controller/ViewDetailOfMentorServlet.java</file>
+            <file>file:/C:/PRJ/happyprogramming/web/header.jsp</file>
+            <file>file:/C:/PRJ/happyprogramming/web/mentoradmin.jsp</file>
+            <file>file:/C:/PRJ/happyprogramming/web/ViewDetailMentor.jsp</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/controller/detailmentoradminServlet.java</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/MentorIntroDAO.java</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/controller/mentoradminServlet.java</file>
+            <file>file:/C:/PRJ/happyprogramming/web/DetailRequestAdmin.jsp</file>
+            <file>file:/C:/PRJ/happyprogramming/web/profile.jsp</file>
+            <file>file:/C:/PRJ/happyprogramming/web/viewdetailmentoradmin.jsp</file>
+            <file>file:/C:/PRJ/happyprogramming/web/menteeadmin.jsp</file>
+            <file>file:/C:/PRJ/happyprogramming/src/java/model/MentorIntro.java</file>
+            <file>file:/C:/PRJ/happyprogramming/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

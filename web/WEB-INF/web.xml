@@ -9,7 +9,7 @@
         <servlet-name>ShowMentorServlet</servlet-name>
         <servlet-class>controller.ShowMentorServlet</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>requestadminServlet</servlet-name>
         <servlet-class>controller.requestadminServlet</servlet-class>
     </servlet>
@@ -25,7 +25,6 @@
         <servlet-name>detailmentoradminServlet</servlet-name>
         <servlet-class>controller.detailmentoradminServlet</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
@@ -111,10 +110,6 @@
         <servlet-class>controller.ViewDetailRequestMenteeServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditSkillServlet</servlet-name>
-        <servlet-class>controller.EditSkillServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CommentServlet</servlet-name>
         <servlet-class>controller.CommentServlet</servlet-class>
     </servlet>
@@ -157,6 +152,10 @@
     <servlet>
         <servlet-name>MentorBySkillServlet</servlet-name>
         <servlet-class>controller.MentorBySkillServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSkillServlet</servlet-name>
+        <servlet-class>controller.EditSkillServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
@@ -218,7 +217,6 @@
         <servlet-name>detailmentoradminServlet</servlet-name>
         <url-pattern>/detailmentoradmin</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/registeracc</url-pattern>
@@ -264,10 +262,6 @@
         <url-pattern>/detailrequestmentee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditSkillServlet</servlet-name>
-        <url-pattern>/editskill</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CommentServlet</servlet-name>
         <url-pattern>/comment</url-pattern>
     </servlet-mapping>
@@ -310,6 +304,10 @@
     <servlet-mapping>
         <servlet-name>MentorBySkillServlet</servlet-name>
         <url-pattern>/MentorBySkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSkillServlet</servlet-name>
+        <url-pattern>/editskill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

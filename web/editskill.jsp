@@ -64,23 +64,26 @@
 <body>
     
 
-    
-     <h1>Edit Skill</h1>
-    <form action="editskill" method="post">
-        <input type="hidden" id="editSkillID" name="skillID" value="${skill.ID}">
-        <label for="editSkillName">Name:</label>
-        <input type="text" id="editSkillName" name="skillName" value="${skill.name}" required><br><br>
+    <h1>Edit Skill</h1>
+<form action="editskill" method="post">
+    <input type="hidden" id="editSkillID" name="skillID" value="${skillID}">
+    <label for="editSkillName">Name:</label>
+    <input type="text" id="editSkillName" name="skillName" value="${skillName}" required><br><br>
 
-        <label for="editSkillImage">Image:</label>
-        <input type="file" id="editSkillImage" name="skillImage" accept="image/*" value="${skill.image}">
-         
+    <label for="editSkillImage">Image:</label>
+    <!-- Thêm một hidden input để lưu giữ giá trị hiện tại của skillImage -->
+    <input type="hidden" name="currentSkillImage" value="${skillImage}">
+    <!-- Hiển thị hình ảnh hiện tại (nếu có) -->
+    <img src="${skillImage}" alt="Current Image" width="200">
+    <!-- Cho phép người dùng tải lên hình ảnh mới -->
+    <input type="file" id="editSkillImage" name="skillImage" accept="image/*">
+     
+    <label for="editSkillDescription">Description:</label><br>
+    <textarea id="editSkillDescription" name="skillDescription" rows="4" required>${skillDescription}</textarea><br><br>
+    <input type="submit" value="Save">
+</form>
 
-        <label for="editSkillDescription">Description:</label><br>
-        <textarea id="editSkillDescription" name="skillDescription" rows="4" required>${skill.description}</textarea><br><br>
-        <input type="submit" value="Save">
-    </form>
-    </form>
     
-    <%-- Your JavaScript for confirmation and other functionalities --%>
+  
 </body>
 </html>
