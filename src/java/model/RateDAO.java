@@ -59,6 +59,17 @@ public class RateDAO extends MyDAO{
             e.printStackTrace();
         }
     }
+    public void DeleteRate(int idMentee){
+              xSql = "Delete from Rate where IDMentee = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, idMentee);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         RateDAO dao = new RateDAO();
         System.out.println(dao.checkIsExistRate(3, 2));

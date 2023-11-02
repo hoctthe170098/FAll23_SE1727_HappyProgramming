@@ -25,6 +25,7 @@ public class ListBecomeMentor extends HttpServlet {
         PrintWriter out = response.getWriter();
         ListBecomeMentorDAO lDAO = new ListBecomeMentorDAO();
         String indexPage = request.getParameter("index");
+        String msgE = request.getParameter("msgE");
         if (indexPage == null) {
             indexPage = "1";
         }
@@ -38,6 +39,9 @@ public class ListBecomeMentor extends HttpServlet {
         request.setAttribute("index", indexPage);
         request.setAttribute("page", page);
         request.setAttribute("listCV", listCV);
+        if(msgE!=null){
+            request.setAttribute("msgE", msgE);
+        }
         request.getRequestDispatcher("ListBecomeMentor.jsp").forward(request, response);
     }
 

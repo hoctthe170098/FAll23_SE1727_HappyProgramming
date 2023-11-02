@@ -67,6 +67,16 @@ public class CommentDAO extends MyDAO{
             e.printStackTrace();
         } 
     }
+     public void deleteCommentByIDMentee(int IDMentee){
+             xSql = "delete from Comment where IDMentee = "+IDMentee;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
     public static void main(String[] args) {
         CommentDAO dao = new CommentDAO();
         for(Comment c : dao.getCommentBy2ID(3, 2)){

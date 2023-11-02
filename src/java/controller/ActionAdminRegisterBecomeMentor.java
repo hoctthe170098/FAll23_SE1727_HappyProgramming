@@ -27,7 +27,6 @@ public class ActionAdminRegisterBecomeMentor extends HttpServlet {
         ListBecomeMentorDAO lDAO = new ListBecomeMentorDAO();
         NoficationDAO nDAO = new NoficationDAO();
         MentorDAO mDAO = new MentorDAO();
-        AccountDAO aDAO = new AccountDAO();
         MenteeDAO meDAO = new MenteeDAO();
         MentorSkillDAO msDAO = new MentorSkillDAO();
         RequestDAO rDAO = new RequestDAO();
@@ -41,7 +40,8 @@ public class ActionAdminRegisterBecomeMentor extends HttpServlet {
             request.getRequestDispatcher("ListBecomeMentor.jsp").forward(request, response);
         } else {            
             if (rDAO.IsExistRequestAccepted(idMentee)) {
-                request.setAttribute("Mentee is having a meeting, can't become mentor now", out);
+                request.setAttribute("msgE","Mentee is having a meeting, can't become mentor now" );
+                request.getRequestDispatcher("listbecomementor").forward(request, response);
             } else {
                 SkillDAO sDAO = new SkillDAO();
                 List<Skill> listSkill = sDAO.getListSkill();
@@ -55,18 +55,21 @@ public class ActionAdminRegisterBecomeMentor extends HttpServlet {
                         }
                     }                    
                 }
+                new CommentDAO().deleteCommentByIDMentee(idMentee);
+                new RateDAO().DeleteRate(idMentee);
                 rDAO.deleteRequestByIDMentee(idMentee);
-                aDAO.updateRole(idMentee);
+                new AccountDAO().updateRole(idMentee);
+                lDAO.delete(idMentee);
                 meDAO.delete(idMentee);
                 mDAO.insertMentor(idMentee, cv.getIntro(), cv.getEx());
                 for (int i : listIDSkill) {
                     msDAO.insertMentorSkill(idMentee, i);
-                }
-                lDAO.delete(idMentee);
+                }           
                 String content = "Congratulations on becoming a mentor, I hope you will try your best to help as much as possible mentees";
-                nDAO.insertNoficationDAO(acc.getID(), idMentee, content, 1);                
+                nDAO.insertNoficationDAO(acc.getID(), idMentee, content, 1);  
+                response.sendRedirect("listbecomementor");
             }
-            request.getRequestDispatcher("ListBecomeMentor.jsp").forward(request, response);
+            
         }
     }
     
