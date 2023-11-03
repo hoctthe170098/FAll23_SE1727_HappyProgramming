@@ -319,6 +319,20 @@ public class RequestDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+    public void updateStatusRequest(String action,int IDRequest){
+                    xSql = "Update Request "
+                            + "set Status = ? "
+                            + "where ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, action);
+            ps.setInt(2, IDRequest);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public int getTotalRequestByID(int IDMentee){
          int x;
         xSql = "select count=count(*)from Request where IDMentee= " + IDMentee;
@@ -433,6 +447,7 @@ public class RequestDAO extends MyDAO {
          }
          return list;
     }
+        
     public static void main(String[] args) {
         RequestDAO dao = new RequestDAO();
 //        long millis=System.currentTimeMillis();   

@@ -80,6 +80,7 @@ if (cookies != null) {
                         <li><a href="listrequestmentor?status=Processing">Invited</a></li>
                         <li><a href="listrequestmentor?status=Accepted">Accepted</a></li>
                         <li><a href="listrequestmentor?status=Closed">Closed</a></li>
+                        <li><a href="listrequestmentor?status=Rejected">Rejected</a></li>
                     </ul>
                 </li>
                 <li><a href="updatecvmentor">CV</a></li>

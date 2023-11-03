@@ -157,6 +157,10 @@
         <servlet-name>EditSkillServlet</servlet-name>
         <servlet-class>controller.EditSkillServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActionRequestMentor</servlet-name>
+        <servlet-class>controller.ActionRequestMentor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -308,6 +312,10 @@
     <servlet-mapping>
         <servlet-name>EditSkillServlet</servlet-name>
         <url-pattern>/editskill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActionRequestMentor</servlet-name>
+        <url-pattern>/actionrequestmentor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

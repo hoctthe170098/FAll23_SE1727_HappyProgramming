@@ -25,7 +25,12 @@ public class ViewDetailRequestMentor extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idRequest = Integer.parseInt(request.getParameter("idrequest"));      
+        String sRequest = request.getParameter("idrequest");
+        if(sRequest==null){
+            sRequest=(String)request.getSession().getAttribute("idrequest");
+        }
+        int idRequest = Integer.parseInt(sRequest);
+        String msgE = request.getParameter("msgE");
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
         Request r = rDAO.getRequestByID(idRequest);
@@ -38,6 +43,9 @@ public class ViewDetailRequestMentor extends HttpServlet {
         request.setAttribute("r", r);
         request.setAttribute("s", s);
         request.setAttribute("mentee", mentee);
+        if(msgE!=null){
+            request.setAttribute("msgE", msgE);
+        }
         request.getRequestDispatcher("ViewDetailRequestMentor.jsp").forward(request, response);   
     }
 
