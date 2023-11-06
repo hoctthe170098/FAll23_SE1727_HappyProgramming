@@ -37,7 +37,6 @@ public class ActionAdminRegisterBecomeMentor extends HttpServlet {
             lDAO.delete(idMentee);
             String content = "If you failed to apply becoming a mentor, you can try again when your CV is better";
             nDAO.insertNoficationDAO(acc.getID(), idMentee, content, 1);
-            request.getRequestDispatcher("ListBecomeMentor.jsp").forward(request, response);
         } else {            
             if (rDAO.IsExistRequestAccepted(idMentee)) {
                 request.setAttribute("msgE","Mentee is having a meeting, can't become mentor now" );
@@ -66,11 +65,10 @@ public class ActionAdminRegisterBecomeMentor extends HttpServlet {
                     msDAO.insertMentorSkill(idMentee, i);
                 }           
                 String content = "Congratulations on becoming a mentor, I hope you will try your best to help as much as possible mentees";
-                nDAO.insertNoficationDAO(acc.getID(), idMentee, content, 1);  
-                response.sendRedirect("listbecomementor");
-            }
-            
+                nDAO.insertNoficationDAO(acc.getID(), idMentee, content, 1);                 
+            }         
         }
+        response.sendRedirect("listbecomementor");
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
