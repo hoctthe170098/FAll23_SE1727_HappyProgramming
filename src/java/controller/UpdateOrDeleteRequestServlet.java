@@ -49,24 +49,23 @@ public class UpdateOrDeleteRequestServlet extends HttpServlet {
             int IDMentee = acc.getID();
             int IDMentor = (int)request.getSession().getAttribute("idmentor");
             int IDSkill = Integer.parseInt(sIDSkill);
-            if(rDAO.IsDuplicateRequestMentee(IDMentee, from, to,date)){
+            if(!date.equals(r.getDate())&&rDAO.IsDuplicateRequestMentee(IDMentee, from, to,date)){
                 request.setAttribute("msgE", "You had another appointment during this time");
                 request.getRequestDispatcher("UpdateRequest.jsp").forward(request, response);
-            }else if(rDAO.IsDuplicateRequestMentor(IDMentor, from, to, date)){
+            }else if(!date.equals(r.getDate())&&rDAO.IsDuplicateRequestMentor(IDMentor, from, to, date)){
                 request.setAttribute("msgE", "This mentor had another appointment during this time");
                 request.getRequestDispatcher("UpdateRequest.jsp").forward(request, response);
             }else{
             Request rUpdate = new Request(r.getID(), IDMentor, 
-                    IDMentee, IDSkill, title, date, from, to, detail, "Processing", address, money);
+                    IDMentee, IDSkill, title, date, from, to, detail, r.getStatus(), address, money);
             rDAO.updateRequest(rUpdate);
             if(r.getStatus().equals("Accepted")){
-            String content = "I have changed a request you have accepted from me, check your request part Processing please";
+            String content = "I have changed a request you have accepted from me, check your request part Accepted please";
             nDAO.insertNoficationDAO(IDMentee, IDMentor, content, 3);
             }
             request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
             }
-            }  
-         
+            }      
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

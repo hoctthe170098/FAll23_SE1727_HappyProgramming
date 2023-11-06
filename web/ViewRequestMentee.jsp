@@ -78,7 +78,6 @@
                                             <th>Date</th>
                                             <th>From</th>
                                             <th>To</th>
-                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -91,7 +90,6 @@
                                             <td>${r.date}</td>
                                             <td>${r.from}</td>
                                             <td>${r.to}</td>
-                                            <td>${r.status}</td>
                                             <td>
                                                 <a href="detailrequestmentee?idrequest=${r.ID}" class="btn btn-primary">Detail</a>
                                             </td>
@@ -105,20 +103,20 @@
                 <div class="block-27">
                     <ul>
                         <c:if test="${index>1}">
-                            <li><a href="viewrequestmentee?index=${index-1}">&lt;</a></li>
+                            <li><a href="viewrequestmentee?status=${status}&index=${index-1}">&lt;</a></li>
                             </c:if>          
                             <c:forEach var="i" begin="1" end="${page}">
                                 <c:choose>
                                     <c:when test="${index==i}">
-                                    <li class="active"><span><a href="viewrequestmentee?index=${i}">${i}</a></span></li>    
+                                    <li class="active"><span><a href="viewrequestmentee?status=${status}&index=${i}">${i}</a></span></li>    
                                             </c:when>
                                             <c:otherwise>
-                                    <li><span><a href="viewrequestmentee?index=${i}">${i}</a></span></li>     
+                                    <li><span><a href="viewrequestmentee?status=${status}&index=${i}">${i}</a></span></li>     
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
                                     <c:if test="${index<page}">
-                            <li><a href="viewrequestmentee?index=${index+1}">&gt;</a></li>
+                            <li><a href="viewrequestmentee?status=${status}&index=${index+1}">&gt;</a></li>
                             </c:if>            
                     </ul>
                 </div>

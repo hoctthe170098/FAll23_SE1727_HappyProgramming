@@ -71,7 +71,15 @@ if (cookies != null) {
                 <%if (acc!=null){%>
                 <%if(acc.getIsMentee()==1){%>
                 <li><a href="profile">Profile</a></li>
-                <li><a href="viewrequestmentee">Request</a></li>
+               
+                <li class="dropdown"><a href="#"><span>Request</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="viewrequestmentee?status=Processing">Processing</a></li>
+                        <li><a href="viewrequestmentee?status=Accepted">Accepted</a></li>
+                        <li><a href="viewrequestmentee?status=Closed">Closed</a></li>
+                        <li><a href="viewrequestmentee?status=Rejected">Rejected</a></li>
+                    </ul>
+                </li>
                 <li><a href="becomementor">Become mentor</a></li>
                     <%}%>
                     <%if(acc.getIsMentor()==1){%>

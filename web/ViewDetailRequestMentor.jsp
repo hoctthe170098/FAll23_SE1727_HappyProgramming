@@ -168,12 +168,11 @@
                                                 <button  class="btn btn-primary btn-lg" onclick="return Action('accept')">Accept</button>
                                             </span> 
                                         </c:when>
-                                        <c:when test="${r.status=='Accepted'}">
-                                           <form action="actionrequestmentor?idrequest=${r.ID}" method="post" enctype="multipart/form-data" style="display: inline">
+                                        <c:when test="${r.status=='Accepted'}">               
                                             <span style="text-align: center">
-                                                <button type="submit" name="button" value="update" id="update" class="btn btn-primary btn-lg">Update Request</button>
-                                            </span>
-                                        </form> 
+                                                <a href="actionrequestmentor?ID=${r.getID()}&action=update">
+                                                  <button  class="btn btn-primary btn-lg">Update Request</button></a>                                           
+                                            </span>                                     
                                         </c:when>
                                         <c:otherwise>
                                             

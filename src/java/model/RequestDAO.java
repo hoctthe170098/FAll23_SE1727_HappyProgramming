@@ -333,13 +333,13 @@ public class RequestDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-    public int getTotalRequestByID(int IDMentee){
+    public int getTotalRequestByID(int IDMentee,String sta){
          int x;
-        xSql = "select count=count(*)from Request where IDMentee= " + IDMentee;
+        xSql = "select count=count(*)from Request where IDMentee = "+IDMentee
+                + " and status = '"+sta+"'";
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
-
             while (rs.next()) {
                 x = rs.getInt("count");
                 return x;
@@ -369,15 +369,17 @@ public class RequestDAO extends MyDAO {
         }
         return 0;
     }
-    public List<Request> getRequestPagging(int index,int IDMentee){
+    public List<Request> getRequestPagging(int index,int IDMentee,String sta){
          int i = (index - 1) * 4;
         List<Request> listRequest = new ArrayList<>();
-        xSql = "select * from Request where IDMentee= " + IDMentee
+        xSql = "select * from Request where IDMentee = ? and status = ? " 
                 + "order by Date desc "
                 + "offset ? rows fetch next 4 rows only";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, i);
+            ps.setInt(1, IDMentee);
+            ps.setString(2, sta);
+            ps.setInt(3, i);
             rs = ps.executeQuery();
               int ID,iDMentor,iDMentee,IDSkill;
          float from,to,money;
@@ -457,8 +459,6 @@ public class RequestDAO extends MyDAO {
 //      for(Request r:dao.getRequestPagging(2, 3)){
 //          System.out.println(r);
 //      }
-        for(Request r:dao.getRequestPagging(1, 10)){
-            System.out.println(r);
-        }
+        System.out.println(dao.getTotalRequestByID(3, "Closed"));
     }
 }

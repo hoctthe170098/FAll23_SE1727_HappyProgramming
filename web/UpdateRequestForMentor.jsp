@@ -112,15 +112,11 @@ color: #9b9ca1;
 <hr>
 </div>
     <%
-        Request r = (Request)request.getSession().getAttribute("request");
+        Request r = (Request)request.getAttribute("r");
     %>
-<%
-    String msgE = (String)request.getAttribute("msgE");
-%>
-<%if(msgE!=null){%>
-<p style="color: red" class="text-danger"><%=msgE%></p>
-<%}%>
-<form class="file-upload" action="updateordeleterequest" method="get" enctype="multipart/form-data" onsubmit="return submitForm(this)">
+<p style="color: red" class="text-danger">${msgE}</p>
+
+<form class="file-upload" action="actionrequestmentor" method="post" onsubmit="return submitForm(this)">
     
 <div class="row mb-5 gx-5">
 
@@ -130,20 +126,12 @@ color: #9b9ca1;
 <h4 class="mb-4 mt-0">Update details</h4>
 
 <div class="col-md-12">
-<label class="form-label">Title *</label>
-<input type="text" name="title" class="form-control" placeholder aria-label="Title" value="<%=r.getTitle()%>" required>
+<label class="form-label">Title :</label>
+<b><%=r.getTitle()%></b>
 </div>
 
 <div class="col-md-6">
-    <%
-        String msgD = (String)request.getAttribute("msgD");
-    %>
-    <%if(msgD!=null){%>
-    <label class="form-label">Date *<span style="color:red"><%=msgD%></span></label>
-    <%}%>
-    <%if(msgD==null){%>
-    <label class="form-label">Date *</label>
-    <%}%>
+    <label class="form-label">Date *<span style="color:red">${msgD}</span></label>  
     <input type="date" name="date" class="form-control" placeholder aria-label="Date" value=<%=r.getDate()%> required>
 </div>
 <div class="col-md-3">
@@ -154,49 +142,41 @@ color: #9b9ca1;
 <label class="form-label">To *</label>
 <input type="number" name="to" class="form-control" min="10" max="22" step="0.5" value=<%=r.getTo()%> required>
 </div>
-<div class="col-md-12">
-    <%
-        String msgS = (String)request.getAttribute("msgS");
-    %>
-    <%if(msgS!=null){%>
-    <label class="form-label">Skill *<span style="color:red"><%=msgS%></span></label>
-    <%}%>
-    <%if(msgS==null){%>
+<div class="col-md-12"> 
     <label class="form-label">Skill *</label>
-    <%}%>
 <div>
 <%      
-        int idMentor = r.getIDMentor();
-        MentorSkillDAO msDAO = new MentorSkillDAO();
-        SkillDAO sDAO = new SkillDAO();
-        MentorSkill mentorSkill = msDAO.getSkillByName(idMentor);
-        List<Skill> listSkill = sDAO.getListSkill();
-        HashMap<Integer,String> hSkill = new HashMap<>();
-        for (Skill s: listSkill){
-            if(msDAO.isExistSkill(s.getID(), mentorSkill.getListSkillID())) hSkill.put(s.getID(), s.getName());
-        }
-        Set<Integer> key = hSkill.keySet();
+         MentorSkill mentorSkill = new MentorSkillDAO().getSkillByName(r.getIDMentor());
+            List<Skill> listSkill = new SkillDAO().getListSkill();
+            for (int i = 0; i < listSkill.size(); i++) {
+                boolean isExist = false;
+                for (int id : mentorSkill.getListSkillID()) {
+                    if (id == listSkill.get(i).getID()) {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if (isExist == false) {
+                    listSkill.remove(listSkill.remove(i));
+                }
+            }
 %>
 <%
-    for(int id: key){
+    for( Skill s: listSkill){
 %>
-<%if(id==r.getIDSkill()){%>
-<input style="margin-right:5px" type="radio" name="idskill" value=<%=id%> checked /><span style="margin-right: 15px"><b><%=hSkill.get(id)%></b></span>
-<%}%>
-<%if(id!=r.getIDSkill()){%>
-<input style="margin-right:5px" type="radio" name="idskill" value=<%=id%> /><span style="margin-right: 15px"><b><%=hSkill.get(id)%></b></span>
-<%}%>
+<input style="margin-right:5px" type="radio" name="idskill" value=<%=s.getID()%>  <%=(s.getID()==r.getIDSkill())?"checked":""%>/><span style="margin-right: 15px"><b><%=s.getName()%></b></span>
 <%}%>
 </div>
 </div>
-<div class="col-md-9">
+<div class="col-md-3">
+<label class="form-label">Can pay :</label>
+<b>$<%=r.getMoney()%></b>
+</div>
+<div class="col-md-12">
 <label class="form-label">Address *</label>
 <input type="text" name="address" class="form-control" placeholder aria-label="Address" value="<%=r.getAddress()%>" required>
 </div>
-<div class="col-md-3">
-<label class="form-label">Can pay *</label>
-<input type="number" min="10" name="money" class="form-control" placeholder aria-label="Address" value=<%=r.getMoney()%> required>
-</div>
+
 <div class="col-md-12">
 <label class="form-label">Detail *</label>
 <textarea class="form-control" rows="3" name="detail" id="ex" required><%=r.getDetails()%></textarea>   
@@ -215,7 +195,7 @@ color: #9b9ca1;
     function submitForm(form){
         swal({
             title: "Are you sure?",
-            text: "This request will be updated, If this is a accepted request, a notification will sent to mentor",
+            text: "This request will be updated, and a notification will sent to mentee",
             icon: "warning",
             buttons: true,
             dangerMode: true,

@@ -24,11 +24,12 @@ public class ViewRequestMenteeServlet extends HttpServlet {
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
         Account acc = (Account)request.getSession().getAttribute("acc");
+        String status = request.getParameter("status");
         String indexPage= request.getParameter("index");
         if (indexPage==null ) {indexPage="1";}
         int index = Integer.parseInt(indexPage);
-        List<Request> listRequest = rDAO.getRequestPagging(index, acc.getID());
-        int total = rDAO.getTotalRequestByID(acc.getID());
+        List<Request> listRequest = rDAO.getRequestPagging(index, acc.getID(),status);
+        int total = rDAO.getTotalRequestByID(acc.getID(),status);
         int page = total/4;
                   if (total%4!=0){
                       page++;
@@ -36,6 +37,7 @@ public class ViewRequestMenteeServlet extends HttpServlet {
         request.setAttribute("index", indexPage);
         request.setAttribute("page", page);
         request.setAttribute("listReq", listRequest);
+        request.setAttribute("status", status);
         request.getRequestDispatcher("ViewRequestMentee.jsp").forward(request, response);
     }
 
