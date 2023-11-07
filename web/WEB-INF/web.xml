@@ -27,7 +27,14 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>MenteeFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/createrequest</url-pattern>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/becomementor</url-pattern>
+        <url-pattern>/updateordeleterequest</url-pattern>
+        <url-pattern>/detailrequestmentee</url-pattern>
+        <url-pattern>/viewrequestmentee</url-pattern>
+        <url-pattern>/comment</url-pattern>
+        <url-pattern>/detailmentor</url-pattern>     
     </filter-mapping>
     <servlet>
         <servlet-name>ShowMentorServlet</servlet-name>

@@ -22,9 +22,9 @@ import model.Account;
 
 /**
  *
- * @author Nhat Anh
+ * @author admin
  */
-public class MenteeFilter implements Filter {
+public class MentorFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -33,13 +33,13 @@ public class MenteeFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public MenteeFilter() {
+    public MentorFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MenteeFilter:DoBeforeProcessing");
+            log("MentorFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -67,7 +67,7 @@ public class MenteeFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MenteeFilter:DoAfterProcessing");
+            log("MentorFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -103,17 +103,9 @@ public class MenteeFilter implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("MenteeFilter:doFilter()");
+            log("MentorFilter:doFilter()");
         }
-        doBeforeProcessing(request, response);
-        HttpServletRequest req = (HttpServletRequest)request;
-        HttpServletResponse res = (HttpServletResponse)response;
-        HttpSession session = req.getSession();
-        String uri = req.getServletPath();
-        Account acc = (Account)session.getAttribute("acc");
-        if(acc.getIsMentee()!=1){
-            res.sendRedirect("home");
-        }
+        
         doBeforeProcessing(request, response);
         
         Throwable problem = null;
@@ -171,7 +163,7 @@ public class MenteeFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("MenteeFilter:Initializing filter");
+                log("MentorFilter:Initializing filter");
             }
         }
     }
@@ -182,9 +174,9 @@ public class MenteeFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("MenteeFilter()");
+            return ("MentorFilter()");
         }
-        StringBuffer sb = new StringBuffer("MenteeFilter(");
+        StringBuffer sb = new StringBuffer("MentorFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
