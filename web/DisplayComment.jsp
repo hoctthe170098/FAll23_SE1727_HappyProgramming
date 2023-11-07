@@ -318,7 +318,7 @@
             )
                     .then((isOkay) => {
                         if (isOkay) {
-                            window.location.href = 'comment?ID=' + ID;
+                            window.location.href = 'comment?IDC=' + ID;
                         }
                     }
                     );

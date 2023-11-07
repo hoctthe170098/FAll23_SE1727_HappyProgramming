@@ -260,7 +260,7 @@ color: #9b9ca1;
 <%if(msgE!=null){%>
 <p style="color: red" class="text-danger"><%=msgE%></p>
 <%}%>
-<form class="file-upload" action="createrequest" enctype="multipart/form-data">
+<form class="file-upload" action="createrequest" method="post">
 <div class="row mb-5 gx-5">
 
 <div class="col-xxl-8 mb-5 mb-xxl-0">

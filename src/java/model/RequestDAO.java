@@ -459,6 +459,6 @@ public class RequestDAO extends MyDAO {
 //      for(Request r:dao.getRequestPagging(2, 3)){
 //          System.out.println(r);
 //      }
-        System.out.println(dao.getTotalRequestByID(3, "Closed"));
+           dao.delete(53);
     }
 }

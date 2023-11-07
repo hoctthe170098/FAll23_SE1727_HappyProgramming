@@ -52,36 +52,6 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt(request.getParameter("idmentor"));
-        String button = request.getParameter("button");
-        if (button.equals("request")) {
-            RequestDAO rDAO = new RequestDAO();
-            rDAO.updateRequestByDate();
-            request.getSession().removeAttribute("idmentor");
-            request.getSession().setAttribute("idmentor", idMentor);
-            request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
-        } else {
-            Account acc = (Account) request.getSession().getAttribute("acc");
-            if (acc == null) {
-                request.setAttribute("account", false);
-            } else {
-                RequestDAO rDAO = new RequestDAO();
-                if (!rDAO.CheckRequestClosed(idMentor, acc.getID())) {
-                    request.setAttribute("closed", false);
-                } else {
-                    request.getSession().removeAttribute("idmentor");
-                    request.getSession().setAttribute("idmentor", idMentor);
-                    CommentDAO cDAO = new CommentDAO();
-                    RateDAO raDAO = new RateDAO();
-                    if (!raDAO.checkIsExistRate(acc.getID(), idMentor)) {
-                        raDAO.insertRate(idMentor, acc.getID());
-                    }
-                    List<Comment> listC = cDAO.getCommentBy2ID( acc.getID(),idMentor);
-                    request.setAttribute("listC", listC);
-                }
-            }
-            request.getRequestDispatcher("DisplayComment.jsp").forward(request, response);
-        }
+        PrintWriter out = response.getWriter();      
     }
 }

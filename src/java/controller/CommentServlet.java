@@ -23,13 +23,34 @@ public class CommentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int ID = Integer.parseInt(request.getParameter("ID"));
         CommentDAO cDAO = new CommentDAO();
-        cDAO.deleteComment(ID);
-        int idMentor = (int) request.getSession().getAttribute("idmentor");
+        RequestDAO rDAO = new RequestDAO();
+        RateDAO raDAO = new RateDAO();
+        String IDC = request.getParameter("IDC");
         Account acc = (Account) request.getSession().getAttribute("acc");
-        List<Comment> list = cDAO.getCommentBy2ID(acc.getID(),idMentor);
-        request.setAttribute("listC", list);
+        if (IDC != null) {
+            int ID = Integer.parseInt(IDC);
+            cDAO.deleteComment(ID);
+        }
+        int idMentor = 0;
+        String idmentor = request.getParameter("idmentor");
+        if (idmentor != null) {
+            idMentor = Integer.parseInt(idmentor);
+            request.getSession().removeAttribute("idmentor");
+            request.getSession().setAttribute("idmentor", idMentor);
+
+        } else {
+            idMentor = (int) request.getSession().getAttribute("idmentor");
+        }
+        if (!rDAO.CheckRequestClosed(idMentor, acc.getID())) {
+            request.setAttribute("closed", false);
+        } else {
+            if (!raDAO.checkIsExistRate(acc.getID(), idMentor)) {
+                raDAO.insertRate(idMentor, acc.getID());
+            }
+            List<Comment> listC = cDAO.getCommentBy2ID(acc.getID(), idMentor);
+            request.setAttribute("listC", listC);
+        }
         request.getRequestDispatcher("DisplayComment.jsp").forward(request, response);
     }
 
@@ -51,7 +72,7 @@ public class CommentServlet extends HttpServlet {
         if (comment != "") {
             cDAO.insertComment(idMentor, acc.getID(), comment);
         }
-        List<Comment> list = cDAO.getCommentBy2ID(acc.getID(),idMentor);
+        List<Comment> list = cDAO.getCommentBy2ID(acc.getID(), idMentor);
         request.setAttribute("listC", list);
         request.getRequestDispatcher("DisplayComment.jsp").forward(request, response);
     }

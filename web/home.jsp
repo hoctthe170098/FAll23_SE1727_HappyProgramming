@@ -169,7 +169,7 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h4>${s.getName()}</h4>
                                     </div>
-                                    <h3><a href="">Mentors of this skill</a></h3>
+                                    <h3><a href="MentorBySkill.jsp?ID=${s.getID()}">Mentors of this skill</a></h3>
                                     <p>${s.getDescription()}</p>
                                 </div>
                             </div>

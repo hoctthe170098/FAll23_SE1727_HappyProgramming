@@ -57,9 +57,8 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/Signup.html").forward(request, response);
+        request.getRequestDispatcher("Signup.jsp").forward(request, response);
     }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *

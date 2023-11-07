@@ -378,10 +378,8 @@ List<Integer> ListSkillMentor = (List<Integer>)request.getAttribute("ListSkillMe
     int idMentor =(int) request.getAttribute("idmentor");
 %>
 <div style="text-align: center">
-    <form action="detailmentor?idmentor=<%=idMentor%>" method="post">
-<button type="submit" name="button" value="rate" class="btn btn-danger btn-lg">Rate and Comment</button>
-<button type="submit" name="button" value="request" class="btn btn-primary btn-lg">Request</button>  
-   </form>
+<a href="comment?idmentor=<%=idMentor%>"><button type="submit" name="button" value="rate" class="btn btn-danger btn-lg">Rate and Comment</button></a>
+<a href="createrequest?idmentor=<%=idMentor%>"><button class="btn btn-primary btn-lg">Request</button></a>
 </div>
 
   <!-- ======= Footer ======= -->

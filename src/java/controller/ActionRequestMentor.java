@@ -97,5 +97,4 @@ public class ActionRequestMentor extends HttpServlet {
         }
         request.getRequestDispatcher("UpdateRequestForMentor.jsp").forward(request, response);
     }
-
 }
