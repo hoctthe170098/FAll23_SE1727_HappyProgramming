@@ -2,8 +2,8 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <welcome-file-list>
         <welcome-file>home</welcome-file>
-        <welcome-file>Signin.html</welcome-file>
-        <welcome-file>Signup.jsp</welcome-file>
+        <welcome-file>login</welcome-file>
+        <welcome-file>registeracc</welcome-file>
     </welcome-file-list>
     <filter>
         <filter-name>HomeFilter</filter-name>
