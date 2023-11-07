@@ -17,6 +17,14 @@
         <filter-name>MenteeFilter</filter-name>
         <filter-class>Filter.MenteeFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>MentorFilter</filter-name>
+        <filter-class>Filter.MentorFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>Filter.AdminFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -34,7 +42,31 @@
         <url-pattern>/detailrequestmentee</url-pattern>
         <url-pattern>/viewrequestmentee</url-pattern>
         <url-pattern>/comment</url-pattern>
-        <url-pattern>/detailmentor</url-pattern>     
+        <url-pattern>/detailmentor</url-pattern>    
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MentorFilter</filter-name>
+        <url-pattern>/listrequestmentor</url-pattern>
+          <url-pattern>/updatecvmentor</url-pattern> 
+          <url-pattern>/detailrequestmentor</url-pattern>
+          <url-pattern>/listrequestmentor</url-pattern>
+          <url-pattern>/detailmentee</url-pattern>
+          <url-pattern>/actionrequestmentor</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/listbecomementor</url-pattern>
+        <url-pattern>/viewcvmentee</url-pattern>
+        <url-pattern>/actionadminregisterbecomementor</url-pattern>
+        <url-pattern>/mentoradmin</url-pattern>
+        <url-pattern>/detailmentoradmin</url-pattern>
+        <url-pattern>/Deletementor</url-pattern>
+        <url-pattern>/menteeadmin</url-pattern>
+        <url-pattern>/requestadmin</url-pattern>
+        <url-pattern>/viewskill</url-pattern>
+        <url-pattern>/createskill</url-pattern>
+        <url-pattern>/editskill</url-pattern>
+        <url-pattern>/DeleteSkill</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>ShowMentorServlet</servlet-name>
