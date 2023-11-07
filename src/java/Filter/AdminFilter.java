@@ -24,7 +24,7 @@ import model.Account;
  *
  * @author admin
  */
-public class MentorFilter implements Filter {
+public class AdminFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -33,13 +33,13 @@ public class MentorFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public MentorFilter() {
+    public AdminFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MentorFilter:DoBeforeProcessing");
+            log("AdminFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -67,7 +67,7 @@ public class MentorFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MentorFilter:DoAfterProcessing");
+            log("AdminFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -103,7 +103,7 @@ public class MentorFilter implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("MentorFilter:doFilter()");
+            log("AdminFilter:doFilter()");
         }
         doBeforeProcessing(request, response);
         HttpServletRequest req = (HttpServletRequest)request;
@@ -111,7 +111,7 @@ public class MentorFilter implements Filter {
         HttpSession session = req.getSession();
         String uri = req.getServletPath();
         Account acc = (Account)session.getAttribute("acc");
-        if(acc.getIsMentor()!=1){
+        if(acc.getIsAdmin()!=1){
             res.sendRedirect("home");
         }
         doBeforeProcessing(request, response);
@@ -171,7 +171,7 @@ public class MentorFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("MentorFilter:Initializing filter");
+                log("AdminFilter:Initializing filter");
             }
         }
     }
@@ -182,9 +182,9 @@ public class MentorFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("MentorFilter()");
+            return ("AdminFilter()");
         }
-        StringBuffer sb = new StringBuffer("MentorFilter(");
+        StringBuffer sb = new StringBuffer("AdminFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
