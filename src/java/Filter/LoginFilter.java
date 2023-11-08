@@ -25,7 +25,7 @@ import java.util.*;
  */
 public class LoginFilter implements Filter {
     private List<String>listURLNotLogin = Arrays.asList("home","header",
-            "suggestmentorbyid","detailmentor","ForgotPassword","registeracc","MentorBySkill.jsp","login");
+            "suggestmentorbyid","detailmentor","ForgotPassword","registeracc","MentorBySkill.jsp","login","ForgotPassword.jsp");
     private static final boolean debug = true;
     private boolean checkExist(String URL){
         for(String s: listURLNotLogin){

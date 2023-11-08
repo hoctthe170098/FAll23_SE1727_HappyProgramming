@@ -54,10 +54,8 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("Username");
         String password = request.getParameter("Password");
         String remember = request.getParameter("remember-me");
-
         AccountDAO db = new AccountDAO();
         Account account = db.getAccountBy(username, password);
-
         if (account == null) {
             String msg = "";
             HttpSession session = request.getSession();

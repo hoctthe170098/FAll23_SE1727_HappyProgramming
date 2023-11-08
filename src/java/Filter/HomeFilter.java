@@ -113,7 +113,7 @@ public class HomeFilter implements Filter {
         session.setAttribute("counter", counter);
         counter++;
         String uri = req.getServletPath();
-        if(uri.endsWith(".jsp")&&!uri.contains("MentorBySkill.jsp")){
+        if(uri.endsWith(".jsp")&&!uri.contains("MentorBySkill.jsp")&&!uri.contains("ForgotPassword.jsp")){
             res.sendRedirect("home");
         }
         Throwable problem = null;

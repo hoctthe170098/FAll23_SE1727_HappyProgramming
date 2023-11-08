@@ -196,7 +196,7 @@ String firstname="";
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Birth *</label>
+<label class="form-label">Birth *<span style="color: red" class="text-danger">${msgB}</span></label>
 <input type="date" name="birth" class="form-control" placeholder aria-label="Enter your birth here" value=<%=p.getBirth()%>>
 </div>
  <div class="col-md-6">

@@ -42,16 +42,15 @@
         <url-pattern>/detailrequestmentee</url-pattern>
         <url-pattern>/viewrequestmentee</url-pattern>
         <url-pattern>/comment</url-pattern>
-        <url-pattern>/detailmentor</url-pattern>    
     </filter-mapping>
     <filter-mapping>
         <filter-name>MentorFilter</filter-name>
         <url-pattern>/listrequestmentor</url-pattern>
-          <url-pattern>/updatecvmentor</url-pattern> 
-          <url-pattern>/detailrequestmentor</url-pattern>
-          <url-pattern>/listrequestmentor</url-pattern>
-          <url-pattern>/detailmentee</url-pattern>
-          <url-pattern>/actionrequestmentor</url-pattern>
+        <url-pattern>/updatecvmentor</url-pattern>
+        <url-pattern>/detailrequestmentor</url-pattern>
+        <url-pattern>/listrequestmentor</url-pattern>
+        <url-pattern>/detailmentee</url-pattern>
+        <url-pattern>/actionrequestmentor</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
@@ -224,6 +223,10 @@
         <servlet-name>ActionRequestMentor</servlet-name>
         <servlet-class>controller.ActionRequestMentor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProfileMentee</servlet-name>
+        <servlet-class>controller.ViewProfileMentee</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowMentorServlet</servlet-name>
         <url-pattern>/mentor</url-pattern>
@@ -379,6 +382,10 @@
     <servlet-mapping>
         <servlet-name>ActionRequestMentor</servlet-name>
         <url-pattern>/actionrequestmentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProfileMentee</servlet-name>
+        <url-pattern>/detailmentee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

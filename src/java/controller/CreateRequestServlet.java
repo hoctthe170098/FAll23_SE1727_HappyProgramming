@@ -23,13 +23,12 @@ public class CreateRequestServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt(request.getParameter("idmentor"));//Integer.parseInt((String)request.getParameter("idmentor"));
+        int idMentor = Integer.parseInt(request.getParameter("idmentor"));
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
         request.getSession().removeAttribute("idmentor");
         request.getSession().setAttribute("idmentor", idMentor);
         request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
-        //response.sendRedirect("CreateRequest.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -39,14 +38,16 @@ public class CreateRequestServlet extends HttpServlet {
         long millis = System.currentTimeMillis();
         java.sql.Date now = new java.sql.Date(millis);
         String title = request.getParameter("title");
-        Date date = Date.valueOf(request.getParameter("date"));
+        java.sql.Date date = java.sql.Date.valueOf(request.getParameter("date"));
         float from = Float.parseFloat(request.getParameter("from"));
         float to = Float.parseFloat(request.getParameter("to"));
         String sIDSkill = request.getParameter("idskill");
         String detail = request.getParameter("detail");
         String address = request.getParameter("address");
         float money = Float.parseFloat(request.getParameter("money"));
-        if (date.before(now)) {
+        if (title.trim().equals("") || detail.trim().equals("") || address.trim().equals("")) {
+            request.setAttribute("msgE", "Must enter all boxs");
+        } else if (date.before(now)) {
             request.setAttribute("msgD", "The date must after today");
         } else if (to - from < 2) {
             request.setAttribute("msgD", "The lesson must last at least 2 hours");
@@ -64,7 +65,7 @@ public class CreateRequestServlet extends HttpServlet {
             } else if (rDAO.IsDuplicateRequestMentor(IDMentor, from, to, date)) {
                 request.setAttribute("msgE", "This mentor had another appointment during this time");
             } else {
-                rDAO.InsertRequest(IDMentor, IDMentee, IDSkill, title, date, from, to, detail, address, money);
+                rDAO.InsertRequest(IDMentor, IDMentee, IDSkill, title.trim(), date, from, to, detail.trim(), address.trim(), money);
                 String content = "I have sent a request to you, check your request please";
                 nDAO.insertNoficationDAO(IDMentee, IDMentor, content, 3);
             }

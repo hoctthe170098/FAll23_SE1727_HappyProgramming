@@ -103,7 +103,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                 } else {
                     String newPassword = request.getParameter("password1");
                     dao.updatePassword(mailCurrent, newPassword);
-                    response.sendRedirect("Signin.html");
+                    response.sendRedirect("login");
                 }
             } else {
                 request.setAttribute("mess", "The code has expired!");

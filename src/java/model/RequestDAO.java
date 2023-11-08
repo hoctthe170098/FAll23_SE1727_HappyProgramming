@@ -172,6 +172,24 @@ public class RequestDAO extends MyDAO {
          }
          return null;
     }
+      public List<Integer> getRequestIDByIDMentor(int idMentor){
+          List<Integer>listID = new ArrayList<>();
+         xSql = "select ID "
+                 + "from Request "
+                 + "where IDMentor = "+idMentor;
+         int ID;
+         try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            ID = rs.getInt("ID");
+            listID.add(ID);
+        }
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+         return listID;
+    }
      public void deleteRequestByIDMentee(int IDMentee){
          xSql = "DELETE FROM Request WHERE IDMentee=?";
         try {
@@ -459,6 +477,14 @@ public class RequestDAO extends MyDAO {
 //      for(Request r:dao.getRequestPagging(2, 3)){
 //          System.out.println(r);
 //      }
-           dao.delete(53);
+          System.out.println(checkIDrequest(Integer.parseInt("detailrequestmentor?idrequest=45".split("=")[1]), 2));
+    }
+    private static boolean checkIDrequest(int ID, int IDMentor) {
+        for (int i : new RequestDAO().getRequestIDByIDMentor(IDMentor)) {
+            if (i == ID) {
+                return true;
+            }
+        }
+        return false;
     }
 }
