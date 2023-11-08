@@ -208,12 +208,12 @@
                                List<Skill> listSkill = sDao.getListSkill();
                             %>
                             <div class="form-group">
-                                <label class="control-label col-sm-10">Skill(you must choose at least one skill):</label>
+                                <label class="control-label col-sm-10">Skill(you must choose at least one skill):<span style="color:red">${msgS}</span></label>
                                 <div class="col-sm-10"> 
                                     <%
                                         for(Skill s:listSkill){
                                     %>
-                                    <input type="checkbox"  name="skill" value=<%=s.getName()%> /> <%=s.getName()%>
+                                    <input type="checkbox"  name="skill" value=<%=s.getName()%> <%=(s.getID()==1)?"checked":""%>/> <%=s.getName()%>
                                     <%}%>
                                 </div>
                             </div>

@@ -20,7 +20,7 @@ import model.*;
  * @author Admin
  */
 public class ViewDetailOfMentorServlet extends HttpServlet {
-
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,27 +31,31 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
         MentorSkillDAO msDAO = new MentorSkillDAO();
         AccountDAO accDAO = new AccountDAO();
         CommentInfoDAO ciDAO = new CommentInfoDAO();
-        Profile p = pDAO.getProfileByID(idMentor);
-        Mentor m = mDAO.getMentorByID(idMentor);
-        MentorSkill ms = msDAO.getSkillByName(idMentor);
-        String email = accDAO.getEmailByID(idMentor);
-        String date = String.valueOf(p.getBirth());
-        List<Integer> ListSkillMentor = ms.getListSkillID();
-        List<CommentInfo> listComment = ciDAO.getAllCommentInfo(idMentor);
-        request.setAttribute("listComment", listComment);
-        request.setAttribute("p", p);
-        request.setAttribute("m", m);
-        request.setAttribute("ListSkillMentor", ListSkillMentor);
-        request.setAttribute("email", email);
-        request.setAttribute("date", date);
-        request.setAttribute("idmentor", idMentor);
-        request.getRequestDispatcher("ViewDetailMentor.jsp").forward(request, response);
-
+        if (mDAO.checkExistMentor(idMentor)!=null) {
+            Profile p = pDAO.getProfileByID(idMentor);
+            Mentor m = mDAO.getMentorByID(idMentor);
+            MentorSkill ms = msDAO.getSkillByName(idMentor);
+            String email = accDAO.getEmailByID(idMentor);
+            String date = String.valueOf(p.getBirth());
+            List<Integer> ListSkillMentor = ms.getListSkillID();
+            List<CommentInfo> listComment = ciDAO.getAllCommentInfo(idMentor);
+            request.setAttribute("listComment", listComment);
+            request.setAttribute("p", p);
+            request.setAttribute("m", m);
+            request.setAttribute("ListSkillMentor", ListSkillMentor);
+            request.setAttribute("email", email);
+            request.setAttribute("date", date);
+            request.setAttribute("idmentor", idMentor);
+            request.getRequestDispatcher("ViewDetailMentor.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("home");
+        }
+        
     }
-
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();      
+        PrintWriter out = response.getWriter();        
     }
 }

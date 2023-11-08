@@ -120,7 +120,7 @@ color: #9b9ca1;
 <%if(msgE!=null){%>
 <p style="color: red" class="text-danger"><%=msgE%></p>
 <%}%>
-<form class="file-upload" action="updateordeleterequest" method="get" enctype="multipart/form-data" onsubmit="return submitForm(this)">
+<form class="file-upload" action="updateordeleterequest" method="post" onsubmit="return submitForm(this)">
     
 <div class="row mb-5 gx-5">
 

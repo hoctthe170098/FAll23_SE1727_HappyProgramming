@@ -146,19 +146,13 @@ color: #9b9ca1;
     <label class="form-label">Skill *</label>
 <div>
 <%      
-         MentorSkill mentorSkill = new MentorSkillDAO().getSkillByName(r.getIDMentor());
-            List<Skill> listSkill = new SkillDAO().getListSkill();
-            for (int i = 0; i < listSkill.size(); i++) {
-                boolean isExist = false;
+           MentorSkill mentorSkill = new MentorSkillDAO().getSkillByName(2);
+            List<Skill> listSkill = new ArrayList<>();
                 for (int id : mentorSkill.getListSkillID()) {
-                    if (id == listSkill.get(i).getID()) {
-                        isExist = true;
-                        break;
-                    }
-                }
-                if (isExist == false) {
-                    listSkill.remove(listSkill.remove(i));
-                }
+                  listSkill.add(new SkillDAO().getSkillByID(id));
+                }                   
+            for(int i=0;i<listSkill.size();i++){
+                System.out.println(listSkill.get(i));
             }
 %>
 <%

@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -61,8 +62,6 @@ public class MentorSkillDAO extends MyDAO{
           return false;
       }
     public static void main(String[] args) {
-        MentorSkillDAO dao = new MentorSkillDAO();
-        dao.insertMentorSkill(4, 2);
-       // dao.insertMentorSkill(2, 4);
+     
     }
 }

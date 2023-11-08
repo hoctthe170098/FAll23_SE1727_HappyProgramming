@@ -201,22 +201,18 @@ color: #9b9ca1;
 </div>
 </div> 
 <%if(r.getStatus().equals("Processing")){%>
-<form action="updateordeleterequest?id1=<%=r.getID()%>" method="post" enctype="multipart/form-data" name="formdelete" style="display: inline " >
-    <span style="text-align: center">   
-    <button type="submit" name="button" value="delete" id="delete" class="btn btn-danger btn-lg" onclick="return submitForm(document.forms['formdelete'])">Delete Request</button>
-</span>
-</form>
+    <span style="text-align: center">    
+        <button  id="delete" class="btn btn-danger btn-lg" onclick="return submit()">Delete Request</button>
+        </span> 
     <%}%>
-<form action="updateordeleterequest?id2=<%=r.getID()%>" method="post" enctype="multipart/form-data" style="display: inline">
     <span style="text-align: center">
-        <button type="submit" name="button" value="update" id="update" class="btn btn-primary btn-lg">Update Request</button>
-    </span>
- </form>    
+        <a href="updateordeleterequest?action=update&idrequest=<%=r.getID()%>"> <button id="update" class="btn btn-primary btn-lg">Update Request</button></a>   
+    </span> 
 <!--</div>-->
 </div> 
 <script src="assets/js/sweetalert.min.js"></script>
 <script>
-    function submitForm(form){
+    function submit(){
         swal({
             title: "Are you sure?",
             text: "This request will be deleted!",
@@ -227,7 +223,7 @@ color: #9b9ca1;
             )
             .then((isOkay) =>{
                 if(isOkay){
-                    form.submit();
+                    window.location.href='updateordeleterequest?action=delete&idrequest=<%=r.getID()%>';
                 }
             }
             );

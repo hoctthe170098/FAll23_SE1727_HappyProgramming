@@ -18,19 +18,23 @@ import model.*;
  * @author Admin
  */
 public class CreateRequestServlet extends HttpServlet {
-
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         int idMentor = Integer.parseInt(request.getParameter("idmentor"));
-        RequestDAO rDAO = new RequestDAO();
-        rDAO.updateRequestByDate();
-        request.getSession().removeAttribute("idmentor");
-        request.getSession().setAttribute("idmentor", idMentor);
-        request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+        if (new MentorDAO().checkExistMentor(idMentor) != null) {
+            RequestDAO rDAO = new RequestDAO();
+            rDAO.updateRequestByDate();
+            request.getSession().removeAttribute("idmentor");
+            request.getSession().setAttribute("idmentor", idMentor);
+            request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("home");
+        }
     }
-
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

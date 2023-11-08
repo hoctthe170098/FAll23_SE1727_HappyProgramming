@@ -119,7 +119,7 @@ public class MentorFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
         String uri = req.getServletPath();
-        System.out.println(uri);
+        log(uri);
         Account acc = (Account) session.getAttribute("acc");
         if (acc.getIsMentor() != 1) {
             res.sendRedirect("home");

@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import java.io.IOException;
@@ -16,29 +15,35 @@ import java.util.List;
 import model.*;
 
 public class ViewRequestMenteeServlet extends HttpServlet {
-   
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
-        Account acc = (Account)request.getSession().getAttribute("acc");
+        Account acc = (Account) request.getSession().getAttribute("acc");
         String status = request.getParameter("status");
-        String indexPage= request.getParameter("index");
-        if (indexPage==null ) {indexPage="1";}
-        int index = Integer.parseInt(indexPage);
-        List<Request> listRequest = rDAO.getRequestPagging(index, acc.getID(),status);
-        int total = rDAO.getTotalRequestByID(acc.getID(),status);
-        int page = total/4;
-                  if (total%4!=0){
-                      page++;
-                    }
-        request.setAttribute("index", indexPage);
-        request.setAttribute("page", page);
-        request.setAttribute("listReq", listRequest);
-        request.setAttribute("status", status);
-        request.getRequestDispatcher("ViewRequestMentee.jsp").forward(request, response);
+        if (status.equals("OutOfDate")) {
+            response.sendRedirect("home");
+        } else {
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            List<Request> listRequest = rDAO.getRequestPagging(index, acc.getID(), status);
+            int total = rDAO.getTotalRequestByID(acc.getID(), status);
+            int page = total / 4;
+            if (total % 4 != 0) {
+                page++;
+            }
+            request.setAttribute("index", indexPage);
+            request.setAttribute("page", page);
+            request.setAttribute("listReq", listRequest);
+            request.setAttribute("status", status);
+            request.getRequestDispatcher("ViewRequestMentee.jsp").forward(request, response);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

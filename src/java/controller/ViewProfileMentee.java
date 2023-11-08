@@ -23,8 +23,13 @@ public class ViewProfileMentee extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        request.setAttribute("p", new ProfileDAO().getProfileByID(Integer.parseInt(request.getParameter("idmentee"))));
-        request.getRequestDispatcher("ViewDetailMentee.jsp").forward(request, response);
+        Account acc = (Account) request.getSession().getAttribute("acc");
+        if (! new RequestDAO().IsExistRequest(Integer.parseInt(request.getParameter("idmentee")), acc.getID())) {
+            response.sendRedirect("home");
+        } else {
+            request.setAttribute("p", new ProfileDAO().getProfileByID(Integer.parseInt(request.getParameter("idmentee"))));
+            request.getRequestDispatcher("ViewDetailMentee.jsp").forward(request, response);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

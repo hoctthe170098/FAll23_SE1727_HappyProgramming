@@ -178,17 +178,15 @@
                                         </form>
                                     </c:if>
                                     <c:if test="${r.status=='Processing'||r.status=='Accepted'}">
-                                        <form action="updateordeleterequest?id2=${r.ID}" method="post" enctype="multipart/form-data" style="display: inline">
-                                            <span style="text-align: center">
-                                                <button type="submit" name="button" value="update" id="update" class="btn btn-primary btn-lg">Update Request</button>
-                                            </span>
-                                        </form>    
+                                        <span style="text-align: center">
+                                            <a href="updateordeleterequest?action=update&idrequest=${r.getID()}"> <button id="update" class="btn btn-primary btn-lg">Update Request</button></a>   
+                                        </span>    
                                     </c:if>
                                     <!--</div>-->
                                 </div> 
                                 <script src="assets/js/sweetalert.min.js"></script>
                                 <script>
-                                                    function submitForm(form) {
+                                                    function submit() {
                                                         swal({
                                                             title: "Are you sure?",
                                                             text: "This request will be deleted!",
@@ -199,7 +197,7 @@
                                                         )
                                                                 .then((isOkay) => {
                                                                     if (isOkay) {
-                                                                        form.submit();
+                                                                        window.location.href = 'updateordeleterequest?action=delete&idrequest=${r.ID}';
                                                                     }
                                                                 }
                                                                 );

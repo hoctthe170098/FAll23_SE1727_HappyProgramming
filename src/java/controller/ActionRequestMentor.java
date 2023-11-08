@@ -24,33 +24,49 @@ public class ActionRequestMentor extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        Account acc = (Account) request.getSession().getAttribute("acc");
         RequestDAO rDAO = new RequestDAO();
         NoficationDAO nDAO = new NoficationDAO();
-        Request r = rDAO.getRequestByID(Integer.parseInt(request.getParameter("ID")));
-        request.getSession().removeAttribute("idrequest");
-        request.getSession().setAttribute("idrequest", String.valueOf(r.getID()));
+        int idRequest = Integer.parseInt(request.getParameter("ID"));
+        Request r ;
         String action = request.getParameter("action");
-        if (action.equals("update")) {
-            request.setAttribute("r", r);
-            request.getRequestDispatcher("UpdateRequestForMentor.jsp").forward(request, response);
+        if (!action.equals("update") && !action.equals("reject") && !action.equals("accept")) {
+            response.sendRedirect("home");
         } else {
-            if (action.equals("reject")) {
-                request.setAttribute("msgE", "Reject request successfully!");
-                new RequestDAO().updateStatusRequest("Rejected", r.getID());
-                nDAO.insertNoficationDAO(r.getIDMentor(), r.getIDMentee(), "Sorry, because some reasons,"
-                        + " I can't meet you now. You can continue sending request, I hope we can meet another time", 2);
+            request.getSession().removeAttribute("idrequest");
+            request.getSession().setAttribute("idrequest", String.valueOf(idRequest));
+            if (action.equals("update")) {
+                r = rDAO.getRequestAcceptByIDMentor(idRequest, acc.getID());
+                out.print(acc.getID());
+                if (r == null) {
+                    response.sendRedirect("home");
+                } 
+                    request.setAttribute("r", r);
+                    request.getRequestDispatcher("UpdateRequestForMentor.jsp").forward(request, response);             
             } else {
-                if (rDAO.IsDuplicateRequestMentee(r.getIDMentee(), r.getFrom(), r.getTo(), r.getDate())
-                        || rDAO.IsDuplicateRequestMentor(r.getIDMentor(), r.getFrom(), r.getTo(), r.getDate())) {
-                    request.setAttribute("msgE", "Can't accept this request because you or this mentee is having a meeting in this time");
+                r = rDAO.getRequestProcessingByIDMentor(idRequest, acc.getID());
+                if (r == null) {
+                    response.sendRedirect("home");
                 } else {
-                    nDAO.insertNoficationDAO(r.getIDMentor(), r.getIDMentee(), "I have accepted your request, "
-                            + "please check your schedule and be on time for your next meeting", 2);
-                    request.setAttribute("msgE", "Accept request successfully!");
-                    new RequestDAO().updateStatusRequest("Accepted", r.getID());
+                    if (action.equals("reject")) {
+                        request.setAttribute("msgE", "Reject request successfully!");
+                        rDAO.updateStatusRequest("Rejected", r.getID());
+                        nDAO.insertNoficationDAO(r.getIDMentor(), r.getIDMentee(), "Sorry, because some reasons,"
+                                + " I can't meet you now. You can continue sending request, I hope we can meet another time", 2);
+                    } else {
+                        if (rDAO.IsDuplicateRequestMentee(r.getIDMentee(), r.getFrom(), r.getTo(), r.getDate())
+                                || rDAO.IsDuplicateRequestMentor(r.getIDMentor(), r.getFrom(), r.getTo(), r.getDate())) {
+                            request.setAttribute("msgE", "Can't accept this request because you or this mentee is having a meeting in this time");
+                        } else {
+                            nDAO.insertNoficationDAO(r.getIDMentor(), r.getIDMentee(), "I have accepted your request, "
+                                    + "please check your schedule and be on time for your next meeting", 2);
+                            request.setAttribute("msgE", "Accept request successfully!");
+                            new RequestDAO().updateStatusRequest("Accepted", r.getID());
+                        }
+                    }
+                    request.getRequestDispatcher("detailrequestmentor").forward(request, response);
                 }
             }
-            request.getRequestDispatcher("detailrequestmentor").forward(request, response);
         }
     }
 
@@ -85,15 +101,15 @@ public class ActionRequestMentor extends HttpServlet {
                 Request rUpdate = new Request(r.getID(), r.getIDMentor(),
                         r.getIDMentee(), Integer.parseInt(sIDSkill), r.getTitle(), date, from, to, detail, r.getStatus(), address, r.getMoney());
                 rDAO.updateRequest(rUpdate);
-                    String content = "I have changed a request I have accepted from you, please check your request part Accepted ";
-                    nDAO.insertNoficationDAO(r.getIDMentor(), r.getIDMentee(), content, 2);
-                    request.setAttribute("r", rUpdate);
-                    update=true;
-                    request.setAttribute("msgE", "Update request successfully!");
+                String content = "I have changed a request I have accepted from you, please check your request part Accepted ";
+                nDAO.insertNoficationDAO(r.getIDMentor(), r.getIDMentee(), content, 2);
+                request.setAttribute("r", rUpdate);
+                update = true;
+                request.setAttribute("msgE", "Update request successfully!");
             }
         }
         if (!update) {
-            request.setAttribute("r", r);        
+            request.setAttribute("r", r);
         }
         request.getRequestDispatcher("UpdateRequestForMentor.jsp").forward(request, response);
     }
