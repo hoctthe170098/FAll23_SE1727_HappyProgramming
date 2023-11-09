@@ -60,10 +60,15 @@
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                             </div>
                         </form>
+                        <div class="form-group form-button">
+                            <a href="login">
+                                  <button class="form-submit">Sign in</button>
+                            </a>
+                            </div>
                     </div>
                     <div class="signup-image">
                         <figure><img src="assets/img/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="login" class="signup-image-link">I am already member</a>
+                      
                     </div>
                 </div>
             </div>

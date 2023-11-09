@@ -37,16 +37,20 @@ public class UpdateOrDeleteRequestServlet extends HttpServlet {
             request.setAttribute("msgE", "Delete Request successfully");
             response.sendRedirect("home");
         } else if (action.equals("update")) {
-            Request r = rDAO.getRequestByIDMentee(ID, acc.getID());
-            long millis = System.currentTimeMillis();
-            java.sql.Date now = new java.sql.Date(millis);
-            if (r.getStatus().equals("Accepted") && r.getDate().toString().equals(now.toString())) {
-                request.setAttribute("msgE", "Can't update request because The meeting took place today!");
-                request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+            Request r = rDAO.getRequestCanUpdateByIDMentee(ID, acc.getID());
+            if (r == null) {
+                response.sendRedirect("home");
             } else {
-                request.getSession().removeAttribute("request");
-                request.getSession().setAttribute("request", r);
-                request.getRequestDispatcher("UpdateRequest.jsp").forward(request, response);
+                long millis = System.currentTimeMillis();
+                java.sql.Date now = new java.sql.Date(millis);
+                if (r.getStatus().equals("Accepted") && r.getDate().toString().equals(now.toString())) {
+                    request.setAttribute("msgE", "Can't update request because The meeting took place today!");
+                    request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
+                } else {
+                    request.getSession().removeAttribute("request");
+                    request.getSession().setAttribute("request", r);
+                    request.getRequestDispatcher("UpdateRequest.jsp").forward(request, response);
+                }
             }
         }
     }

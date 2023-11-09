@@ -348,7 +348,39 @@ public class RequestDAO extends MyDAO {
         }
         return null;
     }
-
+   public Request getRequestCanUpdateByIDMentee(int id, int IDMentee) {
+        xSql = "select * "
+                + "from Request "
+                + "where ID = " + id + " and IDMentee=" + IDMentee + " and Status in ('Processing','Accepted')";
+        int ID, iDMentor, iDMentee, IDSkill;
+        float from, to, money;
+        String title, status, detail, address;
+        Date date;
+        Request r;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ID = rs.getInt("ID");
+                iDMentor = rs.getInt("IDMentor");
+                iDMentee = rs.getInt("IDMentee");
+                IDSkill = rs.getInt("IDSkill");
+                from = rs.getFloat("From");
+                to = rs.getFloat("to");
+                status = rs.getString("status");
+                title = rs.getString("Title");
+                detail = rs.getString("Details");
+                date = rs.getDate("Date");
+                address = rs.getString("Address");
+                money = rs.getFloat("money");
+                r = new Request(ID, iDMentor, iDMentee, IDSkill, title, date, from, to, detail, status, address, money);
+                return r;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public List<Integer> getRequestIDByIDMentor(int idMentor) {
         List<Integer> listID = new ArrayList<>();
         xSql = "select ID "
@@ -678,7 +710,7 @@ public class RequestDAO extends MyDAO {
 //      for(Request r:dao.getRequestPagging(2, 3)){
 //          System.out.println(r);
 //      }
-        System.out.println(dao.getRequestAcceptByIDMentor(336, 2));
+        System.out.println(dao.getRequestCanUpdateByIDMentee(43, 3));
     }
 
     private static boolean checkIDrequest(int ID, int IDMentor) {

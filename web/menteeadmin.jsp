@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>List of Mentor</title>
+        <title>List of Mentee</title>
        
         <meta content="" name="description">
         <meta content="" name="keywords">

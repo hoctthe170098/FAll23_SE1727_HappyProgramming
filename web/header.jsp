@@ -94,13 +94,13 @@ if (cookies != null) {
                 <li><a href="updatecvmentor">CV</a></li>
                 <%}%>
                 <%if(acc.getIsAdmin()==1){%>
-                <li class="dropdown"><a href="#"><span>Static</span> <i class="bi bi-chevron-down"></i></a>
+<!--                <li class="dropdown"><a href="#"><span>Static</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="">Mentee</a></li>
                         <li><a href="">Mentor</a></li>
                         <li><a href="">Request</a></li>
                     </ul>
-                   </li>
+                   </li>-->
                  <li class="dropdown"><a href="#"><span>List</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="listbecomementor">BecomeMentor</a></li>

@@ -164,32 +164,32 @@ String firstname="";
 
 <div class="col-md-6">
 <label class="form-label">First Name *</label>
-<input type="text" name="firstname" class="form-control" value=<%=firstname%>>
+<input type="text" name="firstname" class="form-control" value="<%=firstname%>">
 </div>
 
 <div class="col-md-6">
 <label class="form-label">Last Name *</label>
-<input type="text" name="lastname" class="form-control" value=<%=lastname%>>
+<input type="text" name="lastname" class="form-control" value="<%=lastname%>">
 </div>
 
 <div class="col-md-6">
 <label class="form-label">Phone number * <span style="color: red" class="text-danger">${msgP}</span></label>
-<input type="text" name="phone" class="form-control" placeholder aria-label="Phone number" value=<%=p.getPhone()%>>
+<input type="text" name="phone" class="form-control" placeholder aria-label="Phone number" value="<%=p.getPhone()%>">
 </div>
 <div class="col-md-6">
 <label class="form-label">Birth *<span style="color: red" class="text-danger">${msgB}</span></label>
-<input type="date" name="birth" class="form-control" placeholder aria-label="Enter your birth here" value=<%=p.getBirth()%>>
+<input type="date" name="birth" class="form-control" placeholder aria-label="Enter your birth here" value="<%=p.getBirth()%>">
 </div>
  <div class="col-md-6">
 <label class="form-label">Address *</label>
-<input type="text" name="address" class="form-control" value=<%=p.getAddress()%>>
+<input type="text" name="address" class="form-control" value="<%=p.getAddress()%>">
 </div>
 
 
 <div class="col-md-6">
 <label class="form-label">Gender *</label>
 <!--<input type="text" class="form-control" placeholder aria-label="Phone number" value="Scaralet D">-->
-<select name="gender" class="form-control" value=<%=gender%>>
+<select name="gender" class="form-control" value="<%=gender%>">
   <option value="true">Male</option>
   <option value="false">Female</option>  
 </select>    

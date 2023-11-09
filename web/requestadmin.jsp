@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>List of Mentor</title>
+        <title>List of Request</title>
        
         <meta content="" name="description">
         <meta content="" name="keywords">
@@ -97,7 +97,7 @@
     <body>
           <jsp:include page="header.jsp"></jsp:include>
           
-      <h1>Manage Mentor</h1>
+      <h1>Manage Request</h1>
       <p>Total Requests:${requestlist.size()} </p>
    <table border="1">
     <tr>
