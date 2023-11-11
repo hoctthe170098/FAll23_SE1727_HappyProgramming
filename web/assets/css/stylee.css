@@ -9,6 +9,7 @@ list-type-ulli, .socials {
   margin: 0;
   padding: 0; }
 
+
 /* poppins-300 - latin */
 @font-face {
   font-family: 'Poppins';
@@ -351,6 +352,7 @@ input[type=checkbox]:not(old) {
   font-size: 1em;
   display: none; }
 
+
 input[type=checkbox]:not(old) + label {
   display: inline-block;
   line-height: 1.5em;
@@ -579,7 +581,7 @@ label.valid {
     text-align: center; } }
 @media screen and (max-width: 400px) {
   .social-login {
-    flex-direction: column;
+    flex-diection: column;
     -moz-flex-direction: column;
     -webkit-flex-direction: column;
     -o-flex-direction: column;

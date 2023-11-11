@@ -34,10 +34,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //query data from databases;
-
-        request.getRequestDispatcher("Signin.html").forward(request, response);
-
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     /**
@@ -60,9 +57,9 @@ public class LoginController extends HttpServlet {
             String msg = "";
             HttpSession session = request.getSession();
             session.setAttribute("account", null);
-            response.sendRedirect("login?error=1");
             msg = "Unable to loggin";
             request.setAttribute("mess", msg);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("acc", account);

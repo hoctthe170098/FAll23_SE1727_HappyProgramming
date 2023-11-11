@@ -57,7 +57,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Signup.jsp").forward(request, response);
+        request.getRequestDispatcher("RegisterAccount.jsp").forward(request, response);
     }
 
     /**
@@ -95,7 +95,7 @@ public class RegisterServlet extends HttpServlet {
                 request.setAttribute("msg", "Sign up successfully, please return Sign in page to login");
             }
         }
-         request.getRequestDispatcher("Signup.jsp").forward(request, response);
+         request.getRequestDispatcher("RegisterAccount.jsp").forward(request, response);
     }
 
     /**

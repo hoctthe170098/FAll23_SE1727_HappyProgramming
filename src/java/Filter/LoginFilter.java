@@ -25,7 +25,7 @@ import java.util.*;
  */
 public class LoginFilter implements Filter {
     private List<String>listURLNotLogin = Arrays.asList("home","header",
-            "suggestmentorbyid","detailmentor","ForgotPassword","registeracc","MentorBySkill.jsp","login","ForgotPassword.jsp");
+            "suggestmentorbyid","detailmentor","ForgotPassword","registeracc","MentorBySkill.jsp","login");
     private static final boolean debug = true;
     private boolean checkExist(String URL){
         for(String s: listURLNotLogin){
@@ -115,9 +115,13 @@ public class LoginFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse)response;
         HttpSession session = req.getSession();
         String uri = req.getServletPath();
+        if(uri.contains("/css")||uri.contains("/img")||uri.contains("/js")||uri.contains("images")||uri.contains("login")||uri.contains("home")){
+            chain.doFilter(request, response);
+        }else
         if(session.getAttribute("acc")==null&&!checkExist(uri)){
-            res.sendRedirect("login");
+            req.getRequestDispatcher("login").forward(request, response);
         }
+
         doBeforeProcessing(request, response);
         
         Throwable problem = null;
