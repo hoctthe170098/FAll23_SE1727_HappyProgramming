@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,15 +23,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 import model.DBContext;
-import jakarta.servlet.annotation.MultipartConfig;
 
 
 /**
  *
  * @author ADMIN
  */
-
-
 
 public class EditSkillServlet extends HttpServlet {
 
@@ -78,25 +74,22 @@ public class EditSkillServlet extends HttpServlet {
     }
 }
 
-   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int skillID = Integer.parseInt(request.getParameter("editSkillID"));
+        
         String skillName = request.getParameter("skillName");
         String skillDescription = request.getParameter("skillDescription");
 
-        // Kiểm tra xem người dùng đã chọn tệp ảnh mới hay không
-        Part filePart = request.getPart("skillImage");
-
-        String avatar = request.getParameter("currentSkillImage");
+        // Lấy hình ảnh từ biểu mẫu (nếu cần)
+        Part Filepart = request.getPart("skillImage");
         String relativePath = request.getServletContext().getRealPath("/assets/img");
-        String filePath = null;
 
-        if (filePart != null && filePart.getSize() > 0) {
-            // Nếu người dùng đã chọn tệp mới, thực hiện tải tệp và cập nhật đường dẫn
-            avatar = "assets/img/" + UUID.randomUUID() + "_" + filePart.getSubmittedFileName();
-            filePath = relativePath + File.separator + avatar;
-            filePart.write(filePath);
-        }
+        String avatar = Filepart.getSubmittedFileName();
+        String ava = "assets/img/" + avatar;
+        String filePath = relativePath + File.separator + avatar;
+
+        Filepart.write(filePath);
 
         // Sử dụng lớp DBContext để lấy kết nối đến cơ sở dữ liệu
         DBContext dbContext = new DBContext();
@@ -111,7 +104,7 @@ public class EditSkillServlet extends HttpServlet {
 
             preparedStatement.setString(1, skillName);
             preparedStatement.setString(2, skillDescription);
-            preparedStatement.setString(3, avatar);
+            preparedStatement.setString(3, ava);
             preparedStatement.setInt(4, skillID);
 
             // Thực thi câu lệnh SQL UPDATE
@@ -120,11 +113,13 @@ public class EditSkillServlet extends HttpServlet {
             // Đóng kết nối và xử lý kết quả (nếu cần)
             preparedStatement.close();
             connection.close();
+
+            // Chuyển hướng hoặc hiển thị trang kết quả
         } catch (SQLException e) {
             e.printStackTrace();
             // Xử lý lỗi (ví dụ: in lỗi hoặc chuyển hướng đến trang lỗi)
         }
-        response.sendRedirect("viewskill");
+        response.sendRedirect("editskill"); // Chuyển hướng đến trang danh sách kỹ năng sau khi cập nhật
     }
 }
 

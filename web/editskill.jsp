@@ -65,22 +65,18 @@
     
 
     <h1>Edit Skill</h1>
-<form action="editskill?editSkillID=${skillID}" method="post" enctype="multipart/form-data">
-    <label >ID:${skillID}</label>
-    <input type="hidden" id="skillID" name="editSkillID" value="${skillID}">
-    
+<form action="editskill" method="post">
+    <input type="hidden" id="editSkillID" name="skillID" value="${skillID}">
     <label for="editSkillName">Name:</label>
-    <input type="text" id="editSkillName"id="editSkillName"" value="${skillName}" required><br><br>
+    <input type="text" id="editSkillName" name="skillName" value="${skillName}" required><br><br>
 
-    <label for="editSkillImage">Current Image:</label>
-   
+    <label for="editSkillImage">Image:</label>
+    <!-- Thêm một hidden input để lưu giữ giá trị hiện tại của skillImage -->
     <input type="hidden" name="currentSkillImage" value="${skillImage}">
-    
-    <img src="${skillImage}" alt="CurrentImage" width="200">
-   
-     <label for="skillImage">Update Image:</label>
-     
-            <input type="file" id="skillImage" name="skillImage" accept="image/png, image/gif, image/jpeg" >
+    <!-- Hiển thị hình ảnh hiện tại (nếu có) -->
+    <img src="${skillImage}" alt="Current Image" width="200">
+    <!-- Cho phép người dùng tải lên hình ảnh mới -->
+    <input type="file" id="editSkillImage" name="skillImage" accept="image/*">
      
     <label for="editSkillDescription">Description:</label><br>
     <textarea id="editSkillDescription" name="skillDescription" rows="4" required>${skillDescription}</textarea><br><br>
