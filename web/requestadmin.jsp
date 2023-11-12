@@ -101,7 +101,7 @@
       <p>Total Requests:${requestlist.size()} </p>
    <table border="1">
     <tr>
-        <th>ID</th>
+        <th>Number</th>
         <th>Title</th>
         <th>Requested By</th>
         <th>Request To</th>
@@ -109,10 +109,11 @@
         <th>Options</th>
     </tr>
     <c:set var="count" value="0" />
+    <%int count=0;%>
     <c:forEach items="${requestlist}" var="request">
         
         <tr>
-            <td>${request.ID}</td>
+            <td><%=++count%></td>
             <td>${request.title}</td>
             <td>${request.menteeName}</td>
             <td>${request.mentorName}</td>

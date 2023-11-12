@@ -30,11 +30,13 @@ public class ViewDetailRequestMentor extends HttpServlet {
         if (sRequest == null) {
             sRequest = (String) request.getSession().getAttribute("idrequest");
         }
-        int idRequest = Integer.parseInt(sRequest);
+        if(sRequest==null){
+            response.sendRedirect("home");
+        }
         String msgE = request.getParameter("msgE");
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
-        Request r = rDAO.getRequestByIDMentor(idRequest, acc.getID());
+        Request r = rDAO.getRequestByIDMentor(sRequest, acc.getID());
         if (r == null) {
             response.sendRedirect("home");
         } else {

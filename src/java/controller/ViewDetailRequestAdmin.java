@@ -25,6 +25,10 @@ public class ViewDetailRequestAdmin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        String IDRequest = request.getParameter("requestID");
+        if(IDRequest==null||!check(IDRequest)){
+            response.sendRedirect("home");
+        }
         int idRequest = Integer.parseInt(request.getParameter("requestID"));      
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
@@ -42,11 +46,19 @@ public class ViewDetailRequestAdmin extends HttpServlet {
         request.setAttribute("mentee", mentee);
         request.getRequestDispatcher("DetailRequestAdmin.jsp").forward(request, response);   
     }
-
+    private boolean check(String s){
+        boolean check=true;
+        try{
+            int a = Integer.parseInt(s);
+            if(a<=0)check=false;
+        }catch(Exception e){
+            check=false;
+        }
+        return check;
+    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-      
     }
 }

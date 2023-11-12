@@ -18,17 +18,19 @@ import java.util.*;
  * @author Admin
  */
 public class UpdateOrDeleteRequestServlet extends HttpServlet {
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Account acc = (Account) request.getSession().getAttribute("acc");
         String action = request.getParameter("action");
-        int ID = Integer.parseInt(request.getParameter("idrequest"));
+        String ID = request.getParameter("idrequest");
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
-        if (!action.equals("delete") && !action.equals("update")) {
+        if(action==null||ID==null){
+            response.sendRedirect("home");
+        }
+        else if (!action.equals("delete") && !action.equals("update")) {
             response.sendRedirect("home");
         } else if ((rDAO.getRequestByIDMentee(ID, acc.getID()) == null)) {
             response.sendRedirect("home");
@@ -54,7 +56,6 @@ public class UpdateOrDeleteRequestServlet extends HttpServlet {
             }
         }
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

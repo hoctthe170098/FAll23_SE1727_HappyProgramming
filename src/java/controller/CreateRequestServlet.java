@@ -23,12 +23,15 @@ public class CreateRequestServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt(request.getParameter("idmentor"));
-        if (new MentorDAO().checkExistMentor(idMentor) != null) {
+        String idMentor = request.getParameter("idmentor");
+        if(idMentor==null){
+            response.sendRedirect("home");
+        }
+        else if (new MentorDAO().checkExistMentor(idMentor) != null) {
             RequestDAO rDAO = new RequestDAO();
             rDAO.updateRequestByDate();
             request.getSession().removeAttribute("idmentor");
-            request.getSession().setAttribute("idmentor", idMentor);
+            request.getSession().setAttribute("idmentor", Integer.parseInt(idMentor));
             request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
         } else {
             response.sendRedirect("home");

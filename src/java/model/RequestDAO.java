@@ -72,7 +72,7 @@ public class RequestDAO extends MyDAO {
         return null;
     }
 
-    public boolean CheckRequestClosed(int IDMentor, int IDMentee) {
+    public boolean CheckRequestClosed(String IDMentor, int IDMentee) {
         xSql = "select * "
                 + "from Request "
                 + "where IDMentor = ? and IDMentee = ? and Status = 'Closed'";
@@ -83,7 +83,7 @@ public class RequestDAO extends MyDAO {
         Request r;
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, IDMentor);
+            ps.setString(1, IDMentor);
             ps.setInt(2, IDMentee);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -146,7 +146,7 @@ public class RequestDAO extends MyDAO {
         }
         return false;
     }
-    public boolean IsExistRequest(int IDMentee,int IDMentor) {
+    public boolean IsExistRequest(String IDMentee,int IDMentor) {
         xSql = "select * "
                 + "from Request "
                 + "where IDMentee = ? and IDMentor = ? and Status != 'OutOfDate'";
@@ -157,7 +157,7 @@ public class RequestDAO extends MyDAO {
         Request r;
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, IDMentee);
+            ps.setString(1, IDMentee);
             ps.setInt(2, IDMentor);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -216,10 +216,10 @@ public class RequestDAO extends MyDAO {
         }
         return null;
     }
- public Request getRequestByIDMentor(int id,int IDMentor) {
+ public Request getRequestByIDMentor(String id,int IDMentor) {
         xSql = "select * "
                 + "from Request "
-                + "where ID = " + id+" and IDMentor="+IDMentor;
+                + "where ID = ?" + " and IDMentor="+IDMentor;
         int ID, iDMentor, iDMentee, IDSkill;
         float from, to, money;
         String title, status, detail, address;
@@ -227,6 +227,7 @@ public class RequestDAO extends MyDAO {
         Request r;
         try {
             ps = con.prepareStatement(xSql);
+            ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ID = rs.getInt("ID");
@@ -315,10 +316,10 @@ public class RequestDAO extends MyDAO {
         }
         return null;
     }
-    public Request getRequestByIDMentee(int id, int IDMentee) {
+    public Request getRequestByIDMentee(String id, int IDMentee) {
         xSql = "select * "
                 + "from Request "
-                + "where ID = " + id + " and IDMentee=" + IDMentee + " and Status != 'OutOfDate'";
+                + "where ID = ?" +  " and IDMentee=" + IDMentee + " and Status != 'OutOfDate'";
         int ID, iDMentor, iDMentee, IDSkill;
         float from, to, money;
         String title, status, detail, address;
@@ -326,6 +327,7 @@ public class RequestDAO extends MyDAO {
         Request r;
         try {
             ps = con.prepareStatement(xSql);
+            ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ID = rs.getInt("ID");
@@ -348,10 +350,10 @@ public class RequestDAO extends MyDAO {
         }
         return null;
     }
-   public Request getRequestCanUpdateByIDMentee(int id, int IDMentee) {
+   public Request getRequestCanUpdateByIDMentee(String id, int IDMentee) {
         xSql = "select * "
                 + "from Request "
-                + "where ID = " + id + " and IDMentee=" + IDMentee + " and Status in ('Processing','Accepted')";
+                + "where ID = ?" +  " and IDMentee=" + IDMentee + " and Status in ('Processing','Accepted')";
         int ID, iDMentor, iDMentee, IDSkill;
         float from, to, money;
         String title, status, detail, address;
@@ -359,6 +361,7 @@ public class RequestDAO extends MyDAO {
         Request r;
         try {
             ps = con.prepareStatement(xSql);
+            ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ID = rs.getInt("ID");
@@ -522,10 +525,11 @@ public class RequestDAO extends MyDAO {
         }
     }
 
-    public void deleteRequest(int id) {
-        xSql = "delete from Request where id = " + id;
+    public void deleteRequest(String id) {
+        xSql = "delete from Request where id = ?";
         try {
             ps = con.prepareStatement(xSql);
+            ps.setString(1, id);
             rs = ps.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
@@ -710,7 +714,7 @@ public class RequestDAO extends MyDAO {
 //      for(Request r:dao.getRequestPagging(2, 3)){
 //          System.out.println(r);
 //      }
-        System.out.println(dao.getRequestCanUpdateByIDMentee(43, 3));
+        
     }
 
     private static boolean checkIDrequest(int ID, int IDMentor) {

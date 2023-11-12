@@ -24,10 +24,14 @@ public class ViewProfileMentee extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Account acc = (Account) request.getSession().getAttribute("acc");
-        if (! new RequestDAO().IsExistRequest(Integer.parseInt(request.getParameter("idmentee")), acc.getID())) {
+        String idMentee = request.getParameter("idmentee");
+        if(idMentee==null){
+            response.sendRedirect("home");
+        }
+        if (! new RequestDAO().IsExistRequest(idMentee, acc.getID())) {
             response.sendRedirect("home");
         } else {
-            request.setAttribute("p", new ProfileDAO().getProfileByID(Integer.parseInt(request.getParameter("idmentee"))));
+            request.setAttribute("p", new ProfileDAO().getProfileByID(Integer.parseInt(idMentee)));
             request.getRequestDispatcher("ViewDetailMentee.jsp").forward(request, response);
         }
     }

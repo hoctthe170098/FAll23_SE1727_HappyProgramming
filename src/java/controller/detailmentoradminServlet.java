@@ -25,19 +25,22 @@ public class detailmentoradminServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt(request.getParameter("ID"));
+        String idMentor = request.getParameter("ID");    
         ProfileDAO pDAO = new ProfileDAO();
         MentorDAO mDAO = new MentorDAO();
+        if(idMentor==null||mDAO.checkExistMentor(idMentor)==null){
+            response.sendRedirect("home");
+        }
         MentorSkillDAO msDAO = new MentorSkillDAO();
         AccountDAO accDAO = new AccountDAO();
         CommentInfoDAO ciDAO = new CommentInfoDAO();
-        Profile p = pDAO.getProfileByID(idMentor);
-        Mentor m = mDAO.getMentorByID(idMentor);
-        MentorSkill ms = msDAO.getSkillByName(idMentor);
-        String email = accDAO.getEmailByID(idMentor);
+        Profile p = pDAO.getProfileByID(Integer.parseInt(idMentor));
+        Mentor m = mDAO.getMentorByID(Integer.parseInt(idMentor));
+        MentorSkill ms = msDAO.getSkillByName(Integer.parseInt(idMentor));
+        String email = accDAO.getEmailByID(Integer.parseInt(idMentor));
         String date = String.valueOf(p.getBirth());
         List<Integer> ListSkillMentor = ms.getListSkillID();
-        List<CommentInfo> listComment = ciDAO.getAllCommentInfo(idMentor);
+        List<CommentInfo> listComment = ciDAO.getAllCommentInfo(Integer.parseInt(idMentor));
         request.setAttribute("listComment", listComment);
         request.setAttribute("p", p);
         request.setAttribute("m", m);
@@ -53,35 +56,5 @@ public class detailmentoradminServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt(request.getParameter("idmentor"));
-        String button = request.getParameter("button");
-        if (button.equals("request")) {
-            RequestDAO rDAO = new RequestDAO();
-            rDAO.updateRequestByDate();
-            request.getSession().removeAttribute("idmentor");
-            request.getSession().setAttribute("idmentor", idMentor);
-            request.getRequestDispatcher("CreateRequest.jsp").forward(request, response);
-        } else {
-            Account acc = (Account) request.getSession().getAttribute("acc");
-            if (acc == null) {
-                request.setAttribute("account", false);
-            } else {
-                RequestDAO rDAO = new RequestDAO();
-                if (!rDAO.CheckRequestClosed(idMentor, acc.getID())) {
-                    request.setAttribute("closed", false);
-                } else {
-                    request.getSession().removeAttribute("idmentor");
-                    request.getSession().setAttribute("idmentor", idMentor);
-                    CommentDAO cDAO = new CommentDAO();
-                    RateDAO raDAO = new RateDAO();
-                    if (!raDAO.checkIsExistRate(acc.getID(), idMentor)) {
-                        raDAO.insertRate(idMentor, acc.getID());
-                    }
-                    List<Comment> listC = cDAO.getCommentBy2ID( acc.getID(),idMentor);
-                    request.setAttribute("listC", listC);
-                }
-            }
-            request.getRequestDispatcher("DisplayComment.jsp").forward(request, response);
-        }
     }
 }

@@ -23,8 +23,8 @@ public class ViewRequestMenteeServlet extends HttpServlet {
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
         Account acc = (Account) request.getSession().getAttribute("acc");
-        String status = request.getParameter("status");
-        if (status.equals("OutOfDate")) {
+        String status = request.getParameter("status");    
+        if (status==null||status.equals("OutOfDate")) {
             response.sendRedirect("home");
         } else {
             String indexPage = request.getParameter("index");

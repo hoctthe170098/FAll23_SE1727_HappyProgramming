@@ -106,7 +106,6 @@
             <th>Phone</th>
             <th>Facebook</th>
             <th>Instagram</th>
-            <th>Action</th>
         </tr>
         <c:forEach items="${menteelist}" var="mentee">
             <tr>
@@ -116,12 +115,7 @@
                 <td>${mentee.birth}</td>
                 <td>${mentee.phone}</td>
                 <td><a href="${mentee.facebook}" target="_blank"><i class="bi bi-facebook custom-icon"></i> Facebook</a></td>
-                <td><a href="${mentee.inta}" target="_blank"><i class="bi bi-instagram custom-instagram-icon"></i> Instagram</a></td>
-                <td>
-                    <a style="background-color: red" class="btn btn-outline-danger" onclick="Delete(${mentee.ID})" style="padding: 6px">
-                        <i class="bi bi-trash"></i> Delete
-                    </a>
-                </td>
+                <td><a href="${mentee.inta}" target="_blank"><i class="bi bi-instagram custom-instagram-icon"></i> Instagram</a></td>        
             </tr>
         </c:forEach>
     </table>

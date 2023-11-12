@@ -47,14 +47,15 @@ public class ListBecomeMentorDAO extends MyDAO {
         return list;
     }
 
-    public CVToBecomeMentor getCVBecomeMentorByID(int IDMentee) {
+    public CVToBecomeMentor getCVBecomeMentorByID(String IDMentee) {
         xSql = "select * "
-                + "from BecomeMentor where ID = " + IDMentee;
+                + "from BecomeMentor where ID = ?" ;//+ IDMentee;
         int ID;
         String intro, ex, skill,reason;
         CVToBecomeMentor cv;
         try {
             ps = con.prepareStatement(xSql);
+            ps.setString(1, IDMentee);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ID = rs.getInt("ID");
@@ -103,6 +104,6 @@ public class ListBecomeMentorDAO extends MyDAO {
      }
     public static void main(String[] args) {
         ListBecomeMentorDAO dao = new ListBecomeMentorDAO();
-        System.out.println(dao.getCVBecomeMentorByID(3));
+        
     }
 }

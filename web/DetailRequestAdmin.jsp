@@ -178,7 +178,6 @@
                         </div>
                     </div>
                                                      <div style="text-align: left; margin-left: 310px;">
-    <a href="requestadmin" class="btn btn-primary">Back</a>
 </div>
                     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

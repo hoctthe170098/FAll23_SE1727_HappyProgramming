@@ -35,9 +35,10 @@ public class ProfileDAO extends MyDAO{
     }
      public Profile getProfileByID(int ID){
          Profile p = new Profile();
-         xSql = "select * from Profile where id = " + ID;
+         xSql = "select * from Profile where id = ?" ;
          try{
             ps = con.prepareStatement(xSql);
+            ps.setInt(1, ID);
             rs = ps.executeQuery();
             while (rs.next()) {
             p.setId(rs.getInt("ID"));
@@ -129,6 +130,6 @@ public class ProfileDAO extends MyDAO{
     }
      public static void main(String[] args) throws SQLException  {
         ProfileDAO cdao =  new ProfileDAO();
-    
+         System.out.println(cdao.getProfileByID(2));
     }
 }

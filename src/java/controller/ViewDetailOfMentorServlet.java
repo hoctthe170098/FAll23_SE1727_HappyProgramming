@@ -25,27 +25,31 @@ public class ViewDetailOfMentorServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idMentor = Integer.parseInt(request.getParameter("idmentor"));
+        String idMentor = request.getParameter("idmentor");
         ProfileDAO pDAO = new ProfileDAO();
         MentorDAO mDAO = new MentorDAO();
         MentorSkillDAO msDAO = new MentorSkillDAO();
         AccountDAO accDAO = new AccountDAO();
         CommentInfoDAO ciDAO = new CommentInfoDAO();
+        if(idMentor==null){
+            response.sendRedirect("home");
+        }
         if (mDAO.checkExistMentor(idMentor)!=null) {
-            Profile p = pDAO.getProfileByID(idMentor);
-            Mentor m = mDAO.getMentorByID(idMentor);
-            MentorSkill ms = msDAO.getSkillByName(idMentor);
-            String email = accDAO.getEmailByID(idMentor);
+             int IDMentor = Integer.parseInt(idMentor);
+            Profile p = pDAO.getProfileByID(IDMentor);
+            Mentor m = mDAO.getMentorByID(IDMentor);
+            MentorSkill ms = msDAO.getSkillByName(IDMentor);
+            String email = accDAO.getEmailByID(IDMentor);
             String date = String.valueOf(p.getBirth());
             List<Integer> ListSkillMentor = ms.getListSkillID();
-            List<CommentInfo> listComment = ciDAO.getAllCommentInfo(idMentor);
+            List<CommentInfo> listComment = ciDAO.getAllCommentInfo(IDMentor);
             request.setAttribute("listComment", listComment);
             request.setAttribute("p", p);
             request.setAttribute("m", m);
             request.setAttribute("ListSkillMentor", ListSkillMentor);
             request.setAttribute("email", email);
             request.setAttribute("date", date);
-            request.setAttribute("idmentor", idMentor);
+            request.setAttribute("idmentor", IDMentor);
             request.getRequestDispatcher("ViewDetailMentor.jsp").forward(request, response);
         } else {
             response.sendRedirect("home");

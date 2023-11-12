@@ -118,7 +118,7 @@
         <td> <a  href="${mentor.facebook}"><i class="bi bi-facebook custom-icon"></i></a></td>
         <td><a href="${mentor.inta}"><i class="bi bi-instagram custom-instagram-icon"></i></a></td>
         <td>
-              <a style="background-color: blue" class="btn btn-outline-danger" href="detailmentoradmin?ID=${mentor.ID}" style="padding: 6px">Details</a>
+              <a style="background-color: blue" class="btn btn-outline-danger" href="detailmentor?idmentor=${mentor.ID}" style="padding: 6px">Details</a>
             <a style = " background-color: red" class="btn btn-outline-danger" onclick="Delete(${mentor.ID})" style="padding: 6px"><i class="bi bi-trash"></i>Delete</a>
         </td>
     </tr>

@@ -24,20 +24,31 @@ public class ViewCVMentee extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         ListBecomeMentorDAO lDAO = new ListBecomeMentorDAO();
-        CVToBecomeMentor CV = lDAO.getCVBecomeMentorByID(Integer.parseInt(request.getParameter("idmentee")));
-        String date = String.valueOf(CV.getP().getBirth());
-        boolean g = CV.getP().isGender();
-        if (g) {
-            request.setAttribute("gender", "Male");
+        String idMentee = request.getParameter("idmentee");
+        if (idMentee == null) {
+            response.sendRedirect("home");
         } else {
-            request.setAttribute("gender", "Female");
+            CVToBecomeMentor CV = lDAO.getCVBecomeMentorByID(idMentee);
+            if (CV != null) {
+                String date = String.valueOf(CV.getP().getBirth());
+                boolean g = CV.getP().isGender();
+                if (g) {
+                    request.setAttribute("gender", "Male");
+                } else {
+                    request.setAttribute("gender", "Female");
+                }
+                AccountDAO aDAO = new AccountDAO();
+                String email = aDAO.getEmailByID(CV.getID());
+                request.setAttribute("email", email);
+                request.setAttribute("birth", date);
+                request.setAttribute("CV", CV);
+                request.getRequestDispatcher("ViewCVMentee.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("home");
+            }
+
         }
-        AccountDAO aDAO = new AccountDAO();
-        String email = aDAO.getEmailByID(CV.getID());
-        request.setAttribute("email", email);
-        request.setAttribute("birth", date);
-        request.setAttribute("CV", CV);
-        request.getRequestDispatcher("ViewCVMentee.jsp").forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

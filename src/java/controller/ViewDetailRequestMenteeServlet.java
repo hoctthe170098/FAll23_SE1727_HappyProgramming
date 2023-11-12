@@ -25,7 +25,10 @@ public class ViewDetailRequestMenteeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idRequest = Integer.parseInt(request.getParameter("idrequest"));
+        String idRequest = request.getParameter("idrequest");
+        if(idRequest==null){
+             response.sendRedirect("home");
+        }
         RequestDAO rDAO = new RequestDAO();
         rDAO.updateRequestByDate();
         Account acc = (Account) request.getSession().getAttribute("acc");

@@ -52,11 +52,12 @@ public class MentorDAO extends MyDAO {
         }
         return list;
     }
-    public String checkExistMentor(int ID){
-         xSql = "select Intro from Mentor where id = " + ID;
+    public String checkExistMentor(String ID){
+         xSql = "select Intro from Mentor where id = ?";
          
          try{         
             ps = con.prepareStatement(xSql);
+            ps.setString(1, ID);
             rs = ps.executeQuery();
             while (rs.next()) {
             String intro = rs.getString("intro");
@@ -72,9 +73,10 @@ public class MentorDAO extends MyDAO {
     }
     public Mentor getMentorByID(int ID){
       Mentor m = new Mentor();
-         xSql = "select * from Mentor where id = " + ID;
+         xSql = "select * from Mentor where id = ?";
          try{
             ps = con.prepareStatement(xSql);
+            ps.setInt(1, ID);
             rs = ps.executeQuery();
             while (rs.next()) {
             m.setID(rs.getInt("ID"));  
@@ -144,6 +146,6 @@ public class MentorDAO extends MyDAO {
 
     public static void main(String[] args) throws SQLException {
         MentorDAO dao = new MentorDAO();
-        System.out.println(dao.checkExistMentor(3));
+        System.out.println(dao.getMentorByID(2));
     }
 }

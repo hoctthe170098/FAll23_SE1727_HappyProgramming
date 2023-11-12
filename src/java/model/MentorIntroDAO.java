@@ -176,15 +176,15 @@ public class MentorIntroDAO extends MyDAO {
         return listAllMentor;
     }
 
-    public List<MentorIntro> getTop3MentorIntroByIDSkill(int ID) {
+    public List<MentorIntro> getTop3MentorIntroByIDSkill(String ID) {
         List<MentorIntro> listTop3Mentor = new ArrayList<>();
         xSql = "select top 3 Mentor.ID,Avatar,Fullname,Rate,Intro,FacebookLink,InstagramLink "
                 + "from Mentor join Profile on Mentor.ID=Profile.ID "
-                + "join SkillMentor on Mentor.ID=SkillMentor.IDMentor and IDSkill=" + ID
+                + "join SkillMentor on Mentor.ID=SkillMentor.IDMentor and IDSkill= ?" 
                 + " order by Rate desc ";
         try {
-
             ps = con.prepareStatement(xSql);
+            ps.setString(1, ID);
             rs = ps.executeQuery();
             MentorIntro m;
             int id;
@@ -264,9 +264,5 @@ public class MentorIntroDAO extends MyDAO {
 
     public static void main(String[] args) {
         MentorIntroDAO dao = new MentorIntroDAO();
-        List<MentorIntro> l = dao.getTop3MentorIntroByIDSkill(3);
-        for (MentorIntro m : l) {
-            System.out.println(m);
-        }
     }
 }

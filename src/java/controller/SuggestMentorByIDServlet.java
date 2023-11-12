@@ -11,7 +11,10 @@ public class SuggestMentorByIDServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int ID = Integer.parseInt(request.getParameter("id"));
+        String ID = request.getParameter("id");
+        if(ID==null){
+            response.sendRedirect("home");
+        }
         MentorIntroDAO dao = new MentorIntroDAO();
         List<MentorIntro> list = dao.getTop3MentorIntroByIDSkill(ID);
         request.setAttribute("list", list);

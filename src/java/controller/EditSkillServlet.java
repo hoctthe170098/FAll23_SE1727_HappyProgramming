@@ -38,6 +38,9 @@ public class EditSkillServlet extends HttpServlet {
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+       if(!check(request.getParameter("editSkillID"))){
+           response.sendRedirect("home");
+       }
     int skillID = Integer.parseInt(request.getParameter("editSkillID")); // Lấy ID kỹ năng cần cập nhật
 
     // Sử dụng lớp DBContext để lấy kết nối đến cơ sở dữ liệu
@@ -77,7 +80,16 @@ public class EditSkillServlet extends HttpServlet {
         // Xử lý lỗi (ví dụ: in lỗi hoặc chuyển hướng đến trang lỗi)
     }
 }
-
+ private boolean check(String s){
+        boolean check=true;
+        try{
+            int a = Integer.parseInt(s);
+            if(a<=0)check=false;
+        }catch(Exception e){
+            check=false;
+        }
+        return check;
+    }
    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int skillID = Integer.parseInt(request.getParameter("editSkillID"));

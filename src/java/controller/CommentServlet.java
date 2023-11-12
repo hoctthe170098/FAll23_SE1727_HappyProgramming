@@ -34,17 +34,19 @@ public class CommentServlet extends HttpServlet {
         }
         int idMentor = 0;
         String idmentor = request.getParameter("idmentor");
-        if (idmentor != null) {
-            idMentor = Integer.parseInt(idmentor);
-            request.getSession().removeAttribute("idmentor");
-            request.getSession().setAttribute("idmentor", idMentor);
-
-        } else {
-            idMentor = (int) request.getSession().getAttribute("idmentor");
+        if (idmentor == null) {
+            response.sendRedirect("home");
         }
-        if (!rDAO.CheckRequestClosed(idMentor, acc.getID())) {
+        if (!rDAO.CheckRequestClosed(idmentor, acc.getID())) {
             request.setAttribute("closed", false);
         } else {
+            if (idmentor != null) {
+                idMentor = Integer.parseInt(idmentor);
+                request.getSession().removeAttribute("idmentor");
+                request.getSession().setAttribute("idmentor", idMentor);
+            } else {
+                idMentor = (int) request.getSession().getAttribute("idmentor");
+            }
             if (!raDAO.checkIsExistRate(acc.getID(), idMentor)) {
                 raDAO.insertRate(idMentor, acc.getID());
             }

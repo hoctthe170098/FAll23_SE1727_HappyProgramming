@@ -32,8 +32,17 @@ public class ActionAdminRegisterBecomeMentor extends HttpServlet {
         RequestDAO rDAO = new RequestDAO();
         String action = request.getParameter("action");
         Account acc = (Account) request.getSession().getAttribute("acc");
-        int idMentee = Integer.parseInt(request.getParameter("ID"));
-        if (action.equals("reject")) {
+        String id  = request.getParameter("ID");
+        if(action==null||id==null){
+            response.sendRedirect("home");
+        }
+        else{
+            CVToBecomeMentor cv = lDAO.getCVBecomeMentorByID(id);
+            if(cv==null){
+                response.sendRedirect("home");
+            }else{
+                  int idMentee = Integer.parseInt(request.getParameter("ID"));
+            if (action.equals("reject")) {
             lDAO.delete(idMentee);
             String content = "If you failed to apply becoming a mentor, you can try again when your CV is better";
             nDAO.insertNoficationDAO(acc.getID(), idMentee, content, 1);
@@ -44,7 +53,6 @@ public class ActionAdminRegisterBecomeMentor extends HttpServlet {
             } else {
                 SkillDAO sDAO = new SkillDAO();
                 List<Skill> listSkill = sDAO.getListSkill();
-                CVToBecomeMentor cv = lDAO.getCVBecomeMentorByID(idMentee);
                 String[] skillMentor = cv.getSkill().split(", ");
                 List<Integer> listIDSkill = new ArrayList<>();
                 for (String name : skillMentor) {
@@ -68,7 +76,10 @@ public class ActionAdminRegisterBecomeMentor extends HttpServlet {
                 nDAO.insertNoficationDAO(acc.getID(), idMentee, content, 1);                 
             }         
         }
-        response.sendRedirect("listbecomementor");
+        response.sendRedirect("listbecomementor"); 
+            }     
+        }
+        
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

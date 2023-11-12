@@ -37,16 +37,6 @@ public class ProfileServlet extends HttpServlet {
             Account acc = (Account) request.getSession().getAttribute("acc");
             int ID = acc.getID();
             String button = request.getParameter("button");
-            if (button.equals("delete")) {
-                BecomeMentorDao bmDao = new BecomeMentorDao();
-                if (bmDao.IsExistBecomeMentor(ID)) {
-                    request.setAttribute("msgE", "You are having request to register become a mentor, if you want to delete profile, delete request first");
-                } else {
-                    dao.deleteProfile(ID);
-                }
-                //request.setAttribute("msgE", "Delete Profile successfully!"); 
-                request.setAttribute("p", dao.getProfileByID(ID));
-            }
             if (button.equals("update")) {
                 String firstname = request.getParameter("firstname");
                 String lastname = request.getParameter("lastname");
@@ -61,12 +51,10 @@ public class ProfileServlet extends HttpServlet {
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyy-MM-dd");
                 LocalDate date1 = LocalDate.parse(request.getParameter("birth"), format);
                 Period per = Period.between(date1, LocalDate.now());
-                Profile p;
-                //out.println(part);      
+                Profile p;   
                 Profile pro = dao.getProfileByID(ID);
                 if (pro.getId() == 0) {
                     String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                    //out.println(fileName);
                     if (!fileName.equals("")) {
                         String realPath = request.getServletContext().getRealPath("/imagesAcc");
                         if (!Files.exists(Paths.get(realPath))) {
@@ -86,7 +74,6 @@ public class ProfileServlet extends HttpServlet {
                         p = new Profile(ID, gender, "imagesAcc/" + img, Phone, birth, fullname, address, faceLink, intaLink);
                     } else {
                         p = new Profile(ID, gender, "imagesAcc/acc0.jpg", Phone, birth, fullname, address, faceLink, intaLink);
-                        //out.println(p.toString());
                     }
                     if (!Phone.equals(pro.getPhone()) && dao.IsExistPhone(Phone)) {
                         request.setAttribute("msgP", "This PhoneNumber is Exist");
@@ -99,7 +86,6 @@ public class ProfileServlet extends HttpServlet {
                         request.setAttribute("msgE", "Update Profile successfully!");
                     }
                     request.setAttribute("p", p);
-                    //out.println(dao.getProfileByID(ID));
                 } else {
                     String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
                     if (!fileName.equals("")) {
@@ -119,8 +105,6 @@ public class ProfileServlet extends HttpServlet {
                         String imgName = realPath + "/" + img;
                         part.write(imgName);
                         p = new Profile(ID, gender, "imagesAcc/" + img, Phone, birth, fullname, address, faceLink, intaLink);
-                        //out.println(p.toString());
-
                     } else {
                         p = new Profile(ID, gender, pro.getAvatar(), Phone, birth, fullname, address, faceLink, intaLink);
 

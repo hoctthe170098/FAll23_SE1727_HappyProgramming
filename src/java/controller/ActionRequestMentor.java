@@ -27,14 +27,17 @@ public class ActionRequestMentor extends HttpServlet {
         Account acc = (Account) request.getSession().getAttribute("acc");
         RequestDAO rDAO = new RequestDAO();
         NoficationDAO nDAO = new NoficationDAO();
+        if(!check(request.getParameter("ID"))){
+            response.sendRedirect("home");
+        }
         int idRequest = Integer.parseInt(request.getParameter("ID"));
         Request r ;
         String action = request.getParameter("action");
-        if (!action.equals("update") && !action.equals("reject") && !action.equals("accept")) {
+        if (action==null||!action.equals("update") && !action.equals("reject") && !action.equals("accept")) {
             response.sendRedirect("home");
         } else {
             request.getSession().removeAttribute("idrequest");
-            request.getSession().setAttribute("idrequest", String.valueOf(idRequest));
+            request.getSession().setAttribute("idrequest", String.valueOf(request.getParameter("ID")));
             if (action.equals("update")) {
                 r = rDAO.getRequestAcceptByIDMentor(idRequest, acc.getID());
                 out.print(acc.getID());
@@ -69,7 +72,18 @@ public class ActionRequestMentor extends HttpServlet {
             }
         }
     }
-
+    private boolean check(String s){
+        boolean check = true;
+        try{
+            int i = Integer.parseInt(s);
+            if(i<=0){
+                check=false;
+            }
+        }catch(Exception e){
+            check=false;
+        }
+        return check;
+    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
