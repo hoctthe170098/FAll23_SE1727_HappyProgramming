@@ -25,6 +25,9 @@ public class ListBecomeMentor extends HttpServlet {
         PrintWriter out = response.getWriter();
         ListBecomeMentorDAO lDAO = new ListBecomeMentorDAO();
         String indexPage = request.getParameter("index");
+        if(indexPage!=null&&!check(indexPage)){
+            response.sendRedirect("home");
+        }
         String msgE = request.getParameter("msgE");
         if (indexPage == null) {
             indexPage = "1";
@@ -39,10 +42,23 @@ public class ListBecomeMentor extends HttpServlet {
         request.setAttribute("index", indexPage);
         request.setAttribute("page", page);
         request.setAttribute("listCV", listCV);
-        if(msgE!=null){
+        if (msgE != null) {
             request.setAttribute("msgE", msgE);
         }
         request.getRequestDispatcher("ListBecomeMentor.jsp").forward(request, response);
+    }
+
+    private boolean check(String s) {
+        boolean check = true;
+        try {
+            int n = Integer.parseInt(s);
+            if (n <= 0) {
+                check = false;
+            }
+        } catch (Exception e) {
+            check = false;
+        }
+        return check;
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

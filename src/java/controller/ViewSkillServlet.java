@@ -62,9 +62,7 @@ public class ViewSkillServlet extends HttpServlet {
     @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SkillDAO skillDAO = new SkillDAO(); // Khởi tạo SkillDAO
-        List<Skill> skillList = skillDAO.getListSkill(); // Lấy danh sách kỹ năng từ DAO
-
-        
+        List<Skill> skillList = skillDAO.getListSkill(); // Lấy danh sách kỹ năng từ DA      
         request.setAttribute("skillList", skillList);
         int totalSkill = skillDAO.TotalSkill(); 
         request.setAttribute("totalSkill", totalSkill);

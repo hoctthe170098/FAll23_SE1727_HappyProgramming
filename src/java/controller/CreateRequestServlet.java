@@ -45,6 +45,9 @@ public class CreateRequestServlet extends HttpServlet {
         long millis = System.currentTimeMillis();
         java.sql.Date now = new java.sql.Date(millis);
         String title = request.getParameter("title");
+        if(title==null){
+            response.sendRedirect("home");
+        }
         java.sql.Date date = java.sql.Date.valueOf(request.getParameter("date"));
         float from = Float.parseFloat(request.getParameter("from"));
         float to = Float.parseFloat(request.getParameter("to"));

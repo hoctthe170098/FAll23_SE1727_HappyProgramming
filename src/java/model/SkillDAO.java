@@ -45,11 +45,11 @@ public class SkillDAO extends MyDAO {
 
     public Skill getSkillByID(int ID) {
         Skill skill = null;
-         xSql = "select * from Skills where ID = ?";
+        xSql = "select * from Skills where ID = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, ID);
-             rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 // Lấy thông tin từ cơ sở dữ liệu
@@ -83,7 +83,7 @@ public class SkillDAO extends MyDAO {
         }
     }
 
-     public List<Skill> getSkillByName(String nameSkill)  {
+    public List<Skill> getSkillByName(String nameSkill) {
         List<Skill> listSkill = new ArrayList<>();
         xSql = "select * from Skills where Name like '%" + nameSkill + "%'";
         try {
@@ -109,47 +109,47 @@ public class SkillDAO extends MyDAO {
         }
         return (listSkill);
     }
-      public void updateSkillByID(int ID, String name, String description, String image) {
-    String sql = "UPDATE Skills SET Name = ?, Description = ?, Image = ? WHERE ID = ?";
-    
-    try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
-        preparedStatement.setString(1, name);
-        preparedStatement.setString(2, description);
-        preparedStatement.setString(3, image);
-        preparedStatement.setInt(4, ID);
-        
-        preparedStatement.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
 
+    public void updateSkillByID(int ID, String name, String description, String image) {
+        String sql = "UPDATE Skills SET Name = ?, Description = ?, Image = ? WHERE ID = ?";
+
+        try ( PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, description);
+            preparedStatement.setString(3, image);
+            preparedStatement.setInt(4, ID);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<Skill> getListTop3Skill() {
+        List<Integer>listID = new ArrayList<>();;
         List<Skill> listSkill = new ArrayList<>();
-        xSql = "select top 3 * from Skills order by ID";
+        xSql = "select top 3 Skills.ID"
+                + " From Skills join Request on Skills.ID=Request.IDSkill"
+                + " group by Request.IDSkill,Skills.ID"
+                + " order by count(Request.ID) desc";
         try {
+            int id = 0;
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
-            int id;
-            String name;
-            String Description;
-            String img;
-            Skill x;
             while (rs.next()) {
                 id = rs.getInt("ID");
-                name = rs.getString("Name");
-                Description = rs.getString("Description");
-                img = rs.getString("image");
-                x = new Skill(id, name, Description, img);
-                listSkill.add(x);
+                listID.add(id);
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (listSkill);
+        for(int i:listID){
+            Skill x = getSkillByID(i);
+            listSkill.add(x);
+        }
+        return listSkill;
     }
 
     public int TotalSkill() {
@@ -169,13 +169,5 @@ public class SkillDAO extends MyDAO {
         }
         return 0;
     }
-    public static void main(String[] args) {
-        SkillDAO dao = new SkillDAO();
-        for(Skill s:dao.getListSkill()){
-            System.out.println(s);
-        }
-    }
 
-   
-        
 }
