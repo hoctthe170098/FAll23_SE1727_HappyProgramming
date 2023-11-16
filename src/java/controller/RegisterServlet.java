@@ -78,8 +78,8 @@ public class RegisterServlet extends HttpServlet {
         String repass = request.getParameter("repass");
         if (name == "" || email == "" || password == "" || repass == "") {
             request.setAttribute("msg", "Please fill out the form completely");
-        } else if ((name.contains(" ") || name.length() > 50) || (password.contains(" ") || password.length() > 50)) {
-            request.setAttribute("msg", "Username or password can't contain space or has length >50 ");
+        } else if ((name.contains(" ") || name.length() > 50) || (password.contains(" ") || password.length() > 50)||(email.length()>50)) {
+            request.setAttribute("msg", "Username, password, email can't contain space and has length >50 ");
         } else if (password.length() < 8 || !password.contains("[A-Z]") || !password.contains("[a-z]") || !password.contains("[0-9]")) {
             request.setAttribute("msg", "Password must has at least 8 characters long,one lowercase letter, one uppercase letter and one number ");
         } else {

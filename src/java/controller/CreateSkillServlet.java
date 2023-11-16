@@ -23,7 +23,6 @@ import java.sql.SQLException;
 import java.util.UUID;
 import model.DBContext;
 
-
 /**
  *
  * @author ADMIN
@@ -87,42 +86,46 @@ public class CreateSkillServlet extends HttpServlet {
         String skillDescription = request.getParameter("skillDescription");
         // Lấy hình ảnh từ biểu mẫu (chú ý: bạn cần lưu trữ hình ảnh trong cơ sở dữ liệu hoặc hệ thống tệp riêng biệt)
         Part Filepart = request.getPart("skillImage");
-        String relativePath = request.getServletContext().getRealPath("/assets/img");
+        if (skillName.length() > 50) {
+            request.setAttribute("msg", "Name of skill must has length < 50 ");
+        } else {
+            String relativePath = request.getServletContext().getRealPath("/assets/img");
 
-        String avatar = Filepart.getSubmittedFileName();
-        String ava = "assets/img/" + avatar;
-        String filePath = relativePath + File.separator + avatar;
+            String avatar = Filepart.getSubmittedFileName();
+            String ava = "assets/img/" + avatar;
+            String filePath = relativePath + File.separator + avatar;
 
-        Filepart.write(filePath);
-        // Lưu dữ liệu từ InputStream vào tệp hình ảnh trên máy chủ
+            Filepart.write(filePath);
+            // Lưu dữ liệu từ InputStream vào tệp hình ảnh trên máy chủ
 
-        // Sử dụng lớp DBContext để lấy kết nối đến cơ sở dữ liệu
-        DBContext dbContext = new DBContext();
-        Connection connection = dbContext.getConnection();
+            // Sử dụng lớp DBContext để lấy kết nối đến cơ sở dữ liệu
+            DBContext dbContext = new DBContext();
+            Connection connection = dbContext.getConnection();
 
-        try {
-            // Tạo câu lệnh SQL để chèn dữ liệu vào bảng "Skill"
-            String sql = "INSERT INTO Skills (Name, Description, image) VALUES (?, ?, ?)";
+            try {
+                // Tạo câu lệnh SQL để chèn dữ liệu vào bảng "Skill"
+                String sql = "INSERT INTO Skills (Name, Description, image) VALUES (?, ?, ?)";
 
-            // Tạo PreparedStatement và thiết lập các tham số
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                // Tạo PreparedStatement và thiết lập các tham số
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, skillName);
-            preparedStatement.setString(2, skillDescription);
-            preparedStatement.setString(3, ava);
-            // Thực thi câu lệnh SQL
-            int rowsAffected = preparedStatement.executeUpdate();
+                preparedStatement.setString(1, skillName);
+                preparedStatement.setString(2, skillDescription);
+                preparedStatement.setString(3, ava);
+                // Thực thi câu lệnh SQL
+                int rowsAffected = preparedStatement.executeUpdate();
 
-            // Đóng kết nối và xử lý kết quả (nếu cần)
-            preparedStatement.close();
-            connection.close();
+                // Đóng kết nối và xử lý kết quả (nếu cần)
+                preparedStatement.close();
+                connection.close();
 
-            // Chuyển hướng hoặc hiển thị trang kết quả
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Xử lý lỗi (ví dụ: in lỗi hoặc chuyển hướng đến trang lỗi)
+                // Chuyển hướng hoặc hiển thị trang kết quả
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Xử lý lỗi (ví dụ: in lỗi hoặc chuyển hướng đến trang lỗi)
+            }
+            request.setAttribute("mess", "Add successfully!");
         }
-        request.setAttribute("mess", "Add successfully!");
         request.getRequestDispatcher("CreateSkill.jsp").forward(request, response);
     }
 

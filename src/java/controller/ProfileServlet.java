@@ -51,7 +51,7 @@ public class ProfileServlet extends HttpServlet {
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyy-MM-dd");
                 LocalDate date1 = LocalDate.parse(request.getParameter("birth"), format);
                 Period per = Period.between(date1, LocalDate.now());
-                Profile p;   
+                Profile p;
                 Profile pro = dao.getProfileByID(ID);
                 if (pro.getId() == 0) {
                     String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
@@ -75,12 +75,16 @@ public class ProfileServlet extends HttpServlet {
                     } else {
                         p = new Profile(ID, gender, "imagesAcc/acc0.jpg", Phone, birth, fullname, address, faceLink, intaLink);
                     }
-                    if (!Phone.equals(pro.getPhone()) && dao.IsExistPhone(Phone)) {
+                    if (fullname.length() > 50) {
+                        request.setAttribute("msgN", "Full name must has length < 50 ");
+                    } else if (!Phone.equals(pro.getPhone()) && dao.IsExistPhone(Phone)) {
                         request.setAttribute("msgP", "This PhoneNumber is Exist");
                     } else if (Phone.length() != 10) {
                         request.setAttribute("msgP", "PhoneNumber must contain 10 digit");
                     } else if (per.getYears() < 10) {
                         request.setAttribute("msgB", "You must 10 year old or older");
+                    } else if (address.length() > 50) {
+                        request.setAttribute("msgA", "Address must has length < 50 ");
                     } else {
                         dao.InsertProfile(p);
                         request.setAttribute("msgE", "Update Profile successfully!");
@@ -109,12 +113,16 @@ public class ProfileServlet extends HttpServlet {
                         p = new Profile(ID, gender, pro.getAvatar(), Phone, birth, fullname, address, faceLink, intaLink);
 
                     }
-                    if (!Phone.equals(pro.getPhone()) && dao.IsExistPhone(Phone)) {
+                    if (fullname.length() > 50) {
+                        request.setAttribute("msgN", "Full name must has length < 50 ");
+                    } else if (!Phone.equals(pro.getPhone()) && dao.IsExistPhone(Phone)) {
                         request.setAttribute("msgP", "This PhoneNumber is Exist");
                     } else if (Phone.length() != 10) {
                         request.setAttribute("msgP", "PhoneNumber must contain 10 digit");
                     } else if (per.getYears() < 10) {
                         request.setAttribute("msgB", "You must 10 year old or older");
+                    } else if (address.length() > 50) {
+                        request.setAttribute("msgA", "Address must has length < 50 ");
                     } else {
                         dao.deleteProfile(ID);
                         dao.InsertProfile(p);

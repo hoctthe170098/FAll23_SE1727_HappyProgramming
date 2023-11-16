@@ -168,7 +168,7 @@ String firstname="";
 <h4 class="mb-4 mt-0">Contact detail</h4>
 
 <div class="col-md-6">
-<label class="form-label">First Name *</label>
+<label class="form-label">First Name *<span style="color: red" class="text-danger">${msgN}</span></label>
 <input type="text" name="firstname" class="form-control" placeholder aria-label="First name" value="<%=firstname%>">
 </div>
 
@@ -178,20 +178,7 @@ String firstname="";
 </div>
 
 <div class="col-md-6">
-
-<%
-    String msgP = (String)request.getAttribute("msgP");
-%>
-<%
-    if(msgP!=null){
-%>
-<label class="form-label">Phone number * <span style="color: red" class="text-danger"><%=msgP%></span></label>
- <%}%>
-<%
-    if(msgP==null){
-%>
-<label class="form-label">Phone number *</label>
- <%}%>
+<label class="form-label">Phone number *<span style="color: red" class="text-danger">${msgP}</span></label>
 <input type="text" name="phone" class="form-control" placeholder aria-label="Phone number" value="<%=p.getPhone()%>">
 </div>
 
@@ -200,7 +187,7 @@ String firstname="";
 <input type="date" name="birth" class="form-control" placeholder aria-label="Enter your birth here" value=<%=p.getBirth()%>>
 </div>
  <div class="col-md-6">
-<label class="form-label">Address *</label>
+<label class="form-label">Address *<span style="color: red" class="text-danger">${msgA}</span></label>
 <input type="text" name="address" class="form-control" placeholder aria-label="Address" value="<%=p.getAddress()%>">
 </div>
 
@@ -263,29 +250,6 @@ String firstname="";
 </div> 
 </div>
 </div>
-
-<!--<div class="col-xxl-6">
-<div class="bg-secondary-soft px-4 py-5 rounded">
-<div class="row g-3">
-<h4 class="my-4">Change Password</h4>
-
-<div class="col-md-6">
-<label for="exampleInputPassword1" class="form-label">Old password *</label>
-<input type="password" class="form-control" id="exampleInputPassword1">
-</div>
-
-<div class="col-md-6">
-<label for="exampleInputPassword2" class="form-label">New password *</label>
-<input type="password" class="form-control" id="exampleInputPassword2">
-</div>
-
-<div class="col-md-12">
-<label for="exampleInputPassword3" class="form-label">Confirm Password *</label>
-<input type="password" class="form-control" id="exampleInputPassword3">
-</div>
-</div>
-</div>
-</div>-->
 </div>
 <button type="submit" name="button" value="update" class="btn btn-primary btn-lg">Update profile</button>
 </form> 

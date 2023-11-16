@@ -91,6 +91,7 @@
 
     <h1>Edit Skill</h1>
 <form action="editskill?editSkillID=${skillID}" method="post" enctype="multipart/form-data">
+    <p style="color: red" class="text-danger">${msg}</p>
     <label >ID:${skillID}</label>
     <input type="hidden" id="skillID" name="editSkillID" value="${skillID}">
     

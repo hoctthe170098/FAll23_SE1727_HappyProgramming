@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
-       
-         <title>Create Skill</title>
+
+
+        <title>Create Skill</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -31,7 +31,7 @@
 
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
-         <style>
+        <style>
             body {
                 font-family: Arial, sans-serif;
                 margin: 0;
@@ -90,7 +90,9 @@
     </head>
     <body>
         <h1>Create new skill</h1>
+           
         <form action="createskill" method="post" enctype="multipart/form-data">
+            <p style="color: red" class="text-danger">${msg}</p>
             <label for="skillName">Skill Name:</label>
             <input type="text" id="skillName" name="skillName" required><br><br>
 
@@ -102,10 +104,10 @@
             <textarea id="skillDescription" name="skillDescription" rows="4" required></textarea><br><br>
             <p class="text-success">${mess}</p>
 
-                <input type="submit" value="Create">
-                <button class="hover-button" onclick="window.location.href='viewskill'">Back to Skill list</button>
-            
+            <input type="submit" value="Create">
+            <button class="hover-button" onclick="window.location.href = 'viewskill'">Back to Skill list</button>
+
         </form>
-          
+
     </body>
 </html>
