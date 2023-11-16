@@ -101,7 +101,7 @@
                 <td style="width: 700px;">${skill.description}</td>
                 <td><img src="${skill.image}" width="50" height="50" alt="${skill.name}"></td>
                 <td>
-<!--                    <a style= "background-color: yellowgreen " class="btn btn-outline-danger" href="editskill?editSkillID=${skill.ID}"><i class="bi bi-pencil"></i> Edit</a>-->
+                    <a style= "background-color: yellowgreen " class="btn btn-outline-danger" href="editskill?editSkillID=${skill.ID}"><i class="bi bi-pencil"></i> Edit</a>
                     <a style = " background-color: red"class="btn btn-outline-danger" onclick ="Delete(${skill.ID})" style="padding: 6px"><i class="bi bi-trash"></i>Delete</a></td>
                 </td>
             </tr>
